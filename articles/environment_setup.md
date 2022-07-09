@@ -13,7 +13,7 @@ published: true
 2. create-react-app のインストール
 3. Reactアプリ実行
 
-![ReactIcon](../images/environment_setup/Reactimage.png)
+![ReactIcon](/images/environment_setup/Reactimage.png)
 
 
 ### Node.js のインストール
@@ -24,7 +24,7 @@ LTS版(Long Time Support版)でOKです！
 
 [Node.jsのインストール](https://nodejs.org/ja/)
 
-![Node.js](../images/environment_setup/NodeImage.png)
+![Node.js](/images/environment_setup/NodeImage.png)
 
 * 以下の順番です
 1. [Node.jsのインストール](https://nodejs.org/ja/)よりLTS版をダウンロード
@@ -95,7 +95,7 @@ Reactの雛形のインストールが終わったらHappy Hacking!と祈って�
 
 以下の様な画面がでたら成功です。
 
-![React環境構築完了](../images//environment_setup/createreactappImage.png)
+![React環境構築完了](/images//environment_setup/createreactappImage.png)
 
 
 これでReactアプリの環境構築が完了です！
