@@ -6,8 +6,8 @@
 1.以下のコマンドをstart 
 > npx zenn new:article
 - これでもOK
-> npx zenn new:article --slug 記事のスラッグ --title タイトル --type idea --emoji ✨ 
-2. プレビューを確認する
+> npx zenn new:article --title "React勉強部屋①JSXを修正してみよう😎" --type idea --emoji ✨
+1. プレビューを確認する
 > npx zenn preview
 
 
