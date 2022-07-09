@@ -2,6 +2,7 @@
 title: "React勉強部屋①JSXを修正してみよう😎"
 emoji: "✨"
 type: "idea" # tech: 技術記事 / idea: アイデア
+slug: ""
 topics: ["React","基本構文"]
 published: true
 ---
