@@ -1,9 +1,8 @@
 ---
 title: "React勉強部屋その① JSXを修正してみよう😎"
 emoji: "✨"
-type: "idea" # tech: 技術記事 / idea: アイデア
-slug: ""
-topics: ["React","基本構文"]
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["React","基本構文","JSX"]
 published: true
 ---
 

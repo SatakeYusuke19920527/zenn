@@ -6,7 +6,7 @@
 1.以下のコマンドをstart 
 > npx zenn new:article
 - これでもOK
-> npx zenn new:article --title "React勉強部屋①JSXを修正してみよう😎" --type idea --emoji ✨
+> npx zenn new:article --title "状態管理stateについて😎" --type idea --emoji ✨
 1. プレビューを確認する
 > npx zenn preview
 
