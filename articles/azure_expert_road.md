@@ -87,7 +87,7 @@ https://docs.microsoft.com/ja-jp/certifications/exams/az-900
 + 【2022年版】AZ-900 Microsoft Azure Fundamentals模擬問題集（7回分430問）<br />
 https://www.udemy.com/course/az-900-microsoft-azure-fundamentals4176/
 
-重荷はUdemyの模試を全て90%以上になるまで何回も受けるだけです。
+やり方は簡単で、Udemyの模試を全て90%以上になるまで何回も受けるだけです。
 ゆうじろう暗記科目が弱いので、全部5回ぐらい受験してました。
 
 1月13日から勉強を開始して、ちょうど1ヶ月後の2月13日にめでたく合格しました。
