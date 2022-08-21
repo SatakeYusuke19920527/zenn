@@ -65,10 +65,12 @@ Azure上で使用される機能が浅く広く出てくる感じです。
 
 ゆうじろう特にクラウドをさわった経験もなかったので、Udemyで講座を二つポチりました。
 
-+ 作りながら覚えるMicrosoft Azure入門講座（IaaS編）<br />
++ 作りながら覚えるMicrosoft Azure入門講座（IaaS編）
+
 https://www.udemy.com/course/microsoft-azure-iaas-part/
 
-+ 作りながら覚えるMicrosoft Azure入門講座（PaaS編）<br />
++ 作りながら覚えるMicrosoft Azure入門講座（PaaS編）
+
 https://www.udemy.com/course/microsoft-azure-paas-part/
 
 Azure登録して1ヶ月は無料枠が設けられているので、その期間の間に２つの講座をDone。
@@ -81,10 +83,12 @@ Azure登録して1ヶ月は無料枠が設けられているので、その期�
 + 最短突破 Microsoft Azure Fundamentals[AZ-900]合格教本 
 ![AZ-900-text](/images/azure_expert_road/az-900-text.png)
 
-+ MSLearning<br />
++ MSLearning
+
 https://docs.microsoft.com/ja-jp/certifications/exams/az-900
 
-+ 【2022年版】AZ-900 Microsoft Azure Fundamentals模擬問題集（7回分430問）<br />
++ 【2022年版】AZ-900 Microsoft Azure Fundamentals模擬問題集（7回分430問）
+
 https://www.udemy.com/course/az-900-microsoft-azure-fundamentals4176/
 
 やり方は簡単で、Udemyの模試を全て90%以上になるまで何回も受けるだけです。
@@ -110,10 +114,12 @@ AzureMonitorのLogAnalyticsの設定順序など、各種操作順序を覚え�
 + 合格対策Microsoft認定試験AZ-104:Microsoft Azure Administratorテキスト&演習問題  
 ![AZ-104-text](/images/azure_expert_road/az-104-text.png)
 
-+ AZ-104:Microsoft Azure Administrator模擬試験問題集<br />
++ AZ-104:Microsoft Azure Administrator模擬試験問題集
+
 https://www.udemy.com/course/az-104azure-administrator-associate/
 
-+ 【2022年版】AZ-104 Microsoft Azure Administrator模擬試験問題（4回分260問）<br />
++ 【2022年版】AZ-104 Microsoft Azure Administrator模擬試験問題（4回分260問)
+
 https://www.udemy.com/course/az-104-microsoft-azure-administrator4260/
 
 
@@ -137,14 +143,16 @@ Azureのセキュリティに関する試験です。
 まず、教科書が英語のものしかありません。
 なくなく最初のインプットはMSLearningを使用することに。
 
-+ MSLearning<br />
++ MSLearning
+
 https://docs.microsoft.com/ja-jp/certifications/exams/az-500
 
 紙媒体でガンガン書き込んで学習したいオールドタイプのゆうじろうはかなり苦戦を強いられました。
 
 後はUdemyの公式模試で全て90%以上になるまで解きまくりました。
 
-+ Practice Tests | AZ-500: Microsoft Azure Security Exam 2022<br />
++ Practice Tests | AZ-500: Microsoft Azure Security Exam 2022
+
 https://www.udemy.com/course/microsoft-azure-security-technologies-exam-practice-tests/
 
 
@@ -163,10 +171,12 @@ AZ-900、AZ-104、AZ-500の知識をフル活用して受けた試験でした�
 
 こちらも、MSLearningとUdemyの模試で進めました。
 
-+ MSLearning<br />
++ MSLearning
+
 https://docs.microsoft.com/ja-jp/certifications/exams/az-305
 
-+ AZ-305: Designing Azure Infrastructure Solutions Exam 2022<br />
++ AZ-305: Designing Azure Infrastructure Solutions Exam 2022
+
 https://www.udemy.com/course/az-304-microsoft-azure-architect-design-exam-practice-tests/
 
 
