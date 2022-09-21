@@ -24,7 +24,7 @@ https://docs.docker.com/desktop/install/windows-install/
 
 下記のダウンロードのボタンをクリックでダウンロードが開始されます。
 
-![hello-express](/images/node_docker/Docker-install.png)
+![hello-express](/images/node_docker/Docker_install.png)
 
 # アプリを準備
 Expressのアプリを作成しちゃいましょう！
@@ -126,7 +126,7 @@ npm start
 + http://localhost:3000
 
 以下の様な画面が表示されればアプリ作成成功です！
-![hello-express](/images/node_docker/hello-express.png)
+![hello-express](/images/node_docker/hello_express.png)
 
 
 # アプリをDocker化
@@ -179,7 +179,7 @@ docker build . -t express-app:v1
 
 express-appのv1が作成されます。
 
-![hello-express](/images/node_docker/docker-image.png)
+![hello-express](/images/node_docker/docker_image.png)
 
 DockerDesktopを見てみましょう。
 imagesの箇所へDockerイメージが作成されていれば完了です！
@@ -204,7 +204,7 @@ docker run -p 3000:3000 -d express-app:v1
 では、再度以下へアクセスしましょう！
 + http://localhost:3000
 
-![hello-express](/images/node_docker/hello-express.png)
+![hello-express](/images/node_docker/hello_express.png)
 
 見た目は変わりませんが、今度はDockerコンテナ上でのアプリの実行となります。
 
