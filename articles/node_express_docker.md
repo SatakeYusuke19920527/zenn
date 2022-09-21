@@ -24,7 +24,7 @@ https://docs.docker.com/desktop/install/windows-install/
 
 下記のダウンロードのボタンをクリックでダウンロードが開始されます。
 
-![hello-express](/images/node_docker/Docker_install.png)
+![hello_express](/images/node_docker_image/Docker_install.png)
 
 # アプリを準備
 Expressのアプリを作成しちゃいましょう！
@@ -126,7 +126,7 @@ npm start
 + http://localhost:3000
 
 以下の様な画面が表示されればアプリ作成成功です！
-![hello-express](/images/node_docker/hello_express.png)
+![hello-express](/images/node_docker_image/hello_express.png)
 
 
 # アプリをDocker化
