@@ -1,5 +1,5 @@
 ---
-title: "【Front Door/Traffic Manager】Azureで使う負荷分散の違いをまとめてみる【Load Balancer/Application Gateway】"
+title: "Azureで使う負荷分散の違いをまとめてみる"
 emoji: "📖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure","FrontDoor", "Traffic Manager","Load Balancer", "Application Gateway"]
