@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Ingressをわかりやすく"
+title: "Kubernetes Ingress完全に理解した"
 emoji: "📖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Kubernetes","Ingress", "負荷分散","SSL終端", "仮想ホスティング"]
