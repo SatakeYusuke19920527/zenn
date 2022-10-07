@@ -8,7 +8,8 @@ published: true
 
 # Kubernetes Ingress完全に理解した
 
-ここはIngressってなんじゃいって言う感じのKubernetesを手取り早く理解した気持ちになれる場所です。
+ここはIngressってなんじゃいって言う人向けの記事になります。
+いい感じにKubernetesのIngressをざっくり理解した気持ちになれる場所です。
 
 以下の公式の内容を噛み砕いて、原型をなくしてやろうと思います。
 https://kubernetes.io/ja/docs/concepts/services-networking/ingress/#ingress%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B
