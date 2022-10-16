@@ -102,7 +102,7 @@ spec:
         app: sampleapp
     spec:
       nodeSelector:
-        'beta.kubernetes.io/os': linux
+        'kubernetes.io/os': linux
       containers:
         - name: webapp
           image: [ACRに配置したDockerイメージを配置:v1も忘れずに。]
