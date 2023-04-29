@@ -1,18 +1,23 @@
 # Zenn CLI
-* [📘 explain](https://zenn.dev/zenn/articles/install-zenn-cli)
-* [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)
+
+- [📘 explain](https://zenn.dev/zenn/articles/install-zenn-cli)
+- [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)
 
 # 記事の作り方
-1.以下のコマンドをstart 
-> npx zenn new:article
-- これでもOK
-> npx zenn new:article --title "状態管理stateについて😎" --type idea --emoji ✨
-1. プレビューを確認する
-> npx zenn preview
 
+1.以下のコマンドを start
+
+> npx zenn new:article
+
+- これでも OK
+  > npx zenn new:article --title "Azure 用語解説 Azure Storage Queue/Azure Service Bus/Azure Event Hub/Azure Event Grid " --type idea --emoji ✨
+
+1. プレビューを確認する
+   > npx zenn preview
 
 # sample
-このページでは Zenn のmarkdown記法を一覧で紹介します。
+
+このページでは Zenn の markdown 記法を一覧で紹介します。
 
 # 見出し
 
@@ -120,7 +125,7 @@ _captions_
 
 ```js
 const great = () => {
-  console.log("Awesome");
+  console.log('Awesome');
 };
 ```
 
@@ -172,9 +177,9 @@ const great = () => {
 # 数式
 
 Zenn では**KaTeX**による数式表示に対応しています。
-KaTeXのバージョンは常に最新バージョンを使用します。
+KaTeX のバージョンは常に最新バージョンを使用します。
 
-[📄 KaTeXがサポートする記法の一覧 →](https://katex.org/docs/support_table.html)
+[📄 KaTeX がサポートする記法の一覧 →](https://katex.org/docs/support_table.html)
 
 ## 数式のブロックを挿入する
 
@@ -209,8 +214,6 @@ $$
 
 > 引用文
 > 引用文
-
-
 
 # 注釈
 
@@ -296,7 +299,6 @@ _イタリック_
 表示したい内容
 :::
 
-
 :::message
 「detail」ではなく「details」です。
 :::
@@ -334,8 +336,8 @@ https://zenn.dev/zenn/articles/markdown-guide
 
 また`@[card](URL)`という書き方でカード型のリンクを貼ることもできます。
 
-:::details アンダースコア _ を含むURLが正しく認識されない場合
-[markdownパーサの仕様](https://zenn.dev/catnose99/scraps/e94c8e789f846a)により、アンダースコア（`_`）を含むURLで、正しくURLが認識されないことがあります。
+:::details アンダースコア _ を含む URL が正しく認識されない場合
+[markdown パーサの仕様](https://zenn.dev/catnose99/scraps/e94c8e789f846a)により、アンダースコア（`_`）を含む URL で、正しく URL が認識されないことがあります。
 
 ```
 https://zenn.dev/__example__
@@ -348,7 +350,7 @@ https://zenn.dev/__example__
 1. カード型のリンクとして表示したい場合は
    `@[card](ここにURL)`という書き方をしてください
 2. 単純にリンク化された URL を貼り付けたい場合は`<https://zenn.dev/__example__>`のような形で`<`と`>`で URL を囲むようにしてください
-:::
+   :::
 
 ## ツイート
 
@@ -388,8 +390,8 @@ https://www.youtube.com/watch?v=WRVsOCh907o
 
 ## GitHub
 
-2022/04〜より、GitHub上のソースコードファイルを埋め込めるようになりました。
-GitHub上のファイルへのURLまたはパーマリンクだけの行を作成すると、その部分にGitHubの埋め込みが表示されます。
+2022/04〜より、GitHub 上のソースコードファイルを埋め込めるようになりました。
+GitHub 上のファイルへの URL またはパーマリンクだけの行を作成すると、その部分に GitHub の埋め込みが表示されます。
 
 ```bash
 # GitHubのファイルURLまたはパーマリンクだけの行（前後に改行が必要です）
@@ -400,10 +402,9 @@ https://github.com/octocat/Hello-World/blob/master/README
 
 https://github.com/octocat/Hello-World/blob/master/README
 
-
 ### 行の指定
 
-GitHubと同じように、リンクの末尾に`#L00-L00`のような形で表示するファイルの開始行と終了行を指定することができます。
+GitHub と同じように、リンクの末尾に`#L00-L00`のような形で表示するファイルの開始行と終了行を指定することができます。
 
 ```bash
 # コードの開始行と終了行を指定
@@ -492,13 +493,11 @@ StackBlitz では、各ページから「Embed URL」を取得できます。取
 
 ![](https://storage.googleapis.com/zenn-user-upload/t87wf3d7xgfv7cabv4a9lfr1t79q)
 
-
-
 # ダイアグラム
 
 2021/06/08〜、[mermaid.js](https://mermaid-js.github.io/mermaid/#/) によるダイアグラム表示に対応しました。コードブロックの言語名を`mermaid`とすることで自動的にレンダリングされます。
 
-~~~
+````
 ```mermaid
 graph TB
     A[Hard edge] -->|Link text| B(Round edge)
@@ -506,10 +505,9 @@ graph TB
     C -->|One| D[Result one]
     C -->|Two| E[Result two]
 ```
-~~~
+````
+
 は以下のように表示されます。
-
-
 
 ```mermaid
 graph TB
@@ -522,7 +520,7 @@ graph TB
 他にもシーケンス図やクラス図が表示できます。文法は mermaid.js に従っていますので、どのように書けばよいかは[公式サイトの文法](https://mermaid-js.github.io/mermaid/#/flowchart)を参照してください。
 
 :::message
-mermaid.js側で破壊的変更が行われた場合、表示が変更されたり、適切に表示されなくなる可能性があります。
+mermaid.js 側で破壊的変更が行われた場合、表示が変更されたり、適切に表示されなくなる可能性があります。
 :::
 
 ## 制限事項
@@ -531,24 +529,24 @@ Zenn で mermaid.js 対応を行うにあたり、いくつか制限事項を設
 
 ### クリックイベントの無効化
 
-[Interaction機能](https://mermaid-js.github.io/mermaid/#/classDiagram?id=interaction)として図の要素にクリックイベントなどが設定できますが、セキュリティの観点でZennでは無効にさせていただきます。
+[Interaction 機能](https://mermaid-js.github.io/mermaid/#/classDiagram?id=interaction)として図の要素にクリックイベントなどが設定できますが、セキュリティの観点で Zenn では無効にさせていただきます。
 
-### ブロックあたりの文字数制限 - 2000文字以内
+### ブロックあたりの文字数制限 - 2000 文字以内
 
 ブロックあたりの文字数を**2000**文字に制限させていただいています。これを超えた場合、ダイアグラムが表示される代わりにエラーメッセージが表示されます。
 
-### ブロックあたりのChain数制限 - 10以下
+### ブロックあたりの Chain 数制限 - 10 以下
 
 フローチャートにおいて、ノードをひとまとまりで表現する記述として`&`が利用できます。以下のようなイメージです。
 
-~~~
+````
 ```mermaid
 graph LR
    a --> b & c--> d
 ```
-~~~
-は以下のように表示されます。
+````
 
+は以下のように表示されます。
 
 ```mermaid
 graph LR
