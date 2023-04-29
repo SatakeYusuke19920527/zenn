@@ -1,5 +1,5 @@
 ---
-title: 'Azure用語解説 Azure Storage Queue/Azure Service Bus/Azure Event Hub/Azure Event Grid '
+title: 'Azure用語解説 Storage Queue/Service Bus/Event Hub/Event Grid '
 emoji: '📘'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics:
@@ -119,3 +119,7 @@ Azure Event Grid の主な特徴は以下のとおりです。
 - イベントの配信が可能。
 - リアルタイムイベント配信に対応している。
 - Azure Event Grid は、PaaS サービスに特化しており、サーバーレスコンピューティング、DevOps、IoT、およびビッグデータシナリオなど、多様なアプリケーションで使用されています。Azure リソースやカスタムアプリケーションからのイベントの購読、フィルタリング、配信を行いたい場合は、Azure Event Grid が最適な選択肢の一つとなるでしょう。
+
+# 最後に
+
+完全に理解できたといいたい。
