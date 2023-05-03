@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Service Bus について" --type idea --emoji ✨
+  > npx zenn new:article --title "Azure Queue Storage について" --type tech --emoji 📗
 
 1. プレビューを確認する
    > npx zenn preview
