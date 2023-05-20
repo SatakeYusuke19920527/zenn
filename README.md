@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Queue Storage について" --type tech --emoji 📗
+  > npx zenn new:article --title "Azure Web Apps に React を Deploy する【Azure Web Apps + Express + React】" --type tech --emoji 🌏
 
 1. プレビューを確認する
    > npx zenn preview
