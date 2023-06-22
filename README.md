@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Web Apps に React を Deploy する【Azure Web Apps + Express + React】" --type tech --emoji 🌏
+  > npx zenn new:article --title "やる気がでない時の処方箋" --type idea --emoji 💊
 
 1. プレビューを確認する
    > npx zenn preview

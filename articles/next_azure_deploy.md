@@ -1,32 +1,33 @@
 ---
-title: "【Let's ハンズオン🤙】Next.jsをAzure Static Web Appsを使ってデプロイ"
-emoji: "🤙"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Next.js","React", "Azure", "Static Web Apps"]
+title: "【Let's ハンズオン🤙】Next.jsをAzure Static Web Appsを使ってWEBサイトをデプロイ"
+emoji: '🤙'
+type: 'tech' # tech: 技術記事 / idea: アイデア
+topics: ['Next.js', 'React', 'Azure', 'Static Web Apps']
 published: true
 ---
 
-# 【Let's ハンズオン🤙】 Next.jsをAzureのStatic Web Appsを使ってDeployしていくやで
+# 【Let's ハンズオン 🤙】 Next.js を Azure の Static Web Apps を使って WEB サイトを Deploy していくやで
 
 ## 目次
-1. Next.jsのプロジェクトを準備
-2. Azure PortalからStatic Web Appsを準備
-3. Githubと連携させて、Deploy自動化
+
+1. Next.js のプロジェクトを準備
+2. Azure Portal から Static Web Apps を準備
+3. Github と連携させて、Deploy 自動化
 4. 最後に
 
+# Next.js のプロジェクトを準備
 
-# Next.jsのプロジェクトを準備
-まずはgithubのプロジェクトを作成しまししょう！
-[github](https://github.com/)へアクセスして、Newをクリックです！
+まずは github のプロジェクトを作成しまししょう！
+[github](https://github.com/)へアクセスして、New をクリックです！
 ![github](/images/next_azure_deploy/github.png)
 
-そしてリポジトリをcreateしましょう！
+そしてリポジトリを create しましょう！
 ![create_repo](/images/next_azure_deploy/create_repo.png)
 
-こんな感じの画面が表示されればOKです！
+こんな感じの画面が表示されれば OK です！
 ![fin_create_repo](/images/next_azure_deploy/fin_create_repo.png)
 
-リポジトリをローカルへcloneしましょう。
+リポジトリをローカルへ clone しましょう。
 ターミナルを起動して、以下のコマンドを実行です。
 
 ```bash
@@ -40,20 +41,19 @@ git clone [githubのURL]
 cd [作成されたディレクトリ]
 ```
 
-そこで、Next.jsのプロジェクトを作成するために以下のコマンドを打ちましょう！
+そこで、Next.js のプロジェクトを作成するために以下のコマンドを打ちましょう！
 
 ```bash
 npx create-next-app@latest . --ts
 ```
 
-Success!と出ればOKです！
+Success!と出れば OK です！
 
 ちょっとだけ、コードを変更。
 
+> pages/index.tsx の Image を img に変更してあげてください。
 
-> pages/index.tsxのImageをimgに変更してあげてください。
-
-※これをしとかないと、後々Deployで失敗します...
+※これをしとかないと、後々 Deploy で失敗します...
 
 では、ちょっと動作確認してみましょう。
 以下のコマンドでアプリを起動してみてください！
@@ -64,31 +64,31 @@ npm run dev
 
 http://localhost:3000/
 
-にアクセスして以下の画面が表示されればOKです！
-
+にアクセスして以下の画面が表示されれば OK です！
 
 ![fin_create_repo](/images/next_azure_deploy/nextjs.png)
 
-ここまでできたら、githubへpushしちゃいましょう！
+ここまでできたら、github へ push しちゃいましょう！
 
 できましたか？
 
 ![fin_create_repo](/images/next_azure_deploy/github_push.png)
 
-# Azure PortalからStatic Web Appsを準備
-次はAzureポータルからAzureStaticWebAppsを作成しましょう！
+# Azure Portal から Static Web Apps を準備
 
-Azureportalのログイン画面はこんな感じ。
+次は Azure ポータルから AzureStaticWebApps を作成しましょう！
+
+Azureportal のログイン画面はこんな感じ。
 
 ![Azure_portal](/images/next_azure_deploy/azure_potral.png)
 
-全てのサービ→静的Webサービスを選択してください！
+全てのサービ → 静的 Web サービスを選択してください！
 
-そして静的Webサービスを作成しましょう！
+そして静的 Web サービスを作成しましょう！
 
 ![staticwebapps](/images/next_azure_deploy/staticwebapps.png)
 
-そして静的Webサービスの初期設定はこんな感じ。
+そして静的 Web サービスの初期設定はこんな感じ。
 
 ![settings](/images/next_azure_deploy/setting.png)
 
@@ -100,16 +100,17 @@ Azureportalのログイン画面はこんな感じ。
 
 ![settings](/images/next_azure_deploy/deploy_fin.png)
 
-こんな感じの画面がでたらOKです！
+こんな感じの画面がでたら OK です！
 
-ここからはGithubと連携させてDeployしていくための設定をしていきます。
+ここからは Github と連携させて Deploy していくための設定をしていきます。
 
-# Githubと連携させて、Deploy自動化
-それでは、先ほど作成したGithubの画面に戻ってください。
+# Github と連携させて、Deploy 自動化
+
+それでは、先ほど作成した Github の画面に戻ってください。
 
 ![settings](/images/next_azure_deploy/github2.png)
 
-Actionsを見ると、Deployがエラーとなっているはずです。
+Actions を見ると、Deploy がエラーとなっているはずです。
 
 こんなことでは落ち込みません。
 想定内です。
@@ -120,13 +121,13 @@ Actionsを見ると、Deployがエラーとなっているはずです。
 git pull
 ```
 
-こんなymlファイルが生成されましたか？
+こんな yml ファイルが生成されましたか？
 
 ![yml](/images/next_azure_deploy/ymlfile.png)
 
-ここにNext.jsのDeployの設定を記載していきます
+ここに Next.js の Deploy の設定を記載していきます
 
-jobsのところをこんな感じで書き換えてみてください。
+jobs のところをこんな感じで書き換えてみてください。
 
 ```yml
 jobs:
@@ -154,7 +155,7 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
 ```
 
-そして、package.jsonのscriptsの箇所へnext exportを追記してください。
+そして、package.json の scripts の箇所へ next export を追記してください。
 
 ```json
 "scripts": {
@@ -166,25 +167,22 @@ jobs:
 }
 ```
 
-書き換えれたら、再度、ymlファイルとpackage.jsonをgithubへpushです！
+書き換えれたら、再度、yml ファイルと package.json を github へ push です！
 
-その後、githubへアクセスし、Actionのところからdeployがうまくいくことを見守っててください。
+その後、github へアクセスし、Action のところから deploy がうまくいくことを見守っててください。
 
-githubのActionsでこんな感じで表示されたら拍手です👏
+github の Actions でこんな感じで表示されたら拍手です 👏
 
 ![yml](/images/next_azure_deploy/deploy_success.png)
 
-Azureポータルへ移動しましょう。
-urlをクリックして...
+Azure ポータルへ移動しましょう。
+url をクリックして...
 ![portal](/images/next_azure_deploy/deploy_portal.png)
 
-この画面が出てきたらOKです！
+この画面が出てきたら OK です！
 
 ![deploy](/images/next_azure_deploy/next_deploy.png)
 
-後はソースコード更新→githubへpushすると自動的にデプロイしてくれます！
+後はソースコード更新 →github へ push すると自動的にデプロイしてくれます！
 
 ### お疲れ様でした！
-
-
-
