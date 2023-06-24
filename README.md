@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "やる気がでない時の処方箋" --type idea --emoji 💊
+  > npx zenn new:article --title "Cloud Functions for Firebase で関数を役割毎に美しく分割する方法" --type idea --emoji 💡
 
 1. プレビューを確認する
    > npx zenn preview
