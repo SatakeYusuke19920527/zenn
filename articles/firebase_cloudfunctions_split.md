@@ -3,7 +3,7 @@ title: 'Cloud Functions for Firebaseで関数を役割毎に美しく分割す�
 emoji: '💡'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Firebase', 'Cloud Functions', 'TypeScript']
-published: false
+published: true
 ---
 
 # 目次
