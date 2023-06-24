@@ -10,10 +10,11 @@ published: false
 
 1. はじめに
 2. 作成予定の関数
-3. 実装
-4. シミュレータ実行
-5. フロントサイドからの呼び出し方
-6. 最後に
+3. 環境構築
+4. 実装
+5. シミュレータ実行
+6. フロントサイドからの呼び出し方
+7. 最後に
 
 ## はじめに　
 
@@ -44,7 +45,7 @@ index.ts が 500 行ぐらいになり、コードの保守もかなり厳しく
 第二階層は機能毎にディレクトリを切り分け(これは私の好みです。プロジェクトに合った切り分けをお願いします。)
 第三階層にロジックを実装します。(ここも単一の機能のみになるよう関数の切り分けを意識)
 
-## 実装
+## 環境構築
 
 では、実際に実装していきましょう。
 まずは github にリポジトリを作成します。
@@ -113,11 +114,11 @@ Firebase でプロジェクトを作成します。
 
 今回は Firebase のプロジェクトを functions-sample としました。
 
-![Cloud Functions for Firebase 構成図](/images/firebase_cloudfunctions_split/functions-sample.png)
+![functions sample 作成](/images/firebase_cloudfunctions_split/functions-sample.png)
 
 hosting はなしの設定で、進めていくと以下の画面のようになり、Firebase プロジェクトの作成を教えてくれます。
 
-![Cloud Functions for Firebase 構成図](/images/firebase_cloudfunctions_split/firebase-prj.png)
+![Project 作成](/images/firebase_cloudfunctions_split/firebase-prj.png)
 
 Cloud Functions for Firebase を使用するので、プランを重量課金制に変更しておきましょう。
 
@@ -208,6 +209,19 @@ i  Writing project information to .firebaserc...
 
 ✔  Firebase initialization complete!
 ```
+
+VSCode を開くと以下のような実装になっていれば OK です。
+![change plab](/images/firebase_cloudfunctions_split/vscode-init-dir.png)
+
+## 実装
+
+では、実装していきます。
+復習ですが、以下の構成を作成します。
+![Cloud Functions for Firebase 構成図](/images/firebase_cloudfunctions_split/functions-chart.png)
+
+以下のようなディレクトリ構成を準備してください。
+
+
 
 ## シミュレータ実行
 
