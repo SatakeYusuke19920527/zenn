@@ -48,6 +48,7 @@ published: true
 1. AzureDevOps でプロジェクトの作成
 2. Next.js でフロントエンド構築
 3. AzureStaticWebApps の作成
+4. 最後に
 
 ### AzureDevOps でプロジェクトの作成
 
@@ -194,5 +195,94 @@ npm run dev
 ![Next.js](/images/azuredevops_staticapps_next/next.png)
 
 問題なければ Azure DevOps の Repos へ push しましょう。
+Azure DevOps に戻ったら以下のように code が push されていれば OK です。
+
+![AzureDevOps](/images/azuredevops_staticapps_next/devopsrepos.png)
 
 ## AzureStaticWebApps の作成
+
+では、最後にホスティングです。
+
+Azure へログインして、Azure Static Web Apps を作成しましょう。
+![Azure](/images/azuredevops_staticapps_next/azurestaticwebapps.png)
+
+East Asia でデプロイの詳細はその他を入力
+
+![Azure](/images/azuredevops_staticapps_next/setting.png)
+
+タグ → 確認及び作成より作成してください。
+
+リソースに移動して、デプロイトークンの管理からデプロイトークンをコピーしておいてください。
+
+では、AzureDepOps に戻り、Azure Pipeline をクリックし、create pipeline をクリック
+
+Azure Repos Git を選択
+![Azure](/images/azuredevops_staticapps_next/reposgit.png)
+
+リポジトリを選択したら、Starter Pipeline を選択
+
+![Azure](/images/azuredevops_staticapps_next/stater.png)
+
+yml ファイルへ AzureStaticWebApps の箇所を追記
+
+```yml
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: echo Hello, world!
+    displayName: 'Run a one-line script'
+
+  - script: |
+      echo Add other tasks to build, test, and deploy your project.
+      echo See https://aka.ms/yaml
+    displayName: 'Run a multi-line script'
+
+  # Static Web Appsのデプロイ
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/'
+      api_location: ''
+      output_location: '.next'
+    env:
+      azure_static_web_apps_api_token: $(deployment_token)
+```
+
+画面右上の Variables→New Variables より Name に`deployment_token`と入力し、value へ先ほどコピーしたデプロイメントトークンを貼り付けて OK→save をクリック
+
+![Azure](/images/azuredevops_staticapps_next/deploytoken.png)
+
+あとは`Save and Run`を実行して、神に Deploy が成功することを祈りましょう。
+
+![Azure](/images/azuredevops_staticapps_next/deploying.png)
+
+ざわ...
+ざわ...
+
+...
+
+#### success!!!
+
+![Azure](/images/azuredevops_staticapps_next/deploying.png)
+
+では、Azure の Azure Static Web Apps に戻って URL にアクセスしてみましょう！
+
+![Azure](/images/azuredevops_staticapps_next/url.png)
+
+無事に Deploy されていることを確認して作業は完了です！
+
+お疲れ様でした！
+
+![Azure](/images/azuredevops_staticapps_next/url.png)
+
+## 最後に
+
+Deploy ってよくつまづくからなんでも質問してね。
