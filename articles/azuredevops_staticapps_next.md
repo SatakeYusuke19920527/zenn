@@ -273,7 +273,7 @@ steps:
 
 #### success!!!
 
-![Azure](/images/azuredevops_staticapps_next/deploying.png)
+![Azure](/images/azuredevops_staticapps_next/deploysuccess.png)
 
 では、Azure の Azure Static Web Apps に戻って URL にアクセスしてみましょう！
 
@@ -283,7 +283,7 @@ steps:
 
 お疲れ様でした！
 
-![Azure](/images/azuredevops_staticapps_next/url.png)
+![Azure](/images/azuredevops_staticapps_next/next.png)
 
 ## 最後に
 
