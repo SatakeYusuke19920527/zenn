@@ -26,6 +26,8 @@ published: true
 フロントは最近アゲアゲっぽい Next.js を選定
 サーバサイドはおそらく Azure の Functions を使って拡張していく予定
 
+まずは Azure DevOps の Repos と Pipeline を使って Next.js の WEB アプリを Deploy するところまでやってみる。
+
 > ---
 >
 > フロントエンド
