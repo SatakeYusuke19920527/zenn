@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Cloud Functions for Firebase で関数を役割毎に美しく分割する方法" --type idea --emoji 💡
+  > npx zenn new:article --title "真剣に技術ブログを作ろう【Azure DevOps × Azure Static Web Apps × Next.js】" --type idea --emoji 🗡️
 
 1. プレビューを確認する
    > npx zenn preview
