@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "真剣に技術ブログを作ろう【Azure DevOps × Azure Static Web Apps × Next.js】" --type idea --emoji 🗡️
+  > npx zenn new:article --title "ブログの記事を AI に書いてもらおう【Azure DevOps × Azure Static Web Apps × Next.js × Azure Open AI】" --type idea --emoji 🗡️
 
 1. プレビューを確認する
    > npx zenn preview
