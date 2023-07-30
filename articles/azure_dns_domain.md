@@ -35,7 +35,7 @@ published: true
 # 事前のご準備
 
 WEB サイトは事前に以下の手順で構築してみてください。
-[tech blog](https://zenn.dev/yusu29/articles/azuredevops_staticapps_next)
+[真剣に技術ブログを作ろう【Azure DevOps × Azure Static Web Apps × Next.js】](https://zenn.dev/yusu29/articles/azuredevops_staticapps_next)
 
 # お名前.com でのドメイン購入
 
