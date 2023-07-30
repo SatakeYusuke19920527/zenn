@@ -1,6 +1,6 @@
 ---
 title: '自分のサイトに独自のドメイン名をつけよう🌏'
-emoji: '⚠️'
+emoji: '💡'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'DNS', 'Next.js', 'DevOps', 'StaticWebApps']
 published: true
