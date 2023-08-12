@@ -2,7 +2,7 @@
 title: '真剣に技術ブログを作ろう【Azure DevOps × Azure Static Web Apps × Next.js】'
 emoji: '🗡️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['Azure', 'Next.js', 'DevOps', 'StaticWebApps']
+topics: ['Azure', 'Next.js', 'azuredevops', 'StaticWebApps']
 published: true
 ---
 
