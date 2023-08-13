@@ -2,8 +2,8 @@
 title: 'まだOpenAI使ったことないの？この記事で全員ハンズオンさせてやんよ！'
 emoji: '😎'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['Azure', 'gpt-4', 'openai', 'next.js', 'TypeScript']
-published: false
+topics: ['Azure', 'azuredevops', 'openai', 'next.js', 'TypeScript']
+published: true
 ---
 
 # 目次
@@ -11,9 +11,11 @@ published: false
 1. はじめに
 2. 今回作成するシステムの概要
 3. Azure OpenAI セットアップ
-4. Azure DevOps のセットアップから Next.js のコードを push
-5. Azure Static Web Apps へ Pipelines を用いて Deploy
-6. 動作確認
+4. Azure DevOps の Azure Repos をセットアップ
+5. Next.js でフロントエンド構築
+6. Azure Static Web Apps へ Pipelines を用いて Deploy
+7. 動作確認
+8. お片付け
 
 ## はじめに
 
@@ -102,10 +104,11 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 ここまで来れば、AzureOpenAI のセットアップは完了です！
 次に進みましょう！
 
-## Azure DevOps のセットアップから Next.js のコードを push
+## Azure DevOps の Azure Repos をセットアップ
 
-次は Next.js のコードを Azure DevOps の Repos へ push します。
+次は Azure DevOps に Repos を作成してコードを管理する場所を作ります。
 全体図で言うとここです。
+
 ![Azure](/images/azure_openai_handson/devops_next_set.png)
 
 まずは Azure DevOps へアクセス
@@ -119,11 +122,11 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 
 サインインして`+ New Project` からプロジェクトを作成してください。
 
-![AzureDevOps](/images/azuredevops_staticapps_next/createprj.png)
+![AzureDevOps](/images/azure_openai_handson/devops_create.png)
 
 無事、project が create されたら、Welcome to the Project と暖かく迎えてくれます。
 
-![AzureDevOps](/images/azuredevops_staticapps_next/welcome.png)
+![AzureDevOps](/images/azure_openai_handson/create_repo.png)
 
 (ロゴかわいいですよね)
 
@@ -132,22 +135,24 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 
 以下のリポジトリの url が表示されるので、コピーしてローカル環境へ git clone です。
 
-![AzureDevOps](/images/azuredevops_staticapps_next/repo.png)
+![AzureDevOps](/images/azure_openai_handson/create_repo_gitclone.png)
 
 ```bash
 git clone [リポジトリのurl]
 ```
 
-これでローカル環境へリポジトリをクローンできれば AzureDevOps の環境構築は完了です。
+これでローカル環境へリポジトリをクローンできれば Azure Repos の環境構築は完了です。
 
 ## Next.js でフロントエンド構築
 
 ここからはローカル環境で Next.js の環境構築をします。
 
+![AzureDevOps](/images/azure_openai_handson/next_set.png)
+
 まずは、ローカルへ clone したディレクトリへ移動してください。
 
 ```bash
-cd tech-blog
+cd yujiro-handson-devops
 ```
 
 中に入れたら容赦なく Next.js のプロジェクトを create です。
@@ -219,26 +224,203 @@ output: 'standalone'を追記しました。
 pages/index.tsx は以下のコードとなります。
 
 ```typescript
-export async function getServerSideProps() {
-  const data = JSON.stringify({ time: new Date() });
-  return { props: { data } };
-}
+import axios from 'axios';
+import { useState } from 'react';
 
-export default function Home({ data }: { data: string }) {
-  const serverData = JSON.parse(data);
+export default function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [content, setContent] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
+
+  const getAzData = async () => {
+    setIsLoading(true);
+    try {
+      console.log('start');
+      const res = await axios.post('api/azopenai', { message });
+      setContent(res.data[0].message.content);
+    } catch (err) {
+      console.log('🚀 ~ file: index.tsx:32 ~ getAzData ~ err:', err);
+    }
+    setIsLoading(false);
+  };
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
-      <h1>tech-blog</h1>
-      <h2>
-        Welcome to{' '}
-        <a href="https://nextjs.org">Next.js! The time is {serverData.time}</a>
-      </h2>
+    <main className={`flex min-h-screen flex-col items-center p-24`}>
+      <h1>ネガティブなことを言ってみてください</h1>
+
+      <label
+        htmlFor="message"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+        Your message
+      </label>
+      <textarea
+        id="message"
+        onChange={(e) => setMessage(e.target.value)}
+        rows={4}
+        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Write your thoughts here..."
+      ></textarea>
+      <button
+        onClick={getAzData}
+        type="button"
+        className="my-5 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+      >
+        ポジティブ変換
+      </button>
+      {isLoading ? (
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span className="sr-only">Loading...</span>
+        </div>
+      ) : (
+        <div>
+          {content === '' ? (
+            <div></div>
+          ) : (
+            <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+              <p className="font-normal text-gray-700">{content}</p>
+            </div>
+          )}
+        </div>
+      )}
     </main>
   );
 }
 ```
+
+axios を使用するので、install しておきましょう。
+
+```bash
+npm install axios
+```
+
+src/pages/api/azopenai.ts を作成してください。
+コードは以下となります。
+
+```typescript
+import { getAzOpenAIData } from '@/models/azopenai/azopenaiApplicationService';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    const message = req.body.message;
+    const data = await getAzOpenAIData(message);
+    res.json(data);
+  } catch (error) {
+    console.log('🚀 ~ file: hello.ts:13 ~ error:', error);
+  }
+}
+```
+
+次は OpenAI へアクセスする関数を作成します。
+以下二つのフォルダとファイルを作成してください。
+
+> src/models/azopenai/azopenaiApplicationService.ts
+> src/models/azopenai/azopenaiRepository.ts
+
+それぞれのコードは以下です。
+
+azopenaiApplicationService.ts
+
+```typescript
+import { AzOpenaiRepository } from './azopenaiRepository';
+
+export const getAzOpenAIData = async (message: string) => {
+  try {
+    const repo = new AzOpenaiRepository();
+    return await repo.getAzOpenAIData(message);
+  } catch (err) {
+    return err;
+  }
+};
+```
+
+azopenaiRepository.ts
+
+```typescript
+import { AzureKeyCredential, OpenAIClient } from '@azure/openai';
+
+export class AzOpenaiRepository {
+  async getAzOpenAIData(message: string) {
+    console.log('start', process.env.AZURE_OPENAI_ENDPOINT!);
+    return new Promise(async (resolve, reject) => {
+      const endpoint = process.env.AZURE_OPENAI_ENDPOINT!;
+      const azureApiKey = process.env.AZURE_OPENAI_API_KEY!;
+      const deploymentId = process.env.AZURE_OPENAI_DEPLOYMENT_ID!;
+      const content = `
+      ${message}
+      #上記をポジティブなフィードバックに変換して
+      `;
+      try {
+        const messages = [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          {
+            role: 'user',
+            content,
+          },
+        ];
+        const client = new OpenAIClient(
+          endpoint,
+          new AzureKeyCredential(azureApiKey)
+        );
+
+        const result = await client.getChatCompletions(deploymentId, messages);
+        resolve(result.choices);
+      } catch (error: any) {
+        console.log(
+          '🚀 ~ file: openaiRepository.ts:29 ~ AzOpenaiRepository ~ returnnewPromise ~ error:',
+          error
+        );
+        reject(error);
+      }
+    });
+  }
+}
+```
+
+以下もインストールしておきましょう！
+
+```bash
+npm install @azure/openai
+```
+
+環境変数は.env.local に記載です。
+ルート階層に`.env.local`を作成してください。
+
+.env.local
+
+```
+AZURE_OPENAI_ENDPOINT=https://xxxxxxxxxxxxxxxxx/
+AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxx
+AZURE_OPENAI_DEPLOYMENT_ID=xxxxxxxxxxxxxxxxx
+```
+
+では 3 つの環境変数を取得しましょう。
+AZURE_OPENAI_ENDPOINT と AZURE_OPENAI_API_KEY はは
+Azure へログイン →OpenAI と検索 → 作成した OpenAI を選択 → リソース管理 → キーとエンドポイントの箇所を参照です。
+
+![AzureDevOps](/images/azure_openai_handson/key_endpoint.png)
+
+AZURE_OPENAI_DEPLOYMENT_ID は
+Azure OpenAI Studio→ デプロイの箇所からデプロイ名をコピーしてきてください。
 
 ここまで実装して、実行した時にエラーがなければ OK です。
 
@@ -246,19 +428,21 @@ export default function Home({ data }: { data: string }) {
 npm run dev
 ```
 
-![Next.js](/images/azuredevops_staticapps_next/next.png)
+![Next.js](/images/azure_openai_handson/run_dev.png)
 
 問題なければ Azure DevOps の Repos へ push しましょう。
 Azure DevOps に戻ったら以下のように code が push されていれば OK です。
 
-![AzureDevOps](/images/azuredevops_staticapps_next/devopsrepos.png)
+![AzureDevOps](/images/azure_openai_handson/repos.png)
 
-## AzureStaticWebApps の作成
+## Azure Static Web Apps へ Pipelines を用いて Deploy
 
-では、最後にホスティングです。
+では、Azure Static Web Apps へ Pipeline よりホスティングです。
+全体図で言うとこの部分です。
+![AzureDevOps](/images/azure_openai_handson/pipeline_set.png)
 
 Azure へログインして、Azure Static Web Apps を作成しましょう。
-![Azure](/images/azuredevops_staticapps_next/azurestaticwebapps.png)
+![Azure](/images/azure_openai_handson/azurestaticwebapps.png)
 
 East Asia でデプロイの詳細はその他を入力
 
@@ -268,7 +452,7 @@ East Asia でデプロイの詳細はその他を入力
 
 リソースに移動して、デプロイトークンの管理からデプロイトークンをコピーしておいてください。
 
-では、AzureDepOps に戻り、Azure Pipeline をクリックし、create pipeline をクリック
+では、Azure DevOps に戻り、Azure Pipeline をクリックし、create pipeline をクリック
 
 Azure Repos Git を選択
 ![Azure](/images/azuredevops_staticapps_next/reposgit.png)
@@ -308,6 +492,9 @@ steps:
       output_location: '.next'
     env:
       azure_static_web_apps_api_token: $(deployment_token)
+      AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
+      AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
+      AZURE_OPENAI_DEPLOYMENT_ID: $(AZURE_OPENAI_DEPLOYMENT_ID)
 ```
 
 画面右上の Variables→New Variables より Name に`deployment_token`と入力し、value へ先ほどコピーしたデプロイメントトークンを貼り付けて OK→save をクリック
@@ -333,6 +520,30 @@ steps:
 
 無事に Deploy されていることを確認して作業は完了です！
 
-## Azure Static Web Apps へ Pipelines を用いて Deploy
-
 ## 動作確認
+
+ここまでできたら後はネガティブをアプリへぶつけるだけです。
+
+思いのたけをテキストボックスに入れてボタンをクリックしてみてください。
+
+OpenAI がポジティブに変換していい感じに返事をしてくれます！
+
+![Azure](/images/azure_openai_handson/run_dev.png)
+
+できましたか？
+
+なかなか盛りだくさんの内容なので、詰まっちゃった方はぜひコメント欄にてどしどし質問してくださいね！
+
+## お片付け
+
+最後にずっと残してて課金されないようにお片付けです。
+
+以下、３つの操作を実行すれば OK です。
+
+- Azure OpenAI Studio からデプロイの削除
+- Azure よりリソースグループの削除
+- Azure DevOps よりプロジェクトの削除
+
+しっかりお片付けして本日は終わりです。
+
+お疲れ様でした。
