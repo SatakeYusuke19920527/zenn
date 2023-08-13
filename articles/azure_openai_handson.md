@@ -514,7 +514,11 @@ steps:
 
 ![Azure](/images/azuredevops_staticapps_next/deploysuccess.png)
 
-では、Azure の Azure Static Web Apps に戻って URL にアクセスしてみましょう！
+では、Azure の Azure Static Web Apps に戻って 構成の箇所に環境変数を追加しましょう。
+
+![Azure](/images/azure_openai_handson/env.png)
+
+そして、URL にアクセスしてみましょう！
 
 ![Azure](/images/azuredevops_staticapps_next/url.png)
 
