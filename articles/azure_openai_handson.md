@@ -484,17 +484,17 @@ steps:
       echo See https://aka.ms/yaml
     displayName: 'Run a multi-line script'
 
-  # Static Web Appsのデプロイ
-  - task: AzureStaticWebApp@0
-    inputs:
-      app_location: '/'
-      api_location: ''
-      output_location: '.next'
-    env:
-      azure_static_web_apps_api_token: $(deployment_token)
-      AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
-      AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
-      AZURE_OPENAI_DEPLOYMENT_ID: $(AZURE_OPENAI_DEPLOYMENT_ID)
+# Static Web Appsのデプロイ
+- task: AzureStaticWebApp@0
+  inputs:
+    app_location: '/'
+    api_location: ''
+    output_location: '.next'
+  env:
+    azure_static_web_apps_api_token: $(deployment_token)
+    AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
+    AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
+    AZURE_OPENAI_DEPLOYMENT_ID: $(AZURE_OPENAI_DEPLOYMENT_ID)
 ```
 
 画面右上の Variables→New Variables より Name に`deployment_token`と入力し、value へ先ほどコピーしたデプロイメントトークンを貼り付けて OK→save をクリック
