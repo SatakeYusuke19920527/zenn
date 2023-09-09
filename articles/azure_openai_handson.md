@@ -104,6 +104,19 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 ここまで来れば、AzureOpenAI のセットアップは完了です！
 次に進みましょう！
 
+:::message
+初回はこのような表示が出ている可能性があります。
+
+![Azure](/images/azure_openai_handson/aoai_error.png)
+
+その場合は表示されているリンクをクリックすると、Microsoft へリクエストを送ることができます。
+
+![Azure](/images/azure_openai_handson/request_access.png)
+
+ゆうじろうは数時間ぐらいで許可されたので、気長に待ちましょう。
+
+:::
+
 ## Azure DevOps の Azure Repos をセットアップ
 
 次は Azure DevOps に Repos を作成してコードを管理する場所を作ります。
