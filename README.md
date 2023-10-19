@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！" --type tech --emoji 😎
+  > npx zenn new:article --title "チームトポロジーとは？" --type tech --emoji 📚
 
 1. プレビューを確認する
    > npx zenn preview
