@@ -19,8 +19,15 @@ published: false
 
 :::message
 
-この記事はAzure OpenAIとLangChainを組み合わせて2022年1月以降の知識は検索しながら対応するAIを作成するハンズオン記事です。
-ご興味ある方はぜひ最後までご覧ください！
+この記事はAzure OpenAIとLangChainを組み合わせて2022年1月以降の知識は検索しながら補完するAIを作成するハンズオン記事となります。
+
+### 前提条件として、以下の記事のハンズオン後を想定しています。
+前段のAzure OpenAIへのリクエストまでのハンズオンは以下の記事に記載しておりますので、こちらをご参照ください。
+[まだOpenAI使ったことないの？この記事で全員ハンズオンさせてやんよ！](https://zenn.dev/yusu29/articles/azure_openai_handson)
+
+上記のハンズオンでBing Search以外のセットアップが完了しているところまで実装できます。
+
+ハンズオンを行う際は上記の記事から初めていただけますと、スムーズに進めることが出来ます。
 
 :::
 
@@ -77,13 +84,6 @@ published: false
 2. 2022年1月以降の知識が必要な場合はLangChainのAgentがBing Searchを用いて回答を補完
 3. 補完した回答をAzure OpenAIにて返却
 4. Azure Static Web Appsへ返却された回答を表示
-
-### 前提条件
-
-前段のAzure OpenAIへのリクエストまでのハンズオンは以下の記事に記載しておりますので、こちらをご参照ください。
-### [まだOpenAI使ったことないの？この記事で全員ハンズオンさせてやんよ！](https://zenn.dev/yusu29/articles/azure_openai_handson)
-
-上記のハンズオンでBing Search以外のセットアップが完了しているところまで実装できます。
 
 では、Azure OpenAIをLangChainを使って強化していきましょう！
 
