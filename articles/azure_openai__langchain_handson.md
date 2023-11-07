@@ -3,7 +3,7 @@ title: 'OpenAIよ。2022年1月より先の未来を見たくないか？【Azur
 emoji: '😎'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure','AzureOpenAI','langchain', 'openai', 'next.js']
-published: false
+published: true
 ---
 
 # 目次
@@ -133,7 +133,7 @@ export default function Home() {
       const res = await axios.post('api/azopenai', { message });
       setContent(res.data[0].message.content);
     } catch (err) {
-      console.log('🚀 ~ file: index.tsx:32 ~ getAzData ~ err:', err);
+      console.log('🚀 ~ file: index.tsx:16 ~ getAzData ~ err:', err);
     }
     setIsLoading(false);
   };
@@ -145,7 +145,7 @@ export default function Home() {
       const res = await axios.post('api/langchain', { message });
       setContent(res.data.result.output);
     } catch (err) {
-      console.log('🚀 ~ file: index.tsx:32 ~ getAzData ~ err:', err);
+      console.log('🚀 ~ file: index.tsx:28 ~ getAgentData ~ err:', err);
     }
     setIsLoading(false);
   };
@@ -302,8 +302,10 @@ AZURE_BINGSEARCH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxx
 では聞いてみましょう。
 ![Azure](/images/azure_openai_langchain_handson/aoai.png)
 
-ふふ。そうです。
+ふふ...そうです...
 あなただけの力(AOAI)ではわからないでしょう..
+今はもう2023年11月...
+2022のワールドカップは終わっているのですよ...
 
 では、LangChainと組み合わせ、BingSearchを組み込んだAOAIに聞いてみましょう。
 
