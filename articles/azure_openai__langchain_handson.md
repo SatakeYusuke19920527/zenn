@@ -2,7 +2,7 @@
 title: 'OpenAIよ。2022年1月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】'
 emoji: '😎'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['Azure', 'langchain', 'openai', 'next.js', 'AzureOpenAI']
+topics: ['Azure','AzureOpenAI','langchain', 'openai', 'next.js']
 published: false
 ---
 
@@ -19,14 +19,13 @@ published: false
 
 :::message
 
-この記事はAzure OpenAIとLangChainを組み合わせて2022年1月以降の知識は検索しながら補完するAIを作成するハンズオン記事となります。
+### この記事はAzure OpenAIとLangChainを組み合わせて2022年1月以降の知識は検索しながら補完するAIを作成するハンズオン記事となります。
 
-### 前提条件として、以下の記事のハンズオン後を想定しています。
+- 前提条件として、以下の記事のハンズオン後を想定しています。
 前段のAzure OpenAIへのリクエストまでのハンズオンは以下の記事に記載しておりますので、こちらをご参照ください。
-[まだOpenAI使ったことないの？この記事で全員ハンズオンさせてやんよ！](https://zenn.dev/yusu29/articles/azure_openai_handson)
+> [まだOpenAI使ったことないの？この記事で全員ハンズオンさせてやんよ！](https://zenn.dev/yusu29/articles/azure_openai_handson)
 
 上記のハンズオンでBing Search以外のセットアップが完了しているところまで実装できます。
-
 ハンズオンを行う際は上記の記事から初めていただけますと、スムーズに進めることが出来ます。
 
 :::
