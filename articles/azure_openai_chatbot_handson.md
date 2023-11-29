@@ -48,6 +48,19 @@ published: true
 工夫次第でめちゃくちゃ面白いものが作れる予感...！！
 みなさん頑張っていきましょう！
 
+## 前提条件
+以下のインストールおよびサブスクリプションの契約が必要となります。
+- Node.js
+  - https://nodejs.org/en/blog/release/v16.20.2
+  - Node.js v16.20.2
+  - npm v8.19.4
+
+- Bot Framework Emulator
+  - https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.14.1
+
+- Azure
+  - https://azure.microsoft.com/ja-jp/pricing/purchase-options/pay-as-you-go
+
 ## リソースグループの作成
 まずは何がともあれリソースグループの作成です。
 全体図で言うとここの部分です。
