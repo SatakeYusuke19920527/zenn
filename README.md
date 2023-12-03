@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "チームトポロジーとは？" --type tech --emoji 📚
+  > npx zenn new:article --title "【超入門から応用まで】Azure OpenAI Service × LangChain" --type tech --emoji 🎁
 
 1. プレビューを確認する
    > npx zenn preview
