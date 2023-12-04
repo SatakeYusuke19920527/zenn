@@ -119,169 +119,22 @@ ReAct の主な目的は、自然言語推論と意思決定のタスクを統�
 
 # ReAct アプリケーションの動作検証および解説
 
-以下のリポジトリの README に従って、ReAct アプリケーションを作成します。
+以下にハンズオンの記事を作成したので、そちらを参照して実施してみてください。
+
+- 前編
+  !(まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！)[https://zenn.dev/yusu29/articles/azure_openai_handson]
+
+- 後編
+  !(OpenAI よ。2022 年 1 月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】)[https://zenn.dev/yusu29/articles/azure_openai__langchain_handson]
+
 !(github)[https://github.com/SatakeYusuke19920527/poc-react-app]
-
-1. Azure リソースの Deploy
-   まずは github の README に従って、Azure リソースをデプロイします。
-   以下 3 つのリソースが作成されます。
-
-- Azure OpenAI Service
-- Bing Search
-- Azure Static Web Apps
-
-## Azure OpenAI Service のセットアップ
-
-まずは、Azure OpenAI のセットアップです。全体図で言うとここの部分です。
-
-まずは、Azure 上で動作させるので、何がともあれ Azure の無料アカウントを作成してみましょう！
-[Azure の無料アカウントを使ってクラウドで構築](https://azure.microsoft.com/ja-jp/free)
-
-Microsoft アカウントを作成して Azure へログインすれば OK です。
-
-こんな感じの画面が出てきたでしょうか。
-
-![Azure](/images/azure_openai_handson/azure_main.png)
-
-何がともあれ、リソースグループを作成しましょう！
-上の検索窓に`リソースグループ`と入力して検索してください。
-
-![Azure](/images/azure_openai_handson/resouce_gr.png)
-
-リソースグループの画面に進んだら、左上らへんにある作成をクリックして、リソースグループを作成しましょう！
-次へを進んで、タグは別になくて大丈夫です。
-![Azure](/images/azure_openai_handson/make_rg.png)
-
-作成できましたか？
-
-![Azure](/images/azure_openai_handson/rg_fin.png)
-
-ここまで作成できたら、また検索窓に`OpenAI`と入力して Azure OpenAI の画面を開いてください。
-
-また、左上らへんにある作成ボタンをクリックです。
-リソースグループは先ほど作成したものを指定し、あとは下の画像のように設定してください。
-![Azure](/images/azure_openai_handson/make_ai.png)
-
-ネットワークは`インターネットを含むすべてのネットワークがこのリソースにアクセスできます。`を選択してください。
-タグは特に何もつけなくて OK です。
-
-作成ボタンをクリックしてください。デプロイが進行するはずです。(5 分ぐらいでしょうか。)
-デプロイが完了すれば、リソースへ移動です。
-
-次はモデルを Deploy する必要があります。
-
-画面左上らへんにある`Azure OpenAI Studioへ移動`をクリックしてください。
-
-![Azure](/images/azure_openai_handson/azureopenaistudio.png)
-
-新しいデプロイの作成をクリック → 新しいデプロイの作成をクリックしてください。
-
-以下の様な画面が出てくると思うので、いい感じに入力して作成をクリック
-
-![Azure](/images/azure_openai_handson/modeldeploy.png)
-
-このデプロイはすぐ完了します。
-下の画面のようになりましたか？
-
-![Azure](/images/azure_openai_handson/deploysuccess.png)
-
-ここまで来れば、AzureOpenAI のセットアップは完了です！
-次に進みましょう！
-
-:::message
-初回はこのような表示が出ている可能性があります。
-
-![Azure](/images/azure_openai_handson/aoai_error.png)
-
-その場合は表示されているリンクをクリックすると、Microsoft へリクエストを送ることができます。
-
-![Azure](/images/azure_openai_handson/request_access.png)
-
-ゆうじろうは数時間ぐらいで許可されたので、気長に待ちましょう。
-
-:::
-
-## Azure Bing Search のセットアップ
-
-Azure ポータルの画面へ移動してください。
-![azure](/images/azure_openai_langchain_handson/portal.png)
-
-画面上部の検索窓より、`Bing Search`と入力してください。
-
-Bing リソースを選択して、追加 > Bing Search をクリックしてください。
-
-![azure](/images/azure_openai_langchain_handson/portalbing.png)
-
-リソースグループ及び、名前を入力して、
-価格レベルは F1 で OK です。
-
-ご契約条件を読み、同意して確認と作成をクリックして、リソースを作成してください。
-
-これで Bing Search のセットアップは完了です。
-
-## Azure Static Web Apps のセットアップ
-
-Azure へログインして、Azure Static Web Apps を作成しましょう。
-![Azure](/images/azure_openai_handson/azurestaticwebapps.png)
-
-下記の Github リポジトリをフォークし、Azure Static Web Apps へデプロイします。
-!(github)[https://github.com/SatakeYusuke19920527/poc-react-app]
-
-Azure Static Web Apps へデプロイ Azure へ移動し、Azure Static Web Apps のデプロイ設定へ github の URL を指定し、CI/CD を有効にします。
-
-タグ → 確認及び作成より作成してください。
-
-2. 環境変数の設定
-   環境変数ファイルの作成及び、Static Web Apps に環境変数を設定 .env.loca ファイルを作成し、以下の内容を記載します。
-
-   ```:env
-   AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   AZURE_OPENAI_API_INSTANCE_NAME=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   AZURE_OPENAI_API_DEPLOYMENT_NAME=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   AZURE_OPENAI_API_VERSION=2023-08-01-preview
-   AZURE_OPENAI_API_ENDPOINT=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   AZURE_BINGSEARCH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   ```
-
-AZURE_OPENAI_API_KEY: Azure OpenAI Service の API キー
-AZURE_OPENAI_API_KEY: Azure OpenAI Service の リソース名
-AZURE_OPENAI_API_DEPLOYMENT_NAME: Azure OpenAI Studio の デプロイメント名
-AZURE_OPENAI_API_VERSION: 2023-08-01-preview で ok
-AZURE_OPENAI_API_ENDPOINT: Azure OpenAI Service の エンドポイント
-AZURE_BINGSEARCH_API_KEY: Bing Search の API キー
-
-3. 動作確認
-   github と連携し、自動デプロイが完了した後、Azure Static Web Apps の URL へアクセスします。
-
-では聞いてみましょう。
-![Azure](/images/azure_openai_langchain_handson/aoai.png)
-
-ふふ...そうです...
-あなただけの力(AOAI)ではわからないでしょう..
-今はもう 2023 年 11 月...
-2022 のワールドカップは終わっているのですよ...
-
-では、LangChain と組み合わせ、BingSearch を組み込んだ AOAI に聞いてみましょう。
-
-![Azure](/images/azure_openai_langchain_handson/langchain.png)
-
-### すばらしいですね！
-
-### 2022 年 1 月以降の知識も組み込めた Azure OpenAI が完成しました！
-
-できましたか？
-
-なかなか盛りだくさんの内容なので、詰まっちゃった方はぜひコメント欄にてどしどし質問してくださいね！
 
 # 最後に
 
-最後にずっと残してて課金されないようにお片付けです。
+ReAct は非常に面白い概念で、今後の AI の発展に大きく貢献すると考えています。
+ちなみに本記事はほぼほぼ Github copilot を使って作成しています。
 
-以下、３つの操作を実行すれば OK です。
-
-- Azure OpenAI Studio からデプロイの削除
-- Azure よりリソースグループの削除
-
-しっかりお片付けして今日のお勉強は終わりです。
+恐ろしいですね。
+AI が DX 化してくれることはもちろん、全ての仕事をやってくれる日はそう遠くないのかもしれません。
 
 お疲れ様でした。
