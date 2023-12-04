@@ -122,12 +122,14 @@ ReAct の主な目的は、自然言語推論と意思決定のタスクを統�
 以下にハンズオンの記事を作成したので、そちらを参照して実施してみてください。
 
 - 前編
-  !(まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！)[https://zenn.dev/yusu29/articles/azure_openai_handson]
+  まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！https://zenn.dev/yusu29/articles/azure_openai_handson
 
 - 後編
-  !(OpenAI よ。2022 年 1 月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】)[https://zenn.dev/yusu29/articles/azure_openai__langchain_handson]
+  OpenAI よ。2022 年 1 月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】
+  https://zenn.dev/yusu29/articles/azure_openai__langchain_handson
 
-!(github)[https://github.com/SatakeYusuke19920527/poc-react-app]
+github にもコードを上げているので、そちらも参照してみてください。
+https://github.com/SatakeYusuke19920527/poc-react-app
 
 # 最後に
 
