@@ -85,7 +85,8 @@ ChatGPT が有名ですが、実は他にも大規模言語モデルは各社リ
 `ReAct（REasoning and ACTing）`は、言語モデル（LLM）を使用して思考（推論）と行動を同時に行うための新しい枠組みです。
 ReAct の主な目的は、自然言語推論と意思決定のタスクを統合することで、より高度な言語理解と知識活用を可能にすることです。
 
-!(ReAct の論文はこちら)[https://react-lm.github.io/]
+ReAct の論文はこちら
+https://react-lm.github.io/
 
 **ReAct**の動作は主に以下の 2step からなります。
 
