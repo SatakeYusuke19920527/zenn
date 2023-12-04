@@ -85,8 +85,7 @@ ChatGPT が有名ですが、実は他にも大規模言語モデルは各社リ
 `ReAct（REasoning and ACTing）`は、言語モデル（LLM）を使用して思考（推論）と行動を同時に行うための新しい枠組みです。
 ReAct の主な目的は、自然言語推論と意思決定のタスクを統合することで、より高度な言語理解と知識活用を可能にすることです。
 
-ReAct の論文はこちら
-https://react-lm.github.io/
+[ReAct の論文はこちら](https://react-lm.github.io/)
 
 **ReAct**の動作は主に以下の 2step からなります。
 
@@ -123,14 +122,13 @@ https://react-lm.github.io/
 以下にハンズオンの記事を作成したので、そちらを参照して実施してみてください。
 
 - 前編
-  まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！https://zenn.dev/yusu29/articles/azure_openai_handson
+  [まだ OpenAI 使ったことないの？この記事で全員ハンズオンさせてやんよ！](https://zenn.dev/yusu29/articles/azure_openai_handson)
 
 - 後編
-  OpenAI よ。2022 年 1 月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】
-  https://zenn.dev/yusu29/articles/azure_openai__langchain_handson
+  [OpenAI よ。2022 年 1 月より先の未来を見たくないか？【Azure OpenAI × LangChain ハンズオン】](https://zenn.dev/yusu29/articles/azure_openai__langchain_handson)
 
 github にもコードを上げているので、そちらも参照してみてください。
-https://github.com/SatakeYusuke19920527/poc-react-app
+[github](https://github.com/SatakeYusuke19920527/poc-react-app)
 
 # 最後に
 
