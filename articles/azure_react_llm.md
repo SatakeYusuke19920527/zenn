@@ -243,8 +243,35 @@ Azure Static Web Apps へデプロイ Azure へ移動し、Azure Static Web Apps
    AZURE_BINGSEARCH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
 
+AZURE_OPENAI_API_KEY: Azure OpenAI Service の API キー
+AZURE_OPENAI_API_KEY: Azure OpenAI Service の リソース名
+AZURE_OPENAI_API_DEPLOYMENT_NAME: Azure OpenAI Studio の デプロイメント名
+AZURE_OPENAI_API_VERSION: 2023-08-01-preview で ok
+AZURE_OPENAI_API_ENDPOINT: Azure OpenAI Service の エンドポイント
+AZURE_BINGSEARCH_API_KEY: Bing Search の API キー
+
 3. 動作確認
    github と連携し、自動デプロイが完了した後、Azure Static Web Apps の URL へアクセスします。
+
+では聞いてみましょう。
+![Azure](/images/azure_openai_langchain_handson/aoai.png)
+
+ふふ...そうです...
+あなただけの力(AOAI)ではわからないでしょう..
+今はもう 2023 年 11 月...
+2022 のワールドカップは終わっているのですよ...
+
+では、LangChain と組み合わせ、BingSearch を組み込んだ AOAI に聞いてみましょう。
+
+![Azure](/images/azure_openai_langchain_handson/langchain.png)
+
+### すばらしいですね！
+
+### 2022 年 1 月以降の知識も組み込めた Azure OpenAI が完成しました！
+
+できましたか？
+
+なかなか盛りだくさんの内容なので、詰まっちゃった方はぜひコメント欄にてどしどし質問してくださいね！
 
 # 最後に
 
