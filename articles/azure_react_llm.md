@@ -119,6 +119,33 @@ ReAct の主な目的は、自然言語推論と意思決定のタスクを統�
 
 # ReAct アプリケーションの動作検証および解説
 
+以下のリポジトリの README に従って、ReAct アプリケーションを作成します。
+!(github)[https://github.com/SatakeYusuke19920527/poc-react-app]
+
+1. Azure リソースの Deploy
+   まずは github の README に従って、Azure リソースをデプロイします。
+   以下 3 つのリソースが作成されます。
+
+- Azure OpenAI Service
+- Bing Search
+- Azure Static Web Apps
+
+2. 環境変数の設定
+   環境変数ファイルの作成及び、Static Web Apps に環境変数を設定 .env.loca ファイルを作成し、以下の内容を記載します。
+   ```:env
+   AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   AZURE_OPENAI_API_INSTANCE_NAME=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   AZURE_OPENAI_API_DEPLOYMENT_NAME=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   AZURE_OPENAI_API_VERSION=2023-08-01-preview
+   AZURE_OPENAI_API_ENDPOINT=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   AZURE_BINGSEARCH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
+3. CI/CD を設定し Deploy
+   Azure Static Web Apps へデプロイ Azure へ移動し、Azure Static Web Apps のデプロイ設定へ github の URL を指定し、CI/CD を有効にします。
+
+4. 動作確認
+   github と連携し、自動デプロイが完了した後、Azure Static Web Apps の URL へアクセスします。
+
 # 最後に
 
 最後にずっと残してて課金されないようにお片付けです。
