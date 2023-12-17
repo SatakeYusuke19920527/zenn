@@ -3,7 +3,7 @@ title: 'Azure OpenAIとLangChainを使ってReActの概念を学ぶ'
 emoji: '🎁'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'openai', 'langchain', 'next.js', 'ReAct']
-published: false
+published: true
 ---
 
 ![react](/images/azure_react/react.png)
