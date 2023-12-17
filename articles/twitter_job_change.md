@@ -3,7 +3,7 @@ title: "Twitter転職で業務内容・フルリモート・副業可能を全�
 emoji: "🎁"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["twitter転職", "Azure", "フルリモート", "副業", "転職"]
-published: false
+published: true
 ---
 
 ![Twitter転職](/images/twitter_job_change/twitter_job.png)
@@ -81,7 +81,7 @@ published: false
 
 
 **まとめると、学生時代の最終ステータスはIT未経験の大学院生(麻雀大好き)**
-**1社目10ヶ月で辞めて、2社目で開発・インフラ・PMとかやってた人**
+**1社目10ヶ月で辞めて、2社目3年半かけて開発やインフラ、PMをやってた人**
 
 
 
