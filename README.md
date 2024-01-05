@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Twitter転職で業務内容・フルリモート・副業可能を全てを勝ち取れた話" --type tech --emoji 🎁
+  > npx zenn new:article --title "独自の情報にも回答するAIを作成してみよう" --type tech --emoji 🐲
 
 1. プレビューを確認する
    > npx zenn preview
