@@ -1,8 +1,8 @@
 ---
-title: "【Azure OpenAI × Next.js】独自の情報にも回答するAIをWebアプリへ追加してみよう【Add your data】"
-emoji: "🐲"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ['Azure', 'openai', 'next.js']
+title: 'Add your data と T3 Stackで独自の情報にも回答するAIをWebアプリへ追加してみよう'
+emoji: '🐲'
+type: 'tech' # tech: 技術記事 / idea: アイデア
+topics: ['Azure', 'openai', 'next.js', 'T3Stack', 'addyourdata']
 published: false
 ---
 
@@ -10,22 +10,23 @@ published: false
 
 1. はじめに
 2. 今回作成するシステムの概要
-3. Azure OpenAI セットアップ
-4. Azure DevOps の Azure Repos をセットアップ
-5. Next.js でフロントエンド構築
-6. Azure Static Web Apps へ Pipelines を用いて Deploy
-7. 動作確認
-8. お片付け
+3. Azure OpenAI Service セットアップ
+4. Azure AI Search セットアップ
+5. Azure Blob Storage セットアップ
+6. Add your data で AI Search にインデックスを作成
+7. アプリケーションを作成
+8. 動作確認
+9. お片付け
 
 ## はじめに
 
 ![Azure logo](/images/azure_openai_handson/azureopenai_logo.png)
 
-昨今ちまたで話題の Azure OpenAIに独自データを扱うことが出来る【Add your data】がプレビューでリリースされました。  
+昨今話題の Azure OpenAI に独自データを扱うことが出来る【Add your data】がプレビューでリリースされました。
 
 本当に簡単に独自データを扱うことが出来たので、本記事をご覧になられた皆様へ知見を共有していこうと思います。
 
-そしてどうせなら動くものを見ながら「おぉ～」と言っていただきたいので、今回は Next.js を使用してフロントエンドを作成していきます。
+そしてどうせなら動くものを見ながら「おぉ～」と言っていただきたいので、ハンズオン形式で進めていければと存じます！
 
 ### では、Let's ハンズオン！
 
@@ -34,7 +35,7 @@ published: false
 今回作成するシステムは Azure 上で作成します。
 下の図をご覧ください。
 
-![Azure dashboard](/images/azure_openai_handson/zentai.png)
+![Azure dashboard](/images/azure_openai_addyourdata/zentai.png)
 
 以下の様な技術を使います。
 
@@ -42,12 +43,12 @@ published: false
 - Azure AI Search
 - Azure Blob Storage
 - Azure Static Web Apps
-- Next.js(TypeScript)
+- Next.js(T3 Stack)
 
 ## Azure OpenAI セットアップ
 
 まずは Azure OpenAI のセットアップです。全体図で言うとここの部分です。
-![Azure dashboard](/images/azure_openai_handson/openai_set.png)
+![Azure dashboard](/images/azure_openai_addyourdata/aoai.png)
 
 まずは、Azure 上で動作させるので、何がともあれ Azure の無料アカウントを作成してみましょう！
 [Azure の無料アカウントを使ってクラウドで構築](https://azure.microsoft.com/ja-jp/free)
@@ -91,14 +92,14 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 
 新しいデプロイの作成をクリック → 新しいデプロイの作成をクリックしてください。
 
-以下の様な画面が出てくると思うので、いい感じに入力して作成をクリック
+以下の様な画面が出てくると思うので、`gpt-35-turbo-16k`以上を選択して作成をクリック`
 
-![Azure](/images/azure_openai_handson/modeldeploy.png)
+![Azure](/images/azure_openai_addyourdata/modeldeploy.png)
 
 このデプロイはすぐ完了します。
 下の画面のようになりましたか？
 
-![Azure](/images/azure_openai_handson/deploysuccess.png)
+![Azure](/images/azure_openai_addyourdata/deploysuccess.png)
 
 ここまで来れば、AzureOpenAI のセットアップは完了です！
 次に進みましょう！
@@ -112,429 +113,130 @@ Microsoft アカウントを作成して Azure へログインすれば OK で�
 
 ![Azure](/images/azure_openai_handson/request_access.png)
 
-ゆうじろうは数時間ぐらいで許可されたので、気長に待ちましょう。
+筆者は数時間ぐらいで許可されたので、気長に待ちましょう。
 
 :::
 
-## Azure DevOps の Azure Repos をセットアップ
+## Azure AI Search セットアップ
 
 次は Azure DevOps に Repos を作成してコードを管理する場所を作ります。
 全体図で言うとここです。
 
-![Azure](/images/azure_openai_handson/devops_next_set.png)
+![Azure](/images/azure_openai_addyourdata/aisearch.png)
 
-まずは Azure DevOps へアクセス
-ゆうじろうは DevOps の画面見ただけでワクワクします
+まずは Azure ポータルから検索窓へ Azure AI Service と検索し、AI Search の作成を選択してください。
 
-[AzureDevOps](https://azure.microsoft.com/ja-jp/products/devops/?nav=min)
+![AzureAISearch](/images/azure_openai_addyourdata/aisearch2.png)
 
-![AzureDevOps](/images/azuredevops_staticapps_next/devops.png)
+次に AISearch リソースの作成です。
+価格レベルは Basic(基本)としておいてください。
 
-次にプロジェクトの作成です。
+![AzureAISearch](/images/azure_openai_addyourdata/makeaisearch.png)
 
-サインインして`+ New Project` からプロジェクトを作成してください。
+残りはデフォルトの設定で OK です。
 
-![AzureDevOps](/images/azure_openai_handson/devops_create.png)
+## Azure Blob Storage セットアップ
 
-無事、project が create されたら、Welcome to the Project と暖かく迎えてくれます。
+独自データ(今回は PDF ファイル)を格納するストレージを作成します。
+全体図で言うとここです。
 
-![AzureDevOps](/images/azure_openai_handson/create_repo.png)
+![Azure](/images/azure_openai_addyourdata/blob.png)
 
-(ロゴかわいいですよね)
+Azure ポータルから検索窓へ`ストレージアカウント`と入力して、画面左上の作成よりストレージアカウントを作成してください。
 
-まずはコードを管理するリポジトリを作成します。
-画面左側の Repos をクリックしてください。
+![Azure](/images/azure_openai_addyourdata/blobstorage.png)
 
-以下のリポジトリの url が表示されるので、コピーしてローカル環境へ git clone です。
+残りはデフォルトの設定で大丈夫です。
+リソースが作成されたら、移動してコンテナを作成します。
 
-![AzureDevOps](/images/azure_openai_handson/create_repo_gitclone.png)
+画面左側ペインよりコンテナを選択
+![Azure](/images/azure_openai_addyourdata/container.png)
 
-```bash
-git clone [リポジトリのurl]
-```
++コンテナボタンよりコンテナを作成してください。
 
-これでローカル環境へリポジトリをクローンできれば Azure Repos の環境構築は完了です。
+![Azure](/images/azure_openai_addyourdata/input.png)
 
-## Next.js でフロントエンド構築
+本記事では名前を input に、匿名アクセスレベルを BLOB へ設定しました。
 
-ここからはローカル環境で Next.js の環境構築をします。
+コンテナが作成出来たら、独自データが記載された PDF ファイルを配置してください。
 
-![AzureDevOps](/images/azure_openai_handson/next_set.png)
+今回は私が石垣島に旅行に行った際に作成した旅のしおりを使用します。(誰得)
 
-まずは、ローカルへ clone したディレクトリへ移動してください。
+![Azure](/images/azure_openai_addyourdata/shiori.png)
 
-```bash
-cd yujiro-handson-devops
-```
+作成したコンテナを選択 → アップロードから PDF ファイルをアップロードしてください。
 
-中に入れたら容赦なく Next.js のプロジェクトを create です。
+![Azure](/images/azure_openai_addyourdata/upload.png)
 
-```bash
-create-next-app . --ts
-```
+これで Storage の設定は完了です。
 
-色々聞かれるので、とりあえず設定
+## Add your data で AI Search にインデックスを作成
 
-```bash
- ➜  tech-blog git:(main) ✗ create-next-app . --ts
-✔ Would you like to use ESLint with this project? … No / Yes
-✔ Would you like to use Tailwind CSS with this project? … No / Yes
-✔ Would you like to use `src/` directory with this project? … No / Yes
-✔ Use App Router (recommended)? … No / Yes
-✔ Would you like to customize the default import alias? … No / Yes
-✔ What import alias would you like configured? … @/*
-Creating a new Next.js app in /Users/s.y/dev/05.next/tech-blog.
+では、Azure AI Service の `Add your data`を用いて独自データの情報を AI Search 内へインデックスを作成し、検索出来るようにしましょう。
 
-Using npm.
+全体で言うとこの部分です。
 
-Initializing project with template: default-tw
+![Azure](/images/azure_openai_addyourdata/makeindex.png)
 
+Azure OpenAI Studio へ移動してください。
+画面左側ペインの`チャット`を選択し、`データの追加(プレビュー)`を選択してください。
+![Azure](/images/azure_openai_addyourdata/aistudio.png)
 
-Installing dependencies:
-- react
-- react-dom
-- next
-- typescript
-- @types/react
-- @types/node
-- @types/react-dom
-- tailwindcss
-- postcss
-- autoprefixer
+そしてデータソースの追加を選択してください。
 
+データソースは先ほど作成した BlobStorage を選択
+![Azure](/images/azure_openai_addyourdata/adddata1.png)
 
-added 119 packages, and audited 120 packages in 24s
+先ほど作成したコンテナと AI Search を選択し、次へをクリック
 
-21 packages are looking for funding
-  run `npm fund` for details
+![Azure](/images/azure_openai_addyourdata/adddata2.png)
 
-found 0 vulnerabilities
-Success! Created tech-blog at /Users/s.y/dev/05.next/tech-blog
-```
+その後は検索の種類は`キーワード`で OK
 
-success!と言われれば OK です。
+保存して閉じるをクリックすると、インデックスの作成が開始されます。
 
-では、VSCode を開いて`next.config.js`に追記しましょう。
+これで`Add your data`を用いて独自機能を検索出来るバックエンド側の実装が完了しました。
+非常に簡単ですよね。
 
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  output: 'standalone', // 追記
-};
+## アプリケーションを作成
 
-module.exports = nextConfig;
-```
+今回は T3 Stack という Next.js でフロントサイドもサーバサイドも実装出来るフレームワークを使ってアプリケーションを作成してみようと思います。
 
-output: 'standalone'を追記しました。
+- T3 Stack  
+  https://create.t3.gg/
 
-> Static Web Apps にデプロイするために Next.js アプリを構成するには、Next.js プロジェクトのスタンドアロン機能を有効にします。
-> この手順では、Next.js プロジェクトのサイズを小さくして、Static Web Apps のサイズ制限を下回るようにします。
-> 詳細については、スタンドアロンに関するセクション[https://learn.microsoft.com/ja-jp/azure/static-web-apps/deploy-nextjs-hybrid#enable-standalone-feature]を参照してください。
-
-では、せっかくの Next.js なので、サーバサイドレンダリングも追加してみましょう。
-pages/index.tsx は以下のコードとなります。
-
-```typescript
-import axios from 'axios';
-import { useState } from 'react';
-
-export default function Home() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [content, setContent] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-
-  const getAzData = async () => {
-    setIsLoading(true);
-    try {
-      console.log('start');
-      const res = await axios.post('api/azopenai', { message });
-      setContent(res.data[0].message.content);
-    } catch (err) {
-      console.log('🚀 ~ file: index.tsx:32 ~ getAzData ~ err:', err);
-    }
-    setIsLoading(false);
-  };
-  return (
-    <main className={`flex min-h-screen flex-col items-center p-24`}>
-      <h1>ネガティブなことを言ってみてください</h1>
-
-      <label
-        htmlFor="message"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Your message
-      </label>
-      <textarea
-        id="message"
-        onChange={(e) => setMessage(e.target.value)}
-        rows={4}
-        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Write your thoughts here..."
-      ></textarea>
-      <button
-        onClick={getAzData}
-        type="button"
-        className="my-5 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-      >
-        ポジティブ変換
-      </button>
-      {isLoading ? (
-        <div role="status">
-          <svg
-            aria-hidden="true"
-            className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor"
-            />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill"
-            />
-          </svg>
-          <span className="sr-only">Loading...</span>
-        </div>
-      ) : (
-        <div>
-          {content === '' ? (
-            <div></div>
-          ) : (
-            <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-              <p className="font-normal text-gray-700">{content}</p>
-            </div>
-          )}
-        </div>
-      )}
-    </main>
-  );
-}
-```
-
-axios を使用するので、install しておきましょう。
+まずはお好きなフォルダに移動して git のリポジトリをクローンして
+以下のコマンドを実行してください。
 
 ```bash
-npm install axios
+npm create t3-app@latest
 ```
 
-src/pages/api/azopenai.ts を作成してください。
-コードは以下となります。
+![Azure](/images/azure_openai_addyourdata/t3init.png)
 
-```typescript
-import { getAzOpenAIData } from '@/models/azopenai/azopenaiApplicationService';
-import type { NextApiRequest, NextApiResponse } from 'next';
+次に、GitHub の認証機能を簡単につけておきます。
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
-    const message = req.body.message;
-    const data = await getAzOpenAIData(message);
-    res.json(data);
-  } catch (error) {
-    console.log('🚀 ~ file: hello.ts:13 ~ error:', error);
-  }
-}
+環境変数の DISCORD となっている箇所を GITHUB へ変更してください。
+
+そして、github→settings→Developer settings→OAuth Apps へ移動してください。
+
+New OAuth App をクリックして、CLIENT_ID と CLIENT_SECRET を取得してください。
+
+取得した文字列を.env ファイルの以下の箇所へ記載してください。
+
+```env
+GITHUB_CLIENT_ID=xxxxxxx
+GITHUB_CLIENT_ID=xxxxxxx
 ```
 
-次は OpenAI へアクセスする関数を作成します。
-以下二つのフォルダとファイルを作成してください。
-
-> src/models/azopenai/azopenaiApplicationService.ts
-> src/models/azopenai/azopenaiRepository.ts
-
-それぞれのコードは以下です。
-
-azopenaiApplicationService.ts
-
-```typescript
-import { AzOpenaiRepository } from './azopenaiRepository';
-
-export const getAzOpenAIData = async (message: string) => {
-  try {
-    const repo = new AzOpenaiRepository();
-    return await repo.getAzOpenAIData(message);
-  } catch (err) {
-    return err;
-  }
-};
-```
-
-azopenaiRepository.ts
-
-```typescript
-import { AzureKeyCredential, OpenAIClient } from '@azure/openai';
-
-export class AzOpenaiRepository {
-  async getAzOpenAIData(message: string) {
-    console.log('start', process.env.AZURE_OPENAI_ENDPOINT!);
-    return new Promise(async (resolve, reject) => {
-      const endpoint = process.env.AZURE_OPENAI_ENDPOINT!;
-      const azureApiKey = process.env.AZURE_OPENAI_API_KEY!;
-      const deploymentId = process.env.AZURE_OPENAI_DEPLOYMENT_ID!;
-      const content = `
-      ${message}
-      #上記をポジティブなフィードバックに変換して
-      `;
-      try {
-        const messages = [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          {
-            role: 'user',
-            content,
-          },
-        ];
-        const client = new OpenAIClient(
-          endpoint,
-          new AzureKeyCredential(azureApiKey)
-        );
-
-        const result = await client.getChatCompletions(deploymentId, messages);
-        resolve(result.choices);
-      } catch (error: any) {
-        console.log(
-          '🚀 ~ file: openaiRepository.ts:29 ~ AzOpenaiRepository ~ returnnewPromise ~ error:',
-          error
-        );
-        reject(error);
-      }
-    });
-  }
-}
-```
-
-以下もインストールしておきましょう！
-
-```bash
-npm install @azure/openai
-```
-
-環境変数は.env.local に記載です。
-ルート階層に`.env.local`を作成してください。
-
-.env.local
-
-```
-AZURE_OPENAI_ENDPOINT=https://xxxxxxxxxxxxxxxxx/
-AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxx
-AZURE_OPENAI_DEPLOYMENT_ID=xxxxxxxxxxxxxxxxx
-```
-
-では 3 つの環境変数を取得しましょう。
-AZURE_OPENAI_ENDPOINT と AZURE_OPENAI_API_KEY はは
-Azure へログイン →OpenAI と検索 → 作成した OpenAI を選択 → リソース管理 → キーとエンドポイントの箇所を参照です。
-
-![AzureDevOps](/images/azure_openai_handson/key_endpoint.png)
-
-AZURE_OPENAI_DEPLOYMENT_ID は
-Azure OpenAI Studio→ デプロイの箇所からデプロイ名をコピーしてきてください。
-
-ここまで実装して、実行した時にエラーがなければ OK です。
+そこまでできれば、あとは以下のコマンドを実行すれば OK です。
 
 ```bash
 npm run dev
 ```
 
-![Next.js](/images/azure_openai_handson/run_dev.png)
-
-問題なければ Azure DevOps の Repos へ push しましょう。
-Azure DevOps に戻ったら以下のように code が push されていれば OK です。
-
-![AzureDevOps](/images/azure_openai_handson/repos.png)
-
-## Azure Static Web Apps へ Pipelines を用いて Deploy
-
-では、Azure Static Web Apps へ Pipeline よりホスティングです。
-全体図で言うとこの部分です。
-![AzureDevOps](/images/azure_openai_handson/pipeline_set.png)
-
-Azure へログインして、Azure Static Web Apps を作成しましょう。
-![Azure](/images/azure_openai_handson/azurestaticwebapps.png)
-
-East Asia でデプロイの詳細はその他を入力
-
-![Azure](/images/azuredevops_staticapps_next/setting.png)
-
-タグ → 確認及び作成より作成してください。
-
-リソースに移動して、デプロイトークンの管理からデプロイトークンをコピーしておいてください。
-
-では、Azure DevOps に戻り、Azure Pipeline をクリックし、create pipeline をクリック
-
-Azure Repos Git を選択
-![Azure](/images/azuredevops_staticapps_next/reposgit.png)
-
-リポジトリを選択したら、Starter Pipeline を選択
-
-![Azure](/images/azuredevops_staticapps_next/stater.png)
-
-yml ファイルへ AzureStaticWebApps の箇所を追記
-
-```yml
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-  - main
-
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
-
-  - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-    displayName: 'Run a multi-line script'
-
-# Static Web Appsのデプロイ
-- task: AzureStaticWebApp@0
-  inputs:
-    app_location: '/'
-    api_location: ''
-    output_location: '.next'
-  env:
-    azure_static_web_apps_api_token: $(deployment_token)
-    AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
-    AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
-    AZURE_OPENAI_DEPLOYMENT_ID: $(AZURE_OPENAI_DEPLOYMENT_ID)
-```
-
-画面右上の Variables→New Variables より Name に`deployment_token`と入力し、value へ先ほどコピーしたデプロイメントトークンを貼り付けて OK→save をクリック
-
-![Azure](/images/azuredevops_staticapps_next/deploytoken.png)
-
-あとは`Save and Run`を実行して、神に Deploy が成功することを祈りましょう。
-
-![Azure](/images/azuredevops_staticapps_next/deploying.png)
-
-ざわ...
-ざわ...
-
-...
-
-#### success!!!
-
-![Azure](/images/azuredevops_staticapps_next/deploysuccess.png)
-
-では、Azure の Azure Static Web Apps に戻って 構成の箇所に環境変数を追加しましょう。
-
-![Azure](/images/azure_openai_handson/env.png)
-
-そして、URL にアクセスしてみましょう！
-
-![Azure](/images/azuredevops_staticapps_next/url.png)
-
-無事に Deploy されていることを確認して作業は完了です！
+以下の画面が表示されましたでしょうか。
+![Azure](/images/azure_openai_addyourdata/createt3app.png)
 
 ## 動作確認
 
