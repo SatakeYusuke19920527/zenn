@@ -449,7 +449,7 @@ export const addYourDataRouter = createTRPCRouter({
 
       console.log('🚀 ~ Add your data start ~ 🚀')
 
-      const apiUrl = 'https://yujiro-handson-webapp.azurewebsites.net/conversation';
+      const apiUrl = 'https://[先ほどのWebAppのURL]/conversation';
 
       const requestData = {
         messages: [
@@ -489,6 +489,8 @@ export const addYourDataRouter = createTRPCRouter({
 })
 
 ```
+
+URLを`https://[先ほどのWebAppのURL]/conversation` と/conversationとするところがPoint。
 
 Router を作成したら、server/api/root.ts へ addyourdataRouter を追記してください。
 
