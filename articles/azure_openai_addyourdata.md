@@ -197,6 +197,8 @@ Azure OpenAI Studio へ移動してください。
 
 その後、画面右上の配置先→新しいデプロイ先を選択してWeb Appをデプロイしてください。
 
+![Azure](/images/azure_openai_addyourdata/webappdeploy.png)
+
 10分ぐらいたって、デプロイが完了したら、webアプリの規定のドメインのURLをコピーしておいてください。
 
 これで`Add your data`を用いて独自機能を検索出来るバックエンド側の実装が完了しました。
