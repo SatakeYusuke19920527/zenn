@@ -1,5 +1,5 @@
 ---
-title: '生成AIを用いて企業の独自情報にも回答してくれるAIを出来る限り簡単に実装する方法'
+title: '生成AIを用いて企業の独自情報にも回答してくれるシステムを出来る限り簡単に実装する方法'
 emoji: '🐲'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'openai', 'next.js', 'T3Stack', 'addyourdata']
