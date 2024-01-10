@@ -1,9 +1,9 @@
 ---
-title: 'Add your data と T3 Stackで独自の情報にも回答するAIをWebアプリへ追加してみよう'
+title: '生成AIを用いて企業の独自情報にも回答してくれるAIを出来る限り簡単に実装する方法'
 emoji: '🐲'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'openai', 'next.js', 'T3Stack', 'addyourdata']
-published: false
+published: true
 ---
 
 # 目次
@@ -194,6 +194,10 @@ Azure OpenAI Studio へ移動してください。
 その後は検索の種類は`キーワード`で OK
 
 保存して閉じるをクリックすると、インデックスの作成が開始されます。
+
+その後、画面右上の配置先→新しいデプロイ先を選択してWeb Appをデプロイしてください。
+
+10分ぐらいたって、デプロイが完了したら、webアプリの規定のドメインのURLをコピーしておいてください。
 
 これで`Add your data`を用いて独自機能を検索出来るバックエンド側の実装が完了しました。
 非常に簡単ですよね。
@@ -424,6 +428,8 @@ import {
 
 import { AzureKeyCredential, OpenAIClient } from '@azure/openai';
 
+import axios from 'axios';
+
 import {
   createTRPCRouter,
   protectedProcedure,
@@ -436,10 +442,31 @@ export const addYourDataRouter = createTRPCRouter({
   getAddYourData: protectedProcedure
     .input(getAddYourDataSchema)
     .mutation(async ({ ctx, input }) => {
+
       const endpoint = env.AZURE_OPENAI_ENDPOINT!;
       const azureApiKey = env.AZURE_OPENAI_API_KEY!;
       const deploymentId = env.AZURE_OPENAI_DEPLOYMENT_ID!;
-      const content = `${input.content}`;
+
+      console.log('🚀 ~ Add your data start ~ 🚀')
+
+      const apiUrl = 'https://yujiro-handson-webapp.azurewebsites.net/conversation';
+
+      const requestData = {
+        messages: [
+          { role: 'user', content: input.content }
+        ]
+      };
+
+      const res = await axios.post(apiUrl, requestData);
+
+      const content = `
+      # 質問
+      ${input.content}
+      # 回答
+      ${res.data}
+
+      回答を質問に対して要約してください。
+      `;
       const messages: any[] = [
         {
           role: 'system',
@@ -456,9 +483,11 @@ export const addYourDataRouter = createTRPCRouter({
       );
 
       const result = await client.getChatCompletions(deploymentId, messages);
+      console.log("🚀 ~ .mutation ~ result:", result.choices)
       return result.choices;
     }),
 })
+
 ```
 
 Router を作成したら、server/api/root.ts へ addyourdataRouter を追記してください。
@@ -610,9 +639,12 @@ export default Home;
 以下の画面の PDF にて取り込んだ独自情報に関する質問をしてみてください。
 
 取り込んだ PDF に沿った回答を返してくれるはずです。  
-// TODO: 画像を追加
+![Azure](/images/azure_openai_addyourdata/12.png)
 
 できましたか？
+こんなに簡単に企業の独自情報がAIで活用出来るようになるとは驚きです！
+
+皆さまも是非ハンズオンしてみてくださいね！
 
 なかなか盛りだくさんの内容なので、詰まっちゃった方はぜひコメント欄にてどしどし質問してくださいね！
 
