@@ -3,7 +3,7 @@ title: "Azure Communication Serviceで電話番号を取得しよう"
 emoji: "📞"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure","AzureCommunicationService","電話番号", "コールセンター"]
-published: false
+published: true
 ---
 
 # 目次
@@ -22,11 +22,11 @@ published: false
 # Azure Communication Serviceの概要
 Azure Communication Serviceはクラウドベースのサービスです。用意されている REST API およびクライアント ライブラリ SDK を利用することで、通信を手軽にアプリケーションに組み込むことができます。 基になる技術 (メディアのエンコードやテレフォニーなど) の専門家でなくても、アプリケーションに通信を追加できます。 Azure Communication Service は、複数の Azure 地域と 政府機関向け Azure で利用できます。
 
-[Azure Communication Service](https://learn.microsoft.com/ja-jp/azure/communication-services/overview)
+https://learn.microsoft.com/ja-jp/azure/communication-services/overview
 
 電話番号を取得してみたいと思い、公式ドキュメントを参考にしてみましたが、日本語の情報が少なかったので、今回は日本語で記事にしてみました。
 
-[Azure Communication Service](https://learn.microsoft.com/ja-jp/azure/communication-services/quickstarts/telephony/get-phone-number?tabs=windows&pivots=platform-azcli)
+https://learn.microsoft.com/ja-jp/azure/communication-services/quickstarts/telephony/get-phone-number?tabs=windows&pivots=platform-azcli
 
 それでは、電話番号を取得してみましょう。
 
