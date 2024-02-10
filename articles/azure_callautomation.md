@@ -2,20 +2,9 @@
 title: "OpenAIが自動応答してくれるコールセンターを作ってみた"
 emoji: "📞"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Azure","AzureCommunicationService","AzureOpenAI", "コールセンター"]
+topics: ["Azure","OpenAI","TypeScript", "コールセンター"]
 published: false
 ---
-
-# 目次
-
-1. 概要
-2. Azure Communication Serviceセットアップ
-3. Azure AI Multi Serviceのセットアップ
-4. Azure OpenAI Serviceのセットアップ
-5. Azure DevTunnelセットアップ
-6. Azure AI Multi Service と Azure Communication Services の連携
-7. EventGridのセットアップ
-8. 動作検証
 
 # 概要
 今回はAzure Communication ServiceとAzure OpenAI Serviceを使って、コールセンターを作ってみたいと思います。
@@ -34,6 +23,16 @@ published: false
 総じて、ユーザが電話をかけると、OpenAIが回答を作成して通話越しから応答を返すという流れです。
 
 それでは作っていきましょう。
+
+# 目次
+
+1. Azure Communication Serviceセットアップ
+2. Azure AI Multi Serviceのセットアップ
+3. Azure OpenAI Serviceのセットアップ
+4. Azure DevTunnelセットアップ
+5. Azure AI Multi Service と Azure Communication Services の連携
+6. EventGridのセットアップ
+7. 動作検証
 
 # Azure Communication Serviceセットアップ
 
