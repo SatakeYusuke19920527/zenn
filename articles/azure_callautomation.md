@@ -1,5 +1,5 @@
 ---
-title: "コールセンターを作ってみた【Azure OpenAI Service × Azure Communication Service】"
+title: "OpenAIが自動応答してくれるコールセンターを作ってみた"
 emoji: "📞"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure","AzureCommunicationService","AzureOpenAI", "コールセンター"]
@@ -125,11 +125,14 @@ Identityはシステム割り当てIDをオンにしてください。後ほど�
 # Azure DevTunnelセットアップ
 Azure DevTunnels は、インターネット上でホストされているローカル Web サービスを共有可能にする Azure サービスです。 このドキュメントに記載されているコマンドを使用して、ローカル開発環境をパブリック インターネットに接続します。 これにより永続的なエンドポイント URL のあるトンネルが作成され、匿名アクセスが可能になります。 このエンドポイントを使用して、ACS Call Automation サービスからの呼び出しイベントをアプリケーションに通知します。
 
+以下のコマンドを実行し、DevTunnelをセットアップしてください。
+
 ```bash
 devtunnel create --allow-anonymous
 devtunnel port create -p 8080
 devtunnel host
 ```
+
 
 # Azure AI Multi Service と Azure Communication Services の連携
 
@@ -152,8 +155,15 @@ Azure Portal にて、Azure Communication Services のリソースへ移動し�
 
 次にサブスクリプションの設定です。
 EventGridからWebhookでWebAppへ通知を送信します。
-以下の記事を参考にしてください。
+以下の記事を参考に設定してください。
 https://learn.microsoft.com/ja-jp/azure/communication-services/concepts/call-automation/incoming-call-notification
+
+ポイントとしては以下２点です。
+1. URLはAzure DevTunnelのURLを使います。ex. https://xxxx.devtunnels.ms/api/IncomingCall
+2. イベントタイプは```Microsoft.Communication.IncomingCall```を選択します。
+3. フィルターでキー：```data.to.PhoneNumber.Value```、演算子：```次の文字列で始まる```、値：```Azure Communication Serviceの電話番号```を設定します。
+
+これにて設定は完了です。
 
 # 動作検証
 以下のリポジトリをcloneして、以下のコマンドを実行してください。
@@ -165,6 +175,6 @@ npm run dev
 ```
 Azure Communication Services の電話番号に架電して、OpenAIが生成した回答を答えてくれます。
 
-これにて、コールセンターを作成する手順は完了です。
+これにて、コールセンターを作成する手順は完了です！
 
 ## お疲れ様でした
