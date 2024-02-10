@@ -1,5 +1,5 @@
 ---
-title: "OpenAIが自動応答してくれるコールセンターを作ってみた"
+title: "OpenAIが自動応答してくれるコールセンターを作って遊ぶ"
 emoji: "📞"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure","OpenAI","TypeScript", "コールセンター"]
@@ -176,4 +176,9 @@ Azure Communication Services の電話番号に架電して、OpenAIが生成し
 
 これにて、コールセンターを作成する手順は完了です！
 
-## お疲れ様でした
+## お疲れ様でした📞
+
+# 参考
+2023年Ignite JapanですきやねんAzureのセッションにてDEMOをされていたので、それを参考にしました。
+下記はC#にて実装されていたので、今回はTypeScriptで実装しました。
+https://github.com/TK3214-MS/POC-Ignite2023-CallAutomation
