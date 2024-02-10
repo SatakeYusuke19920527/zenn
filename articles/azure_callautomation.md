@@ -1,5 +1,5 @@
 ---
-title: "OpenAIが自動応答してくれるコールセンターを作ってみよう☎️"
+title: "📲OpenAIが自動応答するコールセンターを作ってみよう！"
 emoji: "📞"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure","OpenAI","TypeScript", "コールセンター"]
