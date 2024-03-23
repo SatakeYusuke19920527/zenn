@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Communication Serviceで電話番号を取得しよう" --type tech --emoji 📞
+  > npx zenn new:article --title "【エンジニアの副業】Udemyの講師デビューしてみた" --type tech --emoji 🧑‍🏫
 
 1. プレビューを確認する
    > npx zenn preview
