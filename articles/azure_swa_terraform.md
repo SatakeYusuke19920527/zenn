@@ -373,3 +373,7 @@ Github Actionsが実行され、Azure Static Web Appsへデプロイされます
 ![Azure Portal](/images/azure_swa_terraform/ast_pic2.png)
 
 お疲れ様でした！
+
+## 参考文献
+以下の文献にお世話になりました！
+https://zenn.dev/dzeyelid/articles/9ab7b020fd774c212344
