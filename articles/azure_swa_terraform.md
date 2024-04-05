@@ -1,5 +1,5 @@
 ---
-title: "【Next.js14対応】Next.jsをAzure Static Web AppsにTerraformからデプロイする方法【Github Actions】"
+title: "【Next.js14対応】Next.jsをAzure Static Web AppsにTerraformからデプロイする方法"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 toast_pics: ["Azure", "Terraform", "Next.js", "Static Web Apps", "Github Actions"]
