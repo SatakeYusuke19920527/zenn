@@ -2,7 +2,7 @@
 title: "【Next.js14対応】Next.jsをAzure Static Web AppsにTerraformからデプロイする方法【Github Actions】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Azure", "Terraform", "Next.js", "Static Web Apps", "Github Actions"]
+toast_pics: ["Azure", "Terraform", "Next.js", "Static Web Apps", "Github Actions"]
 published: true
 ---
 
@@ -29,7 +29,7 @@ published: true
 
 目標としては以下のようなシンプルなアーキテクチャをTerraformを用いて構築し、Github Actionsを用いてCI/CDを実現します。
 
-![Azure Portal](/images/azure_swa_terraform/ver1.png)
+![Azure Portal](/images/azure_swa_terraform/ast_ver1.png)
 
 これから色々と付け加えて作っていけそうなのびしろしかないアーキテクチャ図になります。
 
@@ -38,11 +38,11 @@ Azureのリソースとしては、後述するTerraformで以下のリソース
 1. リソースグループ
 2. Azure Static Web Apps
 
-![Azure Portal](/images/azure_swa_terraform/pic1.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic1.png)
 
 最終的なAzure Static Web AppsにDeployされているNext.jsの画面としてはこんな感じ。(シンプルですね。)
 
-![Azure Portal](/images/azure_swa_terraform/pic2.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic2.png)
 
 それでは実装していきたいと思います。
 
@@ -53,11 +53,11 @@ Azureのリソースとしては、後述するTerraformで以下のリソース
 
 moduleディレクトリに雛形を実装して、environmentから呼び出す形で実装していきます。
 
-![Azure Portal](/images/azure_swa_terraform/pic3.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic3.png)
 
 まずは、moduleディレクトリの中に以下のファイルを作成してください。
 
-![Azure Portal](/images/azure_swa_terraform/pic4.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic4.png)
 
 ざっくりとした説明が以下です。
 - rg.tf : リソースグループを作成するためのTerraformファイル
@@ -113,7 +113,7 @@ variable "swa_location" {
 これでmoduleディレクトリの内容は完璧です。
 次はenvironmentディレクトリに以下のファイルを作成してください。
 
-![Azure Portal](/images/azure_swa_terraform/pic6.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic6.png)
 
 ざっくりとした説明が以下です。
 - data.tf ： static web appsの情報を取得するためのTerraformファイル
@@ -218,7 +218,7 @@ terraform apply
 
 しばらく経てば、Azureリソースが作成されています。
 
-![Azure Portal](/images/azure_swa_terraform/pic2.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic2.png)
 
 ここまで出来たら、Github Actionsで使うStatic Web AppsのAPIキーを取得しておきます。
 
@@ -345,10 +345,10 @@ jobs:
 先ほどのAPIキーをGithubのリポジトリのSecretsに登録していきます。
 
 Githubリポジトリへアクセスし、下記画像のSettingsをクリックしてください。
-![Azure Portal](/images/azure_swa_terraform/pic7.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic7.png)
 
 画面左側ペインより、Secrets and variablesを選択して、Actionsをクリックしてください。
-![Azure Portal](/images/azure_swa_terraform/pic9.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic9.png)
 
 Repository secretsへ以下を登録してください。
 Name : AZURE_STATIC_WEB_APPS_API_TOKEN
@@ -359,17 +359,17 @@ Secret : 先ほど取得したAPIキー
 
 Github Actionsが実行され、Azure Static Web Appsへデプロイされます。
 
-![Azure Portal](/images/azure_swa_terraform/pic10.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic10.png)
 
 ## 動作確認
 
 こちらでデプロイが完了していれば、Azure Static Web AppsのURLへアクセスしてください。
 
 
-![Azure Portal](/images/azure_swa_terraform/pic11.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic11.png)
 
 こんな感じでデプロイされていればOKです！
 
-![Azure Portal](/images/azure_swa_terraform/pic2.png)
+![Azure Portal](/images/azure_swa_terraform/ast_pic2.png)
 
 お疲れ様でした！
