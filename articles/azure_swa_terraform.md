@@ -378,4 +378,4 @@ https://zenn.dev/dzeyelid/articles/9ab7b020fd774c212344
 
 ## 改訂履歴
 - 2024/04/05: 初稿作成
-- 2024/04/06: Terraform実装修正 featuring !(yamapan)[https://zenn.dev/aktsmm]
+- 2024/04/06: Terraform実装修正 featuring [yamapan](https://zenn.dev/aktsmm)
