@@ -57,10 +57,9 @@ moduleディレクトリに雛形を実装して、environmentから呼び出す
 
 まずは、moduleディレクトリの中に以下のファイルを作成してください。
 
-![Azure Portal](/images/azure_swa_terraform/ast_pic4.png)
-
 ざっくりとした説明が以下です。
 - rg.tf : リソースグループを作成するためのTerraformファイル
+- outputs.tf : 出力を定義するためのTerraformファイル
 - swa.tf : Azure Static Web Appsを作成するためのTerraformファイル
 - variables.tf : 変数を定義するためのTerraformファイル
 
@@ -75,6 +74,15 @@ resource "azurerm_resource_group" "rg_app" {
   tags = {
     environment = "sat-web-app"
   }
+}
+```
+
+次にoutputs.tfを実装していきます。
+```terraform:outputs.tf
+## apikeyキーを出力
+output "swa_api_key" {
+  value = azurerm_static_web_app.swa.api_key
+  sensitive = true
 }
 ```
 
@@ -113,10 +121,7 @@ variable "swa_location" {
 これでmoduleディレクトリの内容は完璧です。
 次はenvironmentディレクトリに以下のファイルを作成してください。
 
-![Azure Portal](/images/azure_swa_terraform/ast_pic6.png)
-
 ざっくりとした説明が以下です。
-- data.tf ： static web appsの情報を取得するためのTerraformファイル
 - main.tf : moduleを呼び出すためのTerraformファイル
 - outputs.tf : 出力を定義するためのTerraformファイル
 - provider.tf : Azureのプロバイダーを定義するためのTerraformファイル
@@ -163,14 +168,6 @@ variable "swa_location" {
 }
 ```
 
-次にdata.tfを実装していきます。
-```terraform:data.tf
-data "azurerm_static_web_app" "swa" {
-  name = "sat-web-app-swa"
-  resource_group_name = "sat-web-app-rg"
-}
-```
-
 次にmain.tfを実装していきます。
 ```terraform:main.tf
 module "app" {
@@ -184,8 +181,9 @@ module "app" {
 
 次にoutputs.tfを実装していきます。
 ```terraform:outputs.tf
+# Azure Static Web App の API キー を出力する（センシティブ有効）
 output "swa_api_key" {
-  value = data.azurerm_static_web_app.swa.api_key
+  value = module.app.swa_api_key
   sensitive = true
 }
 ```
@@ -377,3 +375,7 @@ Github Actionsが実行され、Azure Static Web Appsへデプロイされます
 ## 参考文献
 以下の文献にお世話になりました！
 https://zenn.dev/dzeyelid/articles/9ab7b020fd774c212344
+
+## 改訂履歴
+- 2024/04/05: 初稿作成
+- 2024/04/06: Terraform実装修正 featuring !(yamapan)[https://zenn.dev/aktsmm]
