@@ -22,7 +22,7 @@ published: true
 
 https://www.udemy.com/course/az-204-developing-solutions-for-microsoft-azure-fp/?couponCode=377E50773DDF59EED5BB
 
-事の経緯としては、Azure関連の技術カンファレンスにて色々登壇していたところ、Benesse様よりUdemyの講師デビューのお話をいただきました。
+事の経緯としては、Azure関連の技術カンファレンスにて色々登壇していたところ、講師デビューの話が出てきたので、やってみようかなと思いました。
   
 もともとUdemyを利用して勉強していたこともあり、恩返しとして是非...!!!
 みたいな健気な気持ちではなく、お金ほちぃ！！という欲に塗れた動機で取り組んでみることにしました。
