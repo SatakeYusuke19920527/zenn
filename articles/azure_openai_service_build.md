@@ -3,7 +3,7 @@ title: "Azure OpenAI ServiceがMicrosoft BuildでUpdate発表されたよ🎉"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "Azure OpenAI Service", "AI", "OpenAI", "AI"]
-published: false
+published: true
 ---
 
 # 目次
