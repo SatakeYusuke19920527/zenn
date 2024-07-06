@@ -151,3 +151,7 @@ func azure functionapp publish <App Name>
 ローカル環境での実行確認後、AzureポータルやVisual Studio Codeを使用したデプロイ手順も提供しています。具体的なコマンドや設定ファイルの内容が詳細に示されており、手順通りに進めることで、Azure Functionsを使ったサーバーレスアプリケーションの開発が可能です。
 
 今後の更新や追加情報についても随時お知らせしますので、お見逃しなく🚀
+
+
+# 参考文献
+https://learn.microsoft.com/ja-jp/azure/azure-functions/create-first-function-cli-typescript?tabs=macos%2Cazure-cli%2Cbrowser&pivots=nodejs-model-v4
