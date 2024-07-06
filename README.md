@@ -10,11 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-<<<<<<< HEAD
-  > npx zenn new:article --title "【Azure AI × 英会話】AIを活用して流暢な英語を話せるようになる" --type tech --emoji 🚀
-=======
-  > npx zenn new:article --title "プロジェクトってどうすれば上手くいくの？" --type tech --emoji 🚀
->>>>>>> 45ea0ecee09eee8a263646a619ecf0481e95f610
+  > npx zenn new:article --title "【2024年7月最新🚀】Azure Functions V4 環境構築 TypeScript編" --type tech --emoji ⚡️
 
 1. プレビューを確認する
    > npx zenn preview
