@@ -2,7 +2,7 @@
 title: "【2024年7月最新🚀】Azure Functions V4 環境構築 TypeScript編"
 emoji: "⚡️"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: []
+topics: ["Azure", "Azure Functions", "TypeScript", "http", "serverless"]
 published: true
 ---
 
