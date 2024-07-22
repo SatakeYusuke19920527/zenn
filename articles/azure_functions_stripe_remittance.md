@@ -16,13 +16,20 @@ https://dashboard.stripe.com/dashboard
 
 ## 💸 Stripeドキュメント
 
-- [Payments](https://stripe.com/docs/payments)
-- [【StripeAPI】複数の送金先への山分けを実装する](https://zenn.dev/mamushi/articles/multiple_transfer)
-- [Stripe Connect](https://stripe.com/docs/connect)
-- [Stripe Connect | 自社プラットフォームに決済インフラを導入](https://stripe.com/ja-us/connect)
-- [Creating separate charges and transfers](https://stripe.com/docs/connect/charges-transfers)
-- [Stripe API reference – curl](https://stripe.com/docs/api)
-- [Connect Onboarding for Custom accounts](https://stripe.com/docs/connect/connect-onboarding)
+- Payments
+  - https://stripe.com/docs/payments
+- 【StripeAPI】複数の送金先への山分けを実装する
+  - https://zenn.dev/mamushi/articles/multiple_transfer
+- Stripe Connect
+  - https://stripe.com/docs/connect
+- Stripe Connect | 自社プラットフォームに決済インフラを導入
+  - https://stripe.com/ja-us/connect
+- Creating separate charges and transfers
+  - https://stripe.com/docs/connect/charges-transfers
+- Stripe API reference – curl
+  - https://stripe.com/docs/api
+- Connect Onboarding for Custom accounts
+  - https://stripe.com/docs/connect/connect-onboarding
 
 ## 決済実装方法
 
