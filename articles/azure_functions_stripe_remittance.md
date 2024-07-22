@@ -10,24 +10,9 @@ published: false
 
 この記事では、Azure FunctionsとStripeを用いて送金処理を実装する方法を紹介します。
 
-## サードパーティ製ライブラリの情報
 
-<aside>
-💡 Stripe
-</aside>
+https://dashboard.stripe.com/dashboard
 
-- [Stripe Dashboard](https://dashboard.stripe.com/dashboard)
-
-- ユーザ名とパスワード
-    
-    ```
-    SATAKE YUSUKE / S29y27a25!
-    ```
-    
-- 緊急バックアップコード
-    ```
-    ualj-lkoz-mwec-iyvd-xcxl
-    ```
 
 ## 💸 Stripeドキュメント
 
@@ -41,9 +26,9 @@ published: false
 
 ## 決済実装方法
 
-1. ### 顧客の作成
+### 顧客の作成
 
-    カスタマーIDが作成される：`cus_NuR2tCoKyE9rFI`
+    カスタマーIDが作成される：`cus_xxxxxxxxxxxxxxxxx`
     
     呼び出し方：`bet.v1.stripe.createCustomer({})`
 
@@ -59,11 +44,11 @@ published: false
     );
     ```
 
-2. ### カード情報をユーザへ紐づける
+### カード情報をユーザへ紐づける
 
     1で作成したユーザにクレジットカードの情報を紐づける
     
-    呼び出し方：`bet.v1.stripe.createCardInfo({customerId: "cus_NuR2tCoKyE9rFI", cardInfo: { number: '4242424242424242', exp_month: 5, exp_year: 2024, cvc: '314'}})`
+    呼び出し方：`bet.v1.stripe.createCardInfo({customerId: "cus_xxxxxxxxxxxxxxxxx", cardInfo: { number: '4242424242424242', exp_month: 5, exp_year: 2024, cvc: '314'}})`
 
     ```typescript
     export const createCardInfo = regionFunctions.https.onCall(
@@ -80,7 +65,7 @@ published: false
     };
     ```
 
-3. ### 送金先アカウントを作成
+### 送金先アカウントを作成
 
     送金を受けるユーザを作成する
     
@@ -118,7 +103,7 @@ published: false
     );
     ```
 
-4. ### 送金先アカウントの本人確認
+### 送金先アカウントの本人確認
 
     本人確認 + 銀行口座の認証。リンクを取得して認証してもらう
     
@@ -128,7 +113,7 @@ published: false
     export const createAccountLinks = regionFunctions.https.onCall(
       async (data, context) => {
         const accountLink = await stripe.accountLinks.create({
-          account: 'acct_1N8cMLFMmujLeOPg',
+          account: 'acct_xxxxxxxxxxxxxxxx',
           refresh_url: 'https://bet-webapp.vercel.app/app',
           return_url: 'https://bet-webapp.vercel.app/app',
           type: 'account_onboarding',
@@ -147,7 +132,7 @@ published: false
         "object": "account_link",
         "created": 1684299388,
         "expires_at": 1684299688,
-        "url": "https://connect.stripe.com/setup/e/acct_1N8cMLFMmujLeOPg/dVovPX9TnUaq"
+        "url": "https://connect.stripe.com/setup/e/acct_xxxxxxxxxxxxxxxx/dVovPX9TnUaq"
       }
     }
     ```
@@ -161,7 +146,7 @@ published: false
     ```typescript
     export const createAccountRetrieve = regionFunctions.https.onCall(
       async (data, context) => {
-        const account = await stripe.accounts.retrieve('acct_1N8FriFLbkKh1QTz');
+        const account = await stripe.accounts.retrieve('acct_xxxxxxxxxxxxxxxx');
         return account;
       }
     );
@@ -195,7 +180,7 @@ published: false
     export const createCharge = regionFunctions.https.onCall(
       async (data, context) => {
         const idempotencyKey = uuid.v4();
-        const customer = 'cus_NuR2tCoKyE9rFI'; // 顧客
+        const customer = 'cus_xxxxxxxxxxxxxx'; // 顧客
         const amount = 15000; // 支払い総額
         return stripe.charges.create(
           {
@@ -221,12 +206,12 @@ published: false
     export const createTransfer = regionFunctions.https.onCall(
       async (data, context) => {
         const idempotencyKey = uuid.v4();
-        const chargeId = 'ch_3N8cZ0FQKk4Az5jH1sJfksYL';
+        const chargeId = 'ch_xxxxxxxxxxxxxxxxxxx';
         await stripe.transfers.create(
           {
             amount: 20000,
             currency: 'jpy',
-            destination: 'acct_1N8FriFLbkKh1QTz',
+            destination: 'acct_xxxxxxxxxxxxxx',
             source_transaction: chargeId,
           },
           {
@@ -237,7 +222,7 @@ published: false
     );
     ```
 
-- [Collect payments then pay out](https://stripe.com/docs/connect/collect-then-transfer-guide) のサンプルが一番近いです。
+https://stripe.com/docs/connect/collect-then-transfer-guide のサンプルが一番近いです。
 
     createTransferの流れ：
 
