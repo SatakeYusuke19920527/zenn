@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "【2024年7月最新🚀】Azure Functions V4 環境構築 TypeScript編" --type tech --emoji ⚡️
+  > npx zenn new:article --title "Azure FunctionsとStripeで送金処理を実装する" --type tech --emoji ⚡️
 
 1. プレビューを確認する
    > npx zenn preview
