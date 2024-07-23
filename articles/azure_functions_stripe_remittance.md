@@ -37,6 +37,11 @@ StripeAPIとAzure Functionsを用いて、以下の流れで送金処理を実�
 
 それでは、実装してみたいと思います！
 
+:::message
+個人送金は法律の規制があるため、法律に則った形で実装してください。
+https://topcourt-law.com/finance/remittance-between-individuals
+:::
+
 ## Azure Functions 環境構築
 以下の記事を参照し、Azure Functionsの環境構築を行ってください。
 
