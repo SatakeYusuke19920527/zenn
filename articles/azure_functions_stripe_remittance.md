@@ -6,13 +6,10 @@ topics: ["Azure", "Azure Functions", "Stripe", "送金"]
 published: true
 ---
 
-# Azure FunctionsとStripeで送金処理を実装する
+# 概要
 
 この記事では、Azure FunctionsとStripeを用いて送金処理を実装する方法を紹介します。
 StripeAPI を使った山分けの送金処理（ 顧客：送金先 = １：n ）の実装方法となります。
-
-
-# 概要
 
 StripeAPIとAzure Functionsを用いて、以下の流れで送金処理を実装します。
 全体概要を図で表すと以下のようなイメージです。
