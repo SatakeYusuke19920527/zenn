@@ -11,11 +11,8 @@ published: true
 この記事では、Azure FunctionsとStripeを用いて送金処理を実装する方法を紹介します。
 StripeAPI を使った山分けの送金処理（ 顧客：送金先 = １：n ）の実装方法となります。
 
-ストライプのDashboardは以下を使用します。
-https://dashboard.stripe.com/dashboard
 
-
-# 決済実装方法概要
+# 概要
 
 StripeAPIとAzure Functionsを用いて、以下の流れで送金処理を実装します。
 全体概要を図で表すと以下のようなイメージです。
@@ -51,6 +48,9 @@ https://zenn.dev/yusu29/articles/azure_functions_introduction
 ## 0. 共通部分の作成
 src/helper/stripe.tsを作成し、StripeのAPIキーを設定します。
 
+- Stripe Dashboard
+https://dashboard.stripe.com/dashboard
+
 ```typescript:stripe.ts
 export const stripe = require('stripe')(
   'sk_xxxxxxxxxxxxxxxxxx', // StripeDashboardよりシークレットキーを取得してください。
@@ -85,7 +85,7 @@ app.http('CreateCustomer', {
   handler: CreateCustomer,
 });
 ```
-上記、関数を実行すると、cusから始まるカスタマーIDが作成されます：`cus_xxxxxxxxxxxxxxxxx`
+上記、関数を実行すると、cus_ から始まるカスタマーIDが作成されます：`cus_xxxxxxxxxxxxxxxxx`
 
 ![Img](/images/azure_functions_stripe_remittance/img2.png)
 ![Img](/images/azure_functions_stripe_remittance/img3.png)
@@ -125,7 +125,7 @@ export async function createCardInfo(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
-  const customerId = 'cus_QWaaItV1HNFSfo'; // 先ほど作成した顧客情報のカスタマーIDを指定
+  const customerId = 'cus_xxxxxxxxxxxxx'; // 先ほど作成した顧客情報のカスタマーIDを指定
   const cardInfo: CardType = {
     number: '4242424242424242',
     exp_month: 11,
@@ -245,7 +245,6 @@ app.http('CreateAccountLinks', {
 ![Img](/images/azure_functions_stripe_remittance/img6.png)
 
 以下のreturn されたURLを開くと、本人確認の画面が表示されます。
-https://connect.stripe.com/setup/e/acct_1PerK5CxK1pdnAec/xxxxxxx
 
 ![Img](/images/azure_functions_stripe_remittance/img7.png)
 
