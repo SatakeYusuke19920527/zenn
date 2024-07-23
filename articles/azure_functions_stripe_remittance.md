@@ -1,5 +1,5 @@
 ---
-title: "【Azure Functions ✖️ StripeAPI】Azure FunctionsとStripeでpaypayのような送金処理を実現する"
+title: "Azure Functions × StripeAPI Azure FunctionsとStripeでpaypayのような送金を実現する"
 emoji: "⚡️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "Azure Functions", "Stripe", "送金"]
