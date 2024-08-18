@@ -1,5 +1,5 @@
 ---
-title: "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する【2024年8月14日最新版】"
+title: "【Azure OpenAI】PTUについて完全に理解する【2024年8月14日最新版】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
