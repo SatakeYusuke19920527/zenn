@@ -1,19 +1,21 @@
 ---
-title: "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する【2024年8月最新版】"
+title: "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する【2024年8月14日最新版】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Azure", "Azure OpenAI","Microsoft", "PTU"]
+topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
 published: false
 publication_name: "microsoft"
 ---
 
-# 【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する
+![](../images/azure_perfectly_understand_ptu/img1.png)
 
-本記事では、Azure OpenAIを利用する上で理解しておくべき概念である ```PTU``` について、完全に理解する為の記事です。
-```PTU``` とは何か、どのように活用できるのか、利用するとどのようなメリットがあるのか詳細に解説します。
+# 本記事の目標はPTU(Provisioned throughput units)について完全に理解することです🚀
 
-また、Azure OpenAI プロビジョニング オファリングは、購入モデルと Azure 標準との調整や、モデルに依存しないクォータへの移行を含めて、2024 年 8 月 12 日に大規模な更新がありました。
-この更新によって何が変わるのかも
+本記事では、Azure OpenAIを利用する上で理解しておくべき概念である **PTU** について、完全に理解する為の記事です。
+**PTU** とは何か、どのように活用できるのか、利用するとどのようなメリットがあるのか詳細に解説します。
+
+また、Azure OpenAI の PTUは、購入モデルと Azure 標準との調整や、モデルに依存しないクォータへの移行を含めて、2024 年 8 月 12 日に大規模な更新がありました。
+本記事はこの更新によって何が変わるのかも記載したいと思います。
 
 ## 目次
 
@@ -28,22 +30,33 @@ publication_name: "microsoft"
 
 ### 定義と役割
 
-**PTU（Provisioned Throughput Units）**とは、Azure OpenAIサービスで使用される単位で、指定されたスループット（一定時間内に処理できるリクエストの量）を予約する仕組みです。
-VMで言うところのリザーブドインスタンスみたいな感じですね。
+**PTU（Provisioned Throughput Units）**とは、Azure OpenAIサービスで使用される単位で、指定されたスループット（一定時間内に処理できるリクエストの量）を予約する仕組みのことです。
+Azure VMで言うところのリザーブドインスタンスみたいな感じですね。
 
 PTUを利用することで、スケーラブルなAIサービスを提供し、リクエストの高負荷時にも安定したパフォーマンスを維持することができます。
 
+**PTU**で処理能力を事前に予約することで、応答速度の向上と安定稼働を実現することが出来、主なメリットとして以下のような点があります。
 
 
+| メリット | 解説 |
+| ---- | ---- |
+| **予測可能なパフォーマンス** | Azure OpenAIをDeployした処理リソースの占有的な利用が可能なので、均一なワークロードに対して安定した最大待ち時間とスループットを出すことが出来る |
+| **予約済み処理機能** | 処理能力を事前に予約することが出来るので、応答速度の向上と安定稼働を実現することが出来る |
+| **コスト削減** | 高速なレスポンスや高い可用性が求められる用途に適しているPTUは、高スループットワークロードを実現出来、トークンベースの使用と比較したときのコスト削減につながる場合がある |
 
 
-通常、Azureのようなクラウドサービスでは、リクエストの量に応じて自動的にリソースがスケールされます。しかし、急にリクエストが増えると、対応が遅れたり、パフォーマンスが低下することがあります。そこでPTUを使うと、事前に一定の処理能力（スループット）を予約しておくことができるので、リクエストが集中しても安定したパフォーマンスを保てます。
+要するに、**PTU**を使うことで、パフォーマンスが安定出来、普通に使うよりコスト的にも抑えることが出来るというものです。
 
 
 ### 背景と必要性
 
-Azure OpenAIは、大規模なAIモデルを提供していますが、それに伴うリクエスト数の増加に対処するためには、適切なスループット管理が求められます。
-PTUを利用することで、リクエストが急増した場合でも安定した応答時間を確保できます。
+通常、Azureのようなクラウドサービスでは、リクエストの量に応じて自動的にリソースがスケールされます。
+
+しかし、急にリクエストが増えると、対応が遅れたり、パフォーマンスが低下することがあります。
+
+そこでPTUを使うと、事前に一定の処理能力（スループット）を予約しておくことができるので、リクエストが集中しても安定したパフォーマンスを保てます。
+
+なので、
 
 ## PTUの仕組み
 
@@ -89,7 +102,7 @@ PTUを利用することで、コストの可視化が容易になります。Az
 
 PTUは、Azure OpenAIにおいて重要な役割を果たす要素です。適切なPTUの設定と管理を行うことで、スケーラブルかつコスト効率の高いAIサービスの提供が可能になります。この記事を参考に、PTUの理解を深め、Azure OpenAIを最大限に活用してください。
 
-## Reference Materials
-- ![プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
-- ![Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
-- ![Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
+## 参考資料
+- [プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
+- [Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
+- [Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
