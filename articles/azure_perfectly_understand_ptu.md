@@ -3,7 +3,7 @@ title: "Azure OpenAIってPTUを使うと80%OFFになるって知ってた？"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
-published: true
+published: false
 publication_name: "microsoft"
 ---
 
