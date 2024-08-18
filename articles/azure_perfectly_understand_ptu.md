@@ -1,5 +1,5 @@
 ---
-title: "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する"
+title: "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する【2024年8月最新版】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "Azure OpenAI","Microsoft", "PTU"]
@@ -9,8 +9,11 @@ publication_name: "microsoft"
 
 # 【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する
 
-今回はAzure OpenAI
-Azure OpenAIを使用する際に、PTU（Provisioned Throughput Units）という概念は避けて通れません。本記事では、PTUとは何か、どのように活用できるのかについて、詳細に解説します。
+本記事では、Azure OpenAIを利用する上で理解しておくべき概念である ```PTU``` について、完全に理解する為の記事です。
+```PTU``` とは何か、どのように活用できるのか、利用するとどのようなメリットがあるのか詳細に解説します。
+
+また、Azure OpenAI プロビジョニング オファリングは、購入モデルと Azure 標準との調整や、モデルに依存しないクォータへの移行を含めて、2024 年 8 月 12 日に大規模な更新がありました。
+この更新によって何が変わるのかも
 
 ## 目次
 
@@ -25,12 +28,22 @@ Azure OpenAIを使用する際に、PTU（Provisioned Throughput Units）とい�
 
 ### 定義と役割
 
-PTU（Provisioned Throughput Units）とは、Azure OpenAIにおける処理能力の単位で、指定された処理能力を予め予約する仕組みです。
+**PTU（Provisioned Throughput Units）**とは、Azure OpenAIサービスで使用される単位で、指定されたスループット（一定時間内に処理できるリクエストの量）を予約する仕組みです。
+VMで言うところのリザーブドインスタンスみたいな感じですね。
+
 PTUを利用することで、スケーラブルなAIサービスを提供し、リクエストの高負荷時にも安定したパフォーマンスを維持することができます。
+
+
+
+
+
+通常、Azureのようなクラウドサービスでは、リクエストの量に応じて自動的にリソースがスケールされます。しかし、急にリクエストが増えると、対応が遅れたり、パフォーマンスが低下することがあります。そこでPTUを使うと、事前に一定の処理能力（スループット）を予約しておくことができるので、リクエストが集中しても安定したパフォーマンスを保てます。
+
 
 ### 背景と必要性
 
-Azure OpenAIは、大規模なAIモデルを提供していますが、それに伴うリクエスト数の増加に対処するためには、適切なスループット管理が求められます。PTUを利用することで、リクエストが急増した場合でも安定した応答時間を確保できます。
+Azure OpenAIは、大規模なAIモデルを提供していますが、それに伴うリクエスト数の増加に対処するためには、適切なスループット管理が求められます。
+PTUを利用することで、リクエストが急増した場合でも安定した応答時間を確保できます。
 
 ## PTUの仕組み
 
@@ -75,3 +88,8 @@ PTUを利用することで、コストの可視化が容易になります。Az
 ## まとめ
 
 PTUは、Azure OpenAIにおいて重要な役割を果たす要素です。適切なPTUの設定と管理を行うことで、スケーラブルかつコスト効率の高いAIサービスの提供が可能になります。この記事を参考に、PTUの理解を深め、Azure OpenAIを最大限に活用してください。
+
+## Reference Materials
+- ![プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
+- ![Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
+- ![Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
