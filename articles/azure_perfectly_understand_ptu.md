@@ -3,7 +3,7 @@ title: "【Azure OpenAI】PTUについて完全に理解する【2024年8月14�
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
