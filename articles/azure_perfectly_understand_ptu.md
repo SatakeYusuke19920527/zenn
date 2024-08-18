@@ -1,5 +1,5 @@
 ---
-title: "【Azure OpenAI】PTUについて完全に理解する【2024年8月14日最新版】"
+title: "Azure OpenAIってPTUを使うと80%OFFになるって知ってた？"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
