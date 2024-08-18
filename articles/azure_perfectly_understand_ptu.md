@@ -21,11 +21,10 @@ publication_name: "microsoft"
 
 1. [PTUとは何か？](#ptuとは何か)
 2. [PTUが使用出来るモデルとリージョン](#PTUが使用出来るモデルとリージョン)
-3. [PTUの仕組み](#ptuの仕組み)
-4. [PTUの利用方法](#ptuの利用方法)
-5. [PTUのベストプラクティス](#ptuのベストプラクティス)
-6. [PTUとコスト管理](#ptuとコスト管理)
-7. [まとめ](#まとめ)
+3. [PTUの利用方法](#PTUの利用方法)
+4. [PTUのコスト](#PTUのコスト)
+5. [最新Updateで何が変わったのか](#最新Updateで何が変わったのか)
+6. [まとめ](#まとめ)
 
 ## PTUとは何か？
 
@@ -62,7 +61,6 @@ PTUを利用することで、スケーラブルなAIサービスを提供し、
 ## PTUが使用出来るモデルとリージョン
 
 PTUが利用出来るモデルとリージョンは以下の通りです。
-リージョン毎にPTUが使えないモデルもあるので、契約時点ではよく確認してから契約する必要がありそうです。
 
 - **PTUが使用出来るモデルとリージョン一覧**
 
@@ -92,47 +90,105 @@ PTUが利用出来るモデルとリージョンは以下の通りです。
 | westus3                  | ✅          | ✅                  | ✅                  | ✅                      | ✅                       | ✅               | ✅                  | ✅                  |
 
 
-
-## PTUの仕組み
-### スケーリングと負荷分散
-
-PTUは自動スケーリングの一環として機能し、リクエストの負荷に応じて動的にスケールアップまたはダウンすることができます。また、複数のPTUを使用することで、負荷分散が可能になり、パフォーマンスの向上が期待できます。
+リージョン毎にPTUが使えないモデルもあるので、契約時点ではよく確認してから契約する必要がありそうです。
 
 ## PTUの利用方法
+### Deploy方法について
 
-### 設定方法
+Azure OpenAI Studio でPTUを用いてデプロイを実施する場合、[デプロイの作成] から ダイアログのデプロイの種類は Provisioned-Managed です。
 
-PTUの設定は、Azure PortalまたはCLIを使用して簡単に行うことができます。設定時には、必要なスループット量を予測し、それに応じたPTU数を選択します。詳細な設定手順については、[公式ドキュメント](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput)を参照してください。
+CLI または API を使用して Azure OpenAI でPTUデプロイを用いてデプロイする場合は、**sku-name** を ProvisionedManaged に設定し、**sku-capacity** はPTU の数を指定します。
 
-### 管理とモニタリング
+```bash
+az cognitiveservices account deployment create \
+  --name <myResourceName> \
+  --resource-group  <myResourceGroupName> \
+  --deployment-name MyDeployment \
+  --model-name gpt-4 \
+  --model-version 0613  \
+  --model-format OpenAI \
+  --sku-capacity 100 \
+  --sku-name ProvisionedManaged 
+```
 
-PTUの利用状況は、Azure Monitorを使用してリアルタイムでモニタリングすることができます。これにより、パフォーマンスのトレンドを分析し、必要に応じてPTUの調整が可能です。
+PTU は、プロンプトの処理と補完の生成のため必要なスループットを実現するようにプロビジョニングされたデプロイのサイズ指定に使用できるモデル処理容量の一般の単位です。 
 
-## PTUのベストプラクティス
+プロビジョニング スループット ユニットは、リージョンごとにクォータとしてサブスクリプションに付与されます。これにより、そのサブスクリプションとリージョンのデプロイに割り当てることができる PTU の最大数が定義されます。
 
-### 最適なPTUの選定
+### PTUの計算方法
 
-PTUを選定する際は、予測されるトラフィック量を基に、適切なスループットを確保することが重要です。過剰なPTUの選定はコストを増大させるため、ビジネスニーズに合った適切な規模を選ぶことが求められます。
+ここで気になってくるのが、**自分たちが作るアプリケーションがどのくらいのPTUを必要とするのか**ということです。
 
-### コストとパフォーマンスのバランス
+それはAzure OpenAI Studio の Capacity Plannerで簡単に測定することが出来ます。
+ワークロードの見積もりを簡単に取得するには、Azure OpenAI Studio の画面左側ペインより[共有リソース¥クォータ] > [AzureOpenAIプロビジョニング済み] > [容量計算ツール]を開きます。 
+これで、Capacity Planner が開き、必要なPTUの数を計算することができます。
 
-PTUのコストは、選択したスループット量に依存します。効率的なコスト管理を行うためには、利用状況に応じてPTUをスケーリングし、無駄のないリソース利用を目指すことが重要です。
+https://oai.azure.com/
 
-## PTUとコスト管理
+![Azure](/images/azure_perfectly_understand_ptu/img2.png)
 
-### コストの可視化と予算管理
+PTUの計算において入力が必要なのは、以下の項目です。
+- peak calls per min : モデルに対して予想される 1 分あたりの呼び出し回数
+- Tokens in prompt calls : モデルへの各呼び出しのプロンプト内のトークン数
+- Tokens in model response : モデルへの各呼び出しから生成されるトークンの数
 
-PTUを利用することで、コストの可視化が容易になります。Azure Cost Managementを使用して、PTUの利用に伴うコストを追跡し、予算内での運用が可能です。
+では、具体的に計算してみましょう。
+以下の様に設定してみます。
+- peak calls per min : 100回
+- Tokens in prompt calls : 300 tokens
+- Tokens in model response : 300 tokens
 
-### オプティマイゼーション戦略
+※ちなみに300tokensは264文字ぐらいです。
+![Azure](/images/azure_perfectly_understand_ptu/img3.png)
 
-コストを最適化するためには、リクエストのパターンに応じてPTUを動的に調整することが効果的です。ピーク時のスループットを正確に見積もり、必要以上のPTUを割り当てないことがコスト削減のポイントです。
+それでは計算結果を見てみましょう。
+
+![Azure](/images/azure_perfectly_understand_ptu/img4.png)
+
+これぐらいのtoken数とリクエスト回数であれば、PTUは50で大丈夫ということがわかりました。
+
+
+契約時点で不要なPTUを設定することなく数値を検証出来るので、非常に便利ですね。
+
+## PTUのコスト
+
+Azure OpenAI PTUは、プロビジョニングされたスループットのデプロイにおいて、従量課金制の価格に比べて大幅な割引を提供することが出来ます。
+これにより、Azure OpenAI のプロビジョニングされたスループットユニットを、1年間または1か月間の期間で事前購入することが可能になります。
+
+(事前にまとめて買うなら、お安くしておきますよ〜という認識でOK)
+
+### 現時点でどれぐらいの費用か(2024/08/18 時点)
+PTUは個人のサブスクリプションでも購入が可能です。
+Azureの検索窓より **予約** → **作成** → **Azure OpenAI Service Provisioned** を選択してください。
+![Azure](/images/azure_perfectly_understand_ptu/img5.png)
+![Azure](/images/azure_perfectly_understand_ptu/img6.png)
+
+現在、個人用のサブスクリプションでは、以下の３パターンのPTUを購入することが可能です。
+![Azure](/images/azure_perfectly_understand_ptu/img7.png)
+
+それぞれ見てみましょう。
+
+- 1ヶ月契約で前払いする場合
+  - 260USDで82%Offのようですね。もうpay-as-you-go(従量課金)で使うのがもったいないと感じるセールっぷりですね。
+![Azure](/images/azure_perfectly_understand_ptu/img8.png)
+
+- 1年間契約で月毎の支払いをする場合
+  - 221USDで84%Offのようですね。やはり長期で契約した方がお得のようです。
+![Azure](/images/azure_perfectly_understand_ptu/img9.png)
+
+- 1年間契約で前払いをする場合
+  - 2,652USDで84%Offのようですね。
+![Azure](/images/azure_perfectly_understand_ptu/img10.png)
+
+## 最新Updateで何が変わったのか
+
+
 
 ## まとめ
 
-PTUは、Azure OpenAIにおいて重要な役割を果たす要素です。適切なPTUの設定と管理を行うことで、スケーラブルかつコスト効率の高いAIサービスの提供が可能になります。この記事を参考に、PTUの理解を深め、Azure OpenAIを最大限に活用してください。
 
 ## 参考資料
 - [プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
 - [Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
 - [Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
+- [Azure OpenAI Service でプロビジョニングされたデプロイの使用を開始する](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/how-to/provisioned-get-started)
