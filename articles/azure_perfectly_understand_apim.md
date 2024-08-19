@@ -3,7 +3,7 @@ title: "【APIM ❤️ OpenAI】Azure API ManagementとAzure OpenAIを組み合�
 emoji: "💴"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "APIManagement","Microsoft", "OpenAI", "AOAI"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
