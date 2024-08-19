@@ -38,22 +38,33 @@ API ManagementとAzure OpenAI Serviceを組み合わせて構築するシステ�
 - トークン数を呼び出し制限をかけたい
 - ...etc
 
-# [バックエンドプールの負荷分散](https://github.com/Azure-Samples/AI-Gateway/blob/main/labs/backend-pool-load-balancing/backend-pool-load-balancing.ipynb)
+# バックエンドプールの負荷分散
 ![Azure](/images/azure_perfectly_understand_apim/img3.gif)
 
 
+# アクセス制御
+![Azure](/images/azure_perfectly_understand_apim/img6.gif)
 
-# [ログとモニタリング](https://github.com/Azure-Samples/AI-Gateway/blob/main/labs/built-in-logging/built-in-logging.ipynb)
+
+# ログとモニタリング
 ![Azure](/images/azure_perfectly_understand_apim/img4.gif)
 
 
+# トークンレート制限
+![Azure](/images/azure_perfectly_understand_apim/img5.gif)
 
 
-# []()
+# GPT-4o 推論
+![Azure](/images/azure_perfectly_understand_apim/img7.gif)
 
 
+# コンテンツフィルタリング
+![Azure](/images/azure_perfectly_understand_apim/img8.gif)
 
-# []()
+
+# プロンプトシールド
+![Azure](/images/azure_perfectly_understand_apim/img9.gif)
+
 
 それでは👋
 
