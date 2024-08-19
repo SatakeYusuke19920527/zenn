@@ -1,6 +1,6 @@
 ---
 title: "【APIM ❤️ OpenAI】Azure API ManagementとAzure OpenAIを組み合わせて効率的な運用を実現する"
-emoji: "💴"
+emoji: "💛"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "APIManagement","Microsoft", "OpenAI", "AOAI"]
 published: true
@@ -24,6 +24,10 @@ API ManagementとAzure OpenAI Serviceを組み合わせて構築するシステ�
 それでは見て行きましょう👍
 
 ![Azure](/images/azure_perfectly_understand_apim/img1.png)
+
+本記事は以下の記事を解説したものとなります。
+ご興味ある方は是非以下も併せてご覧ください。
+https://github.com/Azure-Samples/AI-Gateway
 
 # Azure OpenAI Serviceを活用したアプリケーションの課題
 
@@ -178,4 +182,4 @@ Azure AI Content Safetyでは以下の機能があります。
 それでは👋
 
 ## 参考資料
-- [https://github.com/Azure-Samples/AI-Gateway](https://github.com/Azure-Samples/AI-Gateway) 
+[https://github.com/Azure-Samples/AI-Gateway](https://github.com/Azure-Samples/AI-Gateway) 
