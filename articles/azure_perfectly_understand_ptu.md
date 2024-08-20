@@ -355,7 +355,7 @@ AOAIの利用について、1カ月や1年を年額一括支払いや月毎分�
 それでは👋
 
 ## 参考資料
-- [プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
-- [Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
-- [Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
-- [Azure OpenAI Service でプロビジョニングされたデプロイの使用を開始する](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/how-to/provisioned-get-started)
+[プロビジョニングされたスループットとは](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-throughput) 
+[Azure OpenAI プロビジョニング 2024 年 8 月の更新プログラム](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/concepts/provisioned-migration)
+[Azure OpenAI で API 管理による PTU/TPM を使用する - スケーリングの特別なソースを使用する](https://github.com/Azure/aoai-apim/blob/main/README.md)
+[Azure OpenAI Service でプロビジョニングされたデプロイの使用を開始する](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/how-to/provisioned-get-started)
