@@ -1,5 +1,5 @@
 ---
-title: "【2024年8月最新版】Azure OpenAIのPTUについて徹底解説"
+title: "【PTU徹底解説】Azure OpenAI Serviceを高パフォーマンス且つ安く使う方法知ってる？"
 emoji: "💴"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
