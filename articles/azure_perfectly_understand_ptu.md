@@ -3,7 +3,7 @@ title: "【PTU徹底解説】Azure OpenAIを高パフォーマンス&安定稼�
 emoji: "💴"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "OpenAI","Microsoft", "PTU", "AOAI"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
