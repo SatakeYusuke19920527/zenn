@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "【Azure OpenAI】PTU(Provisioned throughput units)について完全に理解する" --type tech --emoji 🚀 
+  > npx zenn new:article --title "Azure OpenAIのデプロイの種類って４種類あんねん" --type tech --emoji 🤍 
 
 1. プレビューを確認する
    > npx zenn preview
