@@ -7,3 +7,4 @@ published: false
 publication_name: "microsoft"
 ---
 
+![Azure](/images/azure_rag_asap_cheaply/img1.png)
