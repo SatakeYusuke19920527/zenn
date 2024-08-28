@@ -1,5 +1,5 @@
 ---
-title: "Next.jsとAzure AI Serviceで作る 英会話Lesson 🚀"
+title: "Next.jsとAzure AI Serviceで作る 英会話Lessonアプリ 🚀"
 emoji: "🧑‍🏫"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Next.js", "Azure", "OpenAI","Microsoft", "AzureAIService"]
