@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "RAGってお安くならへんの？" --type tech --emoji 💰 
+  > npx zenn new:article --title "Next.jsとAzure AI Serviceで作る 英会話Lesson 🚀" --type tech --emoji 🧑‍🏫
 
 1. プレビューを確認する
    > npx zenn preview
