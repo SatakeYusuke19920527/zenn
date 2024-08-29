@@ -15,7 +15,7 @@ published: false
 皆様も是非実装してみてください。
 
 アーキテクチャ図は以下のようになります。
-![Azure](/images/azure_next_english_lesson/img15.png)
+![Azure](/images/azure_next_english_lesson/img16.png)
 
 1. Next.jsで実装したブラウザよりAzure AI Speechで質問を音声入力し、リアルタイムで音声→テキストへ変換
 2. テキストへ変換した質問をAzure OpenAIへ投げ、回答を生成
