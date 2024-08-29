@@ -33,6 +33,8 @@ Hi, How about you?
 Hello! I'm here and ready to assist you. How can I help you today? .
 といい感じに返答してくれます。
 
+<video src="/images/azure_next_english_lesson/img17.mp4" controls="true" width="600"></video>
+
 それではやってみましょう🚀
 
 # Next.jsでフロントエンドのアプリを実装
