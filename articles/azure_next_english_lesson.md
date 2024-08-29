@@ -3,7 +3,8 @@ title: "【Let's ハンズオン🖐️】Next.jsとAzure AI Serviceで作る �
 emoji: "🧑‍🏫"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Next.js", "Azure", "OpenAI","Microsoft", "AzureAISpeech"]
-published: false
+published: true
+publication_name: "microsoft"
 ---
 
 ![Azure](/images/azure_next_english_lesson/img1.png)
