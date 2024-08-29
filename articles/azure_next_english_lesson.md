@@ -33,7 +33,7 @@ Hi, How about you?
 Hello! I'm here and ready to assist you. How can I help you today? .
 といい感じに返答してくれます。
 
-(https://youtu.be/7USdjAMVNGU
+https://youtu.be/7USdjAMVNGU
 
 それではやってみましょう🚀
 
