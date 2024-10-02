@@ -1,5 +1,5 @@
 ---
-title: "会社員✖️起業のすゝめ Microsoft for Startups Founders Hub"
+title: "Microsoft for Startups Founders Hub 徹底解説"
 emoji: "🏢"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Microsoft", "Azure", "Mirosoct for Startups", "OpenAI", "起業"]
