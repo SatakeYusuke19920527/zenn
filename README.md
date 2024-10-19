@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Marketplaceって結局なに？" --type tech --emoji 🏬
+  > npx zenn new:article --title "Azureの勉強しながらログイン機能を実装してみる【Azure AD B2C】" --type tech --emoji 🚀
 
 1. プレビューを確認する
    > npx zenn preview
