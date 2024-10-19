@@ -1,9 +1,9 @@
 ---
-title: "【超簡単】Next.jsとAzure AD B2Cでログイン機能を持つWebサイトを作る【Next.js 14】"
+title: "Next.jsとAzure AD B2Cでログイン機能を持つWebサイトを作る【Next.js 14】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["microsoft", "azure", "nextjs", "azureadb2c"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
@@ -188,10 +188,16 @@ export default function Home() {
       >
         {user === null ? 'login' : 'logout'}
       </h1>
+      <h1>
+        {
+          user === null
+            ? 'Please login to see your profile'
+            : `Welcome ${user?.givenName} ${user?.familyName}! 🚀 Warm Welcome 🚀`
+        }
+      </h1>
     </main>
   );
 }
-
 
 ```
 
@@ -314,7 +320,66 @@ AzureポータルからAzure AD B2Cの箇所に行き、アプリの登録を選
 ![img](/images/azure_adb2c_nextjs_auth/img27.png)
 
 
+## config.tsの設定
+先ほど記載した以下のconfigファイルを修正します。
 
+```ts:src/lib/config.ts
+// src/lib/auth/config.ts
+import { Configuration } from '@azure/msal-browser';
+
+export const msalConfig: Configuration = {
+  auth: {
+    clientId: 'xxxxx',
+    authority: 'https://xxxxx.b2clogin.com/xxxxx.onmicrosoft.com/b2c_xxxxx',
+    knownAuthorities: ['xxxxx.b2clogin.com'],
+    redirectUri: '/',
+    postLogoutRedirectUri: '/',
+  },
+  cache: {
+    cacheLocation: 'localStorage',
+  },
+};
+
+export const loginRequest = {
+  scopes: ['openid', 'offline_access'],
+};
+
+```
+
+clientIdはAzure AD B2Cのアプリの登録の箇所から、アプリケーション (クライアント) IDの箇所を貼り付けます。
+![img](/images/azure_adb2c_nextjs_auth/img28.png)
+
+
+authorityは概要のドメイン名になります。xxxxの箇所に記載してください。
+また、b2c_xxxxxの部分はユーザーフロー名となります。
+'https://xxxxx.b2clogin.com/xxxxx.onmicrosoft.com/b2c_xxxxx'
+
+knownAuthoritiesも概要のドメイン名の箇所になります。
+![img](/images/azure_adb2c_nextjs_auth/img29.png)
+
+これで設定は完了です。
+
+# 動作確認
+では、今回はローカルで動かしてみましょう。
+Next.jsのアプリケーションを起動してください。
+```bash
+npm run dev
+```
+
+これ以上ないぐらいシンプルな画面になってますね。
+![img](/images/azure_adb2c_nextjs_auth/img30.png)
+
+loginをクリックすると、こんな感じのカスタマイズされたログイン画面が表示されます。
+![img](/images/azure_adb2c_nextjs_auth/img31.png)
+
+SignUpでユーザー登録をしてみてください。
+![img](/images/azure_adb2c_nextjs_auth/img32.png)
+
+いい感じでログインできましたね！
+
+これにて実装は完了です！
+
+お疲れ様でした！
 
 # 参考資料
 https://fwywd.com/tech/aadb2c-auth
