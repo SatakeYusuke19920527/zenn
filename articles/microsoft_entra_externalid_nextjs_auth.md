@@ -3,16 +3,19 @@ title: "Next.jsとMicrosoft Entra External IDでログイン機能を持つWeb�
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["microsoft", "azure", "nextjs", "externalid", "microsoftentra"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
 # はじめに
-今回はAzure AD B2CとNext.jsを使って、ログイン機能を実装してみたいと思います。
+今回はMicrosoft EntraIDとNext.jsを使って、ログイン機能を実装してみたいと思います。
 
-作成するWebサイトのアーキテクチャは以下のようになります。
+以下の記事を見てみると、Azure AD B2CよりMicrosoft Entra External IDを使ったログインの方がデファクトスタンダードになるようです。
+https://learn.microsoft.com/ja-jp/entra/external-id/customers/overview-customers-ciam#about-azure-ad-b2c
 
-![img](/images/azure_adb2c_nextjs_auth/img24.png)
+今回作成するアプリのアーキテクチャは以下のようになります。
+
+![img](/images/microsoft_entra_externalid_nextjs_auth/img24.png)
 
 リポジトリは以下になります。
 ご参考までに！
