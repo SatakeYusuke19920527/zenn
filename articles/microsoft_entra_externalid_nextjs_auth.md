@@ -12,7 +12,7 @@ publication_name: "microsoft"
 
 作成するWebサイトのアーキテクチャは以下のようになります。
 
-![img](/images/azure_adb2c_nextjs_auth/img2.png)
+![img](/images/azure_adb2c_nextjs_auth/img24.png)
 
 リポジトリは以下になります。
 ご参考までに！
