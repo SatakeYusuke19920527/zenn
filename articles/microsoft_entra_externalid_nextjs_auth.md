@@ -405,6 +405,8 @@ loginをクリックすると、こんな感じのカスタマイズされたロ
 ![img](/images/microsoft_entra_externalid_nextjs_auth/img22.png)
 
 
+最後に、こんな感じでユーザー情報が取得できれいればOKです！！
+![img](/images/microsoft_entra_externalid_nextjs_auth/img23.png)
 
 
 これにて実装は完了です！
