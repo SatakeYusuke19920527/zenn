@@ -3,7 +3,7 @@ title: "【Azure OpenAI Service 最新Update】 Deploy方法が増えてPTUが�
 emoji: "💰"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["microsoft", "azure", "azureopenai", "ptu", "cost"]
-published: false
+published: true
 publication_name: "microsoft"
 ---
 
@@ -88,7 +88,22 @@ AOAIのDeploy場所は指定して、推論は指定した地域の空いてい�
 
 ![Azure](/images/azure_openai_ptu_update_202410/img1.png)
 
+2024 年 11 月 1 日より、paygoと言われる時間あたりの従量課金でPTUが使える方式が8月よりリリースされたのですが、その価格がなんと```50%```も安くなりました。
+
+これにより、PTUどんなもんかいな？いっちょ試してみたろかという人がよりお試しをしやすくなりました。
+
+また、PTUの最低購入数量も引き下げられたことで、より小規模なプロジェクトでもPTUを利用しやすくなり、PoCでPTU使って検証したろ！みたいな人でもこれまでより低コストで試せるようになりました。
+
+![Azure](/images/azure_openai_ptu_update_202410/img3.png)
+
+PTU使うと、パフォーマンスかなり上がるとの声もお客様からいただいているので、是非ちょこっとお試ししてみるのも良いかもしれませんね。
+
 # まとめ
+
+2024年11月1日に入りましたAzure OpenAI ServiceのUpdateについてまとめてみました。
+Deploy方式が増えたり、コストが安くなったりしているので、これを機にAOAIを使ってみるのも良いかもしれませんね。
+
+それでは🖐️
 
 # 参考文献
 https://azure.microsoft.com/en-us/blog/accelerate-scale-with-azure-openai-service-provisioned-offering/
