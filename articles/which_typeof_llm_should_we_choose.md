@@ -1,5 +1,5 @@
 ---
-title: "【GPT vs Claude vs Gemini vs Llama vs Mistral】 LLM戦国時代にそれぞれのモデルの使い所を考えてみる"
+title: "【GPT vs Claude vs Gemini vs Llama vs Mistral】 それぞれのモデルの使い所を考えてみる"
 emoji: "🤔"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["gpt", "claude", "gemini", "llama", "mistral"]
