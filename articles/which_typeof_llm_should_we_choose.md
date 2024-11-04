@@ -1,9 +1,9 @@
 ---
-title: "【GPT vs Claude vs Gemini vs Llama vs Mistral】 それぞれのモデルの使い所を考えてみる"
+title: "【GPT vs Claude vs Gemini vs Llama vs Mistral】 LLM戦国時代に各モデルの使い所を考えてみる"
 emoji: "🤔"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["gpt", "claude", "gemini", "llama", "mistral"]
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -195,6 +195,11 @@ GCPで使えるLLMモデルは以下
 - 各LLMのモデルには特徴はあるが、```回答精度特化型```, ```スピード特化型```, ```バランス型```にグルーピングできること
 - 利用するユースケースを鑑みて、パフォーマンス・スピード・コストの観点からLLMを選定すること
 - 現在契約しているクラウドベンダーももちろん素敵だが、マルチクラウド化することで今後どのようなLLMの戦況になってもついていける状態にすること
+
+乱立するLLMの戦国時代をうまく乗りこなしていきたいところですね。
+
+それでは👋
+
 
 # 参考文献
 https://artificialanalysis.ai/models
