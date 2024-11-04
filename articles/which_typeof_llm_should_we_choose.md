@@ -7,9 +7,11 @@ published: true
 publication_name: microsoft
 ---
 
+![img](/images/which_typeof_llm_should_we_choose/img15.png)
+
 # はじめに
-今回は、GPT、Claude、Geminiのそれぞれのモデルの使い所を考えてみたいと思います。
-筆者は2024/11現在Microsoftに勤めているのですが、GPTやClaude,Geminiとか色々あるけど、結局どれがいいの？という質問をよくいただきます。
+今回は、GPT、Claude、Gemini、Llama、Mistralのそれぞれのモデルの使い所を考えてみたいと思います。
+筆者はお客様から、LLMってGPTとかClaude,Geminiとか色々あるけど結局どれがいいの？という質問をよくいただきます。
 
 「ケースバイケースですねぇ...」と一口に言うのは簡単なので、少し踏み込んでどのケースにどのLLMが必要となるのかを考えてみたいと思います。
 
