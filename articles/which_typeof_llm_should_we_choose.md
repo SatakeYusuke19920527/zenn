@@ -2,7 +2,7 @@
 title: "【GPT vs Claude vs Gemini vs Llama vs Mistral】 それぞれのモデルの使い所を考えてみる"
 emoji: "🤔"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["gpt", "claude", "gemini", "llama", "mistral"]
+topics: ["gpt", "claude", "gemini", "llama", "mistral", "azure"]
 published: false
 publication_name: microsoft
 ---
