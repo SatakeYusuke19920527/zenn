@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "【GPT vs Claude vs Gemini】 それぞれのモデルの使い所を考えてみる" --type tech --emoji 📕 --publication-name "microsoft"
+  > npx zenn new:article --title "Azure Virtual Machines それぞれの特徴について解説" --type tech --emoji 💻 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
