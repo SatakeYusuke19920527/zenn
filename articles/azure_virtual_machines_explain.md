@@ -7,7 +7,7 @@ published: true
 publication_name: microsoft
 ---
 
-![img](/images/azure_virtual_machines_explain/img3.png)
+![img](/images/azure_virtual_machines_explain/img4.png)
 
 # はじめに
 Azureの仮想マシン(VM)のことについてよく質問される機会が増えてきたので、それぞれの特徴について解説します。
