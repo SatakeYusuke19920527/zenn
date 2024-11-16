@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Azure Virtual Machines それぞれの特徴について解説" --type tech --emoji 💻 --publication-name "microsoft"
+  > npx zenn new:article --title "Microsoft EntraIDでGoogleログインを実装する方法" --type tech --emoji 👍 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
