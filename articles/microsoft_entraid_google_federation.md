@@ -7,6 +7,8 @@ published: false
 publication_name: microsoft
 ---
 
+![](https://storage.googleapis.com/zenn-user-upload/f9ad2987ab6f-20241116.png)
+
 # はじめに
 Microsoft EntraIDのExternal IDを使ってGoogleログインを実装する方法を紹介します。
 
