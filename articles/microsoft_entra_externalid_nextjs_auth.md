@@ -64,8 +64,8 @@ Creating a new Next.js app in /Users/s.y/prj/04.webapp/sat-web-repo.
 npm install @azure/msal-browser @azure/msal-react
 ```
 
-次に、src/lib/config.tsを作成してください。
-```ts:src/lib/config.ts
+次に、src/lib/msalConfig.tsを作成してください。
+```ts:src/lib/msalConfig.ts
 export const msalConfig = {
   auth: {
     clientId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // Azure ポータルで取得したクライアントID
