@@ -3,7 +3,7 @@ title: "Microsoft EntraIDでGoogleログインを実装する方法"
 emoji: "👍"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["azure", "google", "microsoft", "externalid", "microsoftentra"]
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -12,8 +12,18 @@ publication_name: microsoft
 # はじめに
 Microsoft EntraIDのExternal IDを使ってGoogleログインを実装する方法を紹介します。
 
-サンプルコードを以下に配置していますのでご参照ください。
+GCPではFirebase AuthやGoogle Identity Platformを使ってGoogleログインを実装することが出来ますが、AzureでもMicrosoft EntraIDのExternal IDを使ってGoogleログインを実装することが可能だったりします。
+
+ユーザー名とパスワードでログインももちろん良いですが、Googleログインもあった方がユーザー体験が向上するので、今回はMicrosoft EntraIDのExternal IDを使ってGoogleログインを実装してみたいと思います。
+
+ユーザー名 + passwordでログインするハンズオンはこちらです。
+
+https://zenn.dev/microsoft/articles/microsoft_entra_externalid_nextjs_auth
+
+今回のハンズオンのサンプルコードを以下に配置していますのでご参照ください。
 https://github.com/SatakeYusuke19920527/azure-externalid-google-federation
+
+それではハンズオン開始🖐️
 
 # 環境構築
 まずはGithubのリポジトリ作成してください。
