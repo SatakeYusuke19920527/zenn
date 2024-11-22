@@ -31,6 +31,10 @@ https://speakerdeck.com/satakeyusuke19920527/deep-dive-to-voice-rag
 
 今回、この```gpt-4o-realtime-preview```を使うと、人との会話スピードを実現出来るどころか、食い気味で会話してくれます。
 
+アーキテクチャとしてはこんな感じです。
+
+![](https://storage.googleapis.com/zenn-user-upload/591233ec3f6f-20241122.png)
+
 本記事では、```gpt-4o-realtime-preview```の基本的な知識と共に、VoiceRAGのハンズオンを行います🚀
 
 まずは、Azureでの```gpt-4o-realtime-preview```について詳しく見ていきましょう。
