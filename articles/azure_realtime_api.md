@@ -1,5 +1,5 @@
 ---
-title: "🗣️VoiceRAG 生成AIとリアルタイム性溢れる会話を楽しむ【gpt-4o-realtime-preview】"
+title: "🗣️VoiceRAG徹底解説 生成AIとリアルタイム性溢れる会話を楽しむ【gpt-4o-realtime-preview】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "gpt-4o-realtime-preview", "OpenAI", "GPT-4o", "Microsoft"]
