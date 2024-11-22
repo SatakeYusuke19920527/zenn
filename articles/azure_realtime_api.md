@@ -12,6 +12,10 @@ publication_name: microsoft
 # 本記事の概要
 Azure OpenAI Service の ```gpt-4o-realtime-preview``` についての解説とVoiceRAGのハンズオンを行います。
 
+- Voice RAGへDeepDive
+
+https://speakerdeck.com/satakeyusuke19920527/deep-dive-to-voice-rag
+
 # Azure OpenAI Service の　gpt-4o-realtime-preview について
 
 2024年10月1日にOpenAI社から```gpt-4o-realtime-preview```というパブリックベータ版がリリースされました。
