@@ -1,5 +1,5 @@
 ---
-title: "🗣️VoiceRAG 生成AIとリアルタイム性溢れる会話を嗜む【gpt-4o-realtime-preview】"
+title: "🗣️VoiceRAG 生成AIとリアルタイム性溢れる会話を楽しむ【gpt-4o-realtime-preview】"
 emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Azure", "gpt-4o-realtime-preview", "OpenAI", "GPT-4o", "Microsoft"]
@@ -133,7 +133,19 @@ http://localhost:8765
 
 実際に会話してみたのがこちらです。
 
+3つの質問をしています。
+- 私自身の質問 (RAGで参照するドキュメントあり)
+- 佐竹塾の質問 (RAGで参照するドキュメントあり)
+- RealTime apiの質問 (RAGで参照するドキュメントなし)
+- 質問を途中で切断して違う質問に切り替える
+
 https://youtu.be/1evCD3t07P8
+
+このように、リアルタイム性を追求した会話が可能です。
+普通の会話の応答速度はもちろん、質問を被せてもスムーズに返答してくれます。
+
+これはすばらしい。
+後は日本語が少し気になるところがあるので、そこさえなんとかなれば最高ですね。
 
 # 最後に
 今回はAzure OpenAI Service の ```gpt-4o-realtime-preview``` についての解説とVoiceRAGのハンズオンを行いました。
