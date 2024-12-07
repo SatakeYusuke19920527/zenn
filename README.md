@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "【gpt-4o-realtime-preview】生成AIとリアルタイム性溢れる会話を嗜む" --type tech --emoji 🗣️ --publication-name "microsoft"
+  > npx zenn new:article --title "【AutoGen ハンズオン 🚀】生徒の進学先をマルチエージェントにディスカッションさせて決めてみる" --type tech --emoji 🤖 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
