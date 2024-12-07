@@ -1,6 +1,6 @@
 ---
-title: '【AutoGen ハンズオン🚀】生徒の進学先をマルチエージェントにディスカッションさせて決めてみる'
-emoji: '🤖'
+title: '【AutoGen ハンズオン🚀】マルチエージェントにディスカッションさせて結論を出させてみる'
+emoji: '🧑‍🏫'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'AutoGen', 'AI', 'agent', 'multi-agent']
 published: false
