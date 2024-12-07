@@ -1,5 +1,5 @@
 ---
-title: '【AutoGen ハンズオン】マルチエージェントにディスカッションさせて結論を出させてみる🚀'
+title: '【AutoGenハンズオン】マルチエージェントにディスカッションさせて結論を出させてみる🚀【マルチエージェント入門】'
 emoji: '🧑‍🏫'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'AutoGen', 'AI', 'agent', 'multi-agent']
