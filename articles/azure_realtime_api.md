@@ -277,7 +277,7 @@ requestとresponseのコマンドについて説明します。
 では、実際にハンズオンです！
 
 以下のリポジトリをcloneしてください。
-https://github.com/Azure-Samples/aoai-realtime-audio-sdk/
+https://github.com/Azure-Samples/aisearch-openai-rag-audio 
 
 次にAzure アカウントにログインします。
 ```bash
