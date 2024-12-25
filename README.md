@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "【AutoGen ハンズオン 🚀】生徒の進学先をマルチエージェントにディスカッションさせて決めてみる" --type tech --emoji 🤖 --publication-name "microsoft"
+  > npx zenn new:article --title "Githubの料金体系について" --type tech --emoji 😎 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
