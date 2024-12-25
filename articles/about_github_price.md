@@ -3,7 +3,7 @@ title: "GitHub各プランの機能について徹底解説"
 emoji: "🧑‍🎄"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["GitHub", "GitHubcopilot", "microsoft", "githubactions", "githubenterprise"]
-published: false
+published: true
 publication_name: microsoft
 ---
 
