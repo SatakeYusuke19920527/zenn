@@ -7,6 +7,8 @@ published: false
 publication_name: microsoft
 ---
 
+![](https://storage.googleapis.com/zenn-user-upload/634835d97a3a-20241225.png)
+
 # 初めに
 Githubとは開発者のためのプラットフォームでオープンソースプロジェクトやビジネスユースまで、GitHub上にソースコードをホスティングすることで数百万人もの他の開発者と一緒にコードのレビューを行ったり、プロジェクトの管理をしながら、ソフトウェアの開発を行うことができます。
 
@@ -150,4 +152,5 @@ Advanced Securityで利用可能|
 
 料金や機能は随時アップデートされるため、**最新情報は[公式サイト](https://github.co.jp/pricing.html#compare-features)をチェック**してください。  
 
----
+# 参考文献
+https://docs.github.com/ja
