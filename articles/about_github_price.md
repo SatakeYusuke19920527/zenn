@@ -2,7 +2,7 @@
 title: "GitHub各プランの機能について徹底解説"
 emoji: "🧑‍🎄"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["GitHub", "GitHubcopilot", "microsoft", "githubactions", "githubenterprise"]
+topics: ["GitHub", "GitHubCopilot", "microsoft", "githubactions", "githubenterprise"]
 published: true
 publication_name: microsoft
 ---
@@ -10,7 +10,7 @@ publication_name: microsoft
 ![](https://storage.googleapis.com/zenn-user-upload/634835d97a3a-20241225.png)
 
 # はじめに
-最近よくお客様から**GitHub Enterpriseにすると何がいいの？**とか、**GitHub copilot使ってみたい**というお声が多くなってきました。
+最近よくお客様から**GitHub Enterpriseにすると何がいいの？**とか、**GitHub Copilot使ってみたい**というお声が多くなってきました。
 GitHubみなさん使われていますが、使ってない機能がいっぱいあるかと存じます。
 
 今回はGitHubの料金プラン別に使える機能についてまとめてみました。
@@ -157,7 +157,7 @@ GitHub CopilotについてはFreeプランからでも利用可能
 
 | #          | Free          | Team                                  | Enterprise                                                                                                                                        |
 |:---------------:|:--------------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------|----|
-| **オプション**  | GitHub copilotの利用可能            | GitHub copilotの利用可能   | GitHub copilotの利用可能  |
+| **オプション**  | GitHub Copilotの利用可能            | GitHub Copilotの利用可能   | GitHub Copilotの利用可能  |
 
 
 ## 割引について
