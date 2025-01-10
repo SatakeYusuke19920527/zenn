@@ -7,8 +7,6 @@ published: false
 publication_name: microsoft
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/2eef0a724371-20250106.png)
-
 ## はじめに
 
 今回は Microsoft が公開している「[Multi-Agent-Custom-Automation-Engine-Solution-Accelerator](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)」というリポジトリを動かして Multi-Agent について理解を深めていく会となります。
@@ -71,6 +69,8 @@ sequenceDiagram
 
 それぞれが専門性を持ち、独自にタスク解決に向けて動いているイメージです。
 
+わかりやすいですね( ͡° ͜ʖ ͡°)
+
 ## リポジトリ概要 ~ Microsoft Multi-Agent Custom Automation Engine ~
 
 Microsoft が公開しているリポジトリ「[Multi-Agent-Custom-Automation-Engine-Solution-Accelerator](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)」は、Multi-Agent のアプリケーションを最小単位で動かすためのテンプレートです。
@@ -79,63 +79,40 @@ Multi-Agent のアプリケーションはその特性上どうしても実装�
 
 そこで本リポジトリは、MVP のベースとして、またはリファレンスとしてすぐに使用できるアプリケーションを提供し、すぐに作業を開始できるようにします。
 
-例えばオンボーディングタスクを Agent に考えさせて、タスクを一覧で表示するといった機能が提供されています。
 本記事の DEMO では、今日の晩御飯について Multi-Agent がユーザーの好みを聞いて必要な材料を洗い出してくれる処理が行われます。
 
 ---
 
-## リポジトリの主要コンポーネント
+## Deploy 方法
 
-実際のリポジトリ内では、以下のようなフォルダ・ファイル構成になっています。（一部抜粋）
+以下の Deploy to Azure ボタンをぽちっとすると、Azure 上にリソースがデプロイされます。
+https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator?tab=readme-ov-file#quick-deploy
 
-- **/agents** … 各エージェントの役割・ロジックがまとめられている
-- **/orchestrator** … エージェント同士の連携を管理する調整ロジック
-- **/pipelines** … Azure Pipelines などのデプロイ周りを扱う
-- **/docs** … ドキュメント関連
+構成としては以下の構成が Deploy されます。
+![](https://storage.googleapis.com/zenn-user-upload/2eef0a724371-20250106.png)
 
-_(※ 実際の内容はリポジトリをご確認ください)_
+Deploy されたリソースの一覧は以下です。
+![](https://storage.googleapis.com/zenn-user-upload/1aaffbc6a25b-20250110.png)
 
----
+認証のために EntraID Provider を Azure App Service へ追加が必要です。
+https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator?tab=readme-ov-file#add-the-entra-identity-provider-to-the-azure-web-app
 
-## 使い方のざっくりイメージ
+また、CosmosDB へのデータプレーンの追加も必要です。
 
-1. **リポジトリをクローン** し、ローカル/クラウド環境にセットアップ
-2. **Azure OpenAI など LLM API の設定** を行う
-3. **エージェント定義の調整** (必要な役割・タスクをカスタマイズ)
-4. **オーケストレーター (もしくはメインの実行ファイル)** を起動してタスクを実行
-5. **実際の業務フローに組み込む** (アプリや Web サービスと連携する、など)
+https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/security/how-to-grant-data-plane-role-based-access?tabs=built-in-definition%2Cpython&pivots=azure-interface-cli
 
----
+https://learn.microsoft.com/en-us/cli/azure/cosmosdb/sql/role/assignment?view=azure-cli-latest#az-cosmosdb-sql-role-assignment-create
 
-## 今晩の晩御飯を聞いてみる DEMO
+無事 Deploy が完了したら以下のような動作になります。
 
-本記事の最後には、**Multi-Agent に「今晩の晩御飯、何がいい？」と聞くデモ** を予定しています（動画でアップロード予定）。
+**Multi-Agent に「Please think today's dinner menu. I want to eat Japanese food.」と聞くデモ** をご覧ください。
 
-こちらではあくまでイメージですが、以下のような手順になります。
+https://youtu.be/ZKMgTrxuHdU
 
-1. **ユーザーが「今晩の晩御飯は何にすればいい？」と入力**
-2. **レシピ提案エージェント** が食材やレシピ情報を取得
-3. **栄養分析エージェント** がバランスなどを検討
-4. **最終エージェント** がユーザーへの返信文を生成して提案
-5. **ユーザーが確認** (実際に作るか判断)
+いい感じにメニューの選定と、そのメニューを作るための材料のリストを返してくれますね。
+マルチエージェントは 2025 年に社会実装がより進んでいく概念だと思うので、ぜひ皆様も一度触ってみてください。
 
-これら一連の流れを Multi-Agent で自動化できれば、非常に便利ですよね。
-
----
-
-## まとめ
-
-本記事では、Microsoft が提供する「**Multi-Agent-Custom-Automation-Engine-Solution-Accelerator**」について、Multi-Agent の概念や使用イメージを交えつつ解説しました。
-
-- **Multi-Agent** は **複数のエージェントが専門タスクを連携して実行する仕組み**
-- Microsoft のリポジトリでは、**複雑な業務自動化** を Multi-Agent で実現するためのテンプレート(アクセラレータ)が用意されている
-- これを参考に **自分の使いたいエージェント構成** を自由に作れる
-
-今後も生成 AI やエージェントの進化により、このような **「複数の AI を組み合わせる」** スタイルの実装が広がっていくと思われます。ぜひリポジトリを活用してみてください。
-
-最後に、「**今晩の晩御飯を聞いてみる**」DEMO 動画 も併せてご覧いただければ幸いです。Multi-Agent の魅力が、さらに実感していただけると思います。
-
-この記事がみなさんの Multi-Agent 活用のヒントになれば幸いです！
+それでは 👋
 
 ---
 
