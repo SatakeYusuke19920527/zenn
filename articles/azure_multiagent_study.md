@@ -3,9 +3,11 @@ title: 'Multi-AgentをMVPで動かして勉強する会'
 emoji: '🤖'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['azure', 'multiagent', 'autogen', 'openai', 'python']
-published: false
+published: true
 publication_name: microsoft
 ---
+
+![](https://storage.googleapis.com/zenn-user-upload/ae376f509a7e-20250110.webp)
 
 ## はじめに
 
@@ -103,9 +105,17 @@ https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/security/how-to-grant-da
 
 https://learn.microsoft.com/en-us/cli/azure/cosmosdb/sql/role/assignment?view=azure-cli-latest#az-cosmosdb-sql-role-assignment-create
 
-無事 Deploy が完了したら以下のような動作になります。
+無事 Deploy が完了したら以下のような画面が WebApp に Deploy されます。
+http://localhost:3000/app.html?v=home
+![](https://storage.googleapis.com/zenn-user-upload/ca19807eaa97-20250110.png)
 
-**Multi-Agent に「Please think today's dinner menu. I want to eat Japanese food.」と聞くデモ** をご覧ください。
+サーバサイドは FastAPI で実装されており、API の一覧が見れて便利です。
+
+http://localhost:8000/docs
+![](https://storage.googleapis.com/zenn-user-upload/853922a09220-20250110.png)
+![](https://storage.googleapis.com/zenn-user-upload/39d8af73310f-20250110.png)
+
+では、**Multi-Agent に「Please think today's dinner menu. I want to eat Japanese food.」と聞くデモ** をご覧ください。
 
 https://youtu.be/ZKMgTrxuHdU
 
