@@ -41,20 +41,6 @@ https://youtu.be/ZKMgTrxuHdU
 
 ---
 
-## Microsoft Multi-Agent Custom Automation Engine とは？
-
-### リポジトリ概要
-
-Microsoft が公開しているリポジトリ「[Multi-Agent-Custom-Automation-Engine-Solution-Accelerator](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)」は、**Multi-Agent を活用した業務自動化のためのサンプル(ソリューション アクセラレータ)** です。以下のような特徴があります。
-
-1. **複数の専門エージェント** を連携させる設計を示す。
-2. それらのエージェントをどのように**オーケストレーション**(統制)するかのサンプル実装がある。
-3. **Azure OpenAI やその他のサービスとの連携** サンプルが含まれる。
-
-例えば、ドキュメント処理・分析タスクを複数エージェントで手分けし、それらの結果をまとめてレポートする、といったケースを想定したフレームワークのベースを提供してくれます。
-
----
-
 ## Multi-Agent ソリューションのイメージ図
 
 ここでは、Multi-Agent を使う場合の一例として、**ユーザーが「ある要求」を投げかけると、複数エージェントが連携して結果を返す** 流れを簡単に図示します。  
@@ -82,6 +68,21 @@ sequenceDiagram
 ```
 
 このように、１つの大きなタスクを複数エージェントが分担し、最後にオーケストレーターが結果を集約するという形が Multi-Agent の典型的なフローです。
+
+それぞれが専門性を持ち、独自にタスク解決に向けて動いているイメージです。
+
+## リポジトリ概要 ~ Microsoft Multi-Agent Custom Automation Engine ~
+
+Microsoft が公開しているリポジトリ「[Multi-Agent-Custom-Automation-Engine-Solution-Accelerator](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)」は、Multi-Agent のアプリケーションを最小単位で動かすためのテンプレートです。
+
+Multi-Agent のアプリケーションはその特性上どうしても実装が難しくなり、簡単な PoC がしにくいという側面があります。
+
+そこで本リポジトリは、MVP のベースとして、またはリファレンスとしてすぐに使用できるアプリケーションを提供し、すぐに作業を開始できるようにします。
+
+例えばオンボーディングタスクを Agent に考えさせて、タスクを一覧で表示するといった機能が提供されています。
+本記事の DEMO では、今日の晩御飯について Multi-Agent がユーザーの好みを聞いて必要な材料を洗い出してくれる処理が行われます。
+
+---
 
 ## リポジトリの主要コンポーネント
 
@@ -142,5 +143,6 @@ _(※ 実際の内容はリポジトリをご確認ください)_
 
 - [**Multi-Agent-Custom-Automation-Engine-Solution-Accelerator GitHub リポジトリ**](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)
 - [**Azure OpenAI Service 公式ドキュメント**](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [**Autogen の最新情報**](https://www.microsoft.com/en-us/research/lab/ai-frontiers/)
 
 ---
