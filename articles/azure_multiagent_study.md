@@ -126,6 +126,15 @@ https://youtu.be/ZKMgTrxuHdU
 
 ---
 
+# スタートアップ企業様向けのお知らせ
+
+日本マイクロソフトでは、スタートアップ企業様向けに、ビジネスを支援するプログラムをご提供しています。
+Azure の無料クレジットが`最大$150,000`もらえるので、是非チェックしてみてください。
+
+https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
+
+---
+
 ### 参考リンク
 
 - [**Multi-Agent-Custom-Automation-Engine-Solution-Accelerator GitHub リポジトリ**](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)
