@@ -1,8 +1,8 @@
 ---
-title: 'これだけ読めば大丈夫Microsoft Fabric徹底入門'
+title: 'Microsoft Fabric徹底入門 Part1 ~ OverView編 ~'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['azure', 'browser-use', 'automation', 'python']
+topics: ['azure', 'microsoftfabric', 'powerbi', 'onelake', '']
 published: false
 publication_name: microsoft
 ---
@@ -131,6 +131,11 @@ https://azure.microsoft.com/ja-jp/pricing/details/bandwidth/
 | 南米から他の大陸       | ¥25.209     |
 
 Fabric の料金については、Capacity が主な料金になります。データを単一リージョンに格納する設計と、必要なコンピューティングリソースに応じて SKU を設定すれば適切な料金で利用することが可能です。
+
+# まとめ
+
+今回は Microsoft Fabric の概要について紹介しました。
+次回はそれぞれの機能について詳細に記載していこうと思います。
 
 それでは 👋
 
