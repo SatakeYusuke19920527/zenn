@@ -103,15 +103,14 @@ Fabric Data Warehouse は、業界をリードする SQL パフォーマンス�
 Fabric Data Warehouse
 https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing
 
-# 価格
+# Microsoft Fabric の価格計算方法について
+
+Microsoft Fabric の価格計算は、以下の計算で算出出来ます。
+コンピューティングである Fabric の capacity + ストレージである OneLake の容量 + PowerBI のライセンス料 + データ通信量
 
 ![](https://storage.googleapis.com/zenn-user-upload/0a9c6ca89940-20250201.png)
 
-## Microsoft Fabric の価格計算方法について
-
 https://azure.microsoft.com/ja-jp/pricing/details/microsoft-fabric/
-Microsoft Fabric の価格計算は、以下の計算で算出出来ます。
-コンピューティングである Fabric の capacity + ストレージである OneLake の容量 + PowerBI のライセンス料 + データ通信量
 
 Fabric ワークスペースへの Power BI 以外のアイテムの利用作成でしたら Power BI Free で十分ですが、Power BI も含んだすべてのアイテムを触らせたい際には、ユーザーに Pro 以上のライセンスを付与する必要があります。
 ただし、SKU が F64 以上の容量を購入することで Power BI のユーザライセンスを問わずデータを見ることができるようになります。
