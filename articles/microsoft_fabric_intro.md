@@ -1,5 +1,5 @@
 ---
-title: 'Microsoft Fabric徹底入門 Part1 ~ microsoft fabricとは？ ~'
+title: 'Microsoft Fabric徹底入門 ~ microsoft fabricとは？ ~'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['azure', 'microsoftfabric', 'onelake', 'powerbi', 'data']
