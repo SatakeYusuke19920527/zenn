@@ -1,5 +1,5 @@
 ---
-title: 'Microsoft Fabric徹底入門 Part1 ~ OverView編 ~'
+title: 'Microsoft Fabric徹底入門 Part1 ~ microsoft fabricとは？ ~'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['azure', 'microsoftfabric', 'powerbi', 'onelake', '']
@@ -152,8 +152,6 @@ https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
 
 ### 参考リンク
 
-- [**Multi-Agent-Custom-Automation-Engine-Solution-Accelerator GitHub リポジトリ**](https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator)
-- [**Azure OpenAI Service 公式ドキュメント**](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [**Autogen の最新情報**](https://www.microsoft.com/en-us/research/lab/ai-frontiers/)
+- https://learn.microsoft.com/ja-jp/fabric/fundamentals/microsoft-fabric-overview
 
 ---
