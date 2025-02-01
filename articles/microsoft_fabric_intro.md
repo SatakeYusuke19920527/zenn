@@ -2,8 +2,8 @@
 title: 'Microsoft Fabric徹底入門 Part1 ~ microsoft fabricとは？ ~'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['azure', 'microsoftfabric', 'powerbi', 'onelake', '']
-published: false
+topics: ['azure', 'microsoftfabric', 'powerbi', 'price', 'data']
+published: true
 publication_name: microsoft
 ---
 
