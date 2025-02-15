@@ -408,6 +408,13 @@ Dify は簡単に LLM アプリケーションが作れ、且つ Azure 上で動
 
 それでは 👋
 
+# スタートアップ企業様向けのお知らせ
+
+日本マイクロソフトでは、スタートアップ企業様向けに、ビジネスを支援するプログラムをご提供しています。
+Azure の無料クレジットが`最大$150,000`もらえるので、是非チェックしてみてください。
+
+https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
+
 # 参考文献
 
 https://github.com/douban/charts/tree/master/charts/dify
