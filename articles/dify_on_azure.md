@@ -1,12 +1,12 @@
 ---
-title: 'DifyをAzure Kubernetes Service(AKS)にデプロイして本番環境で使う手順'
+title: 'Difyで作ったLLM ApplicationをAzure Kubernetes Serviceにデプロイする方法'
 emoji: '🚢'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'Kubernetes', 'Dify', 'Docker']
 published: true
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/296104da0c4f-20250215.png)
+![](https://storage.googleapis.com/zenn-user-upload/713dfc009ddf-20250215.png)
 
 # はじめに
 
