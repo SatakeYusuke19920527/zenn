@@ -2,7 +2,7 @@
 title: 'Difyで作ったLLM ApplicationをAzure Kubernetes Serviceにデプロイする方法'
 emoji: '🚢'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['Azure', 'Kubernetes', 'Dify', 'Docker']
+topics: ['Azure', 'Kubernetes', 'Dify', 'Docker', 'openai']
 published: true
 ---
 
