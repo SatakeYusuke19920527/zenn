@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "browser-use を Azure 上で動かしてみる" --type tech --emoji 💻 --publication-name "microsoft"
+  > npx zenn new:article --title "Microsoft Fabric 徹底入門 ~PowerBI とは？~" --type tech --emoji 🐳 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
