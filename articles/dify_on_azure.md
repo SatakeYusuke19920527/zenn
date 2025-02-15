@@ -4,6 +4,7 @@ emoji: '🚢'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'Kubernetes', 'Dify', 'Docker', 'openai']
 published: true
+publication_name: microsoft
 ---
 
 ![](https://storage.googleapis.com/zenn-user-upload/713dfc009ddf-20250215.png)
