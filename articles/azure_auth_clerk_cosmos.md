@@ -3,7 +3,7 @@ title: "Next.js Clerk Azure CosmosDBでユーザー認証機能を作る"
 emoji: "🙍"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["azure", "nextjs", "clerk", "cosmosdb"]
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -855,6 +855,26 @@ export const deleteUser = async (clerkId: string) => {
 
 ```
 
+次はAzure Portalへ移動してCosmosDBを作成します。
+![](https://storage.googleapis.com/zenn-user-upload/77d07af5b351-20250318.png)
+
+データエクスプローラーからDatabaseとContainerを作成します。
+![](https://storage.googleapis.com/zenn-user-upload/271bc71fb42b-20250318.png)
+
+これでセット完了です。
+
+VSCodeに戻り、.envファイルに以下の情報を追加してください。
+Azureポータルでの記載場所は以下となります。
+![](https://storage.googleapis.com/zenn-user-upload/e92863195ec1-20250318.png)
+
+```env
+COSMOS_CONNECTION_STRING=AccountEndpoint=
+COSMOS_DATABASE_NAME=
+COSMOS_CONTAINER_NAME=
+```
+
+ここまでくればセッティングOKです。
+
 ngrokを使って、ローカルサーバーを外部公開します。
 
 https://ngrok.com/
@@ -887,7 +907,10 @@ Testingの箇所からuser.createdを選択して、Send Test Eventをクリッ�
 ## まとめ
 
 本記事では、Next.jsとClerkを組み合わせた認証と、Azure Cosmos DBへのユーザー情報の保存方法を紹介しました。  
-Clerkを使うと、ログイン機能やサインアップ画面の構築をほぼ自動的に行えるうえ、セッション管理やユーザープロファイル管理の負荷が軽減できます。これに加えて、Azure Cosmos DBの柔軟なスケーラビリティを活かしてユーザーデータを保存すれば、スモールスタートから大規模アプリケーションまで対応可能です。
+
+Clerkを使うと、ログイン機能やサインアップ画面の構築をほぼ自動的に行えるうえ、セッション管理やユーザープロファイル管理の負荷が軽減できます。
+
+これに加えて、Azure Cosmos DBの柔軟なスケーラビリティを活かしてユーザーデータを保存すれば、スモールスタートから大規模アプリケーションまで対応可能です。
 
 これで、**Next.js + Clerk + Azure Cosmos DB**を使った認証＆データ保存基盤の概要が完成です。ぜひ活用してみてください！
 
