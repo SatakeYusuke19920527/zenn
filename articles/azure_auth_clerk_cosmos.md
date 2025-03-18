@@ -7,7 +7,7 @@ published: true
 publication_name: microsoft
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/d1c8455ef198-20250318.webp)
+![](https://storage.googleapis.com/zenn-user-upload/24c23d65aae8-20250318.png)
 
 ## はじめに
 
