@@ -1,11 +1,13 @@
 ---
-title: "Next.js Clerk Azure CosmosDBでユーザー認証機能を作る"
-emoji: "🙍"
+title: "AI駆動開発で作るNext.js×Clerk×CosmosDBを用いたユーザー認証機能の実装"
+emoji: "🚀"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["azure", "nextjs", "clerk", "cosmosdb"]
 published: true
 publication_name: microsoft
 ---
+
+![](https://storage.googleapis.com/zenn-user-upload/d1c8455ef198-20250318.webp)
 
 ## はじめに
 
@@ -913,4 +915,3 @@ Clerkを使うと、ログイン機能やサインアップ画面の構築をほ
 これに加えて、Azure Cosmos DBの柔軟なスケーラビリティを活かしてユーザーデータを保存すれば、スモールスタートから大規模アプリケーションまで対応可能です。
 
 これで、**Next.js + Clerk + Azure Cosmos DB**を使った認証＆データ保存基盤の概要が完成です。ぜひ活用してみてください！
-
