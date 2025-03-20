@@ -51,14 +51,21 @@ https://learn.microsoft.com/ja-jp/azure/storage/blobs/data-lake-storage-introduc
 ## OneLake の特徴
 
 アプリケーションではストレージとコンピューティングが分離されている場合がありますが、多くの場合、データは 1 つのエンジン用に最適化されるため、複数のアプリケーションで同じデータを再利用することが困難になります。
+
 Fabric を使用すると、さまざまな分析エンジン (T-SQL、Apache Spark、Analysis Services など) が、オープンな Delta Parquet 形式でデータを格納するため、複数のエンジンにまたがって同じデータを使用できるようになります。
+
 データを別のエンジンで使用するためだけにコピーする必要はもうありません。 実行しようとしているジョブに最適なエンジンを常に選択できます。
+
 たとえば、SQL エンジニアのチームが完全なトランザクション データ ウェアハウスを構築するとします。 T-SQL エンジンと T-SQL のすべての機能を使用して、データの作成、変換、テーブルへのデータの読み込みを行うことができます。
+
 データ サイエンティストがこのデータを利用する場合、特別な Spark/SQL ドライバーを使用する必要はもうありません。
+
 OneLake は、すべてのデータを Delta Parquet 形式で格納します。 データ サイエンティストは、Spark エンジンとそのオープンソース ライブラリの全機能をデータに対して直接使用できます。
 
 ビジネス ユーザーは、Analysis Services エンジンの新しい Direct Lake モードを使用して、OneLake に基づいて直接 Power BI レポートを作成できます。
+
 Analysis Services エンジンは、Power BI セマンティック モデルが利用するもので、データにアクセスするために、常にインポートと直接クエリの 2 つのモードを提供してきました。
+
 Direct Lake モードを使用すると、データをコピーする必要がないため、インポートそのままの速度がユーザーに提供され、インポートと DirectQuery の利点が組み合わされます。
 
 ### One Copy
@@ -81,4 +88,4 @@ https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
 
 # 参考文献
 
-https://speakerdeck.com/ryomaru0825/microsoft-fabirc-onelake-noshi-ti-nituite
+https://learn.microsoft.com/ja-jp/fabric/onelake/
