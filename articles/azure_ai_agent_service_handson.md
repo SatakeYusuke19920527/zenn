@@ -57,3 +57,18 @@ Agent Service にて
 
 Agent が GUI 上で作成することが出来る
 ![](https://storage.googleapis.com/zenn-user-upload/5b73204b1959-20250315.png)
+
+# 最後に
+
+今回の構成で Azure AI Agent Service を使って、マルチエージェントアプリを構築することが出来ました。
+
+今後は AI Agent Service の SDK もより多くのコネクタに対応するようになりそうなので、引き続き check していきたいと思います。
+
+それでは 👋
+
+# スタートアップ企業様向けのお知らせ
+
+日本マイクロソフトでは、スタートアップ企業様向けに、ビジネスを支援するプログラムをご提供しています。
+Azure の無料クレジットが`最大$150,000`もらえるので、是非チェックしてみてください。
+
+https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
