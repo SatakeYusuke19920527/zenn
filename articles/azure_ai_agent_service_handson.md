@@ -795,7 +795,8 @@ npm run dev
 ブラウザでそれぞれのエンドポイントにアクセスし、Knowledge-Agent と Action-Agent が動作することを確認します。
 
 - http://localhost:3000/knowledge へリクエスト
-  ![](https://storage.googleapis.com/zenn-user-upload/894d0a207557-20250407.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/894d0a207557-20250407.png)
 
 私の PoC 数を記載したドキュメントをアップロードしたので、正しく返答してくれますね。
 参照しているドキュメントも return してくれていることがわかります。
@@ -803,9 +804,10 @@ npm run dev
 次に Action-Agent へリクエストを投げてみます。
 
 - http://localhost:3000/action へリクエスト
-  ![](https://storage.googleapis.com/zenn-user-upload/aad17b7fb538-20250407.png)
-  全てのユーザーを教えてという質問に対して、適切な関数を選択し、ユーザーを返してくれていることがわかりますね。
-  質問の内容によって Function Calling による関数の選択を行い、適切な関数を呼び出してくれているのですが、この精度がほぼほぼ間違いなく意図通りの関数が呼ばれていることが素晴らしかったです。
+
+![](https://storage.googleapis.com/zenn-user-upload/aad17b7fb538-20250407.png)
+全てのユーザーを教えてという質問に対して、適切な関数を選択し、ユーザーを返してくれていることがわかりますね。
+質問の内容によって Function Calling による関数の選択を行い、適切な関数を呼び出してくれているのですが、この精度がほぼほぼ間違いなく意図通りの関数が呼ばれていることが素晴らしかったです。
 
 今回は独立した AI Agent を用意し、それぞれをエンドポイント毎に動かすという基本的なものでしたが、今後はエージェントを組み合わせ、AI Agent 同士の連携を行うことが出来るようになると、より複雑なアプリケーションを構築することが出来るようになると思います。
 
@@ -813,7 +815,7 @@ npm run dev
 
 素晴らしいですね。
 
-また、Fabric や Trip Adviser との連携も出来るようになったので、今後の進化にも期待です。
+また、AI Agent Service は Microsoft Fabric や Trip Adviser との連携も出来るようになったので、今後の進化にも期待です。
 
 # 最後に
 
