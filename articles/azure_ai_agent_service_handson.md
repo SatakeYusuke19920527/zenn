@@ -3,7 +3,7 @@ title: 'TypeScriptで作るマルチエージェントアプリハンズオン�
 emoji: '🤖'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['typescript', 'azure', 'azure-ai-agent-service', 'openai', 'gpt-4o']
-published: false
+published: true
 publication_name: microsoft
 ---
 
