@@ -72,6 +72,29 @@ Agent が GUI 上で作成することが出来る。
 これで AI Agent Service のセットアップは完了です。
 ![](https://storage.googleapis.com/zenn-user-upload/5b73204b1959-20250315.png)
 
+今回は二人の AI Agent を作成しておきます。
+
+- Knowledge-Agent
+  - 独自のドキュメントをセットしておき、RAG のようにドキュメントに沿った返答を行います。
+- Action-Agent
+  - Function Calling を用いて２種類の Functions を呼び出します。
+  - Azure Functions は今回はモックとして天気の情報とユーザー情報を return するだけのものを用意します。
+
+![](https://storage.googleapis.com/zenn-user-upload/01e8100c342f-20250407.png)
+
+Knowledge-Agent は +新しいエージェントを選択し、
+手順へ以下を記載
+
+> ドキュメントの中に記載されている内容を回答してください。結論だけ返答してください。
+
+ナレッジの追加からファイルを選択し、お好きなファイルを Upload してください
+![](https://storage.googleapis.com/zenn-user-upload/66a424db0706-20250407.png)
+
+Action-Agent は +新しいエージェントを選択し作成するだけで OK です。
+内部で動作させる Azure Functions は(2025/04 時点で)手動追加ができないので、後ほどコードベースで追加します。
+
+ここまできたら AI Agent Service のセットアップ完了です。
+
 # Azure Functions のセットアップ
 
 ![](https://storage.googleapis.com/zenn-user-upload/f1b40f2d2076-20250407.png)
@@ -82,9 +105,9 @@ https://zenn.dev/yusu29/articles/azure_functions_introduction
 
 2 つの Azure Functions を作成します。
 
-- GetWeather
+- get_weather
   - 天気の情報を返すだけのモック
-- GetUserInfo
+- get_users
   - ユーザーの情報を返すだけのモック
 
 ## 開発環境のセットアップ
@@ -302,6 +325,492 @@ Azure Portal より、二つの関数が作成されていることを確認し�
 ![](https://storage.googleapis.com/zenn-user-upload/5bad622f3471-20250407.png)
 
 # Express.js のセットアップ
+
+最後に Express.js のセットアップを行います。
+![](https://storage.googleapis.com/zenn-user-upload/7a7dc6d33f06-20250407.png)
+
+任意のディレクトリに移動して、以下のコマンドを実行してください。
+
+```bash
+npx express-generator . --view ejs
+npm install
+npm install @azure/ai-projects
+npm install @azure/identity
+```
+
+TypeScript 化する場合は以下のサイトを参照してください
+https://qiita.com/katkatprog/items/0205f55377896faace5c
+
+各ディレクトリを以下のように作成してください。
+![](https://storage.googleapis.com/zenn-user-upload/630d3d682c03-20250407.png)
+
+- models/FunctionToolExecutor.ts
+  - Agent へ登録する Azure Functions を定義
+- routes/action.ts
+  - Agent を呼び出し、必要な関数を Function Calling にて呼び出すコード
+- routes/knowledge.ts
+  - Knowledge Agent を呼び出すコード
+
+では、コードを順番に記載していきましょう。
+
+API 全体を取りまとめる app.ts は以下のようになります。
+
+```typescript:app.ts
+import cookieParser from 'cookie-parser';
+import express, { NextFunction, Request, Response } from 'express';
+import createError from 'http-errors';
+import logger from 'morgan';
+import path from 'path';
+
+import { router as actionRouter } from './routes/action';
+import { router as indexRouter } from './routes/index';
+import { router as knowledgeRouter } from './routes/knowledge';
+
+const app = express();
+
+// view engine setup
+app.set('views', path.join('views')); //__dirNameと書いてある箇所を除く！
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join('public'))); //__dirNameと書いてある箇所を除く！
+app.use(express.static('public'));
+
+app.use('/', indexRouter);
+app.use('/knowledge', knowledgeRouter);
+app.use('/action', actionRouter);
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+
+interface ErrorWithStatus extends Error {
+  status: number;
+}
+
+app.use(function (
+  err: ErrorWithStatus,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+export default app;
+
+```
+
+Action Agent を呼び出すコードは以下のようになります。
+ACTION_AGENT_ID は Action Agent のものを指定してください。
+
+```typescript:routes/action.ts
+import {
+  AIProjectsClient,
+  isOutputOfType,
+  MessageStreamEvent,
+} from '@azure/ai-projects';
+import { DefaultAzureCredential } from '@azure/identity';
+import express from 'express';
+import { FunctionToolExecutor } from '../models/FunctionToolExecutor';
+
+const router = express.Router();
+
+const connectionString =
+  'eastus2.api.azureml.ms;xxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxxxxx;rg-agent-poc;prj-agent-poc';
+
+const ACTION_AGENT_ID = 'asst_xxxxxxxxxxxxxxxxxxxx';
+
+const QUESTION = 'Please tell me the all user.';
+
+router.get('/', async function (req, res, next) {
+  try {
+    const client = AIProjectsClient.fromConnectionString(
+      connectionString,
+      new DefaultAzureCredential()
+    );
+
+    const actionAgentId = ACTION_AGENT_ID;
+
+    const userQuestion = QUESTION;
+
+    let thread = await client.agents.createThread();
+    console.log('Created thread:', thread.id);
+
+    await client.agents.createMessage(thread.id, {
+      role: 'user',
+      content: userQuestion,
+    });
+    console.log('Added user message:', userQuestion);
+
+    const streamEventMessages = await client.agents
+      .createRun(thread.id, actionAgentId)
+      .stream();
+
+    await new Promise<string>(async (resolve, reject) => {
+      try {
+        let textBuffer = '';
+
+        for await (const eventMessage of streamEventMessages) {
+          switch (eventMessage.event) {
+            case MessageStreamEvent.ThreadMessageDelta: {
+              const messageDelta: any = eventMessage.data;
+              messageDelta.delta.content.forEach((contentPart: any) => {
+                if (contentPart.type === 'text') {
+                  const textValue = contentPart.text?.value || '';
+                  textBuffer += textValue; // テキストを連結
+                  process.stdout.write(textValue); // コンソールにも随時出力
+                }
+              });
+              break;
+            }
+            case 'thread.run.requires_action': {
+              const messageDelta: any = eventMessage.data;
+              const requiredAction = messageDelta.requiredAction;
+              const callId = requiredAction.submitToolOutputs.toolCalls[0].id;
+
+              const executor = new FunctionToolExecutor();
+              const toolCall = {
+                id: callId,
+                function: {
+                  name: requiredAction.submitToolOutputs.toolCalls[0].function
+                    .name,
+                  parameters: '{}',
+                },
+              };
+
+              try {
+                const result = await executor.invokeTool(toolCall as any);
+
+                const toolOutputs = [
+                  {
+                    toolCallId: callId,
+                    output: JSON.stringify(result?.output),
+                  },
+                ];
+
+                await client.agents.submitToolOutputsToRun(
+                  thread.id,
+                  messageDelta.id,
+                  toolOutputs
+                );
+
+                await client.agents
+                  .createRun(thread.id, actionAgentId)
+                  .stream();
+              } catch (err) {
+                console.error('Error invoking tool:', err);
+              }
+              break;
+            }
+            case 'done': {
+              console.log('Received done event.');
+              // done イベントが来たら resolve
+              resolve(textBuffer);
+              break;
+            }
+            default: {
+              console.log('[Default event handler]', eventMessage.event);
+              break;
+            }
+          }
+        }
+
+        console.log('\n--- Stream completed ---\n');
+        resolve(textBuffer);
+      } catch (err) {
+        reject(err);
+      }
+    });
+
+    const messages = await client.agents.listMessages(thread.id);
+    console.log('=== Final conversation messages === :');
+
+    let finalResult: string | null = null;
+
+    for (let i = 0; i < messages.data.length; i++) {
+      const msg = messages.data[i];
+      if (msg.content && msg.content[0]) {
+        const content0 = msg.content[0];
+        if (isOutputOfType(content0, 'text')) {
+          const textObj = (content0 as any).text;
+          console.log(`[${msg.role}]`, textObj.value);
+          finalResult += textObj.value;
+        } else {
+          console.log(`[${msg.role}] (Non-text message)`, content0);
+        }
+      }
+    }
+
+    console.log('🚀 ~ finalResult:', finalResult);
+
+    res.json({
+      status: '200',
+      finalResult,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+export { router };
+
+```
+
+Knowledge Agent を呼び出すコードは以下のようになります。
+agentId は Knowledge Agent のものを指定してください。
+
+```typescript:routes/knowledge.ts
+import type {
+  MessageDeltaChunk,
+  MessageDeltaTextContent,
+  MessageTextContentOutput,
+} from '@azure/ai-projects';
+import {
+  AIProjectsClient,
+  ErrorEvent,
+  isOutputOfType,
+  MessageStreamEvent,
+} from '@azure/ai-projects';
+import { DefaultAzureCredential } from '@azure/identity';
+
+import express from 'express';
+const router = express.Router();
+
+const connectionString =
+  'eastus2.api.azureml.ms;xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx;rg-agent-poc;prj-agent-poc';
+
+if (!connectionString) {
+  throw new Error(
+    'AZURE_AI_PROJECTS_CONNECTION_STRING must be set in the environment variables'
+  );
+}
+
+const question = 'Please tell me total poc amount from 1/23 to 2/17.';
+
+/* GET users listing. */
+router.get('/', async function (req, res, next) {
+  const client = AIProjectsClient.fromConnectionString(
+    connectionString || '',
+    new DefaultAzureCredential()
+  );
+
+  // RAG用のエージェントを指定
+  const agentId = 'asst_xxxxxxxxxxxxxxxxxxxx';
+
+  // Step 3: Create a thread
+  const thread = await client.agents.createThread();
+
+  await client.agents.createMessage(thread.id, {
+    role: 'user',
+    content: question,
+  });
+
+  // 既存エージェントを直接利用
+  const streamEventMessages = await client.agents
+    .createRun(thread.id, agentId)
+    .stream();
+
+  for await (const eventMessage of streamEventMessages) {
+    switch (eventMessage.event) {
+      case MessageStreamEvent.ThreadMessageDelta:
+        {
+          const messageDelta = eventMessage.data as MessageDeltaChunk;
+          messageDelta.delta.content.forEach((contentPart) => {
+            if (contentPart.type === 'text') {
+              const textContent = contentPart as MessageDeltaTextContent;
+              console.log(textContent.text?.value || '');
+            }
+          });
+        }
+        break;
+      case ErrorEvent.Error:
+        console.log(`An error occurred: ${eventMessage.data}`);
+        break;
+    }
+  }
+
+  // 6. Print the messages from the agent
+  const messages = await client.agents.listMessages(thread.id);
+
+  let resultMessage = '';
+
+  // Messages iterate from oldest to newest
+  // messages[0] is the most recent
+  for (let i = messages.data.length - 1; i >= 0; i--) {
+    const m = messages.data[i];
+    if (isOutputOfType<MessageTextContentOutput>(m.content[0], 'text')) {
+      const textContent = m.content[0] as MessageTextContentOutput;
+      console.log(`${textContent.text.value}`);
+      resultMessage += `${textContent.text.value}`;
+      console.log(`---------------------------------`);
+    }
+  }
+
+  res.json(resultMessage);
+});
+
+export { router };
+
+```
+
+```typescript:models/FunctionToolExecutor.ts
+// models/FunctionToolExecutor.ts
+import {
+  FunctionToolDefinition,
+  FunctionToolDefinitionOutput,
+  RequiredToolCallOutput,
+  ToolOutput,
+  ToolUtility,
+} from '@azure/ai-projects';
+
+export class FunctionToolExecutor {
+  private functionTools: {
+    func: (...args: any[]) => Promise<any>;
+    definition: FunctionToolDefinition;
+  }[];
+
+  constructor() {
+    this.functionTools = [
+      {
+        // ユーザー情報を返す関数
+        func: this.callGetUsers,
+        ...ToolUtility.createFunctionTool({
+          name: 'get_users',
+          description:
+            'Returns a list of users. Use this function when the user asks for users.',
+          parameters: {}, // パラメータ不要の場合は空オブジェクトでOK
+        }),
+      },
+      {
+        // 天気情報を返す関数
+        func: this.callGetWeather,
+        ...ToolUtility.createFunctionTool({
+          name: 'get_weather',
+          description:
+            'Returns weather information. Use this function when the user asks for weather.',
+          parameters: {}, // 今回はパラメータなし（必要に応じて city 等を追加可能）
+        }),
+      },
+    ];
+  }
+
+  // Azure Functions の get_users エンドポイントを呼び出す
+  public async callGetUsers(): Promise<any> {
+    const endpoint = 'https://xxxx-agent-poc.azurewebsites.net/api/get_users?';
+    const response = await fetch(endpoint);
+    return await response.json();
+  }
+
+  // Azure Functions の get_weather エンドポイントを呼び出す
+  public async callGetWeather(): Promise<any> {
+    const endpoint =
+      'https://xxxx-agent-poc.azurewebsites.net/api/get_weather?';
+    const response = await fetch(endpoint);
+    return await response.json();
+  }
+
+  // Function Calling リクエストに応じて、該当する関数を呼び出す
+  public async invokeTool(
+    toolCall: RequiredToolCallOutput & FunctionToolDefinitionOutput
+  ): Promise<ToolOutput | undefined> {
+    console.log(`Function tool call - ${toolCall.function.name}`);
+
+    const args: any[] = [];
+    if (toolCall.function.parameters) {
+      try {
+        const params = JSON.parse(toolCall.function.parameters);
+        for (const key in params) {
+          if (Object.prototype.hasOwnProperty.call(params, key)) {
+            args.push(params[key]);
+          }
+        }
+      } catch (error) {
+        console.error(
+          `Failed to parse parameters: ${toolCall.function.parameters}`,
+          error
+        );
+        return undefined;
+      }
+    }
+    const tool = this.functionTools.find(
+      (tool) => tool.definition.function.name === toolCall.function.name
+    );
+    if (!tool) {
+      return undefined;
+    }
+    const result = await tool.func(...args);
+    return result
+      ? {
+          toolCallId: toolCall.id,
+          output: JSON.stringify(result),
+        }
+      : undefined;
+  }
+
+  // エージェントに渡すためのツール定義一覧を返す
+  public getFunctionDefinitions(): FunctionToolDefinition[] {
+    return this.functionTools.map((tool) => tool.definition);
+  }
+}
+
+```
+
+package.json の scripts に以下を追加してください。
+
+```typescript:package.json
+"scripts": {
+    "start": "node ./bin/www",
+    "dev": "ts-node-dev ./src/bin/www --respawn"
+  },
+```
+
+ここまできたら、準備完了です。
+以下コードで Express を実行し、Agent を動作させてください。
+
+```:bash
+npm run dev
+```
+
+- Knowledge-Agent は以下の http リクエストで動作します。
+  http://localhost:3000/knowledge
+
+- Action-Agent は以下の http リクエストで動作します。
+  http://localhost:3000/action
+
+ブラウザでそれぞれのエンドポイントにアクセスし、Knowledge-Agent と Action-Agent が動作することを確認します。
+
+- http://localhost:3000/knowledge へリクエスト
+  ![](https://storage.googleapis.com/zenn-user-upload/894d0a207557-20250407.png)
+
+私の PoC 数を記載したドキュメントをアップロードしたので、正しく返答してくれますね。
+参照しているドキュメントも return してくれていることがわかります。
+
+次に Action-Agent へリクエストを投げてみます。
+
+- http://localhost:3000/action へリクエスト
+  ![](https://storage.googleapis.com/zenn-user-upload/aad17b7fb538-20250407.png)
+  全てのユーザーを教えてという質問に対して、適切な関数を選択し、ユーザーを返してくれていることがわかりますね。
+  質問の内容によって Function Calling による関数の選択を行い、適切な関数を呼び出してくれているのですが、この精度がほぼほぼ間違いなく意図通りの関数が呼ばれていることが素晴らしかったです。
+
+今回は独立した AI Agent を用意し、それぞれをエンドポイント毎に動かすという基本的なものでしたが、今後はエージェントを組み合わせ、AI Agent 同士の連携を行うことが出来るようになると、より複雑なアプリケーションを構築することが出来るようになると思います。
+
+また、AI Agent Service を用いると、そこまで複雑な実装をしなくても簡単にマルチエージェントのアプリケーションが作れることがわかりました。
+
+素晴らしいですね。
+
+また、Fabric や Trip Adviser との連携も出来るようになったので、今後の進化にも期待です。
 
 # 最後に
 
