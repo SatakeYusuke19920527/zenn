@@ -48,6 +48,9 @@ python での実装記事はかなり多く出てきているのですが、Type
 https://learn.microsoft.com/ja-jp/azure/ai-services/agents/quickstart?view=azure-dotnet-preview&pivots=ai-foundry-portal
 
 AI Foundry へアクセスし、新しいプロジェクトの作成を選択
+
+https://ai.azure.com/
+
 ![](https://storage.googleapis.com/zenn-user-upload/b74a4ac44f87-20250315.png)
 
 そのまま、プロジェクトの作成をクリック
