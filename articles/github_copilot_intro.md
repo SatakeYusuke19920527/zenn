@@ -157,8 +157,6 @@ https://docs.github.com/ja/copilot
 
 ![](https://storage.googleapis.com/zenn-user-upload/7eb6fed283bc-20250412.png)
 
-## コード補完
-
 - `Alt + ]`（Mac: `option + ]`）
 
   - コード補完の次の提案を見る
@@ -172,14 +170,10 @@ https://docs.github.com/ja/copilot
 ![](https://storage.googleapis.com/zenn-user-upload/ec933b7f3134-20250412.png)
 ※前の候補がみれます
 
-## コード補完
-
 - `Ctrl + →`（Mac: `⌘ + →`）
   - コード補完の結果に対して単語ごとに提案を受け入れる
 
 ![](https://storage.googleapis.com/zenn-user-upload/bcf145c271e2-20250412.png)
-
-## コード補完
 
 - `Ctrl + Enter`（Mac: `⌘ + Enter`）
   - コード補完された際に実行することで GitHub Copilot から複数の提案を表示
