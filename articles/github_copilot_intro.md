@@ -162,6 +162,9 @@ GitHub Copilot Chat の中での質問で、質問範囲を限定することが
   - ワークスペース内のコードやファイルに関連する質問
     ![](https://storage.googleapis.com/zenn-user-upload/078e9ebb012a-20250412.png)
 
+コメントを記載してとか指示送れるのはかなり便利。
+![](https://storage.googleapis.com/zenn-user-upload/9ba8de3c57d2-20250412.png)
+
 - `@terminal`
 
   - 統合ターミナルに関連する質問
@@ -175,57 +178,72 @@ GitHub Copilot Chat の中での質問で、質問範囲を限定することが
 
 ## @workspace ワークスペースに対するコマンド
 
-- `/doc`
-
-  - ドキュメントコメントを追加
-
 - `/explain`
 
   - 指定した範囲のコードが実行される際の動作を説明
+    ![](https://storage.googleapis.com/zenn-user-upload/d71c5c481e11-20250412.png)
 
 - `/fix`
 
   - 選択したコードの問題点、修正点の提案
-
-- `/generate`
-
-  - プロンプトに沿ったコードを生成
-
-- `/optimize`
-
-  - 選択したコードのパフォーマンス改善
+    ![](https://storage.googleapis.com/zenn-user-upload/ec9aab08b0e8-20250412.png)
+    console.log の g を抜いているのを訂正してくれています
 
 - `/tests`
 
   - コードの単体テストの作成
+    ![](https://storage.googleapis.com/zenn-user-upload/cd690d6e142e-20250412.png)
+    今回は Jest を選択しました。
+    ![](https://storage.googleapis.com/zenn-user-upload/2a4849418e09-20250412.png)
+    変更の適用をすると、ディレクトリが作成され、コマンドを実行すると jest によるテストコードが実行されます。
 
 - `/new`
   - 入力した自然言語に基いた新規ワークスペースの作成
+    ![](https://storage.googleapis.com/zenn-user-upload/68849a593008-20250412.png)
 
 ## @vscode エディタに対するコマンド
 
 - `/search`
-
   - エディタの検索機能で、ワークスペース内のファイルを検索
-
-- `/api`
-  - エディタの拡張機能の開発に関する回答を生成
+    ![](https://storage.googleapis.com/zenn-user-upload/edc0337a80fe-20250412.png)
 
 ## @terminal ターミナルに対するコマンド
 
 - `/explain`
   - ターミナルで実行された処理の内容を説明
+    ![](https://storage.googleapis.com/zenn-user-upload/f672778d9720-20250412.png)
 
 ## GitHub Copilot Chat に関連するコマンド
 
 - `/help`
 
   - Copilot Chat の使用に関するヘルプを表示する
+    ![](https://storage.googleapis.com/zenn-user-upload/38ab555672c0-20250412.png)
 
 - `/clear`
   - 現在のチャットを終わらせて新規チャットを開始する
+    ![](https://storage.googleapis.com/zenn-user-upload/5fde6fd3daee-20250412.png)
 
-# エージェント + スラッシュコマンド
+# コンテキスト変数
+
+- `#codebase`
+
+  - workspace 内のコードの説明が可能
+    ![](https://storage.googleapis.com/zenn-user-upload/b46df529455a-20250412.png)
+
+- `#selection`
+  - 選択したコードの説明が可能
+    ![](https://storage.googleapis.com/zenn-user-upload/8001e8914ea5-20250412.png)
+
+# GitHub 関連の Tips
+
+## コミットメッセージ生成
+
+Form の右側の星マークをクリックすると、
+![](https://storage.googleapis.com/zenn-user-upload/c8348117a02e-20250412.png)
+
+こんな感じで内容を鑑みて自動生成してくれます。
+![](https://storage.googleapis.com/zenn-user-upload/f09d424778b2-20250412.png)
 
 # 最後に
 
