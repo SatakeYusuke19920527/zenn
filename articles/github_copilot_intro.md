@@ -141,7 +141,8 @@ https://docs.github.com/ja/copilot
 
 - `Ctrl + I`（Mac: `⌘ + i`）
   - ファイル内で実行することにより、インラインチャットを開始
-    ![](https://storage.googleapis.com/zenn-user-upload/10924a49fd90-20250409.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/10924a49fd90-20250409.png)
 
 ## コード補完
 
@@ -167,8 +168,9 @@ https://docs.github.com/ja/copilot
 
 - `Alt + [`（Mac: `option + [`）
   - コード補完の前の提案を見る
-    ![](https://storage.googleapis.com/zenn-user-upload/ec933b7f3134-20250412.png)
-    ※前の候補がみれます
+
+![](https://storage.googleapis.com/zenn-user-upload/ec933b7f3134-20250412.png)
+※前の候補がみれます
 
 ## コード補完
 
