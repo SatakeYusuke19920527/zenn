@@ -148,19 +148,22 @@ https://docs.github.com/ja/copilot
 - `Tab`
 
   - コード補完された際に実行することで GitHub Copilot の提案を受け入れ
-    ![](https://storage.googleapis.com/zenn-user-upload/bab6f504caa5-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/bab6f504caa5-20250412.png)
 
 - `Esc`
   - コード補完された際に実行することで GitHub Copilot の提案を拒否
-    ![](https://storage.googleapis.com/zenn-user-upload/7eb6fed283bc-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/7eb6fed283bc-20250412.png)
 
 ## コード補完
 
 - `Alt + ]`（Mac: `option + ]`）
 
   - コード補完の次の提案を見る
-    ![](https://storage.googleapis.com/zenn-user-upload/ec933b7f3134-20250412.png)
-    ※候補が切り替わります
+
+![](https://storage.googleapis.com/zenn-user-upload/ec933b7f3134-20250412.png)
+※候補が切り替わります
 
 - `Alt + [`（Mac: `option + [`）
   - コード補完の前の提案を見る
@@ -171,21 +174,25 @@ https://docs.github.com/ja/copilot
 
 - `Ctrl + →`（Mac: `⌘ + →`）
   - コード補完の結果に対して単語ごとに提案を受け入れる
-    ![](https://storage.googleapis.com/zenn-user-upload/bcf145c271e2-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/bcf145c271e2-20250412.png)
 
 ## コード補完
 
 - `Ctrl + Enter`（Mac: `⌘ + Enter`）
   - コード補完された際に実行することで GitHub Copilot から複数の提案を表示
   - 表示されたサジェストで「Accept」することで選択したコードスニペットをファイルに挿入
-    ![](https://storage.googleapis.com/zenn-user-upload/689020832be6-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/689020832be6-20250412.png)
 
 ## フォーカス移動
 
 - `Ctrl + Alt + i`（Mac: `⌘ + Ctrl + i`）
   - Copilot チャットにカーソルを移動
-    ![](https://storage.googleapis.com/zenn-user-upload/201b0e93d65a-20250412.png)
-    右下のチャットのコメント入力の箇所にフォーカスが移動します(意外と便利)
+
+![](https://storage.googleapis.com/zenn-user-upload/201b0e93d65a-20250412.png)
+
+右下のチャットのコメント入力の箇所にフォーカスが移動します(意外と便利)
 
 # Agent 機能
 
@@ -194,7 +201,8 @@ GitHub Copilot Chat の中での質問で、質問範囲を限定することが
 - `@workspace`
 
   - ワークスペース内のコードやファイルに関連する質問
-    ![](https://storage.googleapis.com/zenn-user-upload/078e9ebb012a-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/078e9ebb012a-20250412.png)
 
 コメントを記載してとか指示送れるのはかなり便利。
 ![](https://storage.googleapis.com/zenn-user-upload/9ba8de3c57d2-20250412.png)
@@ -202,11 +210,13 @@ GitHub Copilot Chat の中での質問で、質問範囲を限定することが
 - `@terminal`
 
   - 統合ターミナルに関連する質問
-    ![](https://storage.googleapis.com/zenn-user-upload/adc927af1fd1-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/adc927af1fd1-20250412.png)
 
 - `@vscode`
   - Visual Studio Code（エディタ）に関連する機能の質問
-    ![](https://storage.googleapis.com/zenn-user-upload/e4f40dc3c39b-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/e4f40dc3c39b-20250412.png)
 
 # スラッシュコマンド
 
@@ -215,59 +225,69 @@ GitHub Copilot Chat の中での質問で、質問範囲を限定することが
 - `/explain`
 
   - 指定した範囲のコードが実行される際の動作を説明
-    ![](https://storage.googleapis.com/zenn-user-upload/d71c5c481e11-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/d71c5c481e11-20250412.png)
 
 - `/fix`
 
   - 選択したコードの問題点、修正点の提案
-    ![](https://storage.googleapis.com/zenn-user-upload/ec9aab08b0e8-20250412.png)
-    console.log の g を抜いているのを訂正してくれています
+
+![](https://storage.googleapis.com/zenn-user-upload/ec9aab08b0e8-20250412.png)
+console.log の g を抜いているのを訂正してくれています
 
 - `/tests`
 
   - コードの単体テストの作成
-    ![](https://storage.googleapis.com/zenn-user-upload/cd690d6e142e-20250412.png)
-    今回は Jest を選択しました。
-    ![](https://storage.googleapis.com/zenn-user-upload/2a4849418e09-20250412.png)
-    変更の適用をすると、ディレクトリが作成され、コマンドを実行すると jest によるテストコードが実行されます。
+
+![](https://storage.googleapis.com/zenn-user-upload/cd690d6e142e-20250412.png)
+今回は Jest を選択しました。
+![](https://storage.googleapis.com/zenn-user-upload/2a4849418e09-20250412.png)
+変更の適用をすると、ディレクトリが作成され、コマンドを実行すると jest によるテストコードが実行されます。
 
 - `/new`
   - 入力した自然言語に基いた新規ワークスペースの作成
-    ![](https://storage.googleapis.com/zenn-user-upload/68849a593008-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/68849a593008-20250412.png)
 
 ## @vscode エディタに対するコマンド
 
 - `/search`
   - エディタの検索機能で、ワークスペース内のファイルを検索
-    ![](https://storage.googleapis.com/zenn-user-upload/edc0337a80fe-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/edc0337a80fe-20250412.png)
 
 ## @terminal ターミナルに対するコマンド
 
 - `/explain`
   - ターミナルで実行された処理の内容を説明
-    ![](https://storage.googleapis.com/zenn-user-upload/f672778d9720-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/f672778d9720-20250412.png)
 
 ## GitHub Copilot Chat に関連するコマンド
 
 - `/help`
 
   - Copilot Chat の使用に関するヘルプを表示する
-    ![](https://storage.googleapis.com/zenn-user-upload/38ab555672c0-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/38ab555672c0-20250412.png)
 
 - `/clear`
   - 現在のチャットを終わらせて新規チャットを開始する
-    ![](https://storage.googleapis.com/zenn-user-upload/5fde6fd3daee-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/5fde6fd3daee-20250412.png)
 
 # コンテキスト変数
 
 - `#codebase`
 
   - workspace 内のコードの説明が可能
-    ![](https://storage.googleapis.com/zenn-user-upload/b46df529455a-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/b46df529455a-20250412.png)
 
 - `#selection`
   - 選択したコードの説明が可能
-    ![](https://storage.googleapis.com/zenn-user-upload/8001e8914ea5-20250412.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/8001e8914ea5-20250412.png)
 
 # GitHub 関連の Tips
 
