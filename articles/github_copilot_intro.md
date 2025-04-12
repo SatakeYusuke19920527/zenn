@@ -17,8 +17,6 @@ GitHub Copilot を普段使っているが、コード補完しか使ってな�
 
 是非日々の開発ライフにお役立てください 🚀
 
-![](https://storage.googleapis.com/zenn-user-upload/004ebd376188-20250412.gif)
-
 # GitHub Copilot とは？
 
 GitHub Copilot は、開発者がコードをより速く、少ない労力で記述できるように支援する AI コーディング アシスタントです。
@@ -61,14 +59,14 @@ https://docs.github.com/ja/copilot
 また、対応しているエディタにもかなりの種類があり、我々の開発ライフを支えてくれます。
 | # | エディタ・ツール名 |
 |----------|-------------------|
-| ![GitHub](https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png) | GitHub |
-| ![Visual Studio Code](https://code.visualstudio.com/assets/apple-touch-icon.png) | Visual Studio Code |
-| ![Visual Studio](https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg) | Visual Studio |
-| ![Xcode](https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png) | Xcode |
-| ![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg) | JetBrains IDE（IntelliJ IDEA など） |
-| ![Neovim](https://neovim.io/images/logo@2x.png) | Neovim |
-| ![Azure](https://azure.microsoft.com/svghandler/azure?width=600&height=315) | Azure Data Studio |
-| ![Eclipse](https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg) | Eclipse |
+| <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="20"> | GitHub |
+| <img src="https://code.visualstudio.com/assets/apple-touch-icon.png" width="20"> | Visual Studio Code |
+| <img src="https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg" width="20"> | Visual Studio |
+| <img src="https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png" width="20"> | Xcode |
+| <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="20"> | JetBrains IDE（IntelliJ IDEA など） |
+| <img src="https://neovim.io/images/logo@2x.png" width="20"> | Neovim |
+| <img src="https://azure.microsoft.com/svghandler/azure?width=600&height=315" width="20"> | Azure Data Studio |
+| <img src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg" width="20"> | Eclipse |
 
 # GitHub Copilot で出来ること
 
