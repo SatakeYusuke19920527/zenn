@@ -1,8 +1,8 @@
 ---
-title: '【2025/4最新】GitHub Copilot Deep Dive 入門から応用、最新情報までキャッチアップ'
+title: 'GitHub Copilot をちゃんと使いこなす為の記事'
 emoji: '🐈'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['GitHub', 'GitHub Copilot', 'AI', 'ChatGPT']
+topics: ['GitHub', 'GitHub Copilot', 'AI', 'ChatGPT', 'openai']
 published: false
 publication_name: microsoft
 ---
@@ -10,7 +10,10 @@ publication_name: microsoft
 # はじめに
 
 本記事は、GitHub Copilot の入門から応用、最新情報までを網羅的に解説します。GitHub Copilot は、AI を活用したコード補完ツールであり、開発者の生産性を向上させるための強力なサポートを提供します。
-GitHub Copilot の基本的な使い方から、実際のプロジェクトでの活用方法、最新の機能やアップデートについて詳しく解説します。
+
+GitHub Copilot を普段使っているが、コード補完しか使ってない方や、これから使おうと思っている方に向けて Tips をまとめて紹介する記事になります。
+
+是非日々の開発ライフにお役立てください 🚀
 
 # GitHub Copilot とは
 
@@ -22,22 +25,22 @@ GitHub Copilot は、開発者がコードをより速く、少ない労力で�
 
 これにより、開発者は問題解決、共同作業、イノベーションに集中できます。主要なエディターと統合され、GitHub にネイティブに組み込まれているこのツールは、最も広く採用されている AI 開発者ツールであり、仕事の満足度と生産性を向上させます。
 
-https://github.com/features/copilot
+https://docs.github.com/ja/copilot
 
 # 大規模言語モデルと GitHub Copilot
 
 ## 自然言語処理 (NLP)
 
-- コンピュータが人間の言語を理解し、生成する能力を開発する人工知能（AI）の一分野
-- **NLP** はテキストや音声データを解析して、その意味や文脈を理解することが目的で、統計的手法や機械学習モデルを使用
+- コンピュータが人間の言語を理解し、生成する能力を開発する人工知能（AI）の一分野で **NLP** はテキストや音声データを解析して、その意味や文脈を理解することが目的。統計的手法や機械学習モデルを使用します。
+- 自然言語理解と自然言語生成に分けることが出来ます。
 
-- **自然言語理解（NLU）**
-  - エンティティの認識
-  - 意味理解
-- **自然言語生成（NLG）**
-  1. 内容の決定
-  2. 自然言語の生成
-  3. 文法の確認
+  - **自然言語理解（NLU）**
+    - エンティティの認識
+    - 意味理解
+  - **自然言語生成（NLG）**
+    1. 内容の決定
+    2. 自然言語の生成
+    3. 文法の確認
 
 ## GitHub Copilot の対応言語
 
@@ -50,6 +53,18 @@ https://github.com/features/copilot
 - Go
 - C#
 - C++
+
+また、対応しているエディタにもかなりの種類があり、我々の開発ライフを支えてくれます。
+| アイコン | エディタ・ツール名 |
+|----------|-------------------|
+| ![GitHub](https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png) | GitHub |
+| ![Visual Studio Code](https://code.visualstudio.com/assets/apple-touch-icon.png) | Visual Studio Code |
+| ![Visual Studio](https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg) | Visual Studio |
+| ![Xcode](https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png) | Xcode |
+| ![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg) | JetBrains IDE（IntelliJ IDEA など） |
+| ![Neovim](https://neovim.io/images/logo@2x.png) | Neovim |
+| ![Azure](https://azure.microsoft.com/svghandler/azure?width=600&height=315) | Azure Data Studio |
+| ![Eclipse](https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg) | Eclipse |
 
 # GitHub Copilot で出来ること
 
@@ -68,6 +83,25 @@ https://github.com/features/copilot
 
 - **コード解説**
   - コードスニペットを指定することで処理の解説を行う
+
+# GitHub Copilot の価格
+
+### GitHub Copilot 個人向けプラン比較表（Individuals）
+
+| プラン | 料金                  | 含まれる機能・内容                                                                                                                                                                                                                       |
+| ------ | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Free   | $0/月                 | - 月 50 回の Agent モードまたはチャットリクエスト<br>- 月 2,000 回のコード補完<br>- Claude 3.5 Sonnet、GPT-4o などのモデルにアクセス可能                                                                                                 |
+| Pro    | $10/月 または $100/年 | **Free の全機能に加え**<br>- GPT-4o を利用した Agent モードやチャットが無制限<br>- コード補完無制限<br>- コードレビュー、Claude 3.7 Sonnet, o1 などにアクセス可能<br>- 最新モデルへのプレミアムリクエストが Free の 6 倍、追加購入も可能 |
+| Pro+   | $39/月 または $390/年 | **Pro の全機能に加え**<br>- GPT-4.5 を含むすべてのモデルにアクセス可能<br>- 最新モデルへのプレミアムリクエストが Free の 30 倍、追加購入も可能                                                                                           |
+
+こう見ると、Enterprise のプランを契約しなくても全てのモデルにアクセス出来る Pro+ のプランはかなりお得ですね。
+
+### GitHub Copilot 法人向けプラン比較表（Business / Enterprise）
+
+| プラン     | 料金                     | 含まれる機能・内容                                                                                                                                                                                                                                                                                              |
+| ---------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Business   | $19/月（ユーザーあたり） | - GPT-4o を利用した Agent モードやチャットが無制限<br>- コード補完無制限<br>- コードレビュー、Claude 3.5/3.7 Sonnet、o1 などにアクセス可能<br>- ユーザーあたり月 300 回の最新モデルへのプレミアムリクエスト、追加購入も可能<br>- ユーザー管理と利用状況メトリクス<br>- 知的財産補償およびデータプライバシー保護 |
+| Enterprise | $39/月（ユーザーあたり） | **Business の全機能に加え**<br>- GPT-4.5 を含むすべてのモデルにアクセス可能<br>- 最新モデルへのプレミアムリクエストが Business の 3.33 倍、追加購入も可能                                                                                                                                                       |
 
 # GitHub Copilot をうまく使う為の Tips
 
@@ -101,7 +135,7 @@ https://github.com/features/copilot
 
 - **Copilot Chat** は同じスレッド内の履歴も回答生成時の判断材料とするため、コンテキストが異なる場合は新規チャットを開く
 
-# 便利なショートカット
+# 便利なショートカット一覧
 
 ## インラインチャット
 
@@ -259,3 +293,7 @@ https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
 # 参考文献
 
 https://www.udemy.com/course/github-copilot-fundamental/
+
+https://github.com/features/copilot
+
+https://github.com/features/copilot/plans?cft=copilot_li.features_copilot
