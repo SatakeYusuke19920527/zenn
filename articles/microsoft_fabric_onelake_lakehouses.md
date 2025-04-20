@@ -15,30 +15,40 @@ publication_name: microsoft
 
 # OneLake とは
 
-## OneLake の特徴
-
-OneLake は、組織全体で 1 つに統合されたまざまなソースからの大量のデータを処理出来るデータレイクです。
-OneDrive と同様、OneLake はすべての Microsoft Fabric テナントに付属し、すべての分析データの単一の場所になるように設計されています。
+OneLake は、組織全体で 1 つに統合された論理データ レイク
+Data Lake は、さまざまなソースからの大量のデータを処理します。 OneDrive と同様、OneLake はすべての Microsoft Fabric テナントに付属し、すべての分析データの単一の場所になるように設計。
 
 OneLake が顧客に提供する内容は次のとおりです。
 
 - 組織全体に対する 1 つのデータ レイク
 - 複数の分析エンジンで使用するデータの 1 つのコピー
 
-Fabric で使用する全ての機能は OneLake 内のデータを参照しています。
+つまり
+
+- OneLake は Microsoft Fabric のインフラとして存在し、構造化/非構造化データを保存可能なデータレイク機能
+- Microsoft Fabric 上で処理されたデータは自動的に OneLake に保管される
+
+以下のようなイメージ
 ![](https://storage.googleapis.com/zenn-user-upload/0943779b26f9-20250202.png)
+
+## OneLake の特徴
+
+Fabric で使用する全ての機能は OneLake 内のデータを参照しています。
+![](https://storage.googleapis.com/zenn-user-upload/c730ab993d13-20250204.png)
 
 OneLake は、すべての Fabric ワークロードが構築される基盤です。
 Fabric プラットフォームに組み込まれており、ワークロードが動作するすべての組織データを保存するための統合された場所になります。
 
-内部の話をすると、OneLake は Azure Data Lake Storage Gen2 上に構築されています。
+内部の話をすると、OneLake は Azure Data Lake Storage Gen2 上に構築されてたりします。
 
-プロ開発者と市民開発者の両方に役立つ、単一の SaaS エクスペリエンスとテナント全体のデータ ストアを提供します。
+みんなが共通して使えるデータ ストアを提供してくれているやつが OneLake だと理解すれば OK です。
+
 リソース グループ、RBAC (ロールベースのアクセス制御)、Azure Resource Manager、冗長性、リージョンなどのインフラストラクチャの概念を理解する必要性を排除することで、Fabric エクスペリエンスを簡素化します。
 
 尚、Fabric を使用するのに Azure アカウントは必要ありません。
 
 Azure Data Lake Storage
+
 https://learn.microsoft.com/ja-jp/azure/storage/blobs/data-lake-storage-introduction
 
 まとめると、Azure Data Lake Storage 上に Fabric 作って、中央集権的にデータを管理する OneLake があるという理解で OK です。
@@ -46,17 +56,17 @@ https://learn.microsoft.com/ja-jp/azure/storage/blobs/data-lake-storage-introduc
 そして、Microsoft Fabric ではテナント内に、任意の数のワークスペースを作成できます。
 ワークスペースを使用すると、組織のさまざまな部門が所有権とアクセス ポリシーを配布できます。
 各ワークスペースは、特定のリージョンに関連付けられている容量の一部であり、個別に課金されます。
+
+※先ほどの図を再掲 それぞれのワークスペースが作成されて、それぞれのデータが格納されていきます。
 ![](https://storage.googleapis.com/zenn-user-upload/c730ab993d13-20250204.png)
 
-## OneLake の特徴
+## OneLake の良いところ
 
 アプリケーションではストレージとコンピューティングが分離されている場合がありますが、多くの場合、データは 1 つのエンジン用に最適化されるため、複数のアプリケーションで同じデータを再利用することが困難になります。
 
 Fabric を使用すると、さまざまな分析エンジン (T-SQL、Apache Spark、Analysis Services など) が、オープンな Delta Parquet 形式でデータを格納するため、複数のエンジンにまたがって同じデータを使用できるようになります。
 
-データを別のエンジンで使用するためだけにコピーする必要はもうありません。 実行しようとしているジョブに最適なエンジンを常に選択できます。
-
-たとえば、SQL エンジニアのチームが完全なトランザクション データ ウェアハウスを構築するとします。 T-SQL エンジンと T-SQL のすべての機能を使用して、データの作成、変換、テーブルへのデータの読み込みを行うことができます。
+例えば、SQL エンジニアのチームが完全なトランザクション データ ウェアハウスを構築するとします。 T-SQL エンジンと T-SQL のすべての機能を使用して、データの作成、変換、テーブルへのデータの読み込みを行うことができます。
 
 データ サイエンティストがこのデータを利用する場合、特別な Spark/SQL ドライバーを使用する必要はもうありません。
 

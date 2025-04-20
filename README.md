@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "GitHub Copilot Deep Dive 入門から応用、最新情報まで" --type tech --emoji 🐈 --publication-name "microsoft"
+  > npx zenn new:article --title "BigData を AI Agent で分析する会" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
