@@ -11,9 +11,7 @@ publication_name: microsoft
 
 # はじめに
 
-この記事は Microsoft Fabric Data Agent を用いた Microsoft Fabric でのデータの処理 ×AI Agent による分析と意思決定を実施します。
-
-ここでは、Fabric と AI Agent Service に焦点を当て、AI Agent によるビッグデータ分析を最小単位にて実施します。
+この記事は Microsoft Fabric Data Agent と Azure AI Agent Service を連携させて、ビッグデータを AI Agent で分析するシステムを最小単位で構築します。
 
 2025/4/1 に AI Agent Service から Microsoft Fabric のコネクタがリリースされました。
 
