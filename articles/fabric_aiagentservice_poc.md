@@ -1,9 +1,9 @@
 ---
-title: 'BigDataをAI Agentで分析する会'
+title: 'ビッグデータをAI Agentで分析するシステムを構築する会'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['microsoftfabric', 'azure', 'agent', 'openai', 'azureopenai']
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -31,11 +31,11 @@ https://techcommunity.microsoft.com/blog/azure-ai-services-blog/expand-azure-ai-
 
 ![](https://storage.googleapis.com/zenn-user-upload/2fa93d1c140f-20250420.png)
 
-| ステージ | 主役               | 役割 (ざっくり ⤴︎)                                                                                                                                           | 例 (Azure)                                   |
-| -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| ① 集める | データレイク       | ありのままを “全部貯める池”<br>• 生ログ・画像・CSV・Parquet など多種多様<br>• スキーマ‑オン‑リード (読むときに意味づけ)<br>• 安価で無限スケール              | Azure Data Lake Storage Gen2、Fabric OneLake |
-| ② 整える | データウェアハウス | “精製工場” で統合・整形した高品質データ<br>• フォーマット統一・欠損補完・型変換<br>• スキーマ‑オン‑ライト (書込時に定義)<br>• 列指向・インデックスで高速集計 | Azure Synapse Warehouse、SQL DW              |
-| ③ 届ける | データマート       | “使いやすい売店” に小分けして配布<br>• 部門/業務特化 (販売、人事 など)<br>• 要件に合わせて列・粒度を絞り込み<br>• 自サービスでセルフ BI                      | Fabric Data Mart、Power BI Datamart          |
+| ステージ | 主役               | 役割 (ざっくり 説明)                                                                                                                                           |
+| -------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ① 集める | データレイク       | ありのままを “全部貯める池”<br>だと理解すれば OK• ログ・画像・CSV・Parquet など多種多様<br>• スキーマ‑オン‑リード (読むときに意味づけ)<br>• 安価で無限スケール |
+| ② 整える | データウェアハウス | 統合・整形した高品質データ<br>• フォーマット統一・欠損補完・型変換<br>• スキーマ‑オン‑ライト (書込時に定義)<br>• 列指向・インデックスで高速集計                |
+| ③ 届ける | データマート       | データを小分けして配布する機能<br>• 部門/業務特化 (販売、人事 など)<br>• 要件に合わせて列・粒度を絞り込み<br>• 自サービスで BI を作る際に利用                  |
 
 データレイクへのデータ蓄積とデータウェアハウスでのデータ構造化やデータマートの構築を Fabric を使って行い、意思決定プロセスを AI Agent Service を用いてアプリケーション側で実施することが本記事の目標です。
 
@@ -47,7 +47,7 @@ Microsoft Fabric で OneLake へ蓄積、Data Engineering にて分析したデ�
 
 # 目標とする構成
 
-![](https://storage.googleapis.com/zenn-user-upload/11f5645d1e5f-20250420.png)
+![](https://storage.googleapis.com/zenn-user-upload/a97398a86f9d-20250420.png)
 
 # Microsoft Fabric データ エージェント利用の前提条件
 
