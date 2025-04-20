@@ -2,7 +2,7 @@
 title: 'BigDataをAI Agentで分析する会'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['microsoftfabric', 'azure', 'aiagentservice', 'openai', 'aiagent']
+topics: ['microsoftfabric', 'azure', 'agent', 'openai', 'azureopenai']
 published: false
 publication_name: microsoft
 ---
