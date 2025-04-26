@@ -51,7 +51,7 @@ Microsoft Fabric で OneLake へ蓄積、Data Engineering にて分析したデ�
 
 Microsoft Fabric データ エージェント利用の為には以下の設定を実施する必要があります。
 
-- F64 以上の有料ファブリック容量リソースをという条件で使用する
+- ファブリック容量リソースの使用
 - Fabric データ エージェントのテナント設定が有効になっている。
 - Copilot テナント スイッチ が有効になっています。
 - AI のクロス geo 処理が有効になっています。
@@ -63,9 +63,9 @@ Microsoft Fabric データ エージェント利用の為には以下の設定�
 
 # Microsoft Fabric データ エージェント利用の各種設定
 
-### F64 以上の有料ファブリック容量リソースをという条件で使用する
+### ファブリック容量リソースの使用
 
-こちらは Azure の Fabric→ スケール → サイズの変更から F64 を選択
+今回は Azure の Fabric→ スケール → サイズの変更から F64 を選択
 ![](https://storage.googleapis.com/zenn-user-upload/80f9239c04e5-20250420.png)
 
 ### Fabric データ エージェントのテナント設定が有効になっている。
@@ -107,7 +107,7 @@ Fabric データ エージェントは、XMLA (XML for Analysis) エンドポイ
 次に、[すべてのアイテム] タブで、Fabric データ エージェントを選択
 ![](https://storage.googleapis.com/zenn-user-upload/774f14f1dff8-20250420.png)
 
-**_※2025/4/20 段階では、East US, East US2, South Central US, and West US のエリア且つ F64 の CU で Fabric を起動していないと項目内に出てきません。_**
+**_※2025/4/20 段階では、East US, East US2, South Central US, and West US のエリアで利用出来ます。_**
 
 データエージェントに名前をつけてあげましょう。
 ![](https://storage.googleapis.com/zenn-user-upload/1b9ea68e689f-20250420.png)
