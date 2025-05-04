@@ -2,7 +2,7 @@
 title: '機械学習入門🤖 手を動かして学ぶ初めてのモデル開発'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['azure', 'azureml', 'mlops', 'azuremlops']
+topics: ['azure', 'llm', 'azureml', 'mlops', 'azuremlops']
 published: true
 publication_name: microsoft
 ---
