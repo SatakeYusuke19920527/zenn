@@ -60,7 +60,7 @@ Azure Machine Learning の AutoML は様々な機械学習のタスクに対応�
 
 ```mermaid
 flowchart LR
-    A[数値データ<br/>(年収, 借入額 など)] --> B[分類モデル]
+    A[数値データ<br/> 年収, 借入額 など] --> B[分類モデル]
     B --> C[顧客の信用度<br/>高信用<br/>中信用<br/>低信用]
 ```
 
