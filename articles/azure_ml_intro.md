@@ -117,8 +117,6 @@ flowchart LR
 ```mermaid
 flowchart LR
     txt1[テキスト<br/>「私は昔ピッチャーでした」] --> nlp1[マルチクラス<br/>自然言語処理モデル] --> nlp_lbl1[野球]
-    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
-    class txt1,nlp1,nlp_lbl1 nodeStyle
 ```
 
 (b) マルチラベル分類
@@ -126,8 +124,6 @@ flowchart LR
 ```mermaid
 flowchart LR
     txt2[テキスト<br/>「野球とサッカーが好きです」] --> nlp2[マルチラベル<br/>自然言語処理モデル] --> nlp_lbl2[野球, サッカー]
-    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
-    class txt2,nlp2,nlp_lbl2 nodeStyle
 ```
 
 # ハンズオン
