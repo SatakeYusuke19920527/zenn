@@ -9,14 +9,10 @@ publication_name: microsoft
 
 # はじめに
 
-本記事は、Azure Machine Learning で始める機械学習/LLM 活用入門 という本に記載されている自動機械学習のモデル構築方法より、Azure Machine Learning を用いて機械学習のモデルを構築する方法を紹介します。
+本記事は、機械学習のモデルを構築する方法をハンズオン形式で紹介します。
 機械学習という名前はよく聞くし、これからキャッチアップしていきたいが何から初めて良いのかわからない方に向けてハンズオン形式で手を動かしながら理解出来る内容となっています。
 
-![](https://storage.googleapis.com/zenn-user-upload/4fdffed24ece-20250401.png)
-
-Amazon の購入リンクは記事最下部に記載しておりますので、ご興味がある方は是非読んでみてください。
-
-それでは進めていきたいと思います。
+それでは進めていきましょう。
 
 ---
 
@@ -28,18 +24,12 @@ Amazon の購入リンクは記事最下部に記載しておりますので、�
 - Azure Machine Learning (以下 Azure ML) 上で "最初のモデル" を動かすまでの手順を追体験する
 - Azure ML を触ってみる
 
-:::message
-この記事は **書評 + ハンズオン** のハイブリッド形式です。すでに書籍を読了した方にも、Azure ML で本格的な MLOps を始めたい方にも役立つよう構成しています。
-:::
-
----
-
 # AutoML (自動機会学習) とは？
 
 自動機械学習とは、機械学習モデルの開発プロセスを自動化する技術です。
 機械学習モデルの開発プロセスにはパターン化出来るものが多く、質の良いデータを用意すれば非専門家でも高品質のモデルを作成できます。
 
-### AutoML／MLOps プロセス全体図
+# AutoML／MLOps プロセス全体図
 
 機械学習モデルの構築は以下のフローで進められます。
 
@@ -58,16 +48,91 @@ flowchart LR
 
 アルゴリズム選定からモデル評価までを自動で行ってくれるのが AutoML の機能です。
 
-### 1. なぜ Azure ML なのか？
+# AutoML で出来る機械学習
 
-- GPU/CPU クラスタをマネージドで使えるため **ローカル PC のスペックに依存しない**
-- **mlflow が標準連携** → 実験ログ・モデルアーティファクトの一元管理
-- Azure CLI / SDK / YAML が揃っているので **Infrastructure as Code** と相性抜群
-- GitHub Actions との統合がシンプル (service principal だけで OK)
+Azure Machine Learning の AutoML は様々な機械学習のタスクに対応しています。
 
----
+## 分類
 
-## ハンズオン: _Titanic_ 予測モデルを Azure ML で再現
+分類タスクは、数値データからカテゴリを予測したい場合に利用します。たとえばローン審査において、顧客の年収や借入金額などのデータから **顧客の信用度（低・中・高）** を予測したい場合に分類モデルが有効です
+
+#### 分類タスクの例
+
+```mermaid
+flowchart LR
+    A[数値データ<br/>(年収, 借入額 など)] --> B[分類モデル]
+    B --> C[顧客の信用度<br/>高信用<br/>中信用<br/>低信用]
+```
+
+## 回帰
+
+回帰タスクは、数値データから 連続値 を予測したい場合に利用します。たとえば不動産の物件価格に関して、築年数や駅からの距離などの数値データから価格を予測したい場合、回帰モデルが有効です。
+
+```mermaid
+flowchart LR
+    A[物件データ<br/>(築年数, 駅からの距離 など)] --> B[回帰モデル]
+    B --> C[6,800万円]
+```
+
+## 時系列予測
+
+時系列予測は、過去の時系列データに基づいて 未来の値 を予測します。たとえば過去の株価情報をもとに未来の株価を予測したい場合、時系列予測モデルが有効です。
+
+```mermaid
+flowchart LR
+    A[過去の株価] --> B[時系列予測モデル]
+    B --> C[未来の株価]
+```
+
+## 画像
+
+画像関連のタスクでは 画像分類・物体検出・セグメント化 をサポートしています。画像分類のタスクでは、1  枚の画像に対して  1  つのラベルを推論する マルチクラス分類 と、1  枚の画像に対して複数のラベルを推論する マルチラベル分類 をサポートしています。
+
+(a) マルチクラス画像分類
+
+```mermaid
+flowchart LR
+    img1[画像] --> cls1[マルチクラス<br/>画像分類モデル] --> lbl1[猫]
+    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
+    class img1,cls1,lbl1 nodeStyle
+```
+
+(b) マルチラベル画像分類
+
+```mermaid
+flowchart LR
+    img2[画像] --> cls2[マルチラベル<br/>画像分類モデル] --> lbl2[犬, 猫]
+    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
+    class img2,cls2,lbl2 nodeStyle
+```
+
+## 自然言語処理(NLP)
+
+自然言語処理タスクでは テキスト分類 と 固有表現認識（NER） がサポートされています。
+
+テキスト分類では、事前にラベルを学習させたモデルにテキストを入力し、マルチクラス（単一ラベル） と マルチラベル（複数ラベル） の両方を推論できます
+
+(a) マルチクラス分類
+
+```mermaid
+コピーする
+編集する
+flowchart LR
+    txt1[テキスト<br/>「私は昔ピッチャーでした」] --> nlp1[マルチクラス<br/>自然言語処理モデル] --> nlp_lbl1[野球]
+    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
+    class txt1,nlp1,nlp_lbl1 nodeStyle
+```
+
+(b) マルチラベル分類
+
+```mermaid
+flowchart LR
+    txt2[テキスト<br/>「野球とサッカーが好きです」] --> nlp2[マルチラベル<br/>自然言語処理モデル] --> nlp_lbl2[野球, サッカー]
+    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
+    class txt2,nlp2,nlp_lbl2 nodeStyle
+```
+
+# ハンズオン
 
 > 書籍サンプルをクラウドへ持ち上げ、**実験 → 登録 → 推論サービス公開** までを 30 分で体験します。
 
@@ -183,20 +248,18 @@ auth_mode: key
 
 ## まとめ
 
-- 本書は _理論より実装_ を重視する人に最適なスターターキット
-- Azure ML に移行することで **再現性・拡張性・運用性** が一気に向上
-- MLOps まで踏み込めば **チーム開発 / 本番運用** への道筋が見える
-
----
-
-### 参考リンク
-
-- [Azure Machine Learning ドキュメント](https://learn.microsoft.com/azure/machine-learning/)
-- [Azure ML CLI (v2) リファレンス](https://learn.microsoft.com/azure/machine-learning/reference-azure-machine-learning-cli)
-- [GitHub Actions 用 Azure ML サンプル](https://github.com/Azure/azureml-examples/tree/main/.github/workflows)
+![](https://storage.googleapis.com/zenn-user-upload/4fdffed24ece-20250401.png)
+Amazon の購入リンクは以下に記載しておりますので、ご興味がある方は是非読んでみてください。
 
 https://www.amazon.co.jp/Azure-Machine-Learning%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92-LLM%E6%B4%BB%E7%94%A8%E5%85%A5%E9%96%80-%E6%B0%B8%E7%94%B0/dp/4297148463
 
----
+### 参考文献
 
-📚 **あなたも本書 + Azure ML で "最初のモデル" をクラウドに飛ばしてみませんか？**
+https://learn.microsoft.com/ja-jp/azure/machine-learning/?view=azureml-api-2
+
+# スタートアップ企業様向けのお知らせ
+
+日本マイクロソフトでは、スタートアップ企業様向けに、ビジネスを支援するプログラムをご提供しています。
+Azure の無料クレジットが`最大$150,000`もらえるので、是非チェックしてみてください。
+
+https://speakerdeck.com/satakeyusuke19920527/microsoft-for-startups-founders-hub
