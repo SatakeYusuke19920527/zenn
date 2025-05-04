@@ -115,8 +115,6 @@ flowchart LR
 (a) マルチクラス分類
 
 ```mermaid
-コピーする
-編集する
 flowchart LR
     txt1[テキスト<br/>「私は昔ピッチャーでした」] --> nlp1[マルチクラス<br/>自然言語処理モデル] --> nlp_lbl1[野球]
     classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
