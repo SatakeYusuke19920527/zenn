@@ -45,15 +45,15 @@ Amazon の購入リンクは記事最下部に記載しておりますので、�
 
 ```mermaid
 flowchart LR
-  A[課題設定<br/>Problem&nbsp;Definition] --> B[データ収集 &amp; 理解<br/>Data&nbsp;Collection &amp; Understanding]
-  B --> C[データ前処理 &amp;<br/>特徴量エンジニアリング]
-  C --> D[AutoML トレーニング<br/>モデル探索 &amp; パラメータ最適化]
-  D --> E[モデル評価 &amp;<br/>バリデーション]
-  E --> F[モデル登録<br/>Model Registry]
-  F --> G[デプロイ<br/>Deployment&nbsp;(オンライン/バッチ)]
-  G --> H[モニタリング &amp;<br/>ドリフト検知]
-  H -- フィードバック --> C
-  H -- 再学習トリガー --> D
+  A["課題設定\nProblem Definition"] --> B["データ収集と理解\nData Collection & Understanding"]
+  B --> C["データ前処理と特徴量エンジニアリング"]
+  C --> D["AutoMLトレーニング\nモデル探索 & パラメータ最適化"]
+  D --> E["モデル評価＆バリデーション"]
+  E --> F["モデル登録\nModel Registry"]
+  F --> G["デプロイ\nDeployment (オンライン／バッチ)"]
+  G --> H["モニタリング & ドリフト検知"]
+  H -->|フィードバック| C
+  H -->|再学習トリガー| D
 ```
 
 アルゴリズム選定からモデル評価までを自動で行ってくれるのが AutoML の機能です。
