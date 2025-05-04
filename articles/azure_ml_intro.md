@@ -70,7 +70,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[物件データ<br/>(築年数, 駅からの距離 など)] --> B[回帰モデル]
+    A[物件データ 築年数, 駅からの距離 など] --> B[回帰モデル]
     B --> C[6,800万円]
 ```
 
@@ -93,8 +93,6 @@ flowchart LR
 ```mermaid
 flowchart LR
     img1[画像] --> cls1[マルチクラス<br/>画像分類モデル] --> lbl1[猫]
-    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
-    class img1,cls1,lbl1 nodeStyle
 ```
 
 (b) マルチラベル画像分類
@@ -102,8 +100,6 @@ flowchart LR
 ```mermaid
 flowchart LR
     img2[画像] --> cls2[マルチラベル<br/>画像分類モデル] --> lbl2[犬, 猫]
-    classDef nodeStyle fill:#fff,stroke:#000,rx:4,ry:4,font-size:12px;
-    class img2,cls2,lbl2 nodeStyle
 ```
 
 ## 自然言語処理(NLP)
