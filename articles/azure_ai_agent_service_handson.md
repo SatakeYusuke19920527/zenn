@@ -4,6 +4,7 @@ emoji: '🤖'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['typescript', 'azure', 'azure-ai-agent-service', 'openai', 'gpt-4o']
 published: true
+topics: [contest2025ts]
 publication_name: microsoft
 ---
 
