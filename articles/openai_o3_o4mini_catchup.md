@@ -43,7 +43,7 @@ o シリーズは chains of thought (思考の連鎖) を用いた大規模強�
 特に熟慮型アラインメント により、潜在的に危険なプロンプトに応答する際に、その文脈内で安全ポリシーを推論可能です。
 
 - Preparedness Framework
-  - https:///pdf/18a02b5d-6b67-4cec-ab64-68cdfbddebcd/preparedness-framework-v2.pdf
+  - https://cdn.openai.com/pdf/18a02b5d-6b67-4cec-ab64-68cdfbddebcd/preparedness-framework-v2.pdf
   - Preparedness Framework v2（2025 年 4 月 15 日版）— OpenAI が公開した“次世代 AI の危険シナリオを追跡し、安全対策を整えるための社内ルールブック”です。PDF 全 30 ページほどの文書で、OpenAI の Safety & Security チームが策定・運用しています。
   - 将来の「フロンティア・モデル」（既存よりはるかに強力な AI）が社会に大きな害を及ぼす可能性を事前に検知し、展開を止めるか追加の安全策を講じるための枠組みを定義します。
 
