@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "OpenAI o3 o4-mini について話せるようになる会" --type tech --emoji 📚 --publication-name "microsoft"
+  > npx zenn new:article --title "RAG の教科書" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
