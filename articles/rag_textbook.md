@@ -60,8 +60,7 @@ flowchart LR
     %% フロー
     Q --> APP
     APP -- "① Retrieve" --> KB
-    KB --> APP
-    APP -- "② Augment Generate"
+    KB --> APP -- "② Augment Generate"
     APP --> A
 ```
 
