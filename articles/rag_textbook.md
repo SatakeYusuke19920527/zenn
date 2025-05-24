@@ -61,7 +61,8 @@ flowchart LR
     Q --> APP
     APP -- "① Retrieve" --> KB
     KB --> APP
-    APP -- "② Augment &amp; Generate" --> A
+    APP -- "② Augment Generate"
+    APP --> A
 ```
 
 # RAG の精度改善の進め方
