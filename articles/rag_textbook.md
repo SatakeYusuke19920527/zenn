@@ -47,21 +47,41 @@ RAG は特に大規模言語モデル(LLM)と組み合わせることで、そ�
 
 ```mermaid
 flowchart LR
+    %%-------------------------
     %% ノード定義
-    Q[質問<br/> Q]
-    A[回答<br/> A]
+    Q([<b>質問<br/> Q </b>])
+    A([<b>回答<br/> A </b>])
 
-    subgraph アプリケーション
+    subgraph APPBOX[""]
         direction LR
-        APP[アプリ ＋ LLM]
-        KB[ナレッジベース]
+        APP[アプリ<br/>＋<br/>LLM]
     end
 
+    subgraph KBBOX[""]
+        direction LR
+        KB[ナレッジベース]
+    end
+    %%-------------------------
     %% フロー
     Q --> APP
     APP -- "① Retrieve" --> KB
-    KB --> APP -- "② Augment Generate"
-    APP --> A
+    KB --> APP
+    APP -- "② Augment&#10;Generate" --> A
+    %%-------------------------
+    %% スタイル
+    classDef ask   fill:#404040,stroke:#404040,color:#fff;
+    classDef ans   fill:#004b4b,stroke:#004b4b,color:#fff;
+    classDef app   fill:#9b3d00,stroke:#9b3d00,color:#fff;
+    classDef kb    fill:#0062c8,stroke:#0062c8,color:#fff;
+    classDef dashed stroke-dasharray:5 5,stroke-width:2px,fill:#ffffef
+    %% ノードへスタイル適用
+    class Q ask
+    class A ans
+    class APP app
+    class KB kb
+    %% サブグラフ枠を破線化（色薄めの背景も付与）
+    style APPBOX stroke:#999,stroke-dasharray:5 5,stroke-width:2px,fill:#ffffef
+    style KBBOX  stroke:#999,stroke-dasharray:5 5,stroke-width:2px,fill:none
 ```
 
 # RAG の精度改善の進め方
