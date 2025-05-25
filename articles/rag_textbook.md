@@ -49,7 +49,7 @@ publication_name: microsoft
   - [検索精度](#検索精度)
   - [回答精度](#回答精度)
 - [RAG と Fine-Tuning](#rag-と-fine-tuning)
-  - [RAFT とは？](#raft-とは)
+  - [RAFT とは？](<#raft-(retrieval-augmented-fine-tuning)-という手法>)
 - [RAG と CAG](#rag-と-cag)
 - [その他](#その他)
 - [まとめ](#まとめ)
