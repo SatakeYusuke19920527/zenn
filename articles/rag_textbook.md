@@ -245,36 +245,95 @@ RAG の精度改善箇所は大きく分けて４項目に分かれます。
 
 上記４項目からさらに細分化して、精度改善の方法を考えていきます。
 
-```mermaid
-flowchart LR
-    %% ノード -------------------------------------------------
-    A["回答用データ\n(Office など)"]
-    B["① テキスト化"]
-    C["② チャンク化"]
-    D["③ 検索エンジン"]
-    E["④ Retrieved データ"]
-    G["プロンプト\n(質問含む)"]
-    H["⑤ OpenAI Service"]
-    I["⑥ 回答"]
+![](https://storage.googleapis.com/zenn-user-upload/0ba3b6bc63dc-20250525.png)
 
-    %% フロー -------------------------------------------------
-    A --> B --> C --> D --> E
-    E --> H
-    G --> H
-    H --> I
+それぞれの箇所で精度改善を行えそうなポイントをざっくりと挙げてみました。
 
-    %% ステージ別カラー --------------------------------------
-    classDef store    fill:#d95829,color:#ffffff
-    classDef retrieve fill:#2b8d3d,color:#ffffff
-    classDef augment  fill:#1b2b4f,color:#ffffff
-    classDef generate fill:#1c6ed2,color:#ffffff
+1. 非構造化データのテキスト抽出精度の向上 など
+2. チャンク分割の最適化 (分割戦略, 分割サイズ, オーバラップサイズ) など
+3. 検索ドキュメントのエンリッチメント など
+4. ドキュメント検索精度のチューニング など
+5. Prompt Engineering, クエリ拡張, 最適モデルの使用 など
+6. RAG アプリ利用の UI の改善 など
 
-    class A,B,C store
-    class D,E   retrieve
-    class G     augment
-    class H,I   generate
+Store、Retrieve、Augment、Generate の各ステップでの精度向上の方法は以下になります。
 
-```
+<table>
+  <thead>
+    <tr>
+      <th>Store</th>
+      <th>Retrieve</th>
+      <th>Augment</th>
+      <th>Generate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PDFファイルのテキスト化</td>
+      <td>検索アルゴリズム</td>
+      <td>システムメッセージ定義</td>
+      <td>モデル選択（回答生成）</td>
+    </tr>
+    <tr>
+      <td>Officeファイルのテキスト化</td>
+      <td>アルゴリズムのパラメータチューニング</td>
+      <td>ユーザメッセージ定義</td>
+      <td>モデル選択（埋め込みモデル）</td>
+    </tr>
+    <tr>
+      <td>音声データのテキスト化</td>
+      <td>スコアリングプロファイル</td>
+      <td>検索クエリ生成</td>
+      <td>マルチモーダル</td>
+    </tr>
+    <tr>
+      <td>動画データのテキスト化</td>
+      <td>カスタムアナライザ</td>
+      <td>ユーザへの聞き返し</td>
+      <td>ファインチューニング</td>
+    </tr>
+    <tr>
+      <td>画像データのテキスト化</td>
+      <td>類似度チューニング</td>
+      <td>仮説的文書埋め込み</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>チャンク分割（チャンクチューニング）</td>
+      <td>—</td>
+      <td>Function Calling</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>オーバラップ</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>テーブル構造抽出</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>エンリッチメント</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>カテゴリ付け</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <!-- Evaluation row -->
+    <tr>
+      <td colspan="4" align="center"><strong>Evaluation</strong></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Store の精度向上 (データ準備)
 
