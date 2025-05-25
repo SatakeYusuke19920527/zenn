@@ -236,15 +236,24 @@ Azure において図示すると以下のようなイメージになります�
 
 # RAG 精度改善の進め方
 
+RAG の精度改善箇所は大きく分けて４項目に分かれます。
+
+- Store : データの格納
+- Retrieve : 検索
+- Augment : プロンプトのビルド
+- Generate : 生成
+
+上記４項目からさらに細分化して、精度改善の方法を考えていきます。
+
 ```mermaid
 flowchart LR
     %% ノード -------------------------------------------------
-    A["回答用データ<br/>Word / Excel / PPT など"]
-    B["① テキスト"]
-    C["② チャンク"]
+    A["回答用データ\n(Office など)"]
+    B["① テキスト化"]
+    C["② チャンク化"]
     D["③ 検索エンジン"]
     E["④ Retrieved データ"]
-    G["プロンプト<br/>質問含む"]
+    G["プロンプト\n(質問含む)"]
     H["⑤ OpenAI Service"]
     I["⑥ 回答"]
 
@@ -255,15 +264,15 @@ flowchart LR
     H --> I
 
     %% ステージ別カラー --------------------------------------
-    classDef store    fill:#d95829,stroke:#d95829,color:#ffffff;
-    classDef retrieve fill:#2b8d3d,stroke:#2b8d3d,color:#ffffff;
-    classDef augment  fill:#1b2b4f,stroke:#1b2b4f,color:#ffffff;
-    classDef generate fill:#1c6ed2,stroke:#1c6ed2,color:#ffffff;
+    classDef store    fill:#d95829,color:#ffffff
+    classDef retrieve fill:#2b8d3d,color:#ffffff
+    classDef augment  fill:#1b2b4f,color:#ffffff
+    classDef generate fill:#1c6ed2,color:#ffffff
 
-    class A,B,C store;
-    class D,E   retrieve;
-    class G     augment;
-    class H,I   generate;
+    class A,B,C store
+    class D,E   retrieve
+    class G     augment
+    class H,I   generate
 
 ```
 
