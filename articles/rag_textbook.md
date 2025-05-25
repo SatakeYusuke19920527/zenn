@@ -239,14 +239,14 @@ Azure において図示すると以下のようなイメージになります�
 ```mermaid
 flowchart LR
     %% フロー本体 --------------------------------------------------
-    A([回答案件用データ<br><sub>(Word / Excel / PPT など)</sub>])
-    B([① テキスト])
-    C([② チャンク])
-    D([③ 検索エンジン])
-    E([④ Retrieved データ])
-    G([プロンプト<br><sub>(質問含む)</sub>])
-    H([⑤ OpenAI Service])
-    I([⑥ 回答])
+    A[回答案件用データ<br> (Word / Excel / PPT など)]
+    B[① テキスト]
+    C[② チャンク]
+    D[③ 検索エンジン]
+    E[④ Retrieved データ]
+    G[プロンプト<br> (質問含む)]
+    H[⑤ OpenAI Service]
+    I[⑥ 回答]
 
     %% 矢印
     A --> B --> C --> D --> E
