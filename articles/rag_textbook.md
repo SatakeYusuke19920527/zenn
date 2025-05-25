@@ -188,7 +188,7 @@ AI Agent の Application の開発においては、開発するプロダクト�
 
 それぞれの利点や課題を正確に抑えながら、Agent の設計を行うことで、より効果的な AI Agent の開発が可能になります。
 
-# RAG の精度改善の進め方
+# RAG の精度改善の進め方 全体観
 
 ここからは NativeRAG をベースに RAG を構築する上でのプロジェクトの進め方について紹介します。
 
@@ -233,6 +233,40 @@ Azure において図示すると以下のようなイメージになります�
 ![](https://storage.googleapis.com/zenn-user-upload/d8ce77271560-20250525.png)
 
 データ準備・ナレッジ活用・評価のサイクルをぐるぐる回すことで、RAG の精度を向上させていきます。
+
+# RAG 精度改善の進め方
+
+```mermaid
+flowchart LR
+    %% フロー本体 --------------------------------------------------
+    A([回答案件用データ<br><sub>(Word / Excel / PPT など)</sub>])
+    B([① テキスト])
+    C([② チャンク])
+    D([③ 検索エンジン])
+    E([④ Retrieved データ])
+    G([プロンプト<br><sub>(質問含む)</sub>])
+    H([⑤ OpenAI Service])
+    I([⑥ 回答])
+
+    %% 矢印
+    A --> B --> C --> D --> E
+    E --> H
+    G --> H
+    H --> I
+
+    %% ステージ別カラー定義 --------------------------------------
+    classDef store    fill:#d95829,color:#ffffff,stroke:#d95829;
+    classDef retrieve fill:#2b8d3d,color:#ffffff,stroke:#2b8d3d;
+    classDef augment  fill:#1b2b4f,color:#ffffff,stroke:#1b2b4f;
+    classDef generate fill:#1c6ed2,color:#ffffff,stroke:#1c6ed2;
+
+    %% ノードにカラー付与
+    class A,B,C                        store;
+    class D,E                          retrieve;
+    class G                            augment;
+    class H,I                          generate;
+
+```
 
 ## Store の精度向上 (データ準備)
 
