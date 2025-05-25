@@ -1,5 +1,5 @@
 ---
-title: 'RAG の教科書'
+title: '【2025年5月完全版】RAG の教科書'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['RAG', 'LLM', 'AI', 'Azure', 'GenAI']
@@ -15,13 +15,27 @@ publication_name: microsoft
   - [Agent 時代の RAG](#agent-時代の-rag)
 - [RAG の精度改善の進め方](#rag-の精度改善の進め方)
   - [Store の精度向上 (データ準備)](#store-の精度向上-データ準備)
+    - [非構造化データのテキスト化](#非構造化データのテキスト化)
+    - [チャンク戦略](#チャンク戦略)
+    - [フィルタリング](#フィルタリング)
   - [Retrieve の精度向上 (検索)](#retrieve-の精度向上-検索)
+    - [フルテキスト検索](#フルテキスト検索)
+    - [ベクトル検索](#ベクトル検索)
+    - [セマンティックハイブリッド検索](#セマンティックハイブリッド検索)
   - [Augment の精度向上 (拡張)](#augment-の精度向上-拡張)
+    - [Prompt Engineering のポイント](#prompt-engineering-のポイント)
+    - [Prompt Engineering がなぜ必要か](#prompt-engineering-がなぜ必要か)
   - [Generation の精度向上 (生成)](#generation-の精度向上-生成)
+    - [LLM モデルの選択](#llm-モデルの選択)
+    - [Inference モデルと Reasoning モデルの違いと使い分け](#inference-モデルと-reasoning-モデルの違いと使い分け)
 - [Evaluate (評価)](#evaluate-評価)
-- [RAG とファインチューニング](#rag-とファインチューニング)
+  - [検索精度](#検索精度)
+  - [回答精度](#回答精度)
+- [RAG と Fine-Tuning](#rag-と-fine-tuning)
+  - [RAFT とは？](#raft-とは)
 - [RAG と CAG](#rag-と-cag)
 - [その他](#その他)
+- [まとめ](#まとめ)
 - [参考文献](#参考文献)
 
 # はじめに
