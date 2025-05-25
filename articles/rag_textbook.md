@@ -244,7 +244,7 @@ flowchart LR
     C[② チャンク]
     D[③ 検索エンジン]
     E[④ Retrieved データ]
-    G[プロンプト<br> (質問含む)]
+    G[プロンプト<br> 質問含む]
     H[⑤ OpenAI Service]
     I[⑥ 回答]
 
