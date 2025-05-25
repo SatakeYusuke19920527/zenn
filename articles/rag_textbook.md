@@ -238,33 +238,32 @@ Azure において図示すると以下のようなイメージになります�
 
 ```mermaid
 flowchart LR
-    %% フロー本体 --------------------------------------------------
-    A[回答案件用データ<br> Word / Excel / PPT など]
-    B[① テキスト]
-    C[② チャンク]
-    D[③ 検索エンジン]
-    E[④ Retrieved データ]
-    G[プロンプト<br> 質問含む]
-    H[⑤ OpenAI Service]
-    I[⑥ 回答]
+    %% ノード -------------------------------------------------
+    A["回答用データ<br/>(Word / Excel / PPT など)"]
+    B["① テキスト"]
+    C["② チャンク"]
+    D["③ 検索エンジン"]
+    E["④ Retrieved データ"]
+    G["プロンプト<br/>(質問含む)"]
+    H["⑤ OpenAI Service"]
+    I["⑥ 回答"]
 
-    %% 矢印
+    %% フロー -------------------------------------------------
     A --> B --> C --> D --> E
     E --> H
     G --> H
     H --> I
 
-    %% ステージ別カラー定義 --------------------------------------
-    classDef store    fill:#d95829,color:#ffffff,stroke:#d95829;
-    classDef retrieve fill:#2b8d3d,color:#ffffff,stroke:#2b8d3d;
-    classDef augment  fill:#1b2b4f,color:#ffffff,stroke:#1b2b4f;
-    classDef generate fill:#1c6ed2,color:#ffffff,stroke:#1c6ed2;
+    %% ステージ別カラー --------------------------------------
+    classDef store    fill:#d95829,stroke:#d95829,color:#ffffff;
+    classDef retrieve fill:#2b8d3d,stroke:#2b8d3d,color:#ffffff;
+    classDef augment  fill:#1b2b4f,stroke:#1b2b4f,color:#ffffff;
+    classDef generate fill:#1c6ed2,stroke:#1c6ed2,color:#ffffff;
 
-    %% ノードにカラー付与
-    class A,B,C                        store;
-    class D,E                          retrieve;
-    class G                            augment;
-    class H,I                          generate;
+    class A,B,C store;
+    class D,E   retrieve;
+    class G     augment;
+    class H,I   generate;
 
 ```
 
