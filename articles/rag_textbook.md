@@ -2,7 +2,7 @@
 title: '【2025年5月完全版】RAG の教科書'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['rag', 'LLM', 'openai', 'Azure', 'tinetuning']
+topics: ['rag', 'LLM', 'openai', 'Azure', 'finetuning']
 published: true
 publication_name: microsoft
 ---
