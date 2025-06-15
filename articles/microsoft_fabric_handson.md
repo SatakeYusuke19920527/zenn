@@ -1,5 +1,5 @@
 ---
-title: "Microsoft Fabricを触りながら理解する会"
+title: "【Microsoft Fabric入門】Fabricでデータ収集・加工・可視化までをハンズオンで理解する会"
 emoji: "🧑‍🏫"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Microsoft Fabric","Power BI","lakehouse","warehouse","data engineering"]
