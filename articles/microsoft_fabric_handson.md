@@ -2,7 +2,7 @@
 title: "Microsoft Fabricを触りながら理解する会"
 emoji: "🧑‍🏫"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Microsoft Fabric","Power BI", ,"lakehouse","warehouse","data engineering"]
+topics: ["Microsoft Fabric","Power BI","lakehouse","warehouse","data engineering"]
 published: false
 publication_name: microsoft
 ---
