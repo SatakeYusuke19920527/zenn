@@ -1,39 +1,40 @@
 ---
-title: "2025/06 最新版🚀 Microsoft for Startups 徹底解説"
-emoji: "🏢"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["Microsoft", "Azure", "Mirosoct for Startups", "OpenAI", "起業"]
+title: '2025/06 最新版🚀 Microsoft for Startups 徹底解説'
+emoji: '🏢'
+type: 'tech' # tech: 技術記事 / idea: アイデア
+topics: ['Microsoft', 'Azure', 'Mirosoct for Startups', 'OpenAI', '起業']
 published: true
-publication_name: "microsoft"
+publication_name: 'microsoft'
 ---
 
 ![](https://storage.googleapis.com/zenn-user-upload/d6c88eb524f5-20250701.png)
 
-# Update情報🚀
-- 2024/10
-  - 2024年10月末にMicrosoft for Startupsの情報が更新されましたので更新🚀
-- 2025/06
-  - Microsoft for StartupsからMicrosoft for Startupsへと名称が変更&内容が更新されましたので、記事を更新🚀
+# Update 情報 🚀
 
+- 2024/10
+  - 2024 年 10 月末に Microsoft for Startups の情報が更新されましたので更新 🚀
+- 2025/06
+  - Microsoft for Startups から Microsoft for Startups へと名称が変更&内容が更新されましたので、記事を更新 🚀
 
 # はじめに
-Microsoftには、スタートアップ企業を支援するためのプログラムとして、Microsoft for Startups というプログラムがあります。
 
-2025年6月にMicrosoft for Startups Microsoft for Startupsは、Microsoft for Startupsへと名称が変更され、内容も大幅に更新されました。
+Microsoft には、スタートアップ企業を支援するためのプログラムとして、Microsoft for Startups というプログラムがあります。
 
-個人的な感想としては、GitHubやAzureを使ってこれから起業を考える方にとってより魅力的なプログラムになったと考えています。
+2025 年 6 月に Microsoft for Startups Microsoft for Startups は、Microsoft for Startups へと名称が変更され、内容も大幅に更新されました。
 
-特にアーリーステージのスタートアップ企業にとって、AzureのクレジットやMicrosoft製品の利用が無料で提供されるので、開発コストや運用コストを大幅に削減し、ビジネスの価値創出に集中出来るプログラムになっているかと思います。
+個人的な感想としては、GitHub や Azure を使ってこれから起業を考える方にとってより魅力的なプログラムになったと考えています。
 
-是非、スタートアップ起業にお勤めの方や、将来起業を志す方はご覧ください🚀
+特にアーリーステージのスタートアップ企業にとって、Azure のクレジットや Microsoft 製品の利用が無料で提供されるので、開発コストや運用コストを大幅に削減し、ビジネスの価値創出に集中出来るプログラムになっているかと思います。
+
+是非、スタートアップ起業にお勤めの方や、将来起業を志す方はご覧ください 🚀
 
 # Microsoft for Startups について
 
 ![img](/images/microsoft_foundershub/img5.png)
 
-Microsoft for Startups は、スタートアップ企業を支援するために設計されたプログラムです。 
+Microsoft for Startups は、スタートアップ企業を支援するために設計されたプログラムです。
 
-Microsoft for Startups では、アーリーステージのスタートアップ企業が迅速にAzureを使ってサービスを構築し、ビジネスを拡張、売上を伸ばせるよう、インフラ・AI ツール・グローバル ネットワークを活用することが可能です。
+Microsoft for Startups では、アーリーステージのスタートアップ企業が迅速に Azure を使ってサービスを構築し、ビジネスを拡張、売上を伸ばせるよう、インフラ・AI ツール・グローバル ネットワークを活用することが可能です。
 
 本プログラムは２パターンのパスがあります。
 
@@ -45,14 +46,13 @@ Microsoft for Startups では、アーリーステージのスタートアップ
 比較すると以下になります。
 
 - 比較表
-  
-| 特徴 | Microsoft for Startups 投資家向けオファリング | Azure スタートアップ クレジット オファー |
-| --- | --- | --- |
-| **申請方法** | Microsoft for Startups Investor Network の関連投資家からの紹介 | Azure を初めて利用するすべての適格スタートアップに公開 |
-| **Azure クレジット** | 最低クレジット付与額 **$100,000** | 最大クレジット付与額 **$5,000** |
-| **サポート** | 専用のサポート、Microsoftとの共同マーケティング など | サポート対応なし |
-| **参加条件** | 紹介コードで申請する必要がある | ビジネス確認に合格する必要がある |
 
+| 特徴                 | Microsoft for Startups 投資家向けオファリング                  | Azure スタートアップ クレジット オファー               |
+| -------------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
+| **申請方法**         | Microsoft for Startups Investor Network の関連投資家からの紹介 | Azure を初めて利用するすべての適格スタートアップに公開 |
+| **Azure クレジット** | 最低クレジット付与額 **$100,000**                              | 最大クレジット付与額 **$5,000**                        |
+| **サポート**         | 専用のサポート、Microsoft との共同マーケティング など          | サポート対応なし                                       |
+| **参加条件**         | 紹介コードで申請する必要がある                                 | ビジネス確認に合格する必要がある                       |
 
 6 月 30 日より、スタートアップ企業は 2 つの簡単なパスを通じて Microsoft for Startups の特典にアクセスできるようになります。大学、アクセラレーター、エンジェル、インキュベーター、VC などの投資家コミュニティ (Microsoft for Startups Investor Network) に所属している場合は、Microsoft から Azure クレジット、追加サポート、カスタマイズされたリソースのロックを解除する紹介コードを受け取ります。
 
@@ -63,19 +63,20 @@ Microsoft for Startups では、アーリーステージのスタートアップ
 # Microsoft for Startups への申請方法
 
 ## 応募方法
+
 では、そんなメリットばかりの Microsoft for Startups への申請方法についてご紹介します。
 
-無料で申請出来て、LinkedInのアカウントがあれば数分で応募が完了します。
-そこから、Microsoftの内部の人が事業内容を審査して、審査が通ればプログラムに参加することが出来ます。
+無料で申請出来て、LinkedIn のアカウントがあれば数分で応募が完了します。
+そこから、Microsoft の内部の人が事業内容を審査して、審査が通ればプログラムに参加することが出来ます。
 
 応募サイトはこちら
 https://foundershub.startups.microsoft.com/signup
 
+## Microsoft for Startups の審査対象となる条件
 
-## Microsoft for Startupsの審査対象となる条件
 Microsoft for Startups の投資家向けオファーに申し込むには、スタートアップは以下の条件を満たす必要があります：
 
-- スタートアップは、**Microsoft for Startups Investor Network に参加している投資家（アクセラレーターやVCなど）と提携している**必要があります。
+- スタートアップは、**Microsoft for Startups Investor Network に参加している投資家（アクセラレーターや VC など）と提携している**必要があります。
 
   > ※参加している投資家のリストは公開されていません。紹介コードを取得するには、**自社と関係のある投資家に直接連絡**してください。
 
@@ -86,19 +87,19 @@ Microsoft for Startups の投資家向けオファーに申し込むには、ス
 
 - スタートアップの本社が、**Azure サービスが提供されている国に所在している**こと。
 
-- スタートアップが **シリーズC資金調達を受けていない**こと。
+- スタートアップが **シリーズ C 資金調達を受けていない**こと。
 
 - スタートアップが **非公開企業（未上場）**であること。
 
 - スタートアップが **営利企業**であること。
 
 - 以下のいずれにも該当しないこと：
-  - 教育機関  
-  - 政府機関  
-  - 個人ブログ  
-  - 開発受託会社（development shop）  
-  - コンサルティング会社  
-  - 代理店（agency）  
+  - 教育機関
+  - 政府機関
+  - 個人ブログ
+  - 開発受託会社（development shop）
+  - コンサルティング会社
+  - 代理店（agency）
   - 仮想通貨／ビットコインのマイニング事業
 
 ご自身の会社がこれらの条件に合致しているかどうかを確認し、応募してください。
@@ -108,9 +109,11 @@ Microsoft for Startups の投資家向けオファーに申し込むには、ス
 $1,000 分の Azure スタートアップ クレジットを受け取るには、以下の条件を満たす必要があります：
 
 - **Azure をこれまでに利用したことのない新規ユーザーであること**
+
   - 既存の Azure アカウントを持っていないことが条件です。
 
 - **有効な Microsoft アカウント（MSA）を使ってサインアップまたはサインインすること**
+
   - 企業アカウントではなく、個人用 Microsoft アカウントが必要です。
 
 - **この Azure オファーが提供されている対象の国／地域に居住していること**
@@ -127,20 +130,21 @@ Microsoft for Startups Investor Network に提携する投資家は、自社の�
 - **GPU クラスタへの優先アクセス**
 - **共同マーケティングや Go-to-Market（市場展開）の機会**
 
-
 ## 審査の結果について
-Microsoft for Startupsは事業として確立されている場合だけでなく、構想段階でもプログラムに申し込むことができます。 
+
+Microsoft for Startups は事業として確立されている場合だけでなく、構想段階でもプログラムに申し込むことができます。
 
 応募フォームの中に、起業する会社の現在の状態を最もよく説明するステージを以下の中から選択するように求められます。
 
 1. 概念設計 - スタートアップの初期のサービスを構想している段階です。潜在的なユーザーや業界の専門家と話すことで、アイデアを洗練させ、ソリューションを検証している段階
 2. プロトタイプ作成 - 既にいくつかのアイデア検証を行い、ユーザー テストを続行するためにワイヤーフレームまたはプロトタイプを構築し始めている段階
 3. MVP の構築 - ソリューションに価値があり、最小限の実行可能な製品 (MVP) を開発していることがわかります。 MVP はプロトタイプよりも高度であり、潜在的な顧客にとって機能するソリューションになるように十分な機能が計画されている必要がある段階
-4. 市場でのMVP - MVP を立ち上げ、出荷機能に重点を置き、有料顧客の獲得に取り組む段階
+4. 市場での MVP - MVP を立ち上げ、出荷機能に重点を置き、有料顧客の獲得に取り組む段階
 5. 確立された市場 - あなたは市場で成熟した製品を持っており、有料顧客のベースを持っています。 会社のスケーリングに集中する準備ができている段階
 
 ## レビューの期間と評価について
-平均して審査には3営業日~2週間程度です。 
+
+平均して審査には 3 営業日~2 週間程度です。
 アプリケーション内の情報を検証する必要がある場合は、応答時間が遅れる可能性があります。
 決定後、応募者へ通知されます。
 
@@ -148,8 +152,8 @@ Microsoft for Startupsは事業として確立されている場合だけでな�
 
 Azure を初めて利用するスタートアップは、以下の特典を受け取ることができます：
 
-- **$1,000 のクレジット（有効期間：90日）**
-- **ビジネス確認完了後、追加で $4,000 のクレジット（有効期間：180日）**
+- **$1,000 のクレジット（有効期間：90 日）**
+- **ビジネス確認完了後、追加で $4,000 のクレジット（有効期間：180 日）**
 
 さらに、将来的に Microsoft for Startups Investor Network に参加している **投資家から資金提供を受けた場合**は、紹介コードを使って **投資家向けオファーに申請することが可能**です。
 
@@ -162,77 +166,69 @@ Microsoft for Startups Investor Network に提携する投資家は、自社の�
 - **GPU クラスタへの優先アクセス**
 - **共同マーケティングや Go-to-Market（市場展開）の機会**
 
-Microsoft for Startups で使用出来るツールは以下にまとめております。(詳細はMicrosoft for Startupsのポータルからご確認ください。)
+# Microsoft for Startups 入会で得られる利点
 
-| 特長                                   | プラン                                         | Azure クレジット | Azure クレジット | Azure クレジット | Azure クレジット | Azure クレジット |
-|----------------------------------------|-----------------------------------------------|------------------|------------------|------------------|------------------|------------------|
-| Microsoft 365 Business Premium         | 50 シート                                     | X                | X                | X                | X                | X                |
-| Dynamics 365 Customer Service Enterprise | 10 シート                                   | X                | X                | X                | X                | X                |
-| Dynamics 365 Sales Enterprise          | 10 シート                                     | X                | X                | X                | X                | X                |
-| Dynamics 365 Team Members              | 25 シート                                     | X                | X                | X                | X                | X                |
-| Power Apps                             | 10 人のユーザー                               | X                | X                | X                | X                | X                |
-| Power Automate                         | 10 人のユーザー                               | X                | X                | X                | X                | X                |
-| Power BI                               | 10 人のユーザー                               | X                | X                | X                | X                | X                |
-| GitHub Enterprise                      | 20 ユーザー                                   | X                | X                | X                | X                | X                |
-| Visual Studio Enterprise               | 5 人のユーザー                                | X                | X                | X                | X                | X                |
-| Azure ペアリング                       | 無制限                                        |                  | X                | X                | X                | X                |
-| エキスパート ネットワーク               | 無制限                                        |                  | X                | X                | X                | X                |
-| サード パーティの特典                  | 利用可能な現在のリストとオファーの詳細 | X                | X                | X                | X                | X                |
-
-
-# Microsoft for Startups入会で得られる利点
-
-Microsoft for Startups入会で提供してもらえるサービス一覧は以下のようになっています。
+Microsoft for Startups 入会で提供してもらえるサービス一覧は以下のようになっています。
 ![](https://storage.googleapis.com/zenn-user-upload/14016bbf75ab-20250701.png)
 
-AzureのクレジットオファーやMicrosoft365、Githubエンタープライズも提供してもらえるのは熱いですね。
+Azure のクレジットオファーや Microsoft365、Github エンタープライズも提供してもらえるのは熱いですね。
 
 開発周りや会社の業務周りで使用するツールを幅広く無料でサポートしてくれていますね
 
-また、既存のサブスクリプションにMicrosoft for StartupsのAzureクレジットを紐づけることも可能です。
+また、既存のサブスクリプションに Microsoft for Startups の Azure クレジットを紐づけることも可能です。
+
 > Microsoft for Startups にログインしたら、[特典] タブに移動し、Azure スポンサー プランの特典セクションで [利用] を選択します。 クレジットを引き換えるときは、Azure サブスクリプションの電子メールを使用します。
 
-Microsoft for Startupsクレジットを別チームへ譲渡も出来たりします。
+Microsoft for Startups クレジットを別チームへ譲渡も出来たりします。
+
 > クレジットの譲渡は、Azure Portal から要求できます。 [ヘルプとサポート] を選択してチケットを送信します。
 
-ただし、複数のアカウントにAzureクレジットを適用することは出来ないのでご注意ください。
+ただし、複数のアカウントに Azure クレジットを適用することは出来ないのでご注意ください。
 
-# Microsoft 365 Business Premiumも使えちゃいます
-Microsoft for Startups のメンバーは、最大 50 ユーザーの Microsoft 365 Business Premium への 1 年間のサブスクリプションにアクセスできます。 
-この特典をアクティブにするには、 Microsoft for Startupsのポータル画面に移動します。 アクティブ化されると、このオファーは 12 か月間有効になります。 このプロセスを完了して本人確認を行い、特典の終了時にサービスの中断を防ぐには、クレジット カードが必要です。 Microsoft 365 を登録するために選択した国は、使用されているクレジット カードの国と一致している必要があります。
+# Microsoft for Startups のその先へ...
 
-後、昨今話題のMicrosoft 365 CopilotはMicrosoft for Startupsの特典には含まれていないので、ご注意ください。
-
-# Microsoft for Startupsのその先へ...
-Microsoft for Startupsの先には更なる成長をサポートするプログラムとして、```Pegasus Program```というものもあります。
+Microsoft for Startups の先には更なる成長をサポートするプログラムとして、`Pegasus Program`というものもあります。
 
 https://www.microsoft.com/ja-jp/startups/pegasus
 
 Pegasus Program は、B2B スタートアップ企業が機会の創出と加速を支援することを目的とした、Microsoft for Startups オファリングの下での招待のみのプログラムです。
 
-Microsoft for StartupsとPegasus Programの違いは成長のすべての段階でスタートアップをサポートする動的なプラットフォームなのがMicrosoft for Startupsに対して、Pegasus Programは、メンバーに追加の利点を提供する一部のファウンダーズ ハブ ユーザー向けのハイタッチ プログラムです。 
+Microsoft for Startups と Pegasus Program の違いは成長のすべての段階でスタートアップをサポートする動的なプラットフォームなのが Microsoft for Startups に対して、Pegasus Program は、メンバーに追加の利点を提供する一部のファウンダーズ ハブ ユーザー向けのハイタッチ プログラムです。
 
-スタートアップは、最初にMicrosoft for Startupsに参加し、プラットフォームを通じて提供される特典を使用せずにPegasus Programに参加することはできません。
+スタートアップは、最初に Microsoft for Startups に参加し、プラットフォームを通じて提供される特典を使用せずに Pegasus Program に参加することはできません。
 
-```Pegasus Programは招待専用です。 ```
-スタートアップは、特定のソリューション領域、成熟度、チーム プロファイル、牽引力、およびその他の要因に基づいて選択されます。 
-Pegasus チームは、Microsoft for Startupsのスタートアップ企業を継続的に監視し、対象と見なされるすべてのスタートアップに直接連絡します。 
+`Pegasus Programは招待専用です。 `
+スタートアップは、特定のソリューション領域、成熟度、チーム プロファイル、牽引力、およびその他の要因に基づいて選択されます。
+Pegasus チームは、Microsoft for Startups のスタートアップ企業を継続的に監視し、対象と見なされるすべてのスタートアップに直接連絡します。
 検討対象となるには、スタートアップ企業は、Microsoft for Startups のメンバーであり、Microsoft テクノロジを基盤とする必要があります。
 
-具体的なもらえるAzureクレジットはオファーによりますが、Microsoft for Startupsよりも大きい額のクレジットがもらえます。
-Microsoft for Startupsのクレジットが足りなくなったら目指してみるのもいいかもしれませんね。
+具体的なもらえる Azure クレジットはオファーによりますが、Microsoft for Startups よりも大きい額のクレジットがもらえます。
+Microsoft for Startups のクレジットが足りなくなったら目指してみるのもいいかもしれませんね。
 
 ### 応募に関して不明点があれば...
-以下によくあるFAQが記載されています。
+
+以下によくある FAQ が記載されています。
 
 https://learn.microsoft.com/ja-jp/microsoft-for-startups/application/faq
 
-上記でもわからなければ、最寄りのMS社員にお気軽に質問してみてください！
+上記でもわからなければ、最寄りの MS 社員にお気軽に質問してみてください！
 
 # 最後に
-Microsoft for Startups を用いて、みなさんの素晴らしいアイディアが、世の中に広がることを心より願っております。
 
-それでは👋
+Microsoft for Startups を用いてみなさんの素晴らしいアイディアが、世の中に広がることを心より願っております。
+Microsoft for Startups のプログラムにご興味がある方は、ぜひ応募してみてください。
+
+また、不明点があれば私までお気軽にご連絡ください。
+
+- X
+  https://x.com/fe_js_engineer
+
+- LinkedIn
+  https://www.linkedin.com/in/satyus/
+
+X or LinkedIn どちらでも OK です。
+
+それでは 👋
 
 # 参考文献
 
