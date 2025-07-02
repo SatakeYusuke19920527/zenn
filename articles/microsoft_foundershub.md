@@ -130,7 +130,7 @@ Microsoft for Startups Investor Network に提携する投資家は、自社の�
 - **GPU クラスタへの優先アクセス**
 - **共同マーケティングや Go-to-Market（市場展開）の機会**
 
-## 審査の結果について
+## スタートアップ企業のフェーズについて
 
 Microsoft for Startups は事業として確立されている場合だけでなく、構想段階でもプログラムに申し込むことができます。
 
@@ -148,7 +148,7 @@ Microsoft for Startups は事業として確立されている場合だけでな
 アプリケーション内の情報を検証する必要がある場合は、応答時間が遅れる可能性があります。
 決定後、応募者へ通知されます。
 
-### 無事、Microsoft for Startups の審査を通過したら
+### 無事審査を通過したら...
 
 Azure を初めて利用するスタートアップは、以下の特典を受け取ることができます：
 
@@ -216,7 +216,7 @@ https://learn.microsoft.com/ja-jp/microsoft-for-startups/application/faq
 # 最後に
 
 Microsoft for Startups を用いてみなさんの素晴らしいアイディアが、世の中に広がることを心より願っております。
-Microsoft for Startups のプログラムにご興味がある方は、ぜひ応募してみてください。
+本プログラムにご興味がある方は、ぜひ応募してみてください。
 
 また、不明点があれば私までお気軽にご連絡ください。
 
