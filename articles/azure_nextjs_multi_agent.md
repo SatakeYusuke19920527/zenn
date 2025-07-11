@@ -1,5 +1,5 @@
 ---
-title: 'マルチエージェント入門 Anthropicのワークフロールーティングを実装して理解する'
+title: 'マルチエージェント入門 Anthropic社のワークフロールーティングを実装して理解する会'
 emoji: '👀'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['nextjs', 'azure', 'multi-agent', 'azureopenai', 'openai']
@@ -7,43 +7,48 @@ published: false
 publication_name: microsoft
 ---
 
+![](https://storage.googleapis.com/zenn-user-upload/5de018f118ae-20250711.png)
+
 # はじめに
 
 本記事では、Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Next.js** と **Azure AI Agent Service** を使って実装しながら理解していきます。
+
+![](https://storage.googleapis.com/zenn-user-upload/6d7c5c3fce54-20250711.png)
 
 ワークフロールーティングとは、**入力（ユーザーのリクエスト）を性質に応じて最適な下流プロセス／モデル／ツールへ振り分ける** 設計パターンです。
 
 ルーティングが特に役立つユースケースは次のようなものです。
 
 - カスタマーサービスで _一般質問_ / _返金リクエスト_ / _テクニカルサポート_ を自動で判別し、それぞれ専用のワークフローに送る。
-- _簡単な FAQ_ は **Claude 3.5 Haiku** など低コストモデルへ、_難解な質問_ は **Claude 3.5 Sonnet** へ送って **速度とコスト** を最適化する。
+- _簡単な FAQ_ は **gpt-4o-mini** など低コストモデルへ、_難解な質問_ は **o3, o3-pro** へ送って **速度とコスト** を最適化する。
 
-本稿では、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** と **Expert Agent** をぶら下げる 3 体構成のマルチエージェントを例に解説します。
+本記事では、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** 、 **Expert Agent** と **General Agent** をぶら下げる 4 体構成のマルチエージェントを例に解説します。
 
----
+流れを図にするとこんな感じのアプリケーションを作っていきます。
+![](https://storage.googleapis.com/zenn-user-upload/8f443eff83fe-20250711.png)
 
 # AI Agent とは？
+
+前提として、AI Agent についてざっとおさらいです。
 
 - **LLM（大規模言語モデル）** に “思考 (Reasoning)” と “行動 (Acting)” を付与し、外部ツールを呼び出してタスクを完遂するソフトウェアコンポーネント。
 - 通常は **System Prompt** でパーソナリティと行動原則を定義し、**Function Calling** で外部 API を叩く。
 - 代表的パターン: _ReAct_、_Plan & Execute_、_Reflexion_ など。
 
----
-
 # Multi Agent とは？
 
-> **複数のエージェントが _協調_ して 1 つの目標を達成するアーキテクチャ**
+**複数のエージェントが _協調_ して 1 つの目標を達成するアーキテクチャ** と理解で OK です。
 
 - **専門分化**: 役割ごとにプロンプト・ツール・モデルを最適化できる。
 - **並列性**: エージェントを非同期に走らせると待ち時間を短縮可能。
 - **ルーティング**: _Classifier_／_Router_ エージェントで入口を 1 本化し、下流へ分岐。
 - OSS 例: **AutoGen**, **LangGraph**, **CrewAI** など。
 
----
-
 # Azure AI Agent Service とは？
 
-Azure OpenAI 上に構築された **エンタープライズ向けエージェント基盤** です。
+Azure AI Foundry 内のサービスの一つで、マルチエージェントアプリケーションを簡単に構築・運用できるサービスです。
+
+https://azure.microsoft.com/ja-jp/products/ai-agent-service
 
 | 機能                                       | 説明                                                            |
 | ------------------------------------------ | --------------------------------------------------------------- |
@@ -57,24 +62,20 @@ Azure OpenAI 上に構築された **エンタープライズ向けエージェ�
 
 # 実装 🚀
 
-## 1. アーキテクチャ全体像
+## アーキテクチャ全体像
 
-```mermaid
-flowchart TD
-  subgraph Frontend
-    C[Next.js App]
-  end
-  subgraph Backend
-    direction TB
-    A[Router Agent] -->|"faq"| B[FAQ Agent]
-    A -->|"expert"| D[Expert Agent]
-  end
-  C -- "fetch /api/agent (SSE)" --> A
-  B -- "NDJSON stream" --> C
-  D -- "NDJSON stream" --> C
-```
+改めて、今回実装する multi-agent application の全体像を確認します。
 
-## 2. 前提
+![](https://storage.googleapis.com/zenn-user-upload/8f443eff83fe-20250711.png)
+
+各エージェントの役割は次の通りです。
+
+- **Router Agent**: gpt-4o を使う。ユーザーのリクエストを受け取り、適切なエージェントへ振り分ける。
+- **FAQ Agent**: gpt-4o を使う。よくある質問に対して、AI Search を用いてデータソースを検索し回答する。
+- **Expert Agent**: o3 を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
+- **General Agent**: gpt-4o-mini を使う。一般的な質問に回答する。(ex. 今日は暑いですね。とか。)
+
+## 前提
 
 ```bash
 # Node 20.x 系
