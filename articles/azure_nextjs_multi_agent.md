@@ -1,5 +1,5 @@
 ---
-title: 'AIエージェントのサービス構築を検討しているあなたへ贈る記事'
+title: 'AIエージェントのサービス構築を検討しているあなたへ'
 emoji: '👀'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['nextjs', 'azure', 'multi-agent', 'azureopenai', 'openai']
