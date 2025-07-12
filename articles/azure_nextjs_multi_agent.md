@@ -397,19 +397,19 @@ flowchart LR
 フローの例は以下になります。
 
 ```mermaid
+
 flowchart LR
   %%--- ユーザー入力 & 応答 ---%%
   UserInput["Where is my order?"] --> Triage
-  Response["On its way!"] <-- Orders
+  Orders --> Response["On its way!"]
 
   %%--- エージェント群 ---%%
   Triage["Triage"] --> Orders
-  Triage -.-> Sales
-  Triage -.-> Issues
+  Triage -.-> Sales["Sales"]
+  Triage -.-> Issues["Issues and Repairs"]
 
   Orders["Orders"]
-  Sales["Sales"]
-  Issues["Issues and Repairs"]
+
 ```
 
 # ガードレールについて
