@@ -11,9 +11,14 @@ publication_name: microsoft
 
 # はじめに
 
-本記事では、昨今時代の AI Agent について DeepDive していきたいと思います。
+本記事では、昨今話題の AI エージェントサービスをこれから作る方へ、AI エージェントシステムを作る上での抑えるべきポイントと実践的なハンズオンにて DeepDive していきたいと思います。
 
-まずは AI Agent の基本的な概念を理解し、次に Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Next.js** と **Azure AI Agent Service** を使って実装しながら理解していきます。
+本記事は 2 部構成になっており、第１章では AI Agent の基本的な概念を理解します。
+
+第２部では Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Next.js** と **Azure AI Agent Service** を使って実装しながら理解していきます。
+
+ハンズオンは以下の構成を取り扱います。
+非常にシンプルな物になっているので、ぜひ手を動かしながらアプリケーションを動作させて catch up してみてください。
 
 ![](https://storage.googleapis.com/zenn-user-upload/6d7c5c3fce54-20250711.png)
 
@@ -24,10 +29,17 @@ publication_name: microsoft
 - カスタマーサービスで _一般質問_ / _返金リクエスト_ / _テクニカルサポート_ を自動で判別し、それぞれ専用のワークフローに送る。
 - _簡単な FAQ_ は **gpt-4o-mini** など低コストモデルへ、_難解な質問_ は **o3, o3-pro** へ送って **速度とコスト** を最適化する。
 
-本記事では、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** 、 **Expert Agent** と **General Agent** をぶら下げる 4 体構成のマルチエージェントを例に解説します。
+ハンズオンでは、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** 、 **Expert Agent** と **General Agent** をぶら下げる 4 体構成のマルチエージェントを例に解説します。
 
 流れを図にするとこんな感じのアプリケーションを作っていきます。
 ![](https://storage.googleapis.com/zenn-user-upload/8f443eff83fe-20250711.png)
+
+本記事は以下の構成となります。
+AI エージェントの設計から深く学びたい方は第１部から、とにかく動かして理解したい方は第２部から始めていただければ OK です。
+
+それでは、AI エージェントの世界へ Deep Dive していきましょう 🚀
+
+# 第 1 部: AI エージェント の基本概念とエージェントシステム構築のガイド
 
 # AI Agent とは？
 
@@ -458,7 +470,7 @@ AI エージェントにおける “ガードレール” とは、モデルの
 
 3 つめのエージェントの進化に合わせてガードレールを調整することが意外と見落としやすく、重要になってくると考えています。
 
-# AI エージェントについてまとめ
+# 第一部 まとめ
 
 - エージェントシステムは、複雑な意思決定や非構造化データ、膨らむルールベースシステムを含むユースケースに適しています。
 
@@ -472,33 +484,12 @@ AI エージェントにおける “ガードレール” とは、モデルの
 
 お疲れ様でした 🖐️
 
-# 実践 マルチエージェントサービスを動かしながら理解する 🚀
+# 第 2 部: Next.js と Azure AI Agent Service を使ったワークフロールーティングの実装
 
-# Azure AI Agent Service とは？
-
-Azure AI Foundry 内のサービスの一つで、マルチエージェントアプリケーションを簡単に構築・運用できるサービスです。
-
-https://azure.microsoft.com/ja-jp/products/ai-agent-service
-
-### Azure AI Foundry Agent Service 概要
-
-- **目的**
-  Azure AI Foundry の _モデル／ツール／フレームワーク_ を 1 つのマネージド・ランタイムに統合し、
-  **安全かつスケーラブルに AI エージェントを開発・運用** できるようにするサービス。
-
-- **主要機能**
-
-  1. **スレッド管理** – すべての対話を構造化データとして保持し、ポータルでデバッグ可能。
-  2. **ツール呼び出しの自動オーケストレーション** – JSON Schema で宣言した検索・DB・業務 API を安全に実行。
-  3. **コンテンツセーフティ & ガードレール** – 不適切入力の検出と修正をランタイム側で強制。
-  4. **統合運用** – Azure AD (RBAC)、VNet、監視 (App Insights) とそのまま連携。
-
-- **エージェントの 3 要素**
-  **モデル**（GPT-4o など LLM）＋ **Instructions**（ゴール・制約）＋ **Tools**（Grounding with Bing Search、Azure Logic Apps 等）を組み合わせて構築。
-
-# サービスの流れの全体像
+# ハンズオンの流れの全体像
 
 改めて、今回実装する multi-agent application の全体像を確認します。
+第１部で説明したマネージャー型のマルチエージェントシステムを Next.js と Azure AI Agent Service を使って実装します。
 
 ![](https://storage.googleapis.com/zenn-user-upload/8f443eff83fe-20250711.png)
 
@@ -509,7 +500,24 @@ https://azure.microsoft.com/ja-jp/products/ai-agent-service
 - **Expert Agent**: o3 を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
 - **General Agent**: gpt-4o-mini を使う。一般的な質問に回答する。(ex. 今日は暑いですね。とか。)
 
-## 環境の設定
+# Azure AI Agent Service とは？
+
+Azure AI Foundry 内のサービスの一つで、マルチエージェントアプリケーションを簡単に構築・運用できるサービスです。
+
+https://azure.microsoft.com/ja-jp/products/ai-agent-service
+
+## Azure AI Foundry Agent Service 概要
+
+Azure AI Foundry の _モデル／ツール／フレームワーク_ を 1 つのマネージド・ランタイムに統合し**安全かつスケーラブルに AI エージェントを開発・運用** できるようにするサービス。
+
+主要機能は以下になります。
+
+1. **スレッド管理** – すべての対話を構造化データとして保持し、ポータルでデバッグ可能。
+2. **ツール呼び出しの自動オーケストレーション** – JSON Schema で宣言した検索・DB・業務 API を安全に実行。
+3. **コンテンツセーフティ & ガードレール** – 不適切入力の検出と修正をランタイム側で強制。
+4. **統合運用** – Azure AD (RBAC)、VNet、監視 (App Insights) とそのまま連携。
+
+## 環境セットアップ
 
 ```bash
 # Node 20.x 系
