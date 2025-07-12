@@ -392,8 +392,6 @@ flowchart LR
 | **柔軟性**       | 必要に応じてエージェントを追加・差し替えできるため、スケールや保守が容易          |
 | **ユースケース** | マルチドメインのカスタマーサポート、複合ドキュメント生成、CI/CD での役割分担 など |
 
----
-
 フローの例は以下になります。
 
 ```mermaid
@@ -470,7 +468,7 @@ AI エージェントにおける “ガードレール” とは、モデルの
 
 3 つめのエージェントの進化に合わせてガードレールを調整することが意外と見落としやすく、重要になってくると考えています。
 
-# 第一部 まとめ
+# 第 1 部 まとめ
 
 - エージェントシステムは、複雑な意思決定や非構造化データ、膨らむルールベースシステムを含むユースケースに適しています。
 
@@ -500,13 +498,11 @@ AI エージェントにおける “ガードレール” とは、モデルの
 - **Expert Agent**: o3 を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
 - **General Agent**: gpt-4o-mini を使う。一般的な質問に回答する。(ex. 今日は暑いですね。とか。)
 
-# Azure AI Agent Service とは？
+# Azure AI Foundry Agent Service 概要
 
 Azure AI Foundry 内のサービスの一つで、マルチエージェントアプリケーションを簡単に構築・運用できるサービスです。
 
 https://azure.microsoft.com/ja-jp/products/ai-agent-service
-
-## Azure AI Foundry Agent Service 概要
 
 Azure AI Foundry の _モデル／ツール／フレームワーク_ を 1 つのマネージド・ランタイムに統合し**安全かつスケーラブルに AI エージェントを開発・運用** できるようにするサービス。
 
@@ -516,6 +512,16 @@ Azure AI Foundry の _モデル／ツール／フレームワーク_ を 1 つ�
 2. **ツール呼び出しの自動オーケストレーション** – JSON Schema で宣言した検索・DB・業務 API を安全に実行。
 3. **コンテンツセーフティ & ガードレール** – 不適切入力の検出と修正をランタイム側で強制。
 4. **統合運用** – Azure AD (RBAC)、VNet、監視 (App Insights) とそのまま連携。
+
+# Let's ハンズオン
+
+ハンズオンは以下の流れで進めます。
+
+1. **環境セットアップ** – Next.js と Azure AI Agent Service の準備
+2. **Azure AI Agent Service のセットアップ** – エージェントの作成と設定
+3. **Next.js アプリケーションの実装** – エージェントとの連携
+4. **動作検証** – エージェントの動作確認
+5. **まとめ**
 
 ## 環境セットアップ
 
@@ -529,84 +535,70 @@ pnpm add @azure/ai-agent @azure/identity openai zod
 - Azure 側で **Agent Service Workspace** を作成し、_Router / FAQ / Expert_ の 3 つのエージェントを登録。
 - FAQ Agent は `gpt-4o-mini`, Expert Agent は `gpt-4o` などモデルを変えるとコスト試算しやすい。
 
-## 3. Router Agent の定義例
+## Azure AI Agent Service のセットアップ
 
-```ts
-// prompts/router/system.ts
-export const system = `
-You are a routing agent for customer queries.
-Return JSON with {"route": "faq" | "expert"}.
-If confidence < 0.6, choose "expert".
-`;
-```
+![](https://storage.googleapis.com/zenn-user-upload/8f443eff83fe-20250711.png)
 
-```ts
-// tools/classify.ts
-import { defineTool } from '@azure/ai-agent';
-import { z } from 'zod';
+以下の記事を参照し、AI Agent を構築していく
 
-export const classifyTool = defineTool({
-  name: 'classifyQuery',
-  description: 'Classify query into faq or expert',
-  parameters: z.object({
-    text: z.string(),
-  }),
-  // 実装はローカル推論 or external API でも OK
-  execute: async ({ text }) => {
-    const faqKeywords = ['price', 'refund', 'hours'];
-    return faqKeywords.some((k) => text.includes(k)) ? 'faq' : 'expert';
-  },
-});
-```
+https://learn.microsoft.com/ja-jp/azure/ai-services/agents/quickstart?view=azure-dotnet-preview&pivots=ai-foundry-portal
 
-## 4. Next.js API Route
+AI Foundry へアクセスし、新しいプロジェクトの作成を選択
 
-```ts
-// app/api/agent/route.ts
-import { NextRequest } from 'next/server';
-import { AIProjectClient, createMCPClient } from '@azure/ai-agent';
-import { DefaultAzureCredential } from '@azure/identity';
+https://ai.azure.com/
 
-export const runtime = 'edge';
+![](https://storage.googleapis.com/zenn-user-upload/b74a4ac44f87-20250315.png)
 
-export async function POST(req: NextRequest) {
-  const { message } = await req.json();
+そのまま、プロジェクトの作成をクリック
+![](https://storage.googleapis.com/zenn-user-upload/d3e6ed95ba0c-20250315.png)
 
-  const mcp = await createMCPClient({
-    transport: {
-      type: 'sse',
-      url: process.env.MCP_SSE_URL!,
-    },
-  });
+プロジェクトを作成すると、以下のリソースが作成される
+![](https://storage.googleapis.com/zenn-user-upload/ebbbb035c1d8-20250315.png)
 
-  const stream = await mcp.chat.completions.create({
-    agentId: 'router-agent',
-    messages: [{ role: 'user', content: message }],
-    stream: true,
-  });
+図解すると以下。Azure AI hub の下に AI project が作成され、その下に KeyVault や AI Search, AI Services, Storage Account が作成される。
+![](https://storage.googleapis.com/zenn-user-upload/44ca7c13bc0f-20250315.png)
 
-  return new Response(stream, {
-    headers: {
-      'Content-Type': 'text/event-stream',
-    },
-  });
-}
-```
+Azure AI Agent Service にてリソースを選択し、作成を進めていく。
+![](https://storage.googleapis.com/zenn-user-upload/c1cd6869044d-20250315.png)
 
-- **ポイント**: MCP からは _NDJSON ストリーム_ が返るので、フロント側で行単位に `JSON.parse` して `"role":"assistant"` だけ描画すれば **1 行テキスト** の要件を満たせる。
+モデル を Deploy する
+![](https://storage.googleapis.com/zenn-user-upload/3324bfbbea20-20250315.png)
 
-## 5. 評価 & コスト試算
+今回は GPT-4o を Deploy する
+![](https://storage.googleapis.com/zenn-user-upload/bc00e91a54f3-20250315.png)
 
-```bash
-npx tsx scripts/batch-eval.ts data/sample.jsonl
-```
+Agent が GUI 上で作成することが出来る。
+これで AI Agent Service のセットアップは完了です。
+![](https://storage.googleapis.com/zenn-user-upload/5b73204b1959-20250315.png)
 
-- ルーティング精度 90% を下回る場合は `classifyTool` の閾値調整 or Embeddings 類似検索で改善。
-- FAQ Agent を `gpt-4o-mini` にすると 1 リクエストあたり \~¥0.015、Expert Agent (gpt‑4o) は \~¥0.07 — 全体平均コスト \~¥0.03 に圧縮。
+今回は二人の AI Agent を作成しておきます。
 
----
+- Knowledge-Agent
+  - 独自のドキュメントをセットしておき、RAG のようにドキュメントに沿った返答を行います。
+- Action-Agent
+  - Function Calling を用いて２種類の Functions を呼び出します。
+  - Azure Functions は今回はモックとして天気の情報とユーザー情報を return するだけのものを用意します。
 
-# 最後に
+![](https://storage.googleapis.com/zenn-user-upload/01e8100c342f-20250407.png)
+
+Knowledge-Agent は +新しいエージェントを選択し、
+手順へ以下を記載
+
+> ドキュメントの中に記載されている内容を回答してください。結論だけ返答してください。
+
+ナレッジの追加からファイルを選択し、お好きなファイルを Upload してください
+![](https://storage.googleapis.com/zenn-user-upload/66a424db0706-20250407.png)
+
+Action-Agent は +新しいエージェントを選択し作成するだけで OK です。
+内部で動作させる Azure Functions は(2025/04 時点で)手動追加ができないので、後ほどコードベースで追加します。
+
+ここまできたら AI Agent Service のセットアップ完了です。
+
+# Next.js アプリケーションの実装
+
+# **動作検証** – エージェントの動作確認
+
+# まとめ
 
 ワークフロールーティングを導入することで、**コスト最適化** と **スケールしやすさ** を両立したエージェント基盤を構築できます。Next.js + Azure AI Agent Service は、
 
