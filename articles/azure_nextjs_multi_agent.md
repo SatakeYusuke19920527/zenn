@@ -278,40 +278,39 @@ flowchart TD
 
 モデル化イメージは以下になります。
 
-````mermaid
-
+```mermaid
 flowchart LR
   %%--- マネージャー型 ---%%
-  subgraph Manager_Pattern["マネージャー型"]
+  subgraph manager["マネージャー型"]
     direction LR
-    Manager[マネージャー<br>Agent]
-    Dev[開発 Agent]
-    QA[QA Agent]
-    Fin[経理 Agent]
-    Manager -- 呼び出し --> Dev
-    Manager -- 呼び出し --> QA
-    Manager -- 呼び出し --> Fin
+    Manager["マネージャー<br/>Agent"]
+    Dev["開発<br/>Agent"]
+    QA["QA<br/>Agent"]
+    Fin["経理<br/>Agent"]
+    Manager -->|呼び出し| Dev
+    Manager -->|呼び出し| QA
+    Manager -->|呼び出し| Fin
   end
 
   %%--- 分散型 ---%%
-  subgraph Delegation_Pattern["分散型（ハンドオフ）"]
+  subgraph delegation["分散型（ハンドオフ）"]
     direction LR
-    A1[Agent A]
-    A2[Agent B]
-    A3[Agent C]
-    A1 -- ハンドオフ --> A2
-    A2 -- ハンドオフ --> A3
+    A1["Agent A"]
+    A2["Agent B"]
+    A3["Agent C"]
+    A1 -->|ハンドオフ| A2
+    A2 -->|ハンドオフ| A3
   end
 
 ```
 
 どのパターンを採用する場合でも、基本原則は共通です。
+
 - コンポーネントは柔軟かつ再利用可能なモジュールとして構成
 - 明確かつ簡潔 なプロンプトで制御
 - グラフ構造で依存関係とデータフローを可視化
 
 これにより、複雑なタスクでもスケーラブルかつ保守しやすいアーキテクチャを実現できます。
-
 
 # Azure AI Agent Service とは？
 
@@ -357,7 +356,7 @@ https://azure.microsoft.com/ja-jp/products/ai-agent-service
 pnpm create next-app@latest multi-agent-app
 cd multi-agent-app
 pnpm add @azure/ai-agent @azure/identity openai zod
-````
+```
 
 - Azure 側で **Agent Service Workspace** を作成し、_Router / FAQ / Expert_ の 3 つのエージェントを登録。
 - FAQ Agent は `gpt-4o-mini`, Expert Agent は `gpt-4o` などモデルを変えるとコスト試算しやすい。
