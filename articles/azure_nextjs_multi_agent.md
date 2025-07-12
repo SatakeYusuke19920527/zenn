@@ -335,7 +335,7 @@ flowchart LR
   %%--- User Input ---%%
   subgraph input["User Input"]
     direction TB
-    U1["Translate 'hello' to<br/>Spanish, French and<br/>Italian for me!"]
+    U1["Translate hello to<br/>Spanish, French and<br/>Italian for me!"]
     U2["..."]
   end
 
@@ -402,16 +402,27 @@ flowchart LR
 
 # ガードレールについて
 
-# ガードレールのレイヤード防御
+AI エージェントにおける “ガードレール” とは、モデルの推論・ツール呼び出し・出力生成の各段階で 安全・適切・意図どおり に振る舞わせるために設ける “安全柵” や “制御ルール” の総称です。
 
-適切に設計された **ガードレール** は以下の２点を管理するうえで欠かせません。
+イメージとしては、車線の外へ車が飛び出さないようにする道路脇のガードレールと同じで AI エージェントが 危険領域に逸脱しないよう囲い込む仕組み と考えると分かりやすいです。
+
+具体的には以下の項目を保護するために設計されます。
+
+| 保護対象               | 代表的なリスク                       | ガードレールの役割                             |
+| ---------------------- | ------------------------------------ | ---------------------------------------------- |
+| **ユーザー**           | 有害・差別的・不正確な出力           | 不適切表現のブロック、ファクトチェック         |
+| **機密／個人情報**     | PII 漏えい、内部情報の暴露           | マスキング・出力除去                           |
+| **システム**           | プロンプトインジェクション、権限昇格 | 入力検査、動的ポリシー適用                     |
+| **ビジネス／ブランド** | ガイドライン違反、法令違反           | スタイル・トーン検証、コンプライアンスチェック |
+
+上記のように、適切に設計された **ガードレール** は以下の２点を管理するうえで欠かせません。
 
 - **データプライバシー上のリスク**（例：システムプロンプトの漏洩防止）
 - **評判リスク**（例：ブランド方針に沿わない出力の抑制）
 
 単一のガードレールだけでは十分な保護を提供できないため、**多層防御 (layered defense)** として複数のガードレールを組み合わせることが推奨されます。
 
-## ガードレールの主なレイヤー
+ガードレールの主なレイヤーは以下になります。
 
 | レイヤー               | 目的                               | 具体例                                                                     |
 | ---------------------- | ---------------------------------- | -------------------------------------------------------------------------- |
@@ -419,38 +430,10 @@ flowchart LR
 | **モデレーション API** | 有害・不適切コンテンツの検出       | OpenAI **Moderation API** を併用し “hate”, “self-harm” などをブロック      |
 | **ルールベース**       | 明示的な禁止事項を高速フィルタ     | 文字数上限・ブラックリスト・正規表現マッチングなど                         |
 
-ガードレールの考えを入れた AI Agent サービスのフロー全体のイメージは以下になります。
+ガードレールの考えを入れた AI エージェント サービスのフロー全体のイメージは以下になります。
 
-```mermaid
-flowchart TD
-  %% --- 入力とユーザ応答 --- %%
-  UserInput["User input"]
-  Reject["Respond \"we cannot process<br/>your message. Try again!\""]
-  ReplyUser["Reply to user"]
-
-  %% --- ガードレール層 --- %%
-  subgraph LLM_Layer["LLM & Moderation Layers"]
-    direction TB
-    LLM1["gpt-4o-mini<br/>hallucination / relevance"]
-    LLM2["gpt-4o-mini (FT)<br/>safe / unsafe"]
-    ModAPI["Moderation API"]
-    Rules["Rules-based protections<br/>(limit, blacklist, regex)"]
-  end
-
-  Decision{is_safe?}
-
-  %% --- エージェント処理 --- %%
-  AgentSDK["AgentSDK"]
-  Handoff["Handoff to<br/>Refund agent"]
-  Initiate["Call<br/>initiate_refund()"]
-  Continue["Continue with function call"]
-
-  %% --- 線の接続 --- %%
-  UserInput --> LLM1 --> LLM2 --> ModAPI --> Rules --> Decision
-  Decision -- "False" --> Reject --> ReplyUser
-  Decision -- "True" --> AgentSDK --> Handoff --> Initiate --> Continue --> ReplyUser
-
-```
+![](https://storage.googleapis.com/zenn-user-upload/dbc48327921e-20250712.png)
+参考: https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf
 
 特に機密情報性の高いデータを取り扱うサービスでは、ガードレールの考えを入れることが非常に重要になってきます。
 
@@ -466,25 +449,30 @@ flowchart TD
 | **ルールベースによる保護** | Rules-based protections | シンプルな**決定論的対策**として、入力文字数上限・正規表現フィルター・ブラックリストなどを適用し、禁止用語や SQL インジェクションを遮断。                                                                     |
 | **出力の検証**             | Output validation       | ブランドガイドラインやコンプライアンスポリシーに合致しているかを**出力後に二次チェック**し、逸脱を修正またはブロック。                                                                                        |
 
----
+ガードレールを構築する上で重要なこちは、対象のユースケースにおいて特定されているリスクに対応するガードレールを設定し、その後新たに発見された脆弱性に応じて追加していく方法が効果的です。
+最初から完璧を目指すのではなく、段階的に強化していくことが重要です。
 
-## チェック・パイプライン例
+1. データプライバシーとコンテンツの安全性を重視
+2. 実際に遭遇したケースや失敗事例に基づいて新たなガードレールを整備
+3. エージェントの進化に合わせてガードレールを調整
 
-```mermaid
-flowchart TD
-  UserInput["User<br/>input"]
-  Relevance["関連性<br/>分類器"]
-  Safety["安全性<br/>分類器"]
-  PII["PII<br/>フィルター"]
-  Moderation["モデレーション<br/>(有害検知)"]
-  ToolSafe["ツール<br/>安全対策"]
-  Rules["ルールベース<br/>保護"]
-  OutValid["出力<br/>検証"]
-  Response["Reply /<br/>Function call"]
+3 つめのエージェントの進化に合わせてガードレールを調整することが意外と見落としやすく、重要になってくると考えています。
 
-  UserInput --> Relevance --> Safety --> PII --> Moderation --> ToolSafe
+# AI エージェントについてまとめ
 
-```
+- エージェントシステムは、複雑な意思決定や非構造化データ、膨らむルールベースシステムを含むユースケースに適しています。
+
+- **オーケストレーションパターン**については、まずはシングルエージェントの構成から始め、必要に応じてマルチエージェントへ進化させましょう。
+- ガードレールは入力フィルタリングやツール利用から人間の介入に至るまで、あらゆる段階で重要。これにより、エージェントが本番環境でも**安全かつ予測可能**に動作することを保証します。
+
+サービス構築成功までの道筋は、決して一度にすべてを実現ものではなく、まず**小規模**なシングルエージェント構成から始めて実際のユーザーと検証を行い、必要に応じてマルチエージェントの仕組みを取り込みながら徐々にエージェントの能力を拡張していきましょう。
+正しい実装と反復的なアプローチがあれば、エージェントはタスクだけでなくワークフロー全体を知性と適応力を持って自動化し、**実際のビジネス価値**を提供できます。
+
+これで、AI エージェントのサービス構築における基本的な考え方と実装方法についてキャッチアップ完了です。
+
+お疲れ様でした 🖐️
+
+# 実践 マルチエージェントサービスを動かしながら理解する 🚀
 
 # Azure AI Agent Service とは？
 
@@ -508,9 +496,7 @@ https://azure.microsoft.com/ja-jp/products/ai-agent-service
 - **エージェントの 3 要素**
   **モデル**（GPT-4o など LLM）＋ **Instructions**（ゴール・制約）＋ **Tools**（Grounding with Bing Search、Azure Logic Apps 等）を組み合わせて構築。
 
-# いざ、実装 🚀
-
-## サービスの流れの全体像
+# サービスの流れの全体像
 
 改めて、今回実装する multi-agent application の全体像を確認します。
 
