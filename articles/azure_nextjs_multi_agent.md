@@ -13,34 +13,29 @@ publication_name: microsoft
 
 本記事では、昨今話題の AI エージェントサービスをこれから作る方へ、AI エージェントシステムを作る上での抑えるべきポイントと実践的なハンズオンにて DeepDive していきたいと思います。
 
-本記事は 2 部構成になっており、第１部では AI Agent の基本的な概念を理解します。
+本記事は 2 部構成になっており、以下の構成です。
 
-第２部では Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Azure AI Agent Service** を使って実装しながら理解していきます。
+- 第 1 部: AI エージェント の基本概念とエージェントシステム構築のガイド
+- 第 2 部: Azure AI Agent Service を使ったワークフロールーティングの実装
+
+第１部では、OpenAI 社の**a-practical-guide-to-building-agents** を参考に、AI エージェントの基本概念とエージェントシステム構築のガイドを解説します。
+
+https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf
+
+第２部では、Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Azure AI Agent Service** を使って実装しながら理解していきます。
 
 上記概念の動作を確認する為に、2025/5 にリリースされた AI Agent Service の **_Connected Agents _** を使ってみます。
 https://techcommunity.microsoft.com/blog/azure-ai-services-blog/building-a-digital-workforce-with-multi-agents-in-azure-ai-foundry-agent-service/4414671
 
 この Connected Agents は、Azure AI Agent Service の新機能で、複数のエージェントを連携させてワークフローを簡単に構築することができます。
 
-そして、ハンズオンは以下の構成を取り扱います。
-非常にシンプルな物になっているので、ぜひ手を動かしながらアプリケーションを動作させて catch up してみてください。
+ハンズオンは以下の Agent の構成を実装します。ぜひ手を動かしながらアプリケーションを動作させて catch up してみてください。
 
-![](https://storage.googleapis.com/zenn-user-upload/6d7c5c3fce54-20250711.png)
-
-ワークフロールーティングとは、**入力（ユーザーのリクエスト）を性質に応じて最適な下流プロセス／モデル／ツールへ振り分ける** 設計パターンです。
-
-ルーティングが特に役立つユースケースは次のようなものです。
-
-- カスタマーサービスで _一般質問_ / _返金リクエスト_ / _テクニカルサポート_ を自動で判別し、それぞれ専用のワークフローに送る。
-- _簡単な FAQ_ は **gpt-4o-mini** など低コストモデルへ、_難解な質問_ は **o3, o3-pro** へ送って **速度とコスト** を最適化する。
-
-ハンズオンでは、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** 、 **Expert Agent** と **General Agent** をぶら下げる 4 体構成のマルチエージェントを例に解説します。
-
-流れを図にするとこんな感じのアプリケーションを作っていきます。
+ハンズオンの流れを図にするとこんな感じのアプリケーションを作っていきます。
 ![](https://storage.googleapis.com/zenn-user-upload/edd3a27912bb-20250713.png)
 
-本記事は以下の構成となります。
-AI エージェントの設計から深く学びたい方は第１部から、とにかく動かして理解したい方は第２部から始めていただければ OK です。
+本記事は AI エージェントの設計から深く学びたい方は第１部から、
+とにかく動かして理解したい方は第２部から始めていただければ OK です。
 
 それでは、AI エージェントの世界へ Deep Dive していきましょう 🚀
 
