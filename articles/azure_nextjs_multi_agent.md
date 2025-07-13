@@ -2,8 +2,8 @@
 title: 'AIエージェントのサービス構築を検討しているあなたへ'
 emoji: '👀'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['nextjs', 'azure', 'multi-agent', 'azureopenai', 'openai']
-published: false
+topics: ['agent', 'azure', 'multi-agent', 'azureopenai', 'openai']
+published: true
 publication_name: microsoft
 ---
 
