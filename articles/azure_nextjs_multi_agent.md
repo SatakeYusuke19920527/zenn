@@ -15,9 +15,14 @@ publication_name: microsoft
 
 本記事は 2 部構成になっており、第１部では AI Agent の基本的な概念を理解します。
 
-第２部では Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Next.js** と **Azure AI Agent Service** を使って実装しながら理解していきます。
+第２部では Anthropic のブログ記事 **[Building Effective Agents – Workflow Routing](https://www.anthropic.com/engineering/building-effective-agents)** で紹介されている _ワークフロールーティング_ のアイデアを、**Azure AI Agent Service** を使って実装しながら理解していきます。
 
-ハンズオンは以下の構成を取り扱います。
+上記概念の動作を確認する為に、2025/5 にリリースされた AI Agent Service の **_Connected Agents _** を使ってみます。
+https://techcommunity.microsoft.com/blog/azure-ai-services-blog/building-a-digital-workforce-with-multi-agents-in-azure-ai-foundry-agent-service/4414671
+
+この Connected Agents は、Azure AI Agent Service の新機能で、複数のエージェントを連携させてワークフローを簡単に構築することができます。
+
+そして、ハンズオンは以下の構成を取り扱います。
 非常にシンプルな物になっているので、ぜひ手を動かしながらアプリケーションを動作させて catch up してみてください。
 
 ![](https://storage.googleapis.com/zenn-user-upload/6d7c5c3fce54-20250711.png)
@@ -32,7 +37,7 @@ publication_name: microsoft
 ハンズオンでは、Next.js API Route で **Router Agent** を構築し、その配下に **FAQ Agent** 、 **Expert Agent** と **General Agent** をぶら下げる 4 体構成のマルチエージェントを例に解説します。
 
 流れを図にするとこんな感じのアプリケーションを作っていきます。
-![](https://storage.googleapis.com/zenn-user-upload/e14be5062d62-20250712.png)
+![](https://storage.googleapis.com/zenn-user-upload/edd3a27912bb-20250713.png)
 
 本記事は以下の構成となります。
 AI エージェントの設計から深く学びたい方は第１部から、とにかく動かして理解したい方は第２部から始めていただければ OK です。
@@ -486,20 +491,20 @@ AI エージェントにおける “ガードレール” とは、モデルの
 
 まずは第 1 部、お疲れ様でした 🖐️
 
-# 第 2 部: Next.js と Azure AI Agent Service を使ったワークフロールーティングの実装
+# 第 2 部: Azure AI Agent Service を使ったワークフロールーティングの実装
 
 # ハンズオンの流れの全体像
 
 改めて、今回実装する multi-agent application の全体像を確認します。
-第１部で説明したマネージャー型のマルチエージェントシステムを Next.js と Azure AI Agent Service を使って実装します。
+第１部で説明したマネージャー型のマルチエージェントシステムを Azure AI Agent Service を使って実装します。
 
-![](https://storage.googleapis.com/zenn-user-upload/e14be5062d62-20250712.png)
+![](https://storage.googleapis.com/zenn-user-upload/edd3a27912bb-20250713.png)
 
 各エージェントの役割は次の通りです。
 
 - **Router Agent**: gpt-4o を使う。ユーザーのリクエストを受け取り、適切なエージェントへ振り分ける。
 - **FAQ Agent**: gpt-4o を使う。よくある質問に対して、AI Search を用いてデータソースを検索し回答する。
-- **Expert Agent**: o3-mini を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
+- **Expert Agent**: gpt-4o を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
 - **General Agent**: gpt-4o-mini を使う。一般的な質問に回答する。(ex. 今日は暑いですね。とか。)
 
 # Azure AI Foundry Agent Service 概要
@@ -521,11 +526,10 @@ Azure AI Foundry の _モデル／ツール／フレームワーク_ を 1 つ�
 
 ハンズオンは以下の流れで進めます。
 
-1. **環境セットアップ** – Next.js と Azure AI Agent Service の準備
+1. **環境セットアップ** – Azure AI Agent Service の準備
 2. **Azure AI Agent Service のセットアップ** – エージェントの作成と設定
-3. **Next.js アプリケーションの実装** – エージェントとの連携
-4. **動作検証** – エージェントの動作確認
-5. **まとめ**
+3. **動作検証** – エージェントの動作確認
+4. **まとめ**
 
 ## 環境セットアップ
 
@@ -543,7 +547,7 @@ v22.17.0
 
 ## Azure AI Agent Service のセットアップ
 
-![](https://storage.googleapis.com/zenn-user-upload/e14be5062d62-20250712.png)
+![](https://storage.googleapis.com/zenn-user-upload/edd3a27912bb-20250713.png)
 
 以下の記事を参照し、AI Agent を構築していく
 
@@ -593,7 +597,7 @@ Azure AI Agent Service にてリソースを選択し、作成を進めていく
 
 - **Router Agent**: gpt-4o を使う。ユーザーのリクエストを受け取り、適切なエージェントへ振り分ける。
 - **FAQ Agent**: gpt-4o を使う。よくある質問に対して、AI Search を用いてデータソースを検索し回答する。
-- **Expert Agent**: o3-mini を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
+- **Expert Agent**: gpt-4o を使う。より専門的な質問に対して、データソースを検索し得られた知見をもとに回答する。
 - **General Agent**: gpt-4o-mini を使う。一般的な質問に回答する。(ex. 今日は暑いですね。とか。)
 
 ## 各エージェントの設定
@@ -617,8 +621,7 @@ Azure AI Agent Service にてリソースを選択し、作成を進めていく
 
 ### router-agent
 
-デプロイ
-モデルは以下を使用
+デプロイモデルは以下を使用
 
 > gpt-4o
 
@@ -650,27 +653,245 @@ expert-agent
 
 ### faq-agent
 
-pdf 直
+faq-agent の設定を行います。
+faq-agent が参照するのは以下の OpenAI 社が出している AI エージェントに関するドキュメントです。
+
+https://cdn.openai.com/pdf/37dce0c6-b190-4cf6-b6b9-2651fe6af98a/%E3%82%A8%E3%83%BC%E3%82%B7%E3%82%99%E3%82%A7%E3%83%B3%E3%83%88%E6%A7%8B%E7%AF%89%E5%AE%9F%E8%B7%B5%E3%82%AB%E3%82%99%E3%82%A4%E3%83%88%E3%82%99.pdf
+
+デプロイモデルは以下を使用
+
+> gpt-4o
+
+手順へ以下を記載
+
+> ドキュメントを参照し、AI エージェントの構築に関するよくある質問に回答してください。
+
+エージェントの説明へ以下を記載
+
+> AI エージェントのドキュメントを参照して、AI エージェントシステム構築における単純な回答を生成するエージェントです。
+
+ナレッジの箇所の追加をクリックして、上述したドキュメントを追加します。
+![](https://storage.googleapis.com/zenn-user-upload/9b31eaf20553-20250713.png)
+
+ファイルを追加してください。
+![](https://storage.googleapis.com/zenn-user-upload/6597169fcde5-20250713.png)
+
+以下のような形でナレッジが追加されていれば OK
+![](https://storage.googleapis.com/zenn-user-upload/ed7cfd842787-20250713.png)
 
 ### expert-agent
 
-AI Search + Blob
+専門的な質問に回答するエージェントを作成します。
+外部ナレッジのデータは Blob Storage に格納し、検索には AI Search を使用します。
+事前に Blob Storage に格納したデータを Index 化する為に、Azure OpenAI Service を Deploy して Embedding モデルも準備しておきます。
+
+まずは Blob Storage にナレッジを格納します。
+Azure Portal にアクセスし、Blob Storage を選択します。
+デプロイの設定は以下で、あとはデフォルトのままで大丈夫です。
+![](https://storage.googleapis.com/zenn-user-upload/9f5082120b79-20250713.png)
+
+Storage Account が作成されたら、リソースへ移動しデータ ストレージ → コンテナー → コンテナーの追加を選択します。
+![](https://storage.googleapis.com/zenn-user-upload/4290096b5054-20250713.png)
+
+コンテナ名はいい感じの名前をつけてください。
+コンテナが作成されたら、先ほどと同様のファイルを Upload します。
+![](https://storage.googleapis.com/zenn-user-upload/67a2414b757b-20250713.png)
+
+これで、Blob Storage にナレッジが格納されました。
+
+次に Azure OpenAI Service を Deploy して Embedding モデルを準備します。
+
+Azure Portal から OpenAI Service を選択し、デプロイの設定を行います。
+![](https://storage.googleapis.com/zenn-user-upload/e410dc020939-20250713.png)
+
+上記の画像のように設定して、後はデフォルトで OK です。
+
+デプロイが完了したら、Azure OpenAI Service のリソースへ移動し、AI Foundry へ移動。Embedding モデルを Deploy します。
+![](https://storage.googleapis.com/zenn-user-upload/348bf58b1973-20250713.png)
+
+`text-embedding-3-large` を Deploy します。
+![](https://storage.googleapis.com/zenn-user-upload/8650aa983292-20250713.png)
+
+次に AI Search を設定します。
+
+Azure Portal から AI Search を選択し、デプロイの設定を行います。
+設定は以下で、あとはデフォルトのままで大丈夫です。
+![](https://storage.googleapis.com/zenn-user-upload/bae5556f400a-20250713.png)
+
+※ 本記事では、Standard を選択していますが、Basic では、Index が 1 ファイル 16 MB (= 16,777,216 bytes) まで全文抽出できます。16MB 以上のデータを使用したい場合は Standard を、それ以下のデータサイズを参照させる場合は、Basic で問題ありません。
+
+デプロイされたら、データソースを追加します。
+![](https://storage.googleapis.com/zenn-user-upload/eabc7d051772-20250713.png)
+
+データソースの追加から先ほど作成した Blob Storage を選択します。
+![](https://storage.googleapis.com/zenn-user-upload/c3caa17dea3e-20250713.png)
+
+次に AI Search 内に index を作成します。
+
+概要からデータのインポートとベクター化を選択
+![](https://storage.googleapis.com/zenn-user-upload/a3a9429f46eb-20250713.png)
+
+Azure Blob Storage を選択
+![](https://storage.googleapis.com/zenn-user-upload/417bf5617038-20250713.png)
+
+RAG を選択してください。
+![](https://storage.googleapis.com/zenn-user-upload/33342ae26fa4-20250713.png)
+
+データへの接続の箇所は以下の画像のように設定
+![](https://storage.googleapis.com/zenn-user-upload/442cfe196091-20250713.png)
+
+デプロイが完了したら、Azure AI Foundry に戻り、expert-agent の設定を行います。
+
+デプロイモデルは以下を使用
+
+> gpt-4o
+
+手順へ以下を記載
+
+> AI エージェントの構築に関する専門的な質問に回答してください。また、ガードレールなどを考慮し、適切な回答を生成してください。
+
+エージェントの説明へ以下を記載
+
+> AI Search を活用して、データソースから AI エージェントのドキュメントを参照して、AI エージェントシステム構築における複雑な回答を生成するエージェントです。データソースを検索して内容を回答することに加え、ガードレールなどを考慮し、適切な回答を生成してください。
+
+ナレッジには、AI Search を選択し、先ほど作成した AI Search のインデックスを選択します。
+![](https://storage.googleapis.com/zenn-user-upload/13eda15a678f-20250713.png)
+
+以下のように Embedding モデルを選択します。
+![](https://storage.googleapis.com/zenn-user-upload/93fa961a5269-20250713.png)
+
+画像ファイルもベクター化したい場合は適宜チェックボックを選択してください。
+![](https://storage.googleapis.com/zenn-user-upload/590a3885f1df-20250713.png)
+
+検索精度を上げる為にセマンティックランカーを ON で設定します。
+![](https://storage.googleapis.com/zenn-user-upload/6349b15965e1-20250713.png)
+
+これで OK です。
+![](https://storage.googleapis.com/zenn-user-upload/93f0669cfb40-20250713.png)
+
+Index 化が成功していれば、このように`*`を検索窓に入力して検索すると、検索結果が表示されます。
+![](https://storage.googleapis.com/zenn-user-upload/ec824ccce7dc-20250713.png)
 
 ここまできたら AI Agent Service のセットアップ完了です。
 
-# Next.js アプリケーションの実装
+次は AI Foundry に戻り、AI Agent Service の expert-agent の設定を行います。
+AI Search を選択
+![](https://storage.googleapis.com/zenn-user-upload/685d4c5ff1a1-20250713.png)
+
+AI Agent Service に接続します。
+![](https://storage.googleapis.com/zenn-user-upload/dafc7d8c2ac2-20250713.png)
+
+以下のように expert-agent に接続されていれば OK
+![](https://storage.googleapis.com/zenn-user-upload/21aee52e164a-20250713.png)
+
+これで、AI Agent Service のセットアップ完了です。
 
 # 動作検証 – エージェントの動作確認
 
+動作検証は簡単で、AI Roundry の AI Agent Service の router-agent を選択し、プレイグラウンドを開いてください。
+
+![](https://storage.googleapis.com/zenn-user-upload/2d56a009a06b-20250713.png)
+
+以下のように入力して会話を始めてみます。
+
+スレッドログを見てみると、Tool にて connected_agent が呼び出され、適切なエージェントが呼び出されていることがわかります。
+![](https://storage.googleapis.com/zenn-user-upload/9f9ea00a1b21-20250713.png)
+
+これで、router-agent が user からのリクエストを受け取り、適切なエージェントへ振り分けていることが確認できました。
+
+ハンズオンもお疲れ様でした。
+
+ちなみに Next.js のアプリケーションでも同様に動作することを確認しました。
+![](https://storage.googleapis.com/zenn-user-upload/4d1856b02b5f-20250713.png)
+
+Next.js の呼び出しの api は以下になります。
+
+```:ts
+// app/api/agent/route.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { DefaultAzureCredential } from '@azure/identity';
+import { NextRequest } from 'next/server';
+
+import { AIProjectClient } from '@azure/ai-projects';
+
+export const runtime = 'nodejs';
+
+/**
+ * POST /api/agent
+ * body: { userInput: string, threadId?: string }
+ */
+export async function POST(req: NextRequest) {
+  const { message } = await req.json();
+
+  console.log('🚀 ~ POST ~ message:', message);
+  // ── エージェントに投げて応答(1 行)を取得 ──
+  const assistantReply = await runAgentConversation(message);
+  console.log('🚀 ~ POST ~ assistantReply:', assistantReply);
+
+  // ── 文字列だけを返す ──
+  return new Response(assistantReply!, {
+    status: 200,
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+}
+
+async function runAgentConversation(userMessage: string) {
+  const project = new AIProjectClient(
+    'https://xxxxxxxxxxxxxxxxxx.services.ai.azure.com/api/projects/xxxxxxxxxxxxxxxxxxx',
+    new DefaultAzureCredential()
+  );
+
+  const agent = await project.agents.getAgent('asst_xxxxxxxxxxxxxxxxxx');
+  const thread = await project.agents.threads.create();
+
+  // ユーザー発話を追加
+  await project.agents.messages.create(thread.id, 'user', userMessage);
+
+  // エージェントを実行
+  let run = await project.agents.runs.create(thread.id, agent.id);
+  while (run.status === 'queued' || run.status === 'in_progress') {
+    await new Promise((r) => setTimeout(r, 1000));
+    run = await project.agents.runs.get(thread.id, run.id);
+  }
+  if (run.status === 'failed') throw new Error(run.lastError?.message);
+
+  // メッセージ一覧（昇順）を取得して最後の assistant 発話を抜き出す
+  const messages = await project.agents.messages.list(thread.id, {
+    order: 'asc',
+  });
+
+  let assistantReply = '';
+  for await (const m of messages) {
+    if (m.role === 'assistant') {
+      const content = m.content.find((c) => c.type === 'text' && 'text' in c);
+      if (content) assistantReply = content.text.value;
+    }
+  }
+
+  return assistantReply; // ← 1 行文字列を返す
+}
+
+```
+
+こちらも上記の TypeScript のコードで呼び出すことができますので、ぜひ Next.js のアプリケーションを実装してチャレンジしてみてください。
+
 # 第 2 部 まとめ
 
-ワークフロールーティングを導入することで、**コスト最適化** と **スケールしやすさ** を両立したエージェント基盤を構築できます。Next.js + Azure AI Agent Service は、
+本章では、Azure AI Agent Service を使ってマルチエージェントアプリケーションを実装しました。
 
-1. **Serverless** で運用コストを抑えられる
-2. **Azure RBAC / ネットワーク分離** でエンタープライズ要件に対応
-3. **MCP ストリーム** によるリアルタイム更新で UX を向上
+Connected Agents という新機能でより第１部で学んだマネージャー型のマルチエージェントシステムを Azure AI Agent Service を使って実装することで、エージェント間のオーケストレーションや専門エージェントの活用が容易になりました。
 
-というメリットが大きく、スタートアップからエンタープライズまで活用しやすいスタックです。
+# 最後に
+
+第１部・第２部とかなりのボリュームになってしましましたが、AI エージェントの基本的な考え方と実装方法についてキャッチアップできたかと思います。
+AI エージェントは、複雑な意思決定や非構造化データ、膨らむルールベースシステムを含むユースケースに適しています。
+まずはシングルエージェントの構成から始め、必要に応じてマルチエージェントへ進化させましょう。
+また、ガードレールは入力フィルタリングやツール利用から人間の介入に至るまで、あらゆる段階で重要です。これにより、エージェントが本番環境でも安全かつ予測可能に動作することを保証することが出来ます。
+
+これから AI エージェントを使ったサービスが増えていく中で、本記事が少しでも参考になれば幸いです。
+
+それでは 🖐️
 
 # 参考文献
 
@@ -679,3 +900,5 @@ https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-buildi
 https://platform.openai.com/docs/guides/model-selection
 
 https://www.anthropic.com/engineering/building-effective-agents
+
+https://techcommunity.microsoft.com/blog/azure-ai-services-blog/building-a-digital-workforce-with-multi-agents-in-azure-ai-foundry-agent-service/4414671
