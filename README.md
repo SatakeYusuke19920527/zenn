@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Next.js で作る マルチエージェントアプリ入門" --type tech --emoji 👀 --publication-name "microsoft"
+  > npx zenn new:article --title "SRE の仕事を AI Agent に任せて人間はゆっくりする会" --type tech --emoji ☕️ --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
