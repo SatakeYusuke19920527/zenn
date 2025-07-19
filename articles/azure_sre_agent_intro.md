@@ -23,7 +23,7 @@ SRE の仕事は IT 業界では非常に重要な役割を担っているので
 
 SRE の基本的な概念や役割から、AI Agent を活用して SRE の業務を任せてみるところまで記載しておりますので、ぜひ楽しんでいただければと思います。
 
-それでは、始めましょう 🚀
+それでは、始めましょう 🚀🚀
 
 # そもそも SRE ってなに？
 
@@ -149,8 +149,7 @@ App Services を検索して Web アプリを選択
 ![](https://storage.googleapis.com/zenn-user-upload/54b9a9103757-20250719.png)
 ![](https://storage.googleapis.com/zenn-user-upload/9b46e7e57a86-20250719.png)
 
-基本認証を有効にするを選択   て後は Default で OK
-![](https://storage.googleapis.com/zenn-user-upload/10d7ec15fd63-20250719.png)
+基本認証を有効にするを選択し後は Default で OK
 
 Deploy してください。
 
@@ -286,3 +285,5 @@ AI Agent が SRE 業務を支援することで、障害検知から復旧まで
 
 https://learn.microsoft.com/ja-jp/training/modules/intro-to-site-reliability-engineering/
 https://learn.microsoft.com/ja-jp/azure/sre-agent/troubleshoot-azure-app-service
+
+https://techcommunity.microsoft.com/blog/azurepaasblog/introducing-azure-sre-agent/4414569
