@@ -1,5 +1,5 @@
 ---
-title: 'SREの仕事をAI Agentに任せて人間はゆっくりする会☕️'
+title: 'SREの仕事をAI Agentに任せてみる'
 emoji: '☕️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['SRE', 'AI Agent', 'Azure', 'Microsoft', 'AzureSREAgent']
@@ -7,7 +7,7 @@ published: true
 publication_name: microsoft
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/021836dd1244-20250717.png)
+![](https://storage.googleapis.com/zenn-user-upload/0fc56fdfc7b5-20250720.png)
 
 # はじめに
 
