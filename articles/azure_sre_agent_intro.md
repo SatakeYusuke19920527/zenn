@@ -3,7 +3,7 @@ title: 'SREの仕事をAI Agentに任せて人間はゆっくりする会☕️'
 emoji: '☕️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['SRE', 'AI Agent', 'Azure', 'Microsoft', 'AzureSREAgent']
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -138,8 +138,151 @@ SRE エージェントは、アプリケーション構成と依存サービス�
 
 # SRE 業務を AI Agent に任せてみるハンズオン
 
+## SRE Agent が監視する Web アプリを作成
+
+監視対象のリソースグループを作成します。
+![](https://storage.googleapis.com/zenn-user-upload/04e0f83f8b03-20250719.png)
+
+App Services を検索して Web アプリを選択
+設定は以下のような感じに。
+※価格プランは Standard 以上を選択してください。
+![](https://storage.googleapis.com/zenn-user-upload/54b9a9103757-20250719.png)
+![](https://storage.googleapis.com/zenn-user-upload/9b46e7e57a86-20250719.png)
+
+基本認証を有効にするを選択   て後は Default で OK
+![](https://storage.googleapis.com/zenn-user-upload/10d7ec15fd63-20250719.png)
+
+Deploy してください。
+
+アプリケーションは以下のリポジトリのものを利用します。
+https://github.com/Azure-Samples/app-service-dotnet-agent-tutorial
+
+Deploy 出来たら、Azure portal で、[リソースに移動] を選択して、新しく作成した App Service に移動します。左側のメニューの [ 展開 ] セクションで、[ 展開センター] を選択します。
+[ 設定] タブで、次の構成を行います。
+![](https://storage.googleapis.com/zenn-user-upload/ff8759e1ad1f-20250719.png)
+
+[保存] を選択してデプロイ設定を適用します。
+
+## Web アプリを確認
+
+デプロイ後、サンプル アプリが想定どおりに実行されていることを確認します。
+App Service の左側のメニューで、[ 概要] を選択します。
+[ 参照 ] を選択して、新しいブラウザー タブでアプリを開きます (読み込みに 1 分かかる場合があります)。
+アプリには、大きなカウンターと 2 つのボタンが表示されます。
+
+![](https://storage.googleapis.com/zenn-user-upload/6bc92256b57e-20250719.png)
+
+こんな感じの.NET9 で作られた簡単なアプリです。
+
+## 障害シミュレーションようのデプロイスロットの設定
+
+アプリの障害シナリオをシミュレートするには、セカンダリ デプロイ スロットを追加します。
+App Service の左側のメニューの [ デプロイ ] セクションで、[ デプロイ スロット] を選択します。
+[ スロットの追加] を選択します。
+次の値を入力します。
+![](https://storage.googleapis.com/zenn-user-upload/d7f78e5edd13-20250719.png)
+
+## サンプル アプリをスロットにデプロイする
+
+スロットが作成されたら、一覧から broken スロットを選択します。
+左側のメニューの [ 展開 ] セクションで、[ 展開センター] を選択します。
+[ 設定] タブで、次の構成を行います。
+
+![](https://storage.googleapis.com/zenn-user-upload/849a9134dc3e-20250719.png)
+
+## エラー シミュレーションを有効にするアプリ設定を追加する
+
+エラー シミュレーションを制御するには、実行時にアプリがチェックするアプリ設定を構成します。
+App Service の左側のメニューで、[設定] セクションの [環境変数] を選択します。
+上部で、正しいスロット（例えば、broken）が選択されていることを確認します。
+[ アプリの設定 ] タブで、[ + 追加] を選択します。
+
+次の値を入力します。
+![](https://storage.googleapis.com/zenn-user-upload/2c36d4f3e382-20250719.png)
+
+## SRE Agent を作成
+
+SRE Agent の画面はこちら。
+![](https://storage.googleapis.com/zenn-user-upload/e94b1000f4fd-20250719.png)
+
+先ほど作成した監視対象のアプリケーションが所属するリソースグループを選択します。
+![](https://storage.googleapis.com/zenn-user-upload/f37ce23b93ef-20250719.png)
+
+SRE Agent を作成してください。
+![](https://storage.googleapis.com/zenn-user-upload/6bcbd6b57075-20250719.png)
+
+細かな設定は以下となります。
+![](https://storage.googleapis.com/zenn-user-upload/555ad2222e4d-20250719.png)
+
+Azure SRE Agent の画面はこんな感じです。チャットベースの画面ですね。
+![](https://storage.googleapis.com/zenn-user-upload/32244bd5b22b-20250719.png)
+
+## SRE Agent とチャットしてみる。
+
+まずは、以下のメッセージを入力します。監視している App Service の一覧を取得してもらいましょう。
+
+> List my App Service apps
+
+![](https://storage.googleapis.com/zenn-user-upload/167e00a8e5a6-20250719.png)
+
+素晴らしいですね。
+しっかりと返してくれました。
+
+## アプリに障害を起こしてみる
+
+次に壊れたデプロイ スロットにスワップして、障害シナリオをシミュレートします。
+App Service で、左側のメニューの [デプロイ ] セクションに移動し、[ デプロイ スロット] を選択します。
+[ スワップ] を選択します。
+[ スワップ ] ダイアログで、次の構成を行います。
+
+Swap をクリック
+![](https://storage.googleapis.com/zenn-user-upload/a7972c9a64c6-20250719.png)
+
+Source を障害があるスロットに、Target を現在の正常なスロットを選択します。
+![](https://storage.googleapis.com/zenn-user-upload/c67cdfe18f2b-20250719.png)
+
+では、Start Swap で障害を起こしてみましょう。
+
+![](https://storage.googleapis.com/zenn-user-upload/2053171d3b56-20250719.png)
+
+インクリメントボタンを 6 回選択して、HTTP 500 エラーが返されることを確認します。
+
+そして、SRE Agent に障害を検知してもらいましょう！
+
+> What's wrong with my-sre-app?
+
+以下のようなメッセージが返ってきます。
+
+> "スロットをスワップバックしてアプリケーションを正常な状態に回復することで、my-sre-app の軽減策を実行します。 スロットをスワップバックすると、常にすぐに正常性が復元されるわけではないことに注意してください。 私は進行状況を更新し続けます。
+
+承認をクリックしてロールバックしてみます。
+
+最後にもう一回、状態を確認してみましょう！
+
+> What's wrong with my-sre-app?
+
+![](https://storage.googleapis.com/zenn-user-upload/6eeb40beba9c-20250719.png)
+
+healthy な状態に戻りましたね。
+
+SRE Agent が障害を検知して、ロールバックまで自動で行ってくれました。
+
+ハンズオンは以上になります。
+
+お疲れ様でした！
+
 # まとめ
+
+今回は SRE 業務を AI Agent に任せてみるというテーマで、Azure SRE Agent を使ったハンズオンを行いました。
+AI Agent が SRE 業務を支援することで、障害検知から復旧までの時間と労力を大幅に短縮できることを体感していただけたかと思います。
+
+まだ、private preview の Azure SRE Agent ですが、今後の Update でさらに多くのシナリオで活用できるようになることが期待しています。
+
+様々な業務が AI Agent が代替してくれて、人間はよりクリエイティブな仕事に集中できる未来が来ることを願っています。
+
+それでは 🖐️
 
 # 参考資料
 
 https://learn.microsoft.com/ja-jp/training/modules/intro-to-site-reliability-engineering/
+https://learn.microsoft.com/ja-jp/azure/sre-agent/troubleshoot-azure-app-service
