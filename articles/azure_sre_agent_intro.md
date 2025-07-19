@@ -1,5 +1,5 @@
 ---
-title: 'SREの仕事をAI Agentに任せてみる'
+title: 'SREの仕事をAI Agentに任せてみてお手なみ拝見'
 emoji: '☕️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['SRE', 'AI Agent', 'Azure', 'Microsoft', 'AzureSREAgent']
