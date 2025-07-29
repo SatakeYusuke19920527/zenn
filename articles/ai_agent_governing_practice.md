@@ -1,9 +1,11 @@
+---
 title: 'AI エージェントシステムのガバナンス実践ガイド'
 emoji: '📃'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['AIagent', 'Governance', 'Governance', 'OpenAI', 'Microsoft']
 published: false
 publication_name: microsoft
+---
 
 ![](https://storage.googleapis.com/zenn-user-upload/1f5fc7603895-20250721.png)
 
