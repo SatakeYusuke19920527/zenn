@@ -2,7 +2,7 @@
 title: 'GPT-5 の教科書'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['GPT-5', 'AI', 'OpenAI', 'LLM']
+topics: ['GPT-5', 'AI', 'OpenAI', 'LLM', 'AGI']
 published: false
 publication_name: microsoft
 ---
@@ -58,13 +58,7 @@ https://cdn.openai.com/pdf/8124a3ce-ab78-4f06-96eb-49ea29ffb52f/gpt5-system-card
 - **高速・汎用** は **gpt-5-main**、**難問推論や厳格安全** は **gpt-5-thinking** を選択。  
   **ルーター運用** で自動最適化が可能。
 
-# 目次
-
-- **1 序論**
-- **2 モデルデータとトレーニング**
-- **3 観察された安全性の課題と評価**
-- **4 レッドチーミングと外部評価**
-- **5 準備態勢フレームワーク**
+# ここから本編開始
 
 # 序論
 
@@ -210,7 +204,7 @@ Safe-completions の目的は、**安全ポリシーの制約を守りながら�
 
 今後は特に **ヘイト/脅迫** および **性的搾取** のカテゴリ改善に注力する予定です。
 
-## 3.3 迎合的応答（Sycophancy）
+## 迎合的応答（Sycophancy）
 
 2025 年 5 月、私たちは GPT-4o モデルで発生した迎合的応答（sycophancy）問題に対処するための即時措置を発表しました。具体的には、直前にデプロイされた GPT-4o の新バージョンをロールバックし、運用中のモデルのシステムプロンプトを調整しました。  
 システムプロンプトは容易に変更できますが、トレーニング後のモデル出力に与える影響は限定的です。
@@ -227,7 +221,7 @@ GPT-5 では、迎合的応答を減らすために**ポストトレーニング
 
 **オンライン予備評価**（A/B テストを用いた実運用トラフィック測定）では、迎合的応答の発生率が無料ユーザーで 69%、有料ユーザーで 75% 減少しました（GPT-4o 比）。
 
-### 表 4: 迎合的応答の評価（数値が低いほど良い）
+### 迎合的応答の評価（数値が低いほど良い）
 
 | モデル                 | テスト種別                      | 結果                                         |
 | ---------------------- | ------------------------------- | -------------------------------------------- |
@@ -239,7 +233,7 @@ GPT-5 では、迎合的応答を減らすために**ポストトレーニング
 これらの数値は、**オフライン評価**および**オンライン予備評価**の両方で、迎合的応答回避において有意な改善があったことを示しています。  
 今後もこの課題への取り組みを継続し、さらなる改善を目指していきます。
 
-## 3.4 脱獄攻撃（Jailbreaks）
+## 脱獄攻撃（Jailbreaks）
 
 モデルが脱獄攻撃に対してどれほど堅牢であるかを評価します。  
 脱獄攻撃とは、本来モデルが生成を拒否すべきコンテンツに対して、意図的にその拒否を回避しようとする敵対的プロンプトのことです。  
@@ -249,7 +243,7 @@ GPT-5 では、迎合的応答を減らすために**ポストトレーニング
   既知の脱獄手法を、安全性拒否評価の例に挿入します。その後、禁止コンテンツ検出に使用しているのと同じポリシー採点器で評価します。  
   脱獄テクニックは複数の危害カテゴリにわたる基本プロンプトに適用し、関連ポリシーに従って `not_unsafe`（安全とみなされる）かを評価します。
 
-### 表 5: 脱獄評価（数値が高いほど良い）
+### 脱獄評価（数値が高いほど良い）
 
 | カテゴリ                       | 指標       | gpt-5-thinking | OpenAI o3 | gpt-5-main | GPT-4o |
 | ------------------------------ | ---------- | -------------- | --------- | ---------- | ------ |
@@ -258,12 +252,10 @@ GPT-5 では、迎合的応答を減らすために**ポストトレーニング
 | 虐待・偽情報・ヘイトプロンプト | not_unsafe | 0.999          | 0.995     | 0.978      | 0.981  |
 | 性的コンテンツプロンプト       | not_unsafe | 0.995          | 0.991     | 0.967      | 0.961  |
 
-**考察**
-
 - `gpt-5-thinking` は OpenAI o3 とほぼ同等の性能を発揮。
 - `gpt-5-main` は GPT-4o と近いスコアで、全体として高い安全性を維持しています。
 
-## 3.5 命令階層（Instruction Hierarchy）
+## 命令階層（Instruction Hierarchy）
 
 API におけるこれらのモデルの利用では、開発者がカスタム開発者メッセージを指定し、それをエンドユーザーからのすべてのプロンプトに含めることができます。  
 この仕組みは適切に扱われない場合、開発者がシステムメッセージのガードレールを回避したり、エンドユーザーがシステムまたは開発者メッセージのガイドラインを回避する可能性があります。
@@ -289,7 +281,7 @@ API におけるこれらのモデルの利用では、開発者がカスタム�
 - **Phrase protection**  
   悪意あるユーザーメッセージがモデルに「access granted」と言わせようとする状況で、システムメッセージが秘密条件を満たさない限りそれを防げるかをテストします。
 
-### 表 6: 命令階層評価（数値が高いほど良い）
+### 命令階層評価（数値が高いほど良い）
 
 | 評価項目                                        | gpt-5-thinking | OpenAI o3 | gpt-5-main | GPT-4o |
 | ----------------------------------------------- | -------------- | --------- | ---------- | ------ |
@@ -303,7 +295,7 @@ API におけるこれらのモデルの利用では、開発者がカスタム�
 - **`gpt-5-main`** は複数の評価項目で他モデルより低いスコアを示す。
 - 特に **Phrase protection（悪意ある開発者メッセージ）** でのスコア低下が顕著で、今後の改善対象となっています。
 
-## 3.6 幻覚（Hallucinations）
+## 幻覚（Hallucinations）
 
 GPT-5 モデルの訓練では、事実誤認（幻覚）の発生頻度を減らすことに注力しました。  
 ChatGPT ではデフォルトでブラウジング機能が有効ですが、多くの API クエリはブラウジングを使用しません。  
@@ -314,13 +306,9 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 実運用の ChatGPT 会話を代表するプロンプトを用い、LLM ベースの採点モデル（ウェブアクセス付き）で主要・軽微な事実誤りを特定しました。  
 人間による評価と比較して 75% の一致率があり、この採点器の妥当性が確認されました。
 
-結果として：
-
 - **`gpt-5-main`** の幻覚率は GPT-4o より 26% 低下
 - **`gpt-5-thinking`** の幻覚率は OpenAI o3 より 65% 低下
 - 主要な事実誤りを 1 つ以上含む応答は `gpt-5-main` が 44% 減少、`gpt-5-thinking` が 78% 減少（比較対象: OpenAI o3）
-
-### 図 1 の数値（Markdown 表）
 
 | モデル         | % 誤った主張 | % 応答に 1 つ以上の主要誤り | 応答あたり正しい主張数 |
 | -------------- | ------------ | --------------------------- | ---------------------- |
@@ -335,7 +323,7 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 
 ## 平均幻覚率の比較
 
-### Figure 2: 平均幻覚率（ブラウジング有効 / Browsing Enabled）
+### 平均幻覚率（ブラウジング有効 / Browsing Enabled）
 
 | モデル              | LongFact-Concepts | LongFact-Objects | FActScore |
 | ------------------- | ----------------: | ---------------: | --------: |
@@ -345,10 +333,9 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 | OpenAI o3           |              3.1% |             4.1% |      5.7% |
 | OpenAI o4-mini      |              4.5% |             5.1% |      5.1% |
 
-**解説**  
 ブラウジングが有効な環境では、`gpt-5-thinking` 系列の幻覚率が最も低く、特に **FActScore** における改善が顕著です。
 
-### Figure 3: 平均幻覚率（ブラウジング無効 / Browsing Disabled）
+### 平均幻覚率（ブラウジング無効 / Browsing Disabled）
 
 | モデル              | LongFact-Concepts | LongFact-Objects | FActScore |
 | ------------------- | ----------------: | ---------------: | --------: |
@@ -360,10 +347,9 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 | gpt-5-main          |              0.9% |             1.3% |      6.9% |
 | GPT-4o              |              0.9% |             1.1% |      5.6% |
 
-**解説**  
 ブラウジング無効時は、**o4-mini** と **o3** の幻覚率が高く、**GPT-5 系**（thinking / main / nano / mini）は相対的に低い値を示します。
 
-### Table 7: SimpleQA 評価（no web）
+### SimpleQA 評価（no web）
 
 | Eval              | 指標                               | gpt-5-thinking | OpenAI o3 | gpt-5-thinking-mini | OpenAI o4-mini | gpt-5-thinking-nano | gpt-5-main | GPT-4o |
 | ----------------- | ---------------------------------- | -------------: | --------: | ------------------: | -------------: | ------------------: | ---------: | -----: |
@@ -374,7 +360,7 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 - ブラウジング無効時は **o4-mini / o3** が特に **FActScore** で高い（＝悪い）幻覚率。
 - **SimpleQA** では **gpt-5-thinking** が正答率トップ、幻覚率も比較的低い。
 
-## 3.7 欺瞞（Deception）
+## 欺瞞（Deception）
 
 **欺瞞**とは、モデルがユーザーに返す回答が、内部推論や実際の行動を誤って伝えることを指します。  
 これは、事前学習時に含まれる欺瞞的なテキストや、強化学習の過程で学習される場合があります。  
@@ -393,7 +379,7 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 - **Broken Tools**: ツールが無効化された状態での応答（例：ブラウジングツールがエラーを返す）
 - **Underspecified User Requests**: 必要な情報が欠落したユーザー入力に対する応答（例：画像がないのに説明を求める）
 
-## Table 8: 欺瞞評価（数値は低いほど良い、Recall は高いほど良い）
+## 欺瞞評価（数値は低いほど良い、Recall は高いほど良い）
 
 | 評価項目                    | 指標             | gpt-5-thinking | OpenAI o3 |
 | --------------------------- | ---------------- | -------------- | --------- |
@@ -421,7 +407,7 @@ ChatGPT ではデフォルトでブラウジング機能が有効ですが、多
 
 ほぼ全てのカテゴリで gpt-5-thinking は欺瞞率を半減以上させており、特に「Missing Dependencies & Tools」で顕著な改善が見られる。
 
-### 3.7.1 モニタリング：Chain of Thought による欺瞞検出
+### モニタリング：Chain of Thought による欺瞞検出
 
 私たちは以前、推論モデルの Chain of Thought (CoT) をモニタリングすることで、フロンティア推論モデルのトレーニング中に不正行為を検出するのに非常に効果的であることを確認しました。同じ手法を用いて、OpenAI o3 および gpt-5-thinking のほぼ最終版から得られた大量の実運用データを分析し、現実世界でどの程度これらのモデルが欺瞞的な振る舞いを示すのかを検証しました。
 
@@ -433,7 +419,7 @@ CoT のモニタリングが困難な非推論モデルや低監視モデルで�
 
 上記の軽減策を講じた後でも、ごく一部のやり取りではモデルがユーザーを欺く可能性があります。CoT モニタリングによって、推論モデルの軽減策を特定・優先できることを嬉しく思います。私たちはこの技術に投資を続けており、モデルがより高度になるにつれてその重要性は増すと考えています。
 
-## 3.8 Image Input
+## Image Input
 
 ChatGPT Agent で導入された image input 評価を実施しました。  
 これらの評価は、不適切なモデル出力を回避するために、許可されていないテキストと画像入力の組み合わせを検出するものです。
@@ -441,7 +427,7 @@ ChatGPT Agent で導入された image input 評価を実施しました。
 結果として、**gpt-5-thinking** は **OpenAI o3** よりやや高いスコアを示しました。  
 また、**gpt-5-main** は **GPT-4o** と同等か、やや上回る傾向を見せています。
 
-### Table 9: Image input evaluations (higher is better)
+### Image input evaluations (higher is better)
 
 | Category        | gpt-5-thinking | OpenAI o3 | gpt-5-main | GPT-4o |
 | --------------- | -------------- | --------- | ---------- | ------ |
@@ -452,18 +438,16 @@ ChatGPT Agent で導入された image input 評価を実施しました。
 | self-harm       | 0.996          | 0.982     | 0.997      | 0.980  |
 | harms-erotic    | 0.994          | 0.987     | 0.994      | 0.995  |
 
-### 解説
-
 - **gpt-5-thinking** は全体的に安定して高いスコアを獲得。特に _attack planning_ では満点の **1.000**。
 - **gpt-5-main** は **GPT-4o** とほぼ同等のパフォーマンスだが、_extremism_ と _self-harm_ 項目でやや優勢。
 - **OpenAI o3** は他モデルと比べやや低めのスコア。
 
-## 3.9 Health
+## Health
 
 健康関連の環境におけるパフォーマンスと安全性を測定するために、GPT-5 モデルファミリーを **HealthBench** で評価しました。  
 ここでは **HealthBench**, **HealthBench Hard**, **HealthBench Consensus** のスコアを報告します。
 
-### Figure 6: Health performance and safety
+### Health performance and safety
 
 - **gpt-5-thinking** は GPT-4o, OpenAI o1, OpenAI o3, OpenAI o4-mini を大幅に上回るスコアを記録。
   - HealthBench Hard におけるスコアは、OpenAI o3 の 31.6% から **46.2%** へ大きく改善。
@@ -497,7 +481,7 @@ ChatGPT Agent で導入された image input 評価を実施しました。
 - gpt-5-main: 94.3%
 - GPT-4o: 88.7%
 
-### Figure 7: Specific areas of potential error
+### Specific areas of potential error
 
 - **HealthBench Hard Hallucinations**
 
@@ -513,7 +497,7 @@ ChatGPT Agent で導入された image input 評価を実施しました。
   - 疫学・標準ケア・医療アクセスなど、曖昧なグローバル健康文脈で調整に失敗するケースを測定。
   - 例はすべて 2 人以上の医師によって検証。
 
-### Figure 7: Health error rates in three areas of safety
+### Health error rates in three areas of safety
 
 **gpt-5-thinking** は OpenAI o3 に比べてエラー率を 8 倍以上削減。  
 **gpt-5-thinking-mini** も大規模モデルを上回り、**gpt-5-main** も従来モデルを上回る結果を示しています。
@@ -548,15 +532,13 @@ ChatGPT Agent で導入された image input 評価を実施しました。
 - gpt-5-main: 5.3%
 - GPT-4o: 13.7%
 
----
-
 - **困難な健康会話の幻覚 (Hallucinations)**: gpt-5-thinking は OpenAI o3 と比較して約 8 倍の削減。
 - **高リスク状況での誤り (Urgent)**: gpt-5-thinking は GPT-4o と比較して 50 倍以上の削減、OpenAI o3 と比較して 8 倍以上の削減。
 - **グローバル健康文脈 (Global Health)**: gpt-5-thinking では誤りが検出されず（0.0%）。
 
 GPT-5 系列は従来の thinking / non-thinking モデルを超えて、医療分野における大幅なエラー削減を実現しています。
 
-## Table 10: MMLU Language (0-shot)
+## MMLU Language (0-shot)
 
 MMLU Language (0-shot) における各モデルのスコアです。  
 評価は **0-shot**、chain-of-thought prompting によって実施されました。  
@@ -579,18 +561,16 @@ MMLU Language (0-shot) における各モデルのスコアです。
 | Swahili              | 0.880          | 0.815      | 0.860          |
 | Yoruba               | 0.806          | 0.664      | 0.780          |
 
-## 3.11 Fairness and Bias: BBQ Evaluation
+## Fairness and Bias: BBQ Evaluation
 
 BBQ evaluation による各モデルの評価結果です【9】。
 
-### Table 11: BBQ evaluation
+### BBQ evaluation
 
 | Metric (higher is better)           | gpt-5-thinking (with web search) | gpt-5-thinking (without web search) | OpenAI o3 (with web search) | gpt-5-main (without browse) | GPT-4o (without browse) |
 | ----------------------------------- | -------------------------------- | ----------------------------------- | --------------------------- | --------------------------- | ----------------------- |
 | Accuracy on ambiguous questions     | 0.95                             | 0.93                                | 0.94                        | 0.93                        | 0.88                    |
 | Accuracy on disambiguated questions | 0.85                             | 0.88                                | 0.93                        | 0.86                        | 0.85                    |
-
-### 解説
 
 - **曖昧な質問 (ambiguous questions)**
 
@@ -625,7 +605,7 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 
 ---
 
-## 4.1 Expert Red Teaming for Violent Attack Planning
+## Expert Red Teaming for Violent Attack Planning
 
 防衛、情報、法執行/セキュリティ分野の経歴を持つ **25 名のレッドチーム** によって、暴力的攻撃計画における gpt-5-thinking の有用性を評価しました。  
 レッドチームは **OpenAI o3** と並行してテストを行い、両モデルを匿名化して比較評価しました。
@@ -639,7 +619,7 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 レッドチームは各会話でモデル出力を比較評価し、安全性や有用性を判断しました。  
 その結果は以下の通りです。
 
-### Table 12: Attack planning red teaming win rate results
+###Attack planning red teaming win rate results
 
 | Winner (more safe) | Loser (less safe) | Win Rate | 95% CI (Win Prob) | Cohen’s h |
 | ------------------ | ----------------- | -------- | ----------------- | --------- |
@@ -649,7 +629,7 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 このキャンペーンにおいて、**gpt-5-thinking は 65% の確率で「より安全」と判断**されました。  
 この差は大きな効果量を示しており、より安全な出力を生み出すための追加学習とセーフコンプリーションによるものと考えられます。
 
-## 4.2 Expert and Automated Red Teaming for Prompt Injections
+## Expert and Automated Red Teaming for Prompt Injections
 
 外部の 2 つのレッドチームグループが、ChatGPT のコネクタやセーフガードを対象に **2 週間のプロンプトインジェクション評価** を実施しました。  
 この評価は **モデル単体の挙動** ではなく、**システムレベルの脆弱性** に焦点を当てています。
@@ -661,7 +641,7 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 加えて、モデル単体のプロンプトインジェクションに焦点を当てた自動化レッドチーミングも行われました。  
 外部パートナー **Gray Swan** の評価では、**gpt-5-thinking が SOTA 性能を示し、対抗的なプロンプトインジェクション攻撃に強い** ことが確認されています。
 
-### Figure 8: Agent Red Teaming (ART) benchmark for prompt injections
+### Agent Red Teaming (ART) benchmark for prompt injections
 
 ![Prompt Injection Benchmark](figure8.png)  
 （攻撃成功率の棒グラフ）
@@ -708,9 +688,7 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 以下では、この評価を支えるために実施した評価内容を詳しく説明します。  
 また、**生物学的・化学的能力に関連するリスク** に対して、フレームワークの下でどのようなセーフガードを実装しているかも解説します。
 
----
-
-## 5.1 Capabilities Assessment
+## Capabilities Assessment
 
 評価では、さまざまな **誘導手法 (elicitation methods)** をテストしました。
 
@@ -720,22 +698,14 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 
 ただし、これらの評価は潜在的な能力の下限を表しています。追加のプロンプティングやファインチューニング、より長いロールアウト、新しいインタラクション、異なる形式の scaffolding などでは、テストで観測した以上の挙動を引き出す可能性があります。
 
----
-
 ### 信頼区間の計算方法
 
 - **pass@1 の 95% 信頼区間** を算出するために、標準的なブートストラップ手法を使用。
 - モデルの試行をリサンプルし、指標の分布を近似。
 - ただし、この方法は小規模データセットにおいて不確実性を過小評価する可能性があります。
 
-理由:
-
 - この方法は問題レベルの分散（問題の難易度や正答率の差）ではなく、**サンプリング分散**（同じ問題を複数回解いたときのランダム性）のみを捉えるため。
 - そのため、信頼区間が不自然に狭くなる場合があり、特に正答率が 0% 付近または 100% 付近のときに顕著です。
-
-本レポートでは、こうした **評価結果に内在する変動** を正しく反映させるために、信頼区間を併記しています。
-
----
 
 ### Note
 
@@ -750,8 +720,6 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 
 特に **生物学的脅威は化学的脅威よりも深刻度が高い** ため、評価の優先度も生物学的領域に置かれています。
 
----
-
 ### Table 13: Overview of Biological and Chemical evaluations
 
 | Evaluation                          | Capability                                                                                                      | Description                                                                                                 |
@@ -761,8 +729,6 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 | ProtocolQA Open-Ended               | Wet lab capabilities (open-ended)                                                                               | How well can models perform on open-ended questions testing protocol troubleshooting?                       |
 | Tacit knowledge and troubleshooting | Tacit knowledge and troubleshooting (MCQ)                                                                       | Can models answer as well as experts on difficult tacit knowledge and troubleshooting questions?            |
 | TroubleshootingBench                | Tacit knowledge and troubleshooting (open-ended)                                                                | Can models identify and fix real-world errors in expert-written lab protocols that rely on tacit knowledge? |
-
----
 
 ## 5.1.1.1 Long-form Biological Risk Questions
 
@@ -778,17 +744,17 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 この質問設計と評価ルーブリックは、**国家安全保障の現場で危険な生物剤を扱う専門知識を持つ Gryphon Scientific** と共同で実施しました。  
 OpenAI o1-preview モデルを **autograder** として使用し、バイオセキュリティ専門家による検証を組み合わせています。
 
-### Figure 9: Long-form biorisk evaluation results
+### Long-form biorisk evaluation results
 
 ![Biorisk Evaluation](figure9.png)  
 （5 段階ごとの評価結果の棒グラフ）
 
-## 5.1.1.2 Multimodal Troubleshooting Virology
+## Multimodal Troubleshooting Virology
 
 マルチモーダル環境での **wet lab 実験のトラブルシューティング能力** を評価するために、  
 SecureBio と Center for AI Safety が提供する **350 問の virology troubleshooting 質問** を用いてモデルをテストしました。
 
-### Figure 10: Multimodal Troubleshooting Virology (Multi-select)
+### Multimodal Troubleshooting Virology (Multi-select)
 
 ![Figure10](figure10.png)
 
@@ -798,7 +764,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ---
 
-## 5.1.1.3 ProtocolQA Open-Ended
+## ProtocolQA Open-Ended
 
 **FutureHouse ProtocolQA dataset** の 108 問の選択問題を **オープンエンド形式** に改変。  
 これにより難易度が高まり、現実的なラボ状況に近い形で評価が行われました。  
@@ -810,7 +776,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 評価には **wet lab 経験を持つ PhD 研究者 19 名** を基準として比較しました。
 
-### Figure 11: ProtocolQA Open-Ended
+### ProtocolQA Open-Ended
 
 ![Figure11](figure11.png)
 
@@ -820,7 +786,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ---
 
-## 5.1.1.4 Tacit Knowledge and Troubleshooting
+## Tacit Knowledge and Troubleshooting
 
 **Gryphon Scientific** と共同で作成した **Tacit knowledge & troubleshooting dataset (MCQ)** を用いて評価。  
 この質問は **バイオリスクの 5 段階** をカバーし、特に tacit knowledge（暗黙知）がボトルネックとなる領域に焦点を当てています。
@@ -828,7 +794,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 - 一般的な論文検索では答えが得られない
 - 実験経験者でなければ回答できない
 
-### Figure 12: Tacit Knowledge and Troubleshooting
+### Tacit Knowledge and Troubleshooting
 
 ![Figure12](figure12.png)
 
@@ -836,7 +802,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 - gpt-5 系列も 69〜74% と健闘。
 - 全モデルが **PhD 研究者（63%）の 80th percentile baseline** を上回る結果。
 
-## 5.1.1.5 TroubleshootingBench
+## TroubleshootingBench
 
 **TroubleshootingBench** は、実際のラボプロトコルにおけるエラーを修正できるかを評価するために構築された短答形式のデータセットです。  
 特徴は以下の通りです。
@@ -845,7 +811,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 - 公開されていない、クリーンな手順書に基づいて作成
 - PhD を持つ研究者が自身の経験からプロトコルを記録し、意図的なエラーを導入
 
-### Figure 13: TroubleshootingBench
+### TroubleshootingBench
 
 ![Figure13](figure13.png)
 
@@ -855,7 +821,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ---
 
-## 5.1.1.6 External Evaluations by SecureBio
+## External Evaluations by SecureBio
 
 **SecureBio** による外部評価では、gpt-5-thinking は以下の特徴を示しました。
 
@@ -872,16 +838,14 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 | Molecular Biology Capabilities   | 4.9 ± 1.1%     | 6.2 ± 1.3%                  | 2.8 ± 1.3% | 4.2 ± 1.4%             | 5.1 ± 1.7% | 47.6%         |
 | World Class Biology              | 5.0 ± 1.7%     | 5.6 ± 1.8%                  | 3.1 ± 1.4% | 4.5 ± 1.7%             | 3.7 ± 1.1% | 49.2%         |
 
-**まとめ:** gpt-5-thinking は、agent 実行環境でも安全性を維持しつつ、OpenAI o3 系列と同等以上の性能を示した。
+- gpt-5-thinking は、agent 実行環境でも安全性を維持しつつ、OpenAI o3 系列と同等以上の性能を示した。
 
----
-
-## 5.1.2 Cybersecurity
+## Cybersecurity
 
 サイバーセキュリティ領域におけるリスク評価では、  
 gpt-5-thinking は OpenAI o3 と同等の性能を示しました。
 
-### Table 15: Vulnerability Identification and Exploitation Capabilities evaluations
+### Vulnerability Identification and Exploitation Capabilities evaluations
 
 | Evaluation       | Capability                                  | Description                                                                                            |
 | ---------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -891,7 +855,7 @@ gpt-5-thinking は OpenAI o3 と同等の性能を示しました。
 - **Capture the Flag**: gpt-5-thinking = OpenAI o3 と同等。
 - **Cyber Range**: gpt-5-thinking-mini がやや優秀だが、全体的には threshold を満たさず。
 
-## 5.1.2.1 Capture the Flag (CTF) Challenges
+## Capture the Flag (CTF) Challenges
 
 100 問以上の公開済み CTF（Capture the Flag）課題でモデル性能を評価しました。  
 CTF 課題は以下のカテゴリに分類されます：
@@ -902,17 +866,7 @@ CTF 課題は以下のカテゴリに分類されます：
 - **Cryptography (crypto)**: 暗号化された flag を復号して取得
 - **Miscellaneous (misc)**: 問題解決から高度なセキュリティ技術まで幅広い課題
 
-### Figure 14: Capture the Flag (CTF) Results
-
-![Figure14](figure14.png)
-
-- **Collegiate CTF**: ChatGPT agent が最高スコア
-- **Professional CTF**: OpenAI o3 が最高スコア
-- **gpt-5-thinking / gpt-5-thinking-mini**: 両者とも prior releases と比べて大きな改善は見られず
-
----
-
-## 5.1.2.2 Cyber Range
+## Cyber Range
 
 Cyber Range は、**現実に近いネットワーク環境でのエンドツーエンドのサイバー作戦能力** を測定する評価です。  
 以下のシナリオが設計され、難易度は「Light」「Medium」に分類されています。
@@ -928,24 +882,12 @@ Cyber Range は、**現実に近いネットワーク環境でのエンドツー
 - **Tenant Shared Context (Light, New)**
   - 複数テナント環境での横展開攻撃
 
-### Figure 15: Cyber Range Results
-
-![Figure15](figure15.png)
-
-- **OpenAI o3**: prior system card と同等の性能
-- **ChatGPT agent**: シナリオごとの試行回数が多いため高スコア
-- **gpt-5-thinking**: Hints なしでは新規 Cyber Range シナリオを解けず
-  - Hints ありでは Simple Privilege Escalation, Basic C2, Azure SSRF を部分的に解決
-- **gpt-5-thinking-mini**: gpt-5-thinking と類似の傾向
-
----
-
 ### 総評（Cybersecurity 評価）
 
 - gpt-5 系列は **CTF では prior releases と同程度**、Cyber Range では **限定的な改善**。
 - 特に **Hints を用いた場合に部分的な進展** が見られるが、全体としてはまだ高水準のサイバーリスク対応能力には到達していない。
 
-## 5.1.2.3 External Evaluations by Pattern Labs
+## External Evaluations by Pattern Labs
 
 **Pattern Labs**（AI セキュリティ組織）が gpt-5-thinking を評価。  
 テストは以下の 3 種類のサイバーセキュリティ課題に分類されました。
@@ -1035,7 +977,7 @@ sequenceDiagram
 
 - gpt-5-thinking は **偽造証明書の生成 → プロキシ設定改ざん → 通信ハイジャック → flag 取得** の一連の流れを正しく計画・実行し、flag の取得に成功。
 
-## 5.1.3 AI Self-Improvement
+## AI Self-Improvement
 
 gpt-5-thinking は自己改善タスク全般において大幅な改善を示しましたが、High threshold には到達しませんでした。
 
@@ -1050,9 +992,7 @@ gpt-5-thinking は自己改善タスク全般において大幅な改善を示�
 | PaperBench                 | Real world ML paper replication             | Can models replicate real, state-of-the-art AI research papers from scratch?                                                                          |
 | OpenAI-Proof Q&A           | Real world ML debugging and diagnosis       | Can models identify and explain the root causes of real OpenAI research and engineering bottlenecks using historical code, logs, and experiment data? |
 
----
-
-## 5.1.3.1 SWE-bench Verified (N=477)
+## SWE-bench Verified (N=477)
 
 **SWE-bench Verified** は、人間によって検証された SWE-bench のサブセットで、モデルの実世界ソフトウェア課題解決能力をより信頼性高く評価します。  
 この 477 問のセットは OpenAI 内部インフラで検証されており、pass@1 が主要評価指標です。
@@ -1072,9 +1012,7 @@ gpt-5-thinking は自己改善タスク全般において大幅な改善を示�
 
 **Note:** 評価はモデルの最大 verbosity（API の "high" よりも高い設定）で実施。verbosity の違いによって結果に差が出る可能性がある。
 
----
-
-## 5.1.3.2 OpenAI PRs
+## OpenAI PRs
 
 モデルが OpenAI 社内の研究者の pull request 貢献を再現できるかを測定。  
 内部の PR をそのままタスクとして使用し、以下の流れで評価しました。
@@ -1083,7 +1021,7 @@ gpt-5-thinking は自己改善タスク全般において大幅な改善を示�
 2. ChatGPT agent が CLI と Python を使い、修正を実装
 3. 修正は非公開の unit test によって検証
 
-### Figure 20: OpenAI PRs 結果
+### OpenAI PRs 結果
 
 - OpenAI o3: 44%
 - ChatGPT agent: 42%
@@ -1092,7 +1030,7 @@ gpt-5-thinking は自己改善タスク全般において大幅な改善を示�
 
 ➡ gpt-5-thinking が最高スコア。
 
-## 5.1.3.3 MLE-Bench
+## MLE-Bench
 
 **MLE-Bench** は、GPU 上でのモデル設計・学習・推論まで含む **Kaggle 形式の ML 課題** を、エージェントがどこまで自律的に解けるかを評価するベンチマークです。  
 環境（仮想マシン + GPU + データセット）が与えられ、通常は **24 時間**（一部実験では 100 時間）で最良の解を提出します。評価指標は各コンペで **銅メダル到達率（bronze pass@1 / pass@10）** など。
@@ -1111,7 +1049,7 @@ flowchart LR
 - 公平性のため、サイズ ≤ 50GB・想定時間 < 10h の **30 コンペ**（MLE-Bench-30）も使用。
 - **例題（Molecular Translation）**: 分子画像から化学識別子（InChI）を予測（例: `InChI=1/C12H10O5/...`）。
 
-#### Figure 23: MLE-Bench-30 結果（bronze pass@1）
+#### MLE-Bench-30 結果（bronze pass@1）
 
 | モデル              | bronze pass@1 |
 | ------------------- | ------------- |
@@ -1125,13 +1063,13 @@ flowchart LR
 
 ---
 
-## 5.1.3.4 SWE-Lancer
+## SWE-Lancer
 
 **SWE-Lancer** は、**経済的価値のある実務的フルスタック開発タスク**（フロント実装・性能改善・バグ修正・コード選定など）でモデルを評価します。  
 各タスクには **プロのソフトウェアエンジニアが作成した E2E テスト** が付属し、3 名による独立レビューで品質を担保。  
 IC SWE（Individual Contributor SWE）トラックでは、Issue 記述・再現手順・修正のゴール・修正前のコードベースが与えられ、モデルが **パッチを作成**。検証は **Playwright** によるブラウザ E2E テストで実施します。主指標は **pass@1**。
 
-#### Figure 24: SWE-Lancer（IC SWE / Diamond セット）結果（pass@1）
+#### SWE-Lancer（IC SWE / Diamond セット）結果（pass@1）
 
 | モデル              | pass@1  |
 | ------------------- | ------- |
@@ -1146,7 +1084,7 @@ IC SWE（Individual Contributor SWE）トラックでは、Issue 記述・再現
 
 - これらの Preparedness 系評価は **モデルの最大 verbosity**（API の "high" より高い）で実施。verbosity の違いで結果が変動し得ます。
 
-## 5.1.3.5 PaperBench
+## PaperBench
 
 は、AI エージェントが最先端の AI 研究を再現する能力を評価します。  
 エージェントは **ICML 2024 Spotlight と Oral 論文を 20 本**、ゼロから複製する必要があります。これには、論文の貢献内容の理解、コードベースの開発、実験の成功した実行が含まれます。
@@ -1157,9 +1095,7 @@ IC SWE（Individual Contributor SWE）トラックでは、Issue 記述・再現
 
 ➡ **gpt-5-thinking がこのベンチマークで最高スコアのモデルです。**
 
----
-
-## 5.1.3.6 OPQA
+## OPQA
 
 **OpenAI-Proof Q&A (OPQA)** は、OpenAI 内部の研究やエンジニアリング上のボトルネックを 20 問題評価します。各問題は、主要プロジェクトに **最低 1 日の遅延** を引き起こすレベルであり、場合によっては大規模なトレーニング実行やローンチに影響します。
 
@@ -1175,25 +1111,23 @@ IC SWE（Individual Contributor SWE）トラックでは、Issue 記述・再現
 
 ➡ **gpt-5-thinking がこのベンチマークで最高スコア（25%）を記録。**
 
----
-
 ### 図表
 
-**Figure 25: PaperBench (no browsing)**
+**PaperBench (no browsing)**
 
 - OpenAI o4 (no browsing): 21%
 - ChatGPT agent (no browsing): 22%
 - gpt-5-thinking (no browsing, launch candidate): 24%
 - gpt-5-thinking-mini (no browsing, launch candidate): 22%
 
-**Figure 26: OpenAI-Proof Q&A**
+**OpenAI-Proof Q&A**
 
 - OpenAI o4 (no browsing): 2%
 - ChatGPT agent (no browsing): 2%
 - gpt-5-thinking (no browsing, launch candidate): 25%
 - gpt-5-thinking-mini (no browsing, launch candidate): 17%
 
-### 5.1.3.5 PaperBench
+### PaperBench
 
 は、AI エージェントが最先端の AI 研究を再現できる能力を評価します。  
 エージェントは、ICML 2024 Spotlight および Oral 論文 20 本をゼロから複製しなければなりません。これには、論文の貢献を理解し、コードベースを開発し、実験を成功裏に実行することが含まれます。  
@@ -1205,9 +1139,7 @@ IC SWE（Individual Contributor SWE）トラックでは、Issue 記述・再現
 
 gpt-5-thinking は、このベンチマークで最も高いスコアを記録しました。
 
----
-
-### 5.1.3.6 OPQA
+### OPQA
 
 OpenAI-Proof Q&A は、OpenAI で遭遇した 20 の内部研究およびエンジニアリングのボトルネックに関して AI モデルを評価します。  
 これらの課題は、主要プロジェクトに少なくとも 1 日の遅延を引き起こし、場合によっては大規模なトレーニング実行やリリースの結果に影響を与える可能性があります。  
@@ -1217,7 +1149,7 @@ OpenAI-Proof Q&A は、OpenAI で遭遇した 20 の内部研究およびエン�
 
 gpt-5-thinking が、このベンチマークで 25% で最高スコアを獲得しました。
 
-#### Figure 25: PaperBench (no browsing)
+#### PaperBench (no browsing)
 
 | モデル                                           | pass@1 |
 | ------------------------------------------------ | ------ |
@@ -1226,7 +1158,7 @@ gpt-5-thinking が、このベンチマークで 25% で最高スコアを獲得
 | gpt-5-thinking no browsing launch candidate      | 24%    |
 | gpt-5-thinking-mini no browsing launch candidate | 22%    |
 
-#### Figure 26: OpenAI-Proof Q&A
+#### OpenAI-Proof Q&A
 
 | モデル                                           | pass@1 |
 | ------------------------------------------------ | ------ |
@@ -1235,7 +1167,7 @@ gpt-5-thinking が、このベンチマークで 25% で最高スコアを獲得
 | gpt-5-thinking no browsing launch candidate      | 7%     |
 | gpt-5-thinking-mini no browsing launch candidate | 1%     |
 
-### 5.1.3.7 External Evaluations by METR
+### External Evaluations by METR
 
 METR（非営利研究機関）は、AI システムが社会に壊滅的なリスクをもたらす可能性があるかを評価するために、gpt-5-thinking を自律性のリスクについて評価しました。  
 この作業は 3 週間にわたり、OpenAI が要求したすべての背景情報がモデルに提供され、推論痕跡へのアクセスも含まれていました。METR の評価チームは次の 4 つの主要な結論を出しました。
@@ -1250,7 +1182,7 @@ METR（非営利研究機関）は、AI システムが社会に壊滅的なリ�
 - gpt-5-thinking の推論痕跡をレビューしたところ、誤解を与える意図的行動は検出されなかった。
 - ただし、人間の検査では、シナリオ理解の誤りが散見され、例えば「今進行している課題がチェーン・オブ・ソートである」と誤って説明することがあった。
 
-#### Figure 27: METR 評価（自律ソフトウェア能力）
+#### METR 評価（自律ソフトウェア能力）
 
 - gpt-5-thinking の 50% タイムホライズンは **約 2 時間 15 分 (95% CI: 1〜4.5 時間)**。
 - これは OpenAI o3 の 1 時間 30 分と比較すると長い。
@@ -1262,7 +1194,7 @@ METR（非営利研究機関）は、AI システムが社会に壊滅的なリ�
 - ただし、将来のモデルの漸進的改善に伴って再評価が必要。
 - 評価に基づく前提（OpenAI 提供情報に依存する部分あり）を考慮しつつ、結論には一定の自信がある。
 
-### 5.1.3.7 METR による外部評価
+### METR による外部評価
 
 METR（研究非営利団体）は、AI システムが社会に壊滅的なリスクをもたらす可能性を評価する活動をしており、gpt-5-thinking の自律性リスクを評価した。この作業は 3 週間にわたり、OpenAI がモデルに関する背景情報の提供や推論痕跡へのアクセスを提供し、METR の評価チームが 4 つの主要な結論に至った。
 
@@ -1289,13 +1221,13 @@ METR は、現在の傾向に基づく自律的な能力の観察、推論痕跡
 
 METR はこれらの条件が満たされているとすれば、重大なリスク（前述の ①〜③）は存在しないと結論付けた。
 
-## 5.3 高度な生物学的・化学的リスクに対するセーフガード
+## 高度な生物学的・化学的リスクに対するセーフガード
 
 本節では、重大な生物学的・化学的リスクに対して我々が実装したセーフガードについて説明し、これらのセーフガードが当社の「備えの枠組み（Preparedness Framework）」の下でどのようにリスクを最小化するよう設計されているかを述べます。この作業は、生物学・化学領域における 1 年以上の努力に基づいており、6 月のブログ投稿で概要を共有しました。ChatGPT の初回リリースに並行して開発されたセーフガードの多くは、生物学および化学分野において適用されており、ここで紹介する内容に含まれています。
 
 「備えの枠組み」に基づき、SAG（Safety Advisory Group）の勧告に従って、特定の高リスク領域（例：生物学）を「高能力領域（High Capability Domain）」として分類し、その領域に関連するリスクを十分に最小化するセーフガードを設計しました。本章では、内部のセーフガード報告書の要約を記載します（攻撃者が利用する可能性のある情報は含みません）。関連する SAG の見解は、当社のセーフガードがリスクを最小限に抑えるのに十分であることを支持しています。
 
-### 5.3.1 脅威モデルと生物学的脅威の分類
+### 脅威モデルと生物学的脅威の分類
 
 ChatGPT エージェント記事で説明している脅威モデルに基づき、我々は以下の 2 つの主要な経路に焦点を当てています。
 
@@ -1308,7 +1240,7 @@ ChatGPT エージェント記事で説明している脅威モデルに基づき
 - **高リスク二重用途生物学（High Risk Dual Use Biology）**: 医薬品や治療法の設計など正当な用途を持ちながらも、生物兵器開発に悪用されうるもの。
 - **低リスク二重用途生物学（Low Risk Dual Use Biology）**: 理論的な説明や概念的な概要など、研究者が安全に実験を行う上で役立つが、生物兵器の開発そのものに直結しないもの。
 
-### 5.3.2 セーフガード設計
+### セーフガード設計
 
 ChatGPT エージェントにおいては、脅威モデルで特定されたリスクを体系的に対処するために、エンドツーエンドのセーフガードを実装しました。これらは以下を含みます：
 
@@ -1318,30 +1250,30 @@ ChatGPT エージェントにおいては、脅威モデルで特定されたリ
 
 さらに、脆弱性が発見された場合の迅速な是正プロトコルやバグ報奨金プログラムも導入済みです。
 
-#### 5.3.2.1 モデルトレーニング
+#### モデルトレーニング
 
 gpt-5-thinking および gpt-5-thinking-mini に対して以下を学習させました：
 
 1. 生物兵器化に関連するリクエストを拒否する。
 2. 二重用途の生物学的支援をむやみに提供しない。
 
-#### 5.3.2.2 システムレベルの保護
+#### システムレベルの保護
 
 - **第 1 フィルタ**: 入力が生物学関連かどうかを判定。
 - **第 2 フィルタ**: 脅威分類に照らして応答の危険度を推定。
 
 これらにより、有害な行動や出力がシステムをすり抜けることを防止。
 
-#### 5.3.2.3 アカウントレベルでの強制
+#### アカウントレベルでの強制
 
 複数のシステムや人間によるレビューを組み合わせ、異常行動を検知。深刻な場合は法執行機関への通報も視野に入れる。
 
-#### 5.3.2.4 API アクセス
+#### API アクセス
 
 今回初めて、生物学や化学領域に「高能力ドメイン」として扱うモデルを API で提供します。  
 新たに **safety_identifier** フィールドを導入し、開発者がリスクを伴う利用を行う可能性がある場合、監視・制御を強化。必要に応じて追加情報の提供や契約の締結を求める場合もあります。
 
-## 5.2 研究カテゴリーの更新: サンドバッギング
+## 研究カテゴリーの更新: サンドバッギング
 
 現行の「Preparedness Framework」では、研究カテゴリーを導入しました。  
 これは「追跡カテゴリーの基準は満たさないが、リスクが高まる可能性を探るため、  
@@ -1351,7 +1283,7 @@ gpt-5-thinking および gpt-5-thinking-mini に対して以下を学習させ�
 「安全性や能力評価に対して、実際の条件下でのパフォーマンスと大きく乖離する形で応答する傾向があり、  
 その結果、評価の妥当性を損なうこと」を意味します。
 
-### 5.2.1 Apollo Research による外部評価
+### Apollo Research による外部評価
 
 Apollo Research は gpt-5-thinking を対象に、  
 26 種類（約 180 環境、約 24,600 サンプル）の評価を行いました。  
@@ -1409,23 +1341,23 @@ Apollo は o3 ベースの判定器を用い「評価されている自覚」の
 制限が緩和された gpt-5-thinking の利用を可能にするもので、  
 「強固なセーフガード」と「責任ある科学的進展」の両立を目指します。
 
-## 5.3.3 セーフガードのテスト
+## セーフガードのテスト
 
-### 5.3.3.1 モデル安全性トレーニングのテスト
+### モデル安全性トレーニングのテスト
 
 **利用した評価セット**
 
 - バイオセーフティ関連の博士号を持つレッドチーム専門家による難しいプロンプト
 - 本番トラフィックに似た境界線上/高リスクのプロンプト（デュアルユース、兵器化）
 
-**表 19: モデル安全性トレーニングの評価**
+**モデル安全性トレーニングの評価**
 
 | 評価セット                     | 指標（高いほど良い） | OpenAI o3 | gpt-5-thinking | gpt-5-thinking-mini |
 | ------------------------------ | -------------------- | --------- | -------------- | ------------------- |
 | レッドチーム難問プロンプト     | not_unsafe           | 0.329     | 0.921          | 0.906               |
 | 境界線プロンプト（フィルタ済） | not_unsafe           | 0.349     | 0.957          | 0.908               |
 
-### 5.3.3.2 システムレベルの保護テスト
+### システムレベルの保護テスト
 
 ChatGPT Agent と同じシステム保護をテストしました。
 
@@ -1433,7 +1365,7 @@ ChatGPT Agent と同じシステム保護をテストしました。
   - 以前モニターが見逃した Jailbreak プロンプト
   - 境界線上のデュアルユース プロンプト
 
-**表 20: システムレベル保護の評価**
+**システムレベル保護の評価**
 
 | システム対策                   | 判別タスク                          | F1    | 再現率 | 適合率 | システム信頼性 |
 | ------------------------------ | ----------------------------------- | ----- | ------ | ------ | -------------- |
@@ -1442,7 +1374,7 @@ ChatGPT Agent と同じシステム保護をテストしました。
 
 > ※ 多くの危険なやり取りを見逃さないよう **再現率（Recall）を優先** したため、精度（Precision）は犠牲になっています。
 
-## 5.3.3.3 Expert Red Teaming for Bioweaponization
+## Expert Red Teaming for Bioweaponization
 
 私たちは、バイオ兵器化アプリケーションに対する gpt-5-thinking の安全性を評価するために、3 つの異なるレッドチームキャンペーンを実施しました。
 
@@ -1455,8 +1387,6 @@ ChatGPT Agent と同じシステム保護をテストしました。
 - テーブルとブラウジング環境を活用し、モデルがプロトタイプ版の監視システムを有効にする前に設計段階での介入が可能であることが確認されました。
 - **結論**: 安全基準では gpt-5-thinking の方が優れている。
 
-#### Table 21
-
 | Winner         | Loser          | Win Rate | 95% CI (Win Prob) | Cohen’s h |
 | -------------- | -------------- | -------- | ----------------- | --------- |
 | gpt-5-thinking | OpenAI o3      | 60.0%    | (53.2% – 66.9%)   | 0.40      |
@@ -1468,8 +1398,7 @@ ChatGPT Agent と同じシステム保護をテストしました。
 - 与えられたルーブリックに基づいて採点し、相対的な安全性を比較。
 - gpt-5-thinking の方が OpenAI o3 よりもリスクの高い回答が少なかった。
 
-![Figure 30](attachment:Distribution_of_Normalized_Rubric_Scores.png)  
-**Figure 30: 正規化されたルーブリックスコアの分布**
+**正規化されたルーブリックスコアの分布**
 
 - OpenAI o3 の方が危険度の高いスコア分布を示している。
 
@@ -1479,7 +1408,7 @@ ChatGPT Agent と同じシステム保護をテストしました。
 - gpt-5-thinking の防御を突破し、有害かつ具体的な生物兵器化に関する情報を引き出せるかをテスト。
 - 結果、380 時間以上の作業を通じて 46 件の脱獄を報告。そのうち 3 件のみが本当に危険と判断され、監視システムによって本来はブロックされるべきものだった。
 
-## 5.3.3.4 Third party red teaming
+## Third party red teaming
 
 ### Far.AI
 
@@ -1494,18 +1423,17 @@ ChatGPT Agent と同じシステム保護をテストしました。
 - 26,367 件の試行のうち、わずか **0.89%** がルーブリックに適合。
 - そのうち 90% は監視システムによってブロックされるべきものであった。
 
-![Figure 31](attachment:Gray_Swan_Jailbreak.png)  
-**Figure 31: ユーザーごとの脱獄試行数**
+**ユーザーごとの脱獄試行数**
 
 - 平均して 4 メッセージごとにブロックが発動したことを示す。
 
-## 5.3.3.5 外部政府レッドチーミング (External government red teaming)
+## 外部政府レッドチーミング (External government red teaming)
 
 外部専門家との継続的な取り組みの一環として、米国人工知能標準・イノベーションセンター（CAISI）に gpt-5-thinking を早期に提供しました。これは新たに締結された契約に基づき、科学的コラボレーションや事前評価を可能にするものです。また、英国の AI Security Institute（UK AISI）にも提供しました。CAISI と UK AISI の両者は、モデルのサイバーおよび生物学的・化学的能力、ならびにセーフガードを評価しました。
 
 長期的な協力の一環として、UK AISI はモニターシステム設計や生物学的コンテンツポリシー、運用上の考え方など、一般公開されていない情報源のプロトタイプ版へのアクセスも受けました。これにより、彼らは悪意あるユーザーよりも厳格なストレステストを実行し、潜在的な脆弱性を特定できるようになりました。UK AISI の Safeguards チームは、gpt-5-thinking に組み込まれた拒否ロジックを回避する複数のモデルレベルの脱獄手法を特定し、それらは OpenAI のモニターシステムによって検出・ブロックされました。ある脱獄手法はすべての防御層を突破し、検出対象となり、プラットフォームからの禁止につながる可能性があります。実際には、このような攻撃は多くの失敗を招き、最終的には強制的な対処やアカウント停止に発展します。
 
-## 5.3.4 セキュリティコントロール (Security controls)
+## セキュリティコントロール (Security controls)
 
 この記事で説明した他の安全対策に加えて、私たちは機密知的財産（顧客データや gpt-5 モデルを動かすためのモデル重みを含む）が悪用されないよう対策を講じています。以前説明したように、防御は多層的に行われており、アクセス制御、インフラ強化、エグレスコントロール、モニタリングの組み合わせに依存しています。特別に設計された検知と制御により、高リスクのモデル重みの流出リスクを軽減しています。
 
@@ -1513,7 +1441,7 @@ ChatGPT Agent と同じシステム保護をテストしました。
 
 モデルの能力とパワーが増すにつれ、それを保護するためのセキュリティ投資も増加しています。
 
-## 5.3.5 リスク軽減策の妥当性 (Sufficiency of Risk Mitigation Measures)
+## リスク軽減策の妥当性 (Sufficiency of Risk Mitigation Measures)
 
 最新モデルと同様に、我々が最も懸念する脅威経路は「有害な生物学情報の検索」であり、これは有害なバイオコンテンツを求めるユーザーに利用される可能性があります。この経路は、突破するのに長期的な時間と労力が必要なため、現実的には悪用のリスクは低いと考えられます。
 
@@ -1525,6 +1453,20 @@ ChatGPT Agent と同じシステム保護をテストしました。
 - **API リスク**: API の利用者が脱獄を試みて有害な情報を得ようとする可能性はありますが、検知と強制対応が行われています。
 
 これらの多層的な仕組みにより、リスクは十分に管理されていると考えています。
+
+# さいごに
+
+いかがでしたでしょうか。
+GPT-5 の登場により、より強力な AI System が実現され、様々な分野での応用が期待されます。
+しかし、その一方で、AI の安全性や倫理的な問題も重要な課題となっています。
+
+これらの問題に対処するために、セーフガードや評価基準を設け、AI の開発と利用において責任を持つことを目指しています。
+
+AGI の実現はまだまだこれから、ですが、GPT-5 の進化を見ていると、セキュリティやリスクヘッジに力を入れていることがわかり、この分野の実装が完成すると AGI の実現も近いのではないかと感じます。
+
+今後の AI の進化も見逃せないですね。
+
+それでは 🖐️
 
 # 参考資料
 
