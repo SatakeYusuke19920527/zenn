@@ -3,7 +3,7 @@ title: 'GPT-5 の教科書'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['GPT-5', 'AI', 'OpenAI', 'LLM', 'AGI']
-published: false
+published: true
 publication_name: microsoft
 ---
 
