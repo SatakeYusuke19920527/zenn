@@ -7,6 +7,8 @@ published: true
 publication_name: microsoft
 ---
 
+![](https://storage.googleapis.com/zenn-user-upload/fa256373042a-20250816.png)
+
 # はじめに
 
 ついに、GPT-5 が 2024 年 8 月に発表されました。
