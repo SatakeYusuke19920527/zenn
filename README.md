@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "AI エージェントシステムのガバナンス実践ガイド" --type tech --emoji 📃 --publication-name "microsoft"
+  > npx zenn new:article --title "GPT-5 の教科書" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
