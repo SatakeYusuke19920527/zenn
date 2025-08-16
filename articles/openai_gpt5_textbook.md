@@ -621,7 +621,7 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 レッドチームは各会話でモデル出力を比較評価し、安全性や有用性を判断しました。  
 その結果は以下の通りです。
 
-###Attack planning red teaming win rate results
+### Attack planning red teaming win rate results
 
 | Winner (more safe) | Loser (less safe) | Win Rate | 95% CI (Win Prob) | Cohen’s h |
 | ------------------ | ----------------- | -------- | ----------------- | --------- |
@@ -642,13 +642,6 @@ OpenAI は外部のレッドチームと協力し、**gpt-5-thinking** の能力
 
 加えて、モデル単体のプロンプトインジェクションに焦点を当てた自動化レッドチーミングも行われました。  
 外部パートナー **Gray Swan** の評価では、**gpt-5-thinking が SOTA 性能を示し、対抗的なプロンプトインジェクション攻撃に強い** ことが確認されています。
-
-### Agent Red Teaming (ART) benchmark for prompt injections
-
-![Prompt Injection Benchmark](figure8.png)  
-（攻撃成功率の棒グラフ）
-
----
 
 ## Microsoft AI Red Team results
 
@@ -722,17 +715,17 @@ Microsoft の AI Red Team も gpt-5-thinking を対象に大規模な評価を�
 
 特に **生物学的脅威は化学的脅威よりも深刻度が高い** ため、評価の優先度も生物学的領域に置かれています。
 
-### Table 13: Overview of Biological and Chemical evaluations
+### 生物学・化学評価の概要
 
-| Evaluation                          | Capability                                                                                                      | Description                                                                                                 |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Long-form biorisk questions         | Sensitive information (protocols, tacit knowledge, accurate planning) in the biological threat creation process | How accurate are model responses on these long-form biorisk questions?                                      |
-| Multimodal troubleshooting virology | Wet lab capabilities (MCQ)                                                                                      | How well can models perform on virology questions testing protocol troubleshooting?                         |
-| ProtocolQA Open-Ended               | Wet lab capabilities (open-ended)                                                                               | How well can models perform on open-ended questions testing protocol troubleshooting?                       |
-| Tacit knowledge and troubleshooting | Tacit knowledge and troubleshooting (MCQ)                                                                       | Can models answer as well as experts on difficult tacit knowledge and troubleshooting questions?            |
-| TroubleshootingBench                | Tacit knowledge and troubleshooting (open-ended)                                                                | Can models identify and fix real-world errors in expert-written lab protocols that rely on tacit knowledge? |
+| 評価                                                 | 能力                                                                       | 説明                                                                                       |
+| ---------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 長文バイオリスク質問                                 | 生物学的脅威作成プロセスにおける機微情報（プロトコル、暗黙知、精密な計画） | これらの長文バイオリスク質問に対するモデルの回答はどの程度正確か？                         |
+| マルチモーダル・トラブルシューティング（ウイルス学） | ウェットラボ能力（選択式）                                                 | プロトコルのトラブルシューティングを問うウイルス学の質問で、モデルはどれほど良く解けるか？ |
+| ProtocolQA（オープンエンド）                         | ウェットラボ能力（自由記述）                                               | プロトコルのトラブルシューティングを問う自由記述の質問で、モデルはどれほど良く解けるか？   |
+| 暗黙知とトラブルシューティング                       | 暗黙知・トラブルシューティング（選択式）                                   | 困難な暗黙知やトラブルシューティングの質問に、専門家と同等に答えられるか？                 |
+| TroubleshootingBench                                 | 暗黙知・トラブルシューティング（自由記述）                                 | 暗黙知に依拠する専門家作成のラボ手順に含まれる現実世界のエラーを特定・修正できるか？       |
 
-## 5.1.1.1 Long-form Biological Risk Questions
+## Long-form Biological Risk Questions
 
 モデルの回答精度を評価するために、**長文の生物学的リスク質問**を作成しました。  
 これらの質問は、生物学的脅威の作成プロセスにおける 5 つの段階を対象としています【11】。
@@ -758,13 +751,9 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ### Multimodal Troubleshooting Virology (Multi-select)
 
-![Figure10](figure10.png)
-
 - 今回の評価は **multi-select 形式** に更新され、難易度が上昇。
 - すべてのモデルが **専門家の中央値（22.1%）を上回る** スコアを記録。
 - gpt-5 系列は 35〜42% 程度で、従来モデルより高い性能を発揮。
-
----
 
 ## ProtocolQA Open-Ended
 
@@ -780,13 +769,9 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ### ProtocolQA Open-Ended
 
-![Figure11](figure11.png)
-
 - **ChatGPT agent with browsing** が最高スコア（42%）を記録。
 - ただし **専門家の中央値（54%）や平均（42%）には届かず**。
 - gpt-5 系列は 32〜37% 程度で専門家に近いが、依然として課題あり。
-
----
 
 ## Tacit Knowledge and Troubleshooting
 
@@ -797,8 +782,6 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 - 実験経験者でなければ回答できない
 
 ### Tacit Knowledge and Troubleshooting
-
-![Figure12](figure12.png)
 
 - **OpenAI o3** が最高性能（72〜74%）。
 - gpt-5 系列も 69〜74% と健闘。
@@ -815,13 +798,9 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 
 ### TroubleshootingBench
 
-![Figure13](figure13.png)
-
 - データセットは **52 プロトコル × 3 問**（計 156 問）で構成。
 - Human baseline（PhD 12 名による評価）の 80th percentile = **36.4%** を基準値と設定。
 - **gpt-5-thinking が最も高いスコアを記録**、OpenAI o3 を 1 ポイント上回った。
-
----
 
 ## External Evaluations by SecureBio
 
@@ -831,7 +810,7 @@ SecureBio と Center for AI Safety が提供する **350 問の virology trouble
 - 一部の評価ではやや劣るが、他では同等かわずかに優れる
 - API を使った agent evaluations ではすべてのプロンプトを拒否（安全性の高さを示す）
 
-### Table 14: SecureBio evaluations
+### SecureBio evaluations
 
 | Evaluation                       | gpt-5-thinking | gpt-5-thinking helpful-only | OpenAI o3  | OpenAI o3-helpful-only | Gork       | Human experts |
 | -------------------------------- | -------------- | --------------------------- | ---------- | ---------------------- | ---------- | ------------- |
@@ -1062,8 +1041,6 @@ flowchart LR
 | gpt-5-thinking-mini | 2%            |
 
 > ChatGPT agent が最高スコア（9%）。gpt-5 系列は現状では限定的な達成率。
-
----
 
 ## SWE-Lancer
 
