@@ -11,10 +11,12 @@ publication_name: microsoft
 
 # はじめに
 
-https://youtu.be/dBI7LhHfto0
-
 今回は AI Agent に AI 関連の最新情報を取得し、スライド形式でドキュメントにまとめてもらう PoC を作成してみました。
 実装は Python のみで、LangChain・LangGraph・LangSmith を活用し簡単に実装しています。
+
+この記事を読んで作れるものは以下のデモ動画をご覧ください。
+
+https://youtu.be/dBI7LhHfto0
 
 全体のアーキテクチャフローは以下のような感じです。
 
@@ -22,12 +24,12 @@ https://youtu.be/dBI7LhHfto0
 
 フローをざっくり説明すると以下のようになります。
 
-0. collect_info -> Tavily 情報収集
-1. make_outline -> アウトライン生成
-2. make_toc -> 目次生成（JSON）
-3. write_slides -> スライド本文生成（Marp）
-4. evaluate_slides -> 自動評価とリトライ分岐
-5. save_and_render -> 保存 & marp-cli レンダリング
+1. collect_info -> Tavily 情報収集
+2. make_outline -> アウトライン生成
+3. make_toc -> 目次生成（JSON）
+4. write_slides -> スライド本文生成（Marp）
+5. evaluate_slides -> 自動評価とリトライ分岐
+6. save_and_render -> 保存 & marp-cli レンダリング
 
 LangGraph で AI Agent を実装しつつ、LangSmith でエージェントの動きの可視化を行いながら AI Agent の動きを学べる内容になります。
 
