@@ -345,6 +345,8 @@ Marp は最近私が愛用しているのですが、サクッとスライド資
 
 #### requirements.txt
 
+requirements.txt には以下を記載します。
+
 ```plaintext
 # --- Core runtime ---
 requests>=2.31.0
@@ -364,6 +366,8 @@ backports.zoneinfo; python_version<"3.9"
 
 #### .env
 
+.env には以下を記載します。
+
 ```plaintext
 # LangSmith
 LANGCHAIN_TRACING_V2=true
@@ -377,9 +381,6 @@ AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 AZURE_OPENAI_API_VERSION=2024-12-01-preview
 AZURE_OPENAI_DEPLOYMENT=gpt-4o
 
-# News API
-NEWS_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
 # Tavily
 TAVILY_API_KEY=tvly-dev-xxxxxxxxxxxxxxxxxxxxxxx
 
@@ -387,7 +388,19 @@ TAVILY_API_KEY=tvly-dev-xxxxxxxxxxxxxxxxxxxxxxx
 SLIDE_FORMAT=pdf
 ```
 
+LANGCHAIN_API_KEY は LangSmith の API キーを指定します。
+LangSmith を起動して、[Settings] - [API Keys] から取得できます。
+![](https://storage.googleapis.com/zenn-user-upload/1c0ae962dd21-20250906.png)
+
+Tavily_API_KEY は Tavily の API キーを指定します。
+Tavily にサインアップして、Top Page に記載されています。
+![](https://storage.googleapis.com/zenn-user-upload/0e21552e5066-20250906.png)
+
+Azure OpenAI Service の各種 Key は Azure AI Foundry より記載してください。
+
 #### langgraph.json
+
+LangSmith を実行する為に準備必要なパーツになります。
 
 ```json
 {
@@ -403,6 +416,8 @@ SLIDE_FORMAT=pdf
 ```
 
 #### marp_agent.py
+
+では、python にて実装していきましょう。
 
 ````python
 # LangGraph × LangSmith × Azure OpenAI × Tavily × Marp
