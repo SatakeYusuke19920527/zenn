@@ -1,11 +1,13 @@
 ---
-title: 'AI Agent にAI最新情報まとめ資料を作ってもらう会【LangGraph/LangSmith】'
+title: 'AIAgentにAI最新情報まとめ資料を作ってもらう会【LangGraph&LangSmith】'
 emoji: '📝'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['AI', 'LangGraph', 'LangSmith', 'AzureOpenAI', 'AIAgent']
-published: false
+published: true
 publication_name: microsoft
 ---
+
+![](https://storage.googleapis.com/zenn-user-upload/1533c044f653-20250906.png)
 
 # はじめに
 
