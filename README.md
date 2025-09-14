@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "AI Agent に資料を作ってもらう会【LangGraph/LangSmith】" --type tech --emoji 📝 --publication-name "microsoft"
+  > npx zenn new:article --title "GitHub Enterpriseプランにするメリットって何？" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
