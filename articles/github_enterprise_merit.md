@@ -3,7 +3,7 @@ title: "GitHub Enterpriseプランにするメリットって何？"
 emoji: "📚"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["GitHub", "GitHub Enterprise", "Microsoft", "Azure"]
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -165,49 +165,22 @@ EMU あり／なしを比較すると以下です。
 # Organizationの上位概念にあたるEnterprise Accountが作成可能に
 Enterprise Accountの作成、複数Organizationの作成し管理することが可能になります。
 
+以下の画像のようなイメージ。Organizationの上にEnterprise Accountが作成出来るイメージですね。
 
-```mermaid
-flowchart TB
-    E[Enterprise]
-    subgraph Org1[Organization]
-        T1[Team]
-        T2[Team]
-    end
-    subgraph Org2[Organization]
-        T3[Team]
-    end
-    E --> Org1
-    E --> Org2
-```
-
-```mermaid
-flowchart TB
-    E[Enterprise]
-    subgraph Org1[Organization]
-        T1[Team]
-        T2[Team]
-    end
-    subgraph Org2[Organization]
-        T3[Team]
-    end
-    E --> Org1
-    E --> Org2
-```
+![](https://storage.googleapis.com/zenn-user-upload/02c3c71eb8a8-20250914.png)
 
 Team PlanではOrganizationごとに契約が必要で、複数Organizationを集約管理することは不可という縛りがありました。
 
 Enterprise Planでは、上位概念として **Enterprise Account** を提供され、1つのEnterprise Account配下で複数Organizationを一括管理可能になり、外部協力会社との共同開発案件では、Organizationを分けて管理しつつ、特定コンポーネントだけを共有する等が可能でよりセキュアな開発管理を実現することが可能です。
 
-#### 機能比較
+機能比較としては以下のようになります。
 
 | 機能 | Team Plan | Enterprise Plan |
 |---|---|---|
 | Enterprise Accountの作成 | × | ○ |
 | 複数Organizationの作成 | × | ○ |
 
----
-
-## Enterprise Accountの管理者が実施できる設定や情報取得
+Enterprise Accountの管理者が実施できる設定などなどは以下。
 
 - 新規Organizationの作成や複数Organizationの一元管理  
 - 所属するユーザ全員の管理（社内外含む、アクセス権を付与したユーザの管理）  
@@ -221,18 +194,12 @@ Enterprise Planでは、上位概念として **Enterprise Account** を提供�
 - 監査ログの取得（API経由／定期的保存／異常行動の監視）  
 - Enterprise Server（オンプレ）利用時のライセンスファイル管理  
 
-詳細: [Enterprise Account ドキュメント](https://docs.github.com/ja/enterprise-cloud@latest/admin/enterprise-accounts/about-enterprise-accounts)
+また、Enterpriseプランでは、リポジトリの可視性を制御することが可能です。
+具体的にはPublic／Privateリポジトリに加えて **Internal Repository** を作成可能になります。
 
----
-
-## 共有「すべき」情報の取捨選択  
-– リポジトリの可視性を制御
-
-Enterprise Planの場合、Public／Privateリポジトリに加えて **Internal Repository** を作成可能。
-
+特徴は以下。
 - **Private Repository**: 外部パートナーやクライアントのOutside Collaboratorにも公開可能  
 - **Internal Repository**: 社員のみに公開  
-
 これにより、リポジトリの可視性を柔軟に制御し、機密情報をセキュアに保護可能。
 
 #### 機能比較
@@ -243,39 +210,136 @@ Enterprise Planの場合、Public／Privateリポジトリに加えて **Interna
 | Private Repositoryの作成 | ○ | ○ |
 | Internal Repositoryの作成 | × | ○ |
 
+個人的には社員のみに公開など、可視性を柔軟に制御できるInternal Repositoryは気に入っています。
+
+# 情報漏洩対策
+他にもEnterpriseプランでは、情報漏洩対策が強化されています。
+
+publicリポジトリの作成制限や外部コラボレータをOrganizationのOwnerのみが招待出来るように制限したりなど、オペレーションミスによる情報漏洩のリスクを管理者が制御可能です。
+
+# ソフトウェア品質 & 開発スピードの向上 – GitHub Advanced Security
+
+開発や運用保守の観点からもEnterpriseプランにするとメリットがあります。
+ここからはGitHub Advanced Security (GHAS)の機能を紹介します。
+GHASはEnterpriseプランの有償オプション製品で、セキュリティとコード品質を向上させるための高度なツールセットを提供します。
+
+GitHub Advanced Securityの中でもEnterpriseプランでのみ利用可能な機能もあるので、チェックが必要です。
+
+## Dependabot
+- セキュリティパッチ・バージョンアップのPRを自動作成  
+- 豊富な脆弱性データ（GitHub Advisory Databaseなど）  
+- Privateリポジトリでの **Dependency Review** 有効化  
+
+| 機能 | Team Plan | Enterprise Plan |
+|---|---|---|
+| Dependabot | ○ | ○ |
+
+## Code Scanning
+- コードを自動解析し脆弱性を検出 (CodeQL)  
+- 2000以上のパターンに対応、カスタムクエリも可能  
+- 他の静的解析ツールとの拡張連携も可能  
+
+| 機能 | Team Plan | Enterprise Plan |
+|---|---|---|
+| Code Scanning | × | ○ |
+
+## Secret Scanning
+- 認証用トークンや秘密鍵がコードに含まれていないか自動検出  
+- Azure, AWS, GCP, Dropbox, Slackなどに対応  
+- 全てのgitヒストリをスキャン可能  
+- Push Protection機能で危険なトークンを防止  
+
+| 機能 | Team Plan | Enterprise Plan |
+|---|---|---|
+| Secret Scanning | × | ○ |
+
+## 組織横断的なセキュリティリスクの可視化
+- 既知の脆弱性や検出されたシークレット情報を横断的に閲覧可能  
+- 各セキュリティ機能の有効状況を確認可能  
+
+| 機能 | Team Plan | Enterprise Plan |
+|---|---|---|
+| 組織横断的な脆弱性リスクの可視化 | × | ○ |
+
+👉 各Organizationごとに **セキュリティリスクを可視化** することが可能であり、複数のOrganizationを跨いだセキュリティ統制も実現可能となります。
 
 
+# Azureとの連携について
+GitHubとAzureなんの関係あんねんと思われる方も多くいらっしゃるかと思いますが、実は両方ともMicrosoft製品だったりします。
+今回紹介するのは**GitHub Metered Billing**というGitHub Enterpriseのライセンス形態で、GitHubとAzureのお会計を紐づけることで、従量課金のようにGitHub Metered Billingが利用可能になる契約形態です。
 
+## GitHub Metered Billingとは？
+通常、GitHubの料金は「ユーザー数 × プラン料金」で計算されますが、
+それに加えて一部のリソースや機能については 利用した分だけ追加請求 されます。
+この「追加分の従量課金」の仕組みを Metered Billing（従量課金課金制） と呼びます。
 
+![](https://storage.googleapis.com/zenn-user-upload/47947a776528-20250914.png)
 
+## Metered Billing がおすすめのシナリオ
 
+### 💰 余分なライセンスを減らしてコスト最適化したい
+GitHub Enterpriseのユーザーライセンスは通常年間契約のため、契約期間中の開発者の増加を考慮して少し多めに調達をしておく場合があります。  
+Metered Billingの場合には毎月必要なライセンス数分だけを購入すればよいため、余分なライセンスコストを減らすことができます。
 
-## 4. Microsoft製品との統合
+### 👥 スモールスタートで GitHub Enterprise を試してみたい
+GitHub Enterpriseに興味はあるが価格がネックで試しづらいという方にはMetered Billingがおすすめです。  
+小規模からはじめて、検証に関わる人の分だけライセンスを用意すればよいので短期間でのお試しに最適です。  
+一次的なプロジェクトで外部の方にライセンス付与するケースもあります。
 
-GitHubはMicrosoft傘下のサービスであり、Azureとの親和性が高いです。
+### 💻 Azure と GitHub のコストをまとめて管理したい
+マイクロソフト製品のコストをできるだけ一括で管理したいという方にもMetered Billingがおすすめです。  
+Metered BillingではAzure Subscriptionに請求をまとめることができるため、Azureポータルで簡単に開発環境のコストを確認することができるようになります。
 
-- **Azure AD連携**によるID統合管理  
-- **Azure DevOps / GitHub Actions** の組み合わせでCI/CDを強化  
-- **CodespacesやCopilot**を活用した開発生産性向上  
+メリットとしてはGitHubの請求も全部Azureのポータル画面から一元管理出来るので、管理者の負担が減るのがGoodなこともポイントです。
+![](https://storage.googleapis.com/zenn-user-upload/6a36cbe58598-20250914.png)
 
-クラウド戦略にAzureを取り入れている企業にとって、Enterpriseプランはよりシームレスな統合を可能にします。
+# まとめ
+改めてGitHub TeamプランとEnterpriseプランの違いを表形式でまとめると以下となります。
 
+## GitHub Team / Enterprise 機能比較表
 
+| 機能 | Team Plan | Enterprise Plan |
+|---|---|---|
+| Enterprise Accountの作成 | × | ○ |
+| 複数Organizationの作成 | × | ○ |
+| Public Repositoryの作成 | ○ | ○ |
+| Private Repositoryの作成 | ○ | ○ |
+| Internal Repositoryの作成 | × | ○ |
+| Public Repositoryの作成禁止 | × | ○ |
+| Organization memberによるOutside Collaboratorの招待禁止 | × | ○ |
+| SAML認証 | × | ○ |
+| SCIMによるユーザプロビジョニング | × | ○ |
+| IDP連携による多要素認証 | × | ○ |
+| IP制限 | × | ○ |
+| Repository/Organization全体の依存関係のダッシュボード (Dependency Insights) | × | ○ |
+| OSSの脆弱性の自動検知・通知・修正 | ○ | ○ |
+| 組織横断的脆弱性リスクの可視化 (Security Overview) *注3 | × | ○ |
+| ライセンス情報の一覧の可視化 | × | ○ |
+| GitHub Actions (CI/CD) | 3,000分/月 *注1 | 50,000分/月 *注1 |
+| GitHub Packages (パッケージ管理) *注2 | 2GB/月 *注1 | 50GB/月 *注1 |
+| Code Scanning *注3 | × | ○ |
+| Secret Scanning *注3 | × | ○ |
+| Audit Log API | × | ○ |
+| 99.95% 稼働率SLA | × | ○ |
+| Enterprise Support (英語・日本語) | × | ○ |
+| 監査ログのストリーミング | × | ○ |
 
-## 5. こんな企業におすすめ
+### 注記
+- *注1: GitHub Enterpriseの有償オプション製品 (GitHub Advanced Security) で提供  
+- *注2: GitHub Packagesの利用制限については別途規定あり  
+- *注3: Advanced Security機能としてEnterpriseのみで提供
 
-- 社員数が数百〜数千規模の大企業  
-- セキュリティや監査が厳格に求められる業界（金融・公共など）  
-- グローバル展開しており、複数リージョンで統一的に開発基盤を運用したい企業  
+また、Enterpriseプランを小規模に試したいという企業様は、Metered Billingでの契約がおすすめです。
+
+私が感じる導入したらいいのにと思うタイミングは以下です。
+- 社員数が数百〜数千規模の大企業(セキュリティ大事)
+- セキュリティや監査が厳格に求められる業界（金融・公共...などなど。情報漏洩する前に対策必要）  
+- グローバル展開しており、複数リージョンで統一的に開発基盤を運用したい企業(海外支店などあれば管理者の負担及びセキュリティホールの心労軽減)
 - Azureとの連携を強化してDXを推進したい企業  
 
----
+セキュリティの強化やGitHubアカウントの管理、Azureとのお会計紐づけなど様々なメリットがあるので、是非検討してみてください。
 
-## まとめ
+それでは👍
 
-GitHub Teamプランは中小規模のチームに十分な機能を提供しますが、**セキュリティ・管理・サポート・統合性**を重視するならEnterpriseプランが圧倒的に有利です。  
-
-特にクラウド戦略をMicrosoft Azureと合わせて進める場合、GitHub Enterpriseは強力な武器になります。  
-
----  
-💡 次回の記事では、**GitHub Advanced Security**を活用した具体的なセキュリティ強化の方法について紹介する予定です。
+# 参考情報
+https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/about-enterprise-managed-users
