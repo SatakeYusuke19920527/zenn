@@ -22,11 +22,11 @@ TeamプランやFreeプランと比べて、セキュリティ・管理性・サ
 
 特に、**セキュリティコンプライアンスが重視される業界（金融・公共・医療・通信・インフラ..etc）**や、クラウドネイティブに大規模な開発を進めるSaaS企業で多く導入されています。
 
-# Free, Team, Enterpriseの比較
+# GitHub 各種プランの比較
 
-# GitHub プラン比較表
+GitHubにはFree・Team・Enterpriseの3つのプランがあり、それぞれに特徴があります。
+まずは比較表を見てみましょう！
 
-比較表は以下。
 https://github.co.jp/pricing.html#compare-features
 
 | 機能カテゴリ | Free | Team ($4/ユーザー/月) | Enterprise ($21/ユーザー/月) |
@@ -72,12 +72,13 @@ https://github.co.jp/pricing.html#compare-features
 | 請求書払い | – | – | ✅ |
 
 上記の表を眺めていると、**不正アクセスの防御**や**専任のサポート**がついたり、**請求書払い**に出来ることは企業としては嬉しいですね。
-それでは私が思う、特にEnterpriseプランの良いところを見ていきましょう。
+
+それではこれから私が思う、特にEnterpriseプランの良いところにDeepDiveしていきましょう。
 
 # GitHub Enterpriseプランにするメリット
 個人的に思う、企業がEnterpriseプランを使うメリットを記載します。
 
-# 不正アクセスに対しての防御
+## 不正アクセスに対しての防御
 管理者によるアカウント管理とセキュリティ制御がTeamプランと比べて強化されています。
 
 GitHubでID／パスワードの漏洩、パーソナルアクセストークンやSSHキーの漏洩、シャドーIT（自宅PCなど企業が管理していないデバイスを用いる等）は、昨今のフルリモート勤務環境では特に気を付けたいところですが、なかなか管理だったり個人のセキュリティ意識の差があったりで徹底が難しい場面が出てきます。
@@ -313,21 +314,16 @@ Metered BillingではAzure Subscriptionに請求をまとめることができ�
 | IP制限 | × | ○ |
 | Repository/Organization全体の依存関係のダッシュボード (Dependency Insights) | × | ○ |
 | OSSの脆弱性の自動検知・通知・修正 | ○ | ○ |
-| 組織横断的脆弱性リスクの可視化 (Security Overview) *注3 | × | ○ |
+| 組織横断的脆弱性リスクの可視化 (Security Overview) | × | ○ |
 | ライセンス情報の一覧の可視化 | × | ○ |
-| GitHub Actions (CI/CD) | 3,000分/月 *注1 | 50,000分/月 *注1 |
-| GitHub Packages (パッケージ管理) *注2 | 2GB/月 *注1 | 50GB/月 *注1 |
-| Code Scanning *注3 | × | ○ |
-| Secret Scanning *注3 | × | ○ |
+| GitHub Actions (CI/CD) | 3,000分/月 *注1 | 50,000分/月 |
+| GitHub Packages (パッケージ管理) *注2 | 2GB/月 *注1 | 50GB/月 |
+| Code Scanning | × | ○ |
+| Secret Scanning | × | ○ |
 | Audit Log API | × | ○ |
 | 99.95% 稼働率SLA | × | ○ |
 | Enterprise Support (英語・日本語) | × | ○ |
 | 監査ログのストリーミング | × | ○ |
-
-### 注記
-- *注1: GitHub Enterpriseの有償オプション製品 (GitHub Advanced Security) で提供  
-- *注2: GitHub Packagesの利用制限については別途規定あり  
-- *注3: Advanced Security機能としてEnterpriseのみで提供
 
 また、Enterpriseプランを小規模に試したいという企業様は、Metered Billingでの契約がおすすめです。
 
@@ -340,6 +336,13 @@ Metered BillingではAzure Subscriptionに請求をまとめることができ�
 セキュリティの強化やGitHubアカウントの管理、Azureとのお会計紐づけなど様々なメリットがあるので、是非検討してみてください。
 
 それでは👍
+
+# 筆者情報
+
+AzureやGitHubに関する情報を発信しておりますので、ご興味あればチェックしてみてください。
+Enterpriseプランの相談も是非お気軽にどうぞ！
+https://x.com/fe_js_engineer
+https://www.linkedin.com/in/satyus/
 
 # 参考情報
 https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/about-enterprise-managed-users
