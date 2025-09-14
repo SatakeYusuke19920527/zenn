@@ -7,10 +7,12 @@ published: true
 publication_name: microsoft
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/5bac1334a670-20250914.png)
+![](https://storage.googleapis.com/zenn-user-upload/dec11cb49efa-20250914.png)
 
 # はじめに
 この記事では、普段皆さんがお使いのGitHubについて、TeamプランからEnterpriseプランにアップグレードして出来ることや、どのような企業がEnterpriseプランへのUpgradeを検討した方が良いかを解説します。
+
+![](https://storage.googleapis.com/zenn-user-upload/5bac1334a670-20250914.png)
 
 # GitHub Enterpriseプランとは？
 
@@ -20,7 +22,11 @@ GitHub Enterpriseは、GitHubが提供する大規模組織・企業向けの上
 
 TeamプランやFreeプランと比べて、セキュリティ・管理性・サポートが強化されており、数百〜数千人規模の開発組織やグローバルに展開する企業に最適化されています。
 
+金額は1userあたり月額21ドルで、Teamプランの4ドルと比べると高価ですが、その分セキュリティや管理機能が充実しているプランとなります。
+
 特に、**セキュリティコンプライアンスが重視される業界（金融・公共・医療・通信・インフラ..etc）**や、クラウドネイティブに大規模な開発を進めるSaaS企業で多く導入されています。
+
+ご興味ある方は是非チェックしてみてください🚀
 
 # GitHub 各種プランの比較
 
