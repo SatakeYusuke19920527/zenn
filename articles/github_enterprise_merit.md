@@ -165,22 +165,18 @@ EMU あり／なしを比較すると以下です。
 # Organizationの上位概念にあたるEnterprise Accountが作成可能に
 Enterprise Accountの作成、複数Organizationの作成し管理することが可能になります。
 
-```
 flowchart TB
     E[Enterprise]
-
     subgraph Org1[Organization]
         T1[Team]
         T2[Team]
     end
-
     subgraph Org2[Organization]
         T3[Team]
     end
-
     E --> Org1
     E --> Org2
-```
+
 
 Team PlanではOrganizationごとに契約が必要で、複数Organizationを集約管理することは不可という縛りがありました。
 
