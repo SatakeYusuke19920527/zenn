@@ -83,6 +83,8 @@ https://github.co.jp/pricing.html#compare-features
 
 上記の表を眺めていると、**不正アクセスの防御**や**専任のサポート**がついたり、**請求書払い**に出来ることは企業としては嬉しいですね。
 
+※専任のサポートエンジニアのご契約はPremium Plus / GitHub Engineering Direct(GHED) が別途契約が必要です。詳細は下記リンクご参照ください。https://docs.github.com/ja/enterprise-cloud@latest/support/learning-about-github-support/about-gith…
+
 それではこれから私が思う、特にEnterpriseプランの良いところにDeepDiveしていきましょう。
 
 # GitHub Enterpriseプランにするメリット
