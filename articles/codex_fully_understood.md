@@ -11,9 +11,11 @@ publication_name: microsoft
 
 # はじめに
 
-Codex は、OpenAI の多くの技術チーム（セキュリティ、プロダクトエンジニアリング、フロントエンド、API、インフラ、パフォーマンスエンジニアリングなど）で日常的に使用されています。
+Codex は、多くの技術チーム（セキュリティ、プロダクトエンジニアリング、フロントエンド、API、インフラ、パフォーマンスエンジニアリングなど）で日常的に使用されています。
 
-そして、最近の Update では、Azure OpenAI のサポートにより、CLI または VS Code でも同等の Codex エクスペリエンスをご利用いただけるようになりました。これを実現するために、以下の 5 つのプルリクエストをご提供しました。これにより、ChatGPT でお馴染みの Codex 機能を VSCode 上で安全に実行できるようになります。
+そして最近の Update では、Azure OpenAI のサポートにより、CLI または VS Code でも同等の Codex エクスペリエンスをご利用いただけるようになりました。
+
+これを実現するために、以下の 5 つのプルリクエストをご提供しました。これにより、ChatGPT でお馴染みの Codex 機能を VSCode 上で安全に実行できるようになります。
 
 https://devblogs.microsoft.com/all-things-azure/codex-azure-openai-integration-fast-secure-code-development/
 
