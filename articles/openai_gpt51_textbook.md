@@ -14,8 +14,6 @@ publication_name: microsoft
 本記事は 2025 年 11 月 12 日に OpenAI より公開された GPT-5.1 のモデルについて System Card がリリースされていたので、わかりやすくまとめてみました。
 GPT-5.1 のキャッチアップに是非お役立てください。
 
-# はじめに
-
 OpenAI のブログでも説明されているように、**GPT-5.1 Instant** と **GPT-5.1 Thinking** は GPT-5 モデルの次世代バージョンです。  
 **GPT-5.1 Instant** は以前のチャットモデルよりも会話的で、より優れた指示追従能力と、  
 いつ「考える」かを自動で判断できる**適応的推論機能（adaptive reasoning capability）**を備えています。  
