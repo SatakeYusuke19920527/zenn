@@ -354,3 +354,8 @@ GPT-5.1-codex と同じセーフティスタックとツールアクセスを提
 **GPT-5.1 シリーズ** は、すでに **Foundry Models** で利用可能です。  
 エンタープライズ企業、中小企業、あるいは次世代デジタルネイティブアプリの構築まで、  
 あらゆる開発者が **より速く・より安全に・より大規模に** イノベーションを実現できるよう設計されています。
+
+# 参考文献
+
+https://cdn.openai.com/pdf/4173ec8d-1229-47db-96de-06d87147e07e/5_1_system_card.pdf
+https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/gpt%E2%80%915-1-in-foundry-a-workhorse-for-reasoning-coding-and-chat/4469067
