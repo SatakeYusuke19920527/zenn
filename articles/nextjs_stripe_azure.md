@@ -2,7 +2,7 @@
 title: '個人開発のマネタイズに是非 💰 Next.js×Stripe でサブスクリプション契約の実装'
 emoji: '💸'
 type: 'tech' # tech: 技術記事 / idea: アイデア
-topics: ['Next.js', 'Stripe', 'Azure', 'CosmosDB']
+topics: ['Next.js', 'Stripe', 'Azure', 'CosmosDB', 'clerk']
 published: false
 publication_name: microsoft
 ---
