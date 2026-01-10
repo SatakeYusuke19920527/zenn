@@ -517,3 +517,54 @@ npm install -g @modelcontextprotocol/server-filesystem
 色々と利用ユースケースありそうですね。
 
 ## ツールセットの作成
+
+ツールセットとは、GitHub Copilot の Agent がタスクを実行する際に利用できるツールの集合体を定義したものです。
+
+実はツールは 128 個までしか設定出来ず、毎回全てのツールを選択していると、足りなくなる可能性があります。
+![](https://storage.googleapis.com/zenn-user-upload/07541ad23588-20260110.png)
+
+そうした時にツールセットを作成しておくことで、複数のツールセットを切り替えながら利用出来るようになります。
+
+ツールセットの作成方法は以下になります。
+まずは VSCode 右上の歯車マークをクリックし、ツールセット を開きます。
+![](https://storage.googleapis.com/zenn-user-upload/7111d320dc65-20260110.png)
+
+新しいツールセットファイル作成を選択
+![](https://storage.googleapis.com/zenn-user-upload/0be25be17464-20260110.png)
+
+最初はこんな感じで作成されます。
+![](https://storage.googleapis.com/zenn-user-upload/1891e40b46ef-20260110.png)
+
+それぞれの項目を説明すると以下になります。
+
+- toolSetName: ツールセットの名前
+- tools: ツールセットに含めるツールのリスト
+- description: ツールセットの説明
+- icon: ツールセットのアイコン
+
+ツールセットのアイコンは以下サイトから選択できます。
+https://code.visualstudio.com/api/references/icons-in-labels
+
+今回ツールセットには先ほど追加した、Microsoft Learn MCP Server と filesystem MCP Server を追加してみます。
+
+```:json
+{
+  "sample-toolset": {
+    "tools": ["filesystem", "microsoftdocs/mcp"],
+    "description": "sample toolset has two MCP servers.",
+    "icon": "tools"
+  }
+}
+```
+
+こんな感じになりました。
+![](https://storage.googleapis.com/zenn-user-upload/f18843b8c54e-20260110.png)
+
+では、VSCode 右下のツールの箇所をクリックして、ツールセットを確認してみましょう。
+
+作成したツールセットが VSCode 上で選択出来るようになっていますね！
+![](https://storage.googleapis.com/zenn-user-upload/45878c00a9e9-20260110.png)
+
+これで、プロジェクトに合わせてツールセットの切り替えが簡単に出来るようになります。
+
+是非活用してみてください。
