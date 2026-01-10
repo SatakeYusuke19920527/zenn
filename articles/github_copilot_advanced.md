@@ -27,12 +27,10 @@ GitHub Copilot を使う側のレベルを一段引き上げる記事となれ�
 
 それでは行きましょう 🚀
 
-:::message
 本記事は GitHub Copilot の基礎ではなく、応用的な内容となります。
 基本的な内容から理解されたい場合は以下の記事をご参照ください。
 GitHub Copilot を完全に使いこなす会
 https://zenn.dev/microsoft/articles/github_copilot_intro
-:::
 
 # Visual Studio Code から GitHub Copilot を利用
 
