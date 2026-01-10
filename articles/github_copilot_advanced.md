@@ -64,6 +64,8 @@ https://github.blog/jp/2025-10-29-welcome-home-agents/
 
 ## Agent HQ とは？
 
+![](https://storage.googleapis.com/zenn-user-upload/f43fe868493f-20260110.png)
+
 GitHub Universe 2025 で発表された新構想で、あらゆる AI エージェントを単一のプラットフォームとして統合・管理するための基盤 です。
 GitHub の既存ワークフロー（Issue、Pull Request、GitHub Actions など）に AI エージェント体験をネイティブ統合 します。
 
@@ -114,8 +116,11 @@ GitHub は AI を単なる補助ツールではなく、開発体験の中核に
 ## プレミアムリクエストについて
 
 ![](https://storage.googleapis.com/zenn-user-upload/65c79175711f-20260110.png)
+
 画像の各モデルの横に記載されている ×1 や ×3 などの表記は GitHub Copilot のプレミアムリクエストについての表記となります。
+
 https://docs.github.com/ja/billing/concepts/product-billing/github-copilot-premium-requests
+
 プレミアムリクエストとは、GitHub Copilot の有料機能を使うときに消費する「使い切りポイント」 のようなものです。
 Copilot の高度な機能や一部モデルを使うと、このリクエストを消費します。
 簡単に言えば、高度なモデルや AI 機能を使う権利を消費するポイントという理解で OK です。
@@ -373,7 +378,7 @@ https://code.visualstudio.com/mcp
 
 では実際に MCP サーバーを追加してみましょう。
 
-まずは VSCode の拡張機能の箇所から Enable MCP Servers Marketplace のボタンをクリックします。
+まずは VSCode の拡張機能の箇所から左下の MCP サーバーと記載されている箇所にある Enable MCP Servers Marketplace のボタンをクリックします。
 ![](https://storage.googleapis.com/zenn-user-upload/53258b861491-20260110.png)
 
 今回はこの Microsoft Learn MCP Server を追加してみます。
@@ -494,8 +499,8 @@ npm install -g @modelcontextprotocol/server-filesystem
 
 そして、先ほど開いた MCP の設定ファイルに以下のコードを追記して保存してください。
 
-![](https://storage.googleapis.com/zenn-user-upload/89443a66efad-20260110.png)
 設定を保存したら、画面左下の MCP Server の箇所に filesystem が追加されていることがわかりますね。
+![](https://storage.googleapis.com/zenn-user-upload/65b408f6f07f-20260110.png)
 
 追加部分は以下になります。
 
@@ -568,3 +573,8 @@ https://code.visualstudio.com/api/references/icons-in-labels
 これで、プロジェクトに合わせてツールセットの切り替えが簡単に出来るようになります。
 
 是非活用してみてください。
+
+# Let's バイブコーディング 🎸
+
+ここまでで GitHub Copilot の Agent モードの使い方について解説してきました。
+ここからは実際に GitHub Copilot の Agent モードを使ってバイブコーディングを体験してみましょう。
