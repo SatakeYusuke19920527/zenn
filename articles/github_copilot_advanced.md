@@ -7,7 +7,7 @@ published: false
 publication_name: microsoft
 ---
 
-![](https://storage.googleapis.com/zenn-user-upload/a5ee2bfe7017-20260110.png)
+![](https://storage.googleapis.com/zenn-user-upload/f21551400bda-20260112.png)
 
 # はじめに
 
@@ -29,7 +29,9 @@ GitHub Copilot を使う側のレベルを一段引き上げる記事となれ�
 
 本記事は GitHub Copilot の基礎ではなく、応用的な内容となります。
 基本的な内容から理解されたい場合は以下の記事をご参照ください。
-GitHub Copilot を完全に使いこなす会
+
+- GitHub Copilot を完全に使いこなす会
+
 https://zenn.dev/microsoft/articles/github_copilot_intro
 
 # Visual Studio Code から GitHub Copilot を利用
@@ -112,6 +114,7 @@ GitHub は AI を単なる補助ツールではなく、開発体験の中核に
 | **GPT-5.2** | OpenAI | 最新・最上位。Agent モード、Plan ＋実装の一気通貫 |
 
 好みに合わせてお好きなモデルを...というところですが、筆者は主に GPT-5.2 や Codex シリーズを中心に使っています。
+現時点の使い心地としては、Codex が一番 Good かなと感じています。
 
 ## プレミアムリクエストについて
 
@@ -302,7 +305,7 @@ Visual Studio Code で拡張機能として組み込まれている機能をツ�
 
 これで組み込み機能を GitHub Copilot の Agent からツールとして利用出来るようになりました。非常に簡単ですね。
 
-## MCP
+# MCP
 
 ### MCP（Model Context Protocol）とは？
 
@@ -574,7 +577,165 @@ https://code.visualstudio.com/api/references/icons-in-labels
 
 是非活用してみてください。
 
-# Let's バイブコーディング 🎸
+# カスタム命令
 
-ここまでで GitHub Copilot の Agent モードの使い方について解説してきました。
-ここからは実際に GitHub Copilot の Agent モードを使ってバイブコーディングを体験してみましょう。
+GitHub Copilot に対して「常に守ってほしい前提条件・振る舞い」を事前に与える設定機能です。
+毎回プロンプトで説明しなくても、Copilot が“空気を読んで”動くようになります。
+
+一言で言うと 👇
+**Copilot の性格・前提知識・ルールを定義する仕組み** です。
+
+では、設定すると何が変わるのか？
+
+カスタム命令なしだと...
+
+- 毎回ルールを説明する必要がある
+- 人によって回答品質がブレる
+- プロジェクト固有ルールを守らないことがある
+
+カスタム命令ありだと...
+
+- ✅ 常に同じルールでコード生成
+- ✅ プロジェクト文脈を理解した回答
+
+カスタム設定は個人用だと、出力を簡潔・詳細を設定出来たり、コメントを英語・日本語の設定、思考プロセスの説明有無の表示が設定出来たりします。
+
+Agent にこんな感じのルールで実装しているから、ええ感じに引き継いでほしいルールを記載するイメージですね。
+
+Agent 向けのカスタム命令には以下のようなものがあります。
+| ファイル名 | 役割 | 効果 |
+|---|---|---|
+| AGENTS.md | AI（Copilot/Agent）の最上位ルール | 技術スタック固定・Copilot 暴走防止 |
+| instructions.md | 実装・設計・UI・セキュリティの共通ルール | 実装品質の安定・判断ブレ防止 |
+| docs/introduction.md | アプリの概要・目的・非目的を定義 | 要件誤解の防止・AI の文脈理解向上 |
+| docs/architecture.md | 全体アーキテクチャ定義（Client/Backend/Data） | 構成の一貫性維持・勝手な設計変更防止 |
+| docs/api/README.md | API 全体の方針・共通仕様 | API 設計の統一・破壊的変更防止 |
+| docs/api/xxx.md | xxx API の契約定義 | フロント/バックの連携安定 |
+| docs/decisions/README.md | ADR（設計判断）一覧 | 設計理由の可視化・将来の迷走防止 |
+
+この中で特に重要なのが、
+
+- AGENTS.md
+- instructions.md
+- docs/introduction.md
+- docs/architecture.md
+
+のあたりが重要です。
+AI 駆動開発を進める上で、これらのドキュメントがあると Agent が迷いなく実装することが出来、その結果、品質の高いコードが生成されやすくなります。
+
+## カスタム命令の設定方法 (xxx.instructions.md)
+
+GitHub Copilot の挙動を自分に合った形に調整できる設定機能のことです。
+記載の仕方でいくと以下のように書き分けるイメージです。
+
+- 個人向けのカスタム命令の記載
+  - 回答は結論 → 理由 → 手順の順で
+  - 不確実な点は明示する
+  - 可能な限り実務ベースで説明する
+- リポジトリ向けのカスタム命令の記載
+  - このプロジェクトは Next.js + TypeScript
+  - state 管理は Redux Toolkit
+  - UI は shadcn/ui と Tailwind CSS
+  - 命名は camelCase、関数は動詞始まり
+  - Database は CosmosDB...etc
+
+では、実際にカスタム命令を設定してみましょう。
+
+GitHub Copilot の 📎 マークをクリックして、手順を選択
+![](https://storage.googleapis.com/zenn-user-upload/c5651aa5ee8b-20260112.png)
+
+手順の構成を選択
+![](https://storage.googleapis.com/zenn-user-upload/fde03e907ca3-20260112.png)
+
+新しい命令ファイルを選択
+![](https://storage.googleapis.com/zenn-user-upload/d973f895d0cd-20260112.png)
+
+.github/instructions を選択
+![](https://storage.googleapis.com/zenn-user-upload/8bf8082b2158-20260112.png)
+
+名前を入力すると、**xxx.instractions.md** というファイルが作成されます。
+![](https://storage.googleapis.com/zenn-user-upload/74a808d2dc66-20260112.png)
+
+ここに個人用の指示や、リポジトリのルールなどを記載していきます。
+そうすると、GitHub Copilot の Agent がこの指示を読んでいい感じに動いてくれるようになります。
+
+### カスタム命令の記載例
+
+カスタム命令の実態は instructions.md という Markdown ファイルです。
+サンプルを記載すると以下のようになります。
+
+```:markdown:instructions.md
+---
+applyTo: '**'
+---
+
+# Basic Instructions
+- 常に日本語で応答すること（ユーザー向け出力・説明・エラーメッセージを含む）。
+- 技術用語は必要に応じて英語併記してよいが、本文は日本語を主とすること。
+
+# Tech Stack / Constraints
+- アプリケーションは **Next.js（App Router）+ TypeScript** で実装すること。
+- 認証は **Clerk** を使用すること。
+- データベースは **Azure Cosmos DB** を使用すること。
+- 環境変数は **`.env.local`** にのみ定義し、リポジトリにコミットしないこと（`.gitignore` に含める）。
+- 追加ライブラリ導入は最小限とし、導入理由を明確にすること。
+
+# UI / Design
+- CSSは **Tailwind CSS** と **shadcn/ui** を用いてモダンなデザインにすること。
+- **レスポンシブ対応必須**：
+  - スマホ（例：375px前後）とiPad（例：768px前後）を主要ターゲットとして最適化する。
+  - Tailwindのブレークポイント（`sm`, `md`, `lg`）を適切に用い、崩れないUIにする。
+  - タップ操作を前提に、ボタン/入力のヒット領域は十分に確保する（目安：44px相当以上）。
+- UIコンポーネントは可能な限り shadcn/ui を利用し、独自実装は必要最小限にすること。
+
+# Architecture / Implementation Rules
+- Next.jsの **Server/Client境界** を明確にすること。
+  - Server Componentsを基本とし、Client Componentsは必要な箇所に限定する（`"use client"` の乱用を避ける）。
+- API呼び出しは **Route Handlers（`app/api/**`）** を基本とする（要件に応じてServer Actionsも可）。
+- Cosmos DBアクセスはサーバー側で行い、クライアントに接続文字列などを露出させないこと。
+- データアクセス層（Cosmos）とUI層を分離し、関心の分離を保つこと。
+
+# State Management (Redux Toolkit)
+- クライアント状態管理は **Redux Toolkit** を使用すること。
+  - UI状態（モーダル開閉、フィルタ、フォーム一時状態など）や、必要なキャッシュに限定する。
+  - サーバー状態の過剰な複製は避け、取得・更新の責務を明確にする。
+- Slice/Thunkは責務ごとに分割し、命名規則を統一すること。
+
+# Security
+- Clerkのセッション/ユーザーIDを基準に、**ユーザー単位のデータ分離**（AuthZ）を徹底すること。
+- 入力値は必ずサーバー側で検証し、不正入力・権限外アクセスを防止すること。
+- 機密情報（キー、トークン、接続文字列）はログ出力しないこと。
+
+# Commit Message
+- コミットメッセージは日本語で記述すること。
+- 形式は次を推奨：`<種別>: <要約>`
+  - 例：`機能: 日記投稿APIを追加`
+  - 例：`修正: Clerkセッション検証の不具合を修正`
+  - 例：`整理: UIコンポーネントの配置を整理`
+
+# Code generation
+- 生成するコードには可能な限りコメントを付与し、意図・前提・注意点を明確にすること。
+- 型（TypeScript）を適切に付与し、`any` の乱用を避けること。
+- 変更時は「目的」「影響範囲」「確認方法（コマンド）」が分かるように記述すること。
+
+# Verification
+- 変更後は最低限、以下が通る状態を維持すること：
+  - `lint`
+  - `typecheck`
+  - `build`（可能なら）
+- 追加・変更した機能には、動作確認手順を併記すること（UI操作手順またはAPI例）。
+
+
+```
+
+ずらっと書いてますが、こういった感じでルールを定義しておくと、毎回同じ説明をしなくても GitHub Copilot がここを見ていい感じに動いてくれるようになります。
+
+毎回プロンプトに同じ説明を書くのは大変なので、是非カスタム命令を活用してみてください。
+
+# 最後に
+
+# 参考文献
+
+https://github.com/features/copilot?locale=ja
+https://github.blog/jp/2025-10-29-welcome-home-agents/
+https://www.udemy.com/course/github-copilot-next/
