@@ -3,7 +3,7 @@ title: 'GitHub Copilot を極める会'
 emoji: '♥️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['github', 'copilot', 'agent', 'githubcopilot', 'llm']
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -27,7 +27,7 @@ GitHub Copilot を使う側のレベルを一段引き上げる記事となれ�
 
 それでは行きましょう 🚀
 
-本記事は GitHub Copilot の**Agent モード**の使い方や**MCP**、**カスタム命令**などの高度な内容を扱います。
+本記事は GitHub Copilot の**Agent モード**の使い方や**MCP**、**カスタム命令**、さらには**バイブコーディング**からの GitHub Copilot を使った**コードレビュー**など盛りだくさんな記事となります。
 
 基本的な内容から理解されたい場合は以下の記事をご参照ください。
 
