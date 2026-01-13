@@ -27,7 +27,8 @@ GitHub Copilot を使う側のレベルを一段引き上げる記事となれ�
 
 それでは行きましょう 🚀
 
-本記事は GitHub Copilot の基礎ではなく、応用的な内容となります。
+本記事は GitHub Copilot の**Agent モード**の使い方や**MCP**、**カスタム命令**などの高度な内容を扱います。
+
 基本的な内容から理解されたい場合は以下の記事をご参照ください。
 
 - GitHub Copilot を完全に使いこなす会
@@ -313,7 +314,7 @@ Visual Studio Code で拡張機能として組み込まれている機能をツ�
 
 ![](https://storage.googleapis.com/zenn-user-upload/2e0cbf127c8b-20260110.png)
 
-### MCP Client（左側）
+### MCP Client
 
 - GitHub Copilot
 - Visual Studio Code
@@ -321,17 +322,17 @@ Visual Studio Code で拡張機能として組み込まれている機能をツ�
 
 👉 ユーザーが操作し、AI が実行する側
 
-### MCP（中央）
+### MCP
 
 - Model Context Protocol
 - どの情報に、どの権限で、どんな形式でアクセスできるかを定義
 
 👉 AI と外部サービスをつなぐ「安全な橋渡し」
 
-### MCP Server（右側）
+### MCP Server
 
 - GitHub
-- Microsoft Docs
+- Microsoft Learn
 
 👉 実データ・実機能を提供する側
 
@@ -342,7 +343,7 @@ MCP でできることは以下になります。
 - 権限・スコープを明確にした安全な実行
 - 複数サービスを同一ルールで扱う
 
-MCP がない時とある時
+MCP がない時とある時を比較すると以下。
 
 #### MCP ない時
 
@@ -503,6 +504,7 @@ npm install -g @modelcontextprotocol/server-filesystem
 そして、先ほど開いた MCP の設定ファイルに以下のコードを追記して保存してください。
 
 設定を保存したら、画面左下の MCP Server の箇所に filesystem が追加されていることがわかりますね。
+
 ![](https://storage.googleapis.com/zenn-user-upload/65b408f6f07f-20260110.png)
 
 追加部分は以下になります。
@@ -520,6 +522,7 @@ npm install -g @modelcontextprotocol/server-filesystem
 ```
 
 これでローカルのファイルが MCP Server 経由で検索出来るようになりました。
+
 ![](https://storage.googleapis.com/zenn-user-upload/45c905874a85-20260110.png)
 
 色々と利用ユースケースありそうですね。
@@ -613,6 +616,31 @@ Agent 向けのカスタム命令には以下のようなものがあります�
 | docs/api/xxx.md | xxx API の契約定義 | フロント/バックの連携安定 |
 | docs/decisions/README.md | ADR（設計判断）一覧 | 設計理由の可視化・将来の迷走防止 |
 
+ディレクトリ構造としては以下のようなイメージです。
+
+```
+.
+├── AGENTS.md *important
+├── instructions.md *important
+├── docs/
+│   ├── introduction.md *important
+│   ├── architecture.md *important
+│   ├── api/
+│   │   ├── README.md
+│   │   ├── daily.md
+│   │   └── user.md
+│   └── decisions/
+│       ├── README.md
+└── src/
+    ├── app/
+    │    ├── api/
+    │    ├── pages/
+    │    └── layout.tsx
+    │    └── page.tsx
+    ├── components/
+    └── lib/
+```
+
 この中で特に重要なのが、
 
 - AGENTS.md
@@ -620,8 +648,10 @@ Agent 向けのカスタム命令には以下のようなものがあります�
 - docs/introduction.md
 - docs/architecture.md
 
-のあたりが重要です。
+のあたりが重要です。(最悪これだけあれば OK です。)
 AI 駆動開発を進める上で、これらのドキュメントがあると Agent が迷いなく実装することが出来、その結果、品質の高いコードが生成されやすくなります。
+
+その結果、手戻りが減少し、開発スピードが向上する傾向にあります。
 
 ## カスタム命令の設定方法 (xxx.instructions.md)
 
@@ -722,7 +752,7 @@ applyTo: '**'
 - 変更後は最低限、以下が通る状態を維持すること：
   - `lint`
   - `typecheck`
-  - `build`（可能なら）
+  - `build`
 - 追加・変更した機能には、動作確認手順を併記すること（UI操作手順またはAPI例）。
 
 
@@ -732,10 +762,417 @@ applyTo: '**'
 
 毎回プロンプトに同じ説明を書くのは大変なので、是非カスタム命令を活用してみてください。
 
+その他のファイルについては、基本的には GitHub Copilot に作成してと頼めばいい感じに作成してもらえるようになります。
+開発が進むにつれて、定期的にカスタム命令を更新していくと良いでしょう。
+
+# コーディングエージェント
+
+Issue に書かれたユーザーのやりたいこと（実装したい内容）を解釈、反復的に実装することが可能。
+特徴としては、以下。
+・抽象的な内容を小さなステップに分割して反復実行
+・エラーも自動的に検知、解消
+・出来上がったコードは Pull Request を作成
+
+issue の修正もこれからは GitHub Copilot にお任せ出来る時代がきています。
+
+sample として、コーディングエージェントがどんな感じで働いてくれるのか見てみましょう。
+
+## サンプルアプリケーションをバイブコーディングで作ってみる 🎸
+
+コーディングエージェントで修正することを体験する為に、簡単な日記アプリを作成してみましょう。
+筆者のリポジトリは以下になります。
+https://github.com/SatakeYusuke19920527/github-copilot-zenn
+
+ローカルにクローンして、Visual Studio Code で開きます。
+![](https://storage.googleapis.com/zenn-user-upload/7b69330b0bd6-20260113.png)
+
+せっかくなので、最初のアプリもコーディングエージェントに作成してもらいましょう。
+簡単なアプリケーションを作ってみます。
+
+GitHub Copilot で以下のように指示します。
+以下を GitHub Copilot のチャットに貼り付けてアプリを Agent に実装してもらいましょう。
+
+```
+あなたはシニアフルスタックエンジニアです。Next.js（App Router）+ TypeScriptで「日記WEBアプリ」を実装してください。
+状態管理は Redux Toolkit を使用し、UI は Tailwind CSS + shadcn/ui を用いたモダンなデザインにしてください。
+
+# 技術スタック / 制約
+- Next.js（App Router）, TypeScript
+- Redux Toolkit（store, slice, typed hooks）
+- Tailwind CSS + shadcn/ui
+- まずはローカル状態（永続化なし）で CRUD が完結する構成にする（DB/認証は不要）
+
+# 機能要件（必須）
+1) 日記一覧表示
+- トップページに日記一覧を表示
+- 各日記カードに「タイトル」「本文の冒頭」「更新日時」を表示
+- 日記の一覧表示はshadcn/ui の Card コンポーネントを利用
+- Card上部にunsplash(https://unsplash.com/ja)を用いて各日記のイメージ画像を作成して
+- 日記が0件の場合は空状態（Empty State）を表示
+- 3×3のグリッドレイアウトで表示（レスポンシブ対応）
+
+2) 追加（Create）
+- 画面右下に固定配置の「+」フローティングボタン（FAB）を配置
+- クリックで新規作成用の Dialog（モーダル）を開く
+- 入力項目: title（必須）, content（必須）
+- 保存すると一覧に即反映し、Dialogは閉じる
+
+3) 編集（Update）
+- 一覧の各カードに「Edit」ボタン
+- クリックで編集用 Dialog を開く（既存値を初期値として表示）
+- 保存で更新し、一覧に即反映
+
+4) 削除（Delete）
+- 一覧の各カードに「Delete」ボタン
+- 誤削除防止のため Confirm Dialog を挟む（OKで削除）
+- 削除後は一覧に即反映
+
+# 画面/UI要件
+- Tailwindで余白・文字サイズ・カードレイアウトを整える
+- shadcn/ui の Button / Card / Dialog / Input / Textarea を利用
+- FAB（+ボタン）は右下 fixed、丸型、影あり、hoverで視認性が上がる
+- レスポンシブ（スマホ〜デスクトップ）で崩れないように
+
+# 状態管理（Redux Toolkit）
+- diarySlice を作成し、stateは以下の形にする
+  - diaries: Diary[]
+  - selectedId: string | null（必要なら）
+- Diary型:
+  - id: string
+  - title: string
+  - content: string
+  - createdAt: string（ISO）
+  - updatedAt: string（ISO）
+- actions:
+  - addDiary(payload: {title, content})
+  - updateDiary(payload: {id, title, content})
+  - deleteDiary(payload: {id})
+- store設定と typed hooks（useAppDispatch/useAppSelector）を用意
+- App Router で Redux Provider を app/providers.tsx 等に分離して layout.tsx に組み込む
+- ReduxToolkitは永続化出来るようにして
+
+# 実装方針
+- 追加/編集は共通の DiaryFormDialog コンポーネントにまとめる（mode: "create" | "edit"）
+- 削除は ConfirmDialog コンポーネントに分離する
+- ID生成は crypto.randomUUID() を使用（利用不可ならフォールバック実装）
+- 日時は new Date().toISOString()
+
+# 成果物
+- 主要ファイルの作成/編集を行い、動作する状態にしてください
+  - app/page.tsx（一覧画面）
+  - app/layout.tsx（Provider組み込み）
+  - app/providers.tsx（Redux Provider）
+  - lib/store.ts, lib/hooks.ts
+  - features/diary/diarySlice.ts
+  - components/DiaryList.tsx, DiaryCard.tsx, DiaryFormDialog.tsx, ConfirmDialog.tsx, FloatingAddButton.tsx
+- 可能なら簡単な初期ダミーデータを1件入れて UI 確認しやすくする（任意）
+
+まずは「動く最小構成（MVP）」を完成させ、次にUIの整え（余白、カード、DialogのUX）まで仕上げてください。
+
+```
+
+実装中はこんな感じです。
+![](https://storage.googleapis.com/zenn-user-upload/ffc1b95305ca-20260113.png)
+
+途中、create-next-app のコマンドを実行して良いか聞いてくれます。
+![](https://storage.googleapis.com/zenn-user-upload/11a074ce1465-20260113.png)
+
+許可すると、ターミナルも使って作っていってくれます。
+![](https://storage.googleapis.com/zenn-user-upload/423a2efb80c0-20260113.png)
+
+次は ReduxToolkit や shadcn/ui のインストールも聞いてくれます。
+![](https://storage.googleapis.com/zenn-user-upload/a94ed8594133-20260113.png)
+
+頑張ってくれている進捗は以下の TODO の箇所で確認出来ます。いいですね。
+![](https://storage.googleapis.com/zenn-user-upload/cdad783909cc-20260113.png)
+
+作っている途中でエラーが発生したら、自動的にエラー内容を解析して修正も行ってくれます。
+![](https://storage.googleapis.com/zenn-user-upload/6012850f38b9-20260113.png)
+
+完成したら、サマリーも作成してくれます。
+![](https://storage.googleapis.com/zenn-user-upload/eeb538b28fb7-20260113.png)
+
+では、ターミナルで以下のコマンドを実行してアプリを起動してみましょう。
+
+```
+npm run dev
+```
+
+筆者のアプリは以下のようになりました。(いい感じですね)
+![](https://storage.googleapis.com/zenn-user-upload/45d11bc2ef81-20260113.png)
+
+日記も追加してみました。
+![](https://storage.googleapis.com/zenn-user-upload/a3c3f932e37d-20260113.png)
+いい感じで追加できてますね。
+![](https://storage.googleapis.com/zenn-user-upload/b91edf22ed57-20260113.png)
+
+ReduxToolkit で永続化ができているかどうかも確認してみましょう。
+画面をリロードしても、追加した日記が残っていることがわかりますね。
+
+これでサンプルアプリの実装は完了なので、GitHub へ push しておきましょう。
+最近はコミットメッセージももっぱら AI で次自動生成です。
+
+push できたら次は GitHub Copilot でコーディングエージェントを使ってみます。
+![](https://storage.googleapis.com/zenn-user-upload/057af7e25f43-20260113.png)
+
+## コーディングエージェントを Issue へ割り当て
+
+では、さっそくコーディングエージェントを Issue に割り当てて、アプリのバグを修正してもらいましょう。
+https://github.com/SatakeYusuke19920527/github-copilot-zenn
+
+では、issue を作成してみます。
+アプリには Header と Footer がないので、Header と Footer を追加する Issue を作成してみます。
+
+Issue→New issue から以下のように記載して作成します。
+![](https://storage.googleapis.com/zenn-user-upload/1bb37236e5b3-20260113.png)
+
+Issue の titile は以下にしてみました。
+
+> Header / Footer 追加 Issue 作成の依頼
+
+内容は以下のように記載しています。
+
+```
+## 背景
+現在の「日記WEBアプリ」には、グローバルな **Header** および **Footer** が存在していません。
+アプリ全体の情報構造・ナビゲーション・視認性を向上させるため、Header / Footer を追加するための Issue を新規に作成したいと考えています。
+
+## 依頼内容
+このリポジトリに対して、**Header / Footer を追加** してください。
+
+### 実装要件
+
+#### Header
+- 全ページ共通で表示
+- 左側にアプリ名（例: Diary App）
+- 右側に将来拡張を考慮したナビゲーション領域（今はプレースホルダーでOK）
+- 高さは固定、スクロールしても常に上部に表示される（sticky or fixed）
+- Tailwind CSS + shadcn/ui を使用
+- レスポンシブデザインでスマホでも快適に見られるようにしてください。
+
+#### Footer
+- 全ページ共通で表示
+- アプリ最下部に配置
+- コピーライト表記（例: © 2026 Diary App）
+- シンプルで主張しすぎないデザイン
+- Tailwind CSS + shadcn/ui を使用
+- レスポンシブデザインでスマホでも快適に見られるようにしてください。
+
+### 4. 技術的制約
+- Next.js App Router を前提
+- `app/layout.tsx` に組み込む構成
+- Header / Footer はそれぞれ独立したコンポーネントとして実装
+- TypeScript を使用
+
+### 5. 完了条件（Acceptance Criteria）
+- すべてのページで Header / Footer が表示されている
+- レスポンシブ対応（モバイル / デスクトップ）
+- 既存の UI や機能（日記の CRUD）に影響がない
+- コードが読みやすく、責務が分離されている
+
+## 補足
+- デザインは「モダン・シンプル」を重視
+- 今後、認証やナビゲーションが追加される前提で拡張しやすい構造にする
+```
+
+では、ここまで記載したら、Assigners の箇所で GitHub Copilot を選択して割り当てます。
+![](https://storage.googleapis.com/zenn-user-upload/1f4b3174e59c-20260113.png)
+Create をクリックして Issue を作成します。
+![](https://storage.googleapis.com/zenn-user-upload/c1b2688e105f-20260113.png)
+
+👀 のマークがついて GitHubCopilot が確認したことが確認でき、[WIP] Work in Progress の記載があれば GitHub Copilot が仕事を進めてくれています。
+![](https://storage.googleapis.com/zenn-user-upload/fec40b2a0c4f-20260113.png)
+
+そして、実装完了したら pull request が自動的に作成されます。すごいですね。
+![](https://storage.googleapis.com/zenn-user-upload/62065b27a81e-20260113.png)
+
+では、GitHub Copilot が作成した pull request を確認してみましょう。
+Changes が綺麗にまとまってますね。
+![](https://storage.googleapis.com/zenn-user-upload/d367c3984b67-20260113.png)
+
+そして最近驚きなのがスクリーンショットも自動的に追加してくれるんですよね。
+![](https://storage.googleapis.com/zenn-user-upload/fb06bca78afa-20260113.png)
+
+しかも、レスポンシブ後のモバイルも。
+![](https://storage.googleapis.com/zenn-user-upload/8b0953a3c599-20260113.png)
+
+では Marge してローカルで動作を確認してみましょう。
+![](https://storage.googleapis.com/zenn-user-upload/570607bf0bf0-20260113.png)
+
+いい感じに Header と Footer が追加されていますね。すばらしい働きです。
+![](https://storage.googleapis.com/zenn-user-upload/7bdaf67951be-20260113.png)
+
+# コードレビュー
+
+次に Pull Request（PR）に対して GitHub Copilot が自動的にレビューコメントを生成してくれます。
+
+特徴としては以下になります。
+・PR に Copilot を割り当てると自動的にコメントを作成
+・セキュリティリスク、バグの可能性、冗長な処理、ベストプラクティスに沿っているかなどを指摘
+・指摘対応も同時に提案
+
+これで、PR をチェックする開発リーダーの負担が大幅に低減されそうですね。
+それでは、使ってみましょう。
+
+先ほどのアプリに以下のエラーが出ていることがわかりました。
+![](https://storage.googleapis.com/zenn-user-upload/ee09ca989083-20260113.png)
+
+Issue を作成して、人間が修正して pull request を出して GitHub Copilot に Review してもらいましょう。
+
+では、Issue を作成します。
+また、New Issue から以下のように記載して作成します。
+
+titile
+
+> Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+エラー内容
+
+````
+# React Hydration Error 修正内容
+
+## エラー概要
+
+Next.js（App Router）において **Hydration Error** が発生しています。
+
+主な症状は以下です：
+
+- サーバーで生成された HTML と
+- クライアントで初回レンダリングされた HTML
+
+が一致していないため、React が再構築（hydrate）できずエラーになっています。
+
+今回の差分では、**DiaryCard 内の表示内容が Server / Client で異なっている**ことが原因です。
+
+```diff
++ src="https://images.unsplash.com/photo-1504384308090-..."
+- src="https://images.unsplash.com/photo-1496307042754-..."
+
++ alt="test title"
+- alt="はじめての日記"
+
++ test title
+- はじめての日記
+根本原因（今回のケース）
+❌ 問題点
+以下のいずれか、もしくは複合です。
+
+初期表示時に Math.random() や Date.now() を直接使っている
+
+サーバーとクライアントで初期データが一致していない
+
+Diary データを Client Component 側で生成している
+
+useEffect 前後で表示内容が変わっている
+
+今回のログから判断すると、最も可能性が高いのは：
+
+日記データ（title / image URL）を Client Component 側でランダム生成している
+
+修正方針（正解）
+原則
+初回レンダリングで使うデータは、Server / Client で完全に一致させる
+
+修正方法①（推奨）
+ランダム値・日時生成を reducer or action 内に移動する
+❌ NG（Component 内で生成）
+
+ts
+コードをコピーする
+// ❌ ダメ：レンダリング毎に変わる
+const diary = {
+  id: crypto.randomUUID(),
+  title: Math.random() > 0.5 ? 'test title' : 'はじめての日記',
+}
+✅ OK（dispatch 時に一度だけ生成）
+
+ts
+コードをコピーする
+// diarySlice.ts
+addDiary: (state, action) => {
+  state.diaries.push({
+    id: crypto.randomUUID(),
+    title: action.payload.title,
+    content: action.payload.content,
+    imageUrl: action.payload.imageUrl,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  })
+}
+➡ レンダリング中に値が変わらなくなる
+
+修正方法②
+初期ダミーデータを固定値にする
+ts
+コードをコピーする
+const initialState = {
+  diaries: [
+    {
+      id: 'dummy-1',
+      title: 'はじめての日記',
+      content: 'これはサンプルの日記です',
+      imageUrl: 'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d',
+      createdAt: '2026-01-01T00:00:00.000Z',
+      updatedAt: '2026-01-01T00:00:00.000Z',
+    },
+  ],
+}
+➡ Server / Client で 完全一致
+
+修正方法③（最終手段・非推奨）
+Client Only Rendering にする
+ts
+コードをコピーする
+'use client'
+import dynamic from 'next/dynamic'
+
+export default dynamic(() => import('./DiaryList'), {
+  ssr: false,
+})
+⚠️ SEO・初期表示性能が落ちるため非推奨
+
+今回のケースでの結論（ベストプラクティス）
+✅ DiaryCard / DiaryList は「純粋な表示コンポーネント」にする
+✅ データ生成（ランダム・日時）は reducer / action で一度だけ行う
+✅ 初期表示に使う値は固定 or サーバー由来にする
+````
+
+今度は人間が Issue を修正して pull request を出します。
+まずは、ローカルでブランチを作成し、修正を行います。
+ここは GitHub Copilot chat を使って修正を行います。
+![](https://storage.googleapis.com/zenn-user-upload/b8aa14461fbf-20260113.png)
+
+ローカル環境で修正されていることが確認出来たので、これで OK。
+![](https://storage.googleapis.com/zenn-user-upload/a9268fc41aef-20260113.png)
+
+pull request 作成して、reviewer を GitHub Copilot に設定しましょう。
+![](https://storage.googleapis.com/zenn-user-upload/044b0cf7a7a0-20260113.png)
+
+ちゃんとレビューもして、コメントも残してくれていますね。
+![](https://storage.googleapis.com/zenn-user-upload/7b68a209a80d-20260113.png)
+
+では、Marge してローカルで動作を確認してみましょう。
+![](https://storage.googleapis.com/zenn-user-upload/2ac81f10595c-20260113.png)
+
+これで一連の GitHub Copilot の Agent を活用した修正作業が完了です。
+
+すばらしすぎますね。
+
 # 最後に
+
+GitHub Copilot は最近ますます進化しており、全ての開発者にとって強力なツールとなっています。
+特に Agent モードや MCP、カスタム命令などの高度な機能を活用することで、開発効率が大幅に向上します。
+
+もしかしたら、我々が手を動かしてコードを書く時代ももうそろそろ終わりで、以下にうまく指示を出せるかがポイントになってくるかもしれませんね。
+
+GitHub Copilot の進化は目覚ましく、今後も新しい機能や改善が期待されているので、是非積極的に活用してみてください。
+
+それでは 🖐️
 
 # 参考文献
 
 https://github.com/features/copilot?locale=ja
+
 https://github.blog/jp/2025-10-29-welcome-home-agents/
+
 https://www.udemy.com/course/github-copilot-next/
