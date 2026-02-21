@@ -3,7 +3,7 @@ title: 'GPT-5.3-Codexの教科書'
 emoji: '🔥'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['openai', 'gpt-5.3-codex', 'codex', 'llm', 'githubcopilot']
-published: false
+published: true
 publication_name: microsoft
 ---
 
@@ -24,7 +24,17 @@ GPT-5.3-Codexがリリースされたので、概要のキャッチアップと�
 - ベンチマーク結果の読み方と注目ポイント
 - 実際に触ったうえでの所感（追記予定）
 
-この記事では、OpenAI社からの発表をもとに、GPT-5.3-Codex の概要・能力・安全設計を整理し、実際に触ってみた所感をまとめます。
+この記事では、前半がOpenAI社からの発表をもとに、GPT-5.3-Codex の概要・能力・安全設計を整理し、後半で実際に触ってみた所感をまとめます。
+
+後半で作成するアプリケーションは、音声を録音して文字起こしし、その内容を分析してDBに保存し、Webアプリで表示するというものです。
+
+- アーキテクチャ
+  ![](https://storage.googleapis.com/zenn-user-upload/a920f40e0c10-20260221.png)
+
+- アプリ画面
+  https://youtu.be/gnARR-xtfis
+
+markdownファイルの配置なども記載しましたので、是非参考になりましたら幸いです。
 
 # 序論
 
