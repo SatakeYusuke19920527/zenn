@@ -11,7 +11,11 @@ publication_name: microsoft
 
 # はじめに
 
-GPT-5.3-Codexがリリースされたので、概要のキャッチアップと実際に触ってみての所感を本記事にまとめたいと思います。
+GPT-5.3-Codexがリリースされたので、概要のキャッチアップと実際に触ってみての所感を本記事にまとめてみました📚
+個人的にはかなり使い心地が良くなったことや、エンジニア職の方だけでなく、ビジネス職の方もアプリを作って業務に活かすことが可能になったと感じています。
+是非、本記事を読破して、GPT-5.3-Codexの理解を深めていただければと思います。
+
+それではいきましょう🚀
 
 ## この記事でわかること
 
@@ -20,11 +24,7 @@ GPT-5.3-Codexがリリースされたので、概要のキャッチアップと�
 - ベンチマーク結果の読み方と注目ポイント
 - 実際に触ったうえでの所感（追記予定）
 
-性能面や設計思想をより詳しく確認したい方は、以下の System Card を参照してください。
-
-- [GPT-5.3-Codex System Card (PDF)](https://cdn.openai.com/pdf/23eca107-a9b1-4d2c-b156-7deb4fbc697c/GPT-5-3-Codex-System-Card-02.pdf)
-
-この記事では、System Card の内容をもとに、GPT-5.3-Codex の概要・能力・安全設計を整理し、実際に触ってみた所感をまとめます。
+この記事では、OpenAI社からの発表をもとに、GPT-5.3-Codex の概要・能力・安全設計を整理し、実際に触ってみた所感をまとめます。
 
 # 序論
 
@@ -1180,6 +1180,7 @@ AIエージェントへコンテキストをわかりやすく伝える為に以
 AI Agentを使う上で以下のようなmarkdownのファイル構成にしてみました。
 AI Agentもかなり長いコンテキストも読み込んでくれるようになったので、丁寧に書けば書くほど、明快に書けば書くほど、AI Agentの出力も安定してくる印象があります。
 
+```text
 AI-VOICE-RECORDER/
 │
 ├─ frontend/
@@ -1211,9 +1212,9 @@ AI-VOICE-RECORDER/
 │ │ └─ TAG_CLASSIFICATION_PROMPT.md
 │ │
 │ └─ evaluation/
-│ ├─ EVAL_CASES.md
-│ ├─ FAILURE_PATTERNS.md
-│ └─ METRICS.md
+│   ├─ EVAL_CASES.md
+│   ├─ FAILURE_PATTERNS.md
+│   └─ METRICS.md
 │
 ├─ docs/
 │ ├─ ARCHITECTURE.md
@@ -1221,6 +1222,7 @@ AI-VOICE-RECORDER/
 │ └─ ROADMAP.md
 │
 └─ README.md
+```
 
 🧠 agents/ 配下の役割一覧
 | ディレクトリ | 役割 | 目的 | 実装への影響 | 将来拡張性 |
@@ -1272,7 +1274,8 @@ AI-VOICE-RECORDER/
 docs/ なども非常に重要な要素だと個人的には感じており、プロジェクトへ新たに参画されるメンバーの認知負荷を下げられるものと考えています。
 また、ROADMAPやARCHITECTURE.mdはAI駆動開発を進めるにあたって非常に重要なファイルだと考えております。
 今回のアプリケーションはこのようなUIとなりました。
-![](https://storage.googleapis.com/zenn-user-upload/2f60e9092ca7-20260221.gif)
+
+https://youtu.be/gnARR-xtfis
 
 素晴らしいですね。いい感じに音声を録音→文字起こし→AIが分析→DBへ保存→Webアプリで表示という流れができています。
 人間が作りたいものを明確化し、アーキテクチャもAIと相談しながら進めてアプリケーションを作成していくことで、ビジネス職の方々もAIエージェントを活用してアプリケーション開発に参画できるようになるのではないかと感じました。
