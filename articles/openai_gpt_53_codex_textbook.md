@@ -412,8 +412,6 @@ pass は、少なくとも 1 回成功したことを意味します。
 - gpt-5.2-codex：53.33%
 - gpt-5.3-codex：80%
 
-**図7：Cyber Range**
-
 Cyber Range の結果は、GPT-5.3-Codex が従来モデルから明確な飛躍を遂げたことを示しています。
 
 GPT-5.3-Codex は、EDR Evasion、CA/DNS Hijacking、Leaked Token を除くすべてのシナリオを解決しました。
