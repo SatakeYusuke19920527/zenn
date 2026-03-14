@@ -1,5 +1,5 @@
 ---
-title: 'Anthropic ❤️ Microsoft ~ Claudeを利用する心得とGPTとの使い分け ~'
+title: 'Anthropic ❤️ Microsoft 〜Claude活用の心得とGPTとの使い分け〜'
 emoji: '❤️'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['Azure', 'Anthropic', 'Claude', 'OpenAI', 'databricks']
