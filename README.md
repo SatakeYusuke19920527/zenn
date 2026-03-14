@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "グローバルチームと英語と私 ~GenAI時代の英語トレーニング方法~" --type tech --emoji 📚 --publication-name "microsoft"
+  > npx zenn new:article --title "Codex の Best Practiceを知る会" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
