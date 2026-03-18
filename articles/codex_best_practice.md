@@ -3,7 +3,7 @@ title: 'CodexのBestPracticeを学ぶ会'
 emoji: '📚'
 type: 'tech' # tech: 技術記事 / idea: アイデア
 topics: ['codex', 'best practice', 'microsoft', 'githubcopilot', 'github']
-published: false
+published: true
 publication_name: microsoft
 ---
 
