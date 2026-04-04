@@ -200,7 +200,7 @@ copilot --resume abc123
 # GitHub Copilot CLIのモード
 
 GitHub Copilot は4つのモードがあります。
-![](https://storage.googleapis.com/zenn-user-upload/8f38829f3cab-20260321.png)
+![](https://storage.googleapis.com/zenn-user-upload/2207e7f61f6c-20260404.png)
 
 - Interactive > 通常の会話形式のモードです。
 - Programmatic > プログラムモード（copilot -p "<your prompt>"）は、簡単な単発の質問に使用します。
