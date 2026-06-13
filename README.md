@@ -10,7 +10,7 @@
 > npx zenn new:article
 
 - これでも OK
-  > npx zenn new:article --title "Codex の Best Practiceを知る会" --type tech --emoji 📚 --publication-name "microsoft"
+  > npx zenn new:article --title "2026年最新版 今だからこそAIコーディングエージェント徹底比較 ~GitHubCopilot/ClaudeCode/Codex..~" --type tech --emoji 💡 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
