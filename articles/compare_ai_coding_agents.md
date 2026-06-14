@@ -1,5 +1,5 @@
 ---
-title: "【2026最新版】AIコーディングツール11選 2026 - GitHub Copilot / Cursor / Claude Code / Codex / Devin を全観点で徹底比較"
+title: "【保存版】AIコーディングツール11選 - Copilot/Cursor/Claude/Codex/Devin 徹底比較"
 emoji: "🗺️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["githubcopilot", "claudecode", "codex", "cursor", "devin"]
