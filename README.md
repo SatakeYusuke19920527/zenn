@@ -11,6 +11,7 @@
 
 - これでも OK
   > npx zenn new:article --title "2026年最新版 今だからこそAIコーディングエージェント徹底比較 ~GitHubCopilot/ClaudeCode/Codex..~" --type tech --emoji 💡 --publication-name "microsoft"
+  > npx zenn new:article --title "GitHub Copilot CLI マスタークラス" --type tech --emoji 📚 --publication-name "microsoft"
 
 1. プレビューを確認する
    > npx zenn preview
