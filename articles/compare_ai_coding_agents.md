@@ -1,5 +1,5 @@
 ---
-title: "【保存版】AIコーディングツール11選 - Copilot/Cursor/Claude/Codex/Devin 徹底比較"
+title: "【2026年最新版】AIコーディングツール11選 - Copilot/Cursor/Claude/Codex/Devin 徹底比較"
 emoji: "🗺️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["githubcopilot", "claudecode", "codex", "cursor", "devin"]
@@ -7,7 +7,7 @@ published: false
 publication_name: microsoft
 ---
 
-![](https://static.zenn.studio/user-upload/7e52cbdbc880-20260614.png)
+![](https://static.zenn.studio/user-upload/3aa54cab2799-20260614.png)
 
 # はじめに
 
@@ -207,9 +207,9 @@ VSCodeだけではなく、Xcodeへの対応も進んでいますね。
 3. GitHub Copilot CLI の利用は、AI Credits / トークンベース利用の対象です。
 
 
-# 競合比較大全
+# AIツール比較大全
 ここから、各社のAIコーディングエージェントの比較を行います。
-それぞれ、GitHub Copilotと比較する形で記載していきたいと思います。
+それぞれGitHub Copilotと比較する形で記載していきたいと思います。
 
 # GitHub Copilot vs Cursor
 
