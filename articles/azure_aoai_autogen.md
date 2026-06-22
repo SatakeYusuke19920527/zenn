@@ -154,7 +154,7 @@ poetry --version
 今回は python で実行するので、モジュールをインストールします。
 
 ```bash
-pip install pyautogen
+pip install ag2
 ```
 
 次に main.py を作成し、以下のコードを記述します。
