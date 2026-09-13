@@ -569,36 +569,37 @@ Plugin のコード自体を Model に渡すのではなく、Plugin が追加�
 
 Agent Loop は、**推論 → 操作 → 結果の確認**を繰り返す流れとして理解できます。すべての依頼で Tool を呼ぶわけではなく、回答だけで完了する場合もあります。
 
-```mermaid
-sequenceDiagram
-    participant C as Channel / Client
-    participant G as Gateway
-    participant A as Agent Runtime
-    participant S as Session Store
-    participant M as Model
-    participant T as Tools
-    participant MEM as Memory
-
-    C->>G: メッセージ
-    G->>A: Agent・Session を指定して実行要求
-    A->>S: 会話履歴を取得
-    S-->>A: 履歴・状態
-    Note over A: Workspace・Skills などから Context を構築
-    A->>M: 入力・Context・Tool 定義
-    loop Tool が必要な間
-        M-->>A: Tool 呼び出しの提案
-        A->>T: 権限・承認を確認して実行
-        T-->>A: 実行結果
-        A->>S: Tool 呼び出し・結果を保存
-        A->>M: 実行結果を渡す
-    end
-    M-->>A: 最終応答
-    opt 後で使う情報を記録する場合
-        A->>MEM: 記憶として保存
-    end
-    A->>S: 応答・実行状態を保存
-    A-->>G: 結果
-    G-->>C: 応答
+```text
+Channel / Client
+  | メッセージ
+  v
+Gateway
+  | Agent・Session を指定
+  v
+Agent Runtime
+  |
+  |-- 準備
+  |   |-- Session Store から会話履歴を取得
+  |   `-- Workspace・Skills などから Context を構築
+  |
+  |-- Model に入力・Context・Tool 定義を渡す
+  |   |
+  |   |-- Tool が必要：以下を繰り返す
+  |   |   |-- Model が Tool 呼び出しを提案
+  |   |   |-- Runtime が権限・承認を確認して Tools を実行
+  |   |   |-- 呼び出し・結果を Session Store に保存
+  |   |   `-- 結果を Model に渡し、次の操作を判断
+  |   |
+  |   `-- Model が最終応答を返す
+  |
+  |-- 必要な情報を Memory に保存
+  `-- 応答・実行状態を Session Store に保存
+  |
+  v
+Gateway
+  | 応答
+  v
+Channel / Client
 ```
 
 これは処理の関係を示す概念図です。Memory の読み書きも Tool 経由で行われ、保存は実行途中にも発生します。エラー・タイムアウト・承認拒否などでは、完了せず停止する場合があります。
