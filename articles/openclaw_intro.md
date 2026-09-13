@@ -619,51 +619,13 @@ Channel / Client
 
 # OpenClaw 構築
 
-## Gateway
 
-## Models
+# 
 
-## Channels
-
-# OpenClaw 運用管理
 
 # 参考文献
 
 https://docs.openclaw.ai/
-
-https://docs.openclaw.ai/start/getting-started
-
-https://docs.openclaw.ai/tools/skills
-
-https://docs.openclaw.ai/gateway/heartbeat
-
-https://docs.openclaw.ai/gateway/security
-
-https://docs.openclaw.ai/concepts/architecture
-
-https://docs.openclaw.ai/concepts/agent
-
-https://docs.openclaw.ai/concepts/agent-workspace
-
-https://docs.openclaw.ai/concepts/session
-
-https://docs.openclaw.ai/concepts/memory
-
-https://docs.openclaw.ai/concepts/memory-builtin
-
-https://docs.openclaw.ai/concepts/agent-loop
-
-https://docs.openclaw.ai/tools
-
-https://docs.openclaw.ai/gateway/config-tools/tool-policy
-
-https://docs.openclaw.ai/tools/skills-config
-
-https://docs.openclaw.ai/tools/plugin
-
-https://docs.openclaw.ai/cli/skills
-
-https://docs.openclaw.ai/cli/plugins
 
 https://agentskills.io/
 
