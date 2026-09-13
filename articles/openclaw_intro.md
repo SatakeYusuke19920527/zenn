@@ -255,26 +255,26 @@ Workspace は Agent の作業ディレクトリーです。作業ファイル、
 以下は既定の状態ディレクトリーの例です。`~` はホームディレクトリーを表し、配置は設定で変更できます。
 
 ```text
-~\.openclaw\
-|-- openclaw.json                  メイン設定
-|-- credentials\                  接続先の認証関連情報
-|-- state\
-|   `-- openclaw.sqlite            共有状態
-|-- agents\
-|   `-- <AGENT_ID>\
-|       |-- agent\
-|       |   `-- openclaw-agent.sqlite   Agent ごとの実行状態
-|       `-- sessions\              旧形式・アーカイブ関連
-|-- skills\                       共有する Skills
-`-- workspace\
-    |-- AGENTS.md
-    |-- IDENTITY.md
-    |-- SOUL.md
-    |-- USER.md
-    |-- MEMORY.md
-    |-- memory\
-    |   `-- YYYY-MM-DD.md
-    `-- skills\
+~\.openclaw\                           ... OpenClaw の設定・状態を保存するルート
+|-- openclaw.json                      ... メイン設定
+|-- credentials\                      ... 接続先の認証関連情報
+|-- state\                            ... Gateway 全体の共有状態
+|   `-- openclaw.sqlite                ... 共有状態を保存するデータベース
+|-- agents\                           ... Agent ごとの状態を格納
+|   `-- <AGENT_ID>\                    ... 指定した Agent の専用領域
+|       |-- agent\                     ... 認証・Session などの実行時データ
+|       |   `-- openclaw-agent.sqlite   ... Agent ごとの実行状態を保存するデータベース
+|       `-- sessions\                  ... 旧形式の Session・アーカイブ関連
+|-- skills\                           ... Agent 間で共有する Skills
+`-- workspace\                        ... Agent の作業ファイル・指示・記憶
+    |-- AGENTS.md                     ... 作業ルール・安全方針・Memory の扱い
+    |-- IDENTITY.md                   ... Agent の名前・雰囲気・絵文字
+    |-- SOUL.md                       ... Agent の人格・口調・価値観
+    |-- USER.md                       ... ユーザー情報・呼び方・好み
+    |-- MEMORY.md                     ... 長く使う事実・判断・要約
+    |-- memory\                       ... 日々の作業記録・メモ
+    |   `-- YYYY-MM-DD.md              ... 指定した日付の記録
+    `-- skills\                       ... この Workspace 専用の Skills
 ```
 
 :::message alert
