@@ -1,11 +1,13 @@
 ---
-title: "OpenClawを学び、日々を便利に"
-emoji: "📚"
-type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["openclaw", "llm", "ai", "claude", "gpt"]
-published: false
+title: 'OpenClawを学び、日々を便利に'
+emoji: '📚'
+type: 'tech' # tech: 技術記事 / idea: アイデア
+topics: ['openclaw', 'llm', 'ai', 'claude', 'gpt']
+published: true
 publication_name: microsoft
 ---
+
+![](https://static.zenn.studio/user-upload/a02a9ff18fe4-20260913.png)
 
 # OpenClaw 概要
 
@@ -38,12 +40,12 @@ flowchart TB
 
 OpenClaw 自体は AI モデルではありません。OpenAI、Anthropic、ローカル LLM などを選べますが、ツール対応や推論能力によって作業の品質は変わります。
 
-| 機能 | 役割 |
-| --- | --- |
-| Skills | ツールの使い方や作業手順を教える。独自の手順も追加できる |
-| メモリー | 保存した情報を次の作業に活かす。無制限に記憶するわけではない |
-| マルチエージェント | 用途ごとにエージェントや作業領域を分ける |
-| Control UI | ブラウザーからチャットや設定を操作する |
+| 機能               | 役割                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| Skills             | ツールの使い方や作業手順を教える。独自の手順も追加できる     |
+| メモリー           | 保存した情報を次の作業に活かす。無制限に記憶するわけではない |
+| マルチエージェント | 用途ごとにエージェントや作業領域を分ける                     |
+| Control UI         | ブラウザーからチャットや設定を操作する                       |
 
 チャット連携のために、Control UI をインターネットへ公開する必要はありません。
 
@@ -51,11 +53,11 @@ OpenClaw 自体は AI モデルではありません。OpenAI、Anthropic、ロ�
 
 OpenClaw は MIT ライセンスで公開され、コミュニティとともに開発されています。注目の背景は、次の 3 点で捉えられます。
 
-| 観点 | 特徴 |
-| --- | --- |
-| 技術 | 使い慣れたチャットから、PC 上の作業を指示できる |
+| 観点       | 特徴                                                    |
+| ---------- | ------------------------------------------------------- |
+| 技術       | 使い慣れたチャットから、PC 上の作業を指示できる         |
 | タイミング | AI の用途が文章生成からツールを使った作業へ広がっている |
-| OSS | GitHub 上のコードを確認し、試したり拡張したりできる |
+| OSS        | GitHub 上のコードを確認し、試したり拡張したりできる     |
 
 ## 定期実行と活用例
 
@@ -63,15 +65,15 @@ OpenClaw は MIT ライセンスで公開され、コミュニティとともに
 
 以下は、必要なツール・接続先・権限を設定した場合の例です。**導入直後からすべて使えるわけではありません。**
 
-| 分野 | 活用例 |
-| --- | --- |
-| メール・予定 | 優先順位付け、返信の下書き、空き時間の確認、予定調整 |
-| 調べもの | 情報収集、要約、レポート作成、飲食店の検索・予約補助 |
-| ファイル整理 | フォルダー整理、分類、一括リネーム |
-| 設計・実装 | 要件整理、設計案・コード・設定ファイルの作成、リファクタリング |
-| Git・テスト | PR 作成、レビュー補助、テスト生成・実行、失敗ログの解析 |
-| 運用・サポート | アラート解析、障害切り分け、回答案・チケット・対応記録の作成 |
-| 定常作業 | バックアップ実行、検証環境へのパッチ適用、定期レポート |
+| 分野           | 活用例                                                         |
+| -------------- | -------------------------------------------------------------- |
+| メール・予定   | 優先順位付け、返信の下書き、空き時間の確認、予定調整           |
+| 調べもの       | 情報収集、要約、レポート作成、飲食店の検索・予約補助           |
+| ファイル整理   | フォルダー整理、分類、一括リネーム                             |
+| 設計・実装     | 要件整理、設計案・コード・設定ファイルの作成、リファクタリング |
+| Git・テスト    | PR 作成、レビュー補助、テスト生成・実行、失敗ログの解析        |
+| 運用・サポート | アラート解析、障害切り分け、回答案・チケット・対応記録の作成   |
+| 定常作業       | バックアップ実行、検証環境へのパッチ適用、定期レポート         |
 
 メール送信、予約確定、ファイル削除、本番変更などは、人の承認を挟む設計にします。
 
@@ -107,10 +109,10 @@ OpenClaw のソースコードは無償で公開されていますが、モデ�
 
 過去に報告・修正された例を示します。スコアと修正バージョンの出典は、末尾の GitHub Advisory Database です。
 
-| 脆弱性 | CVSS v3.1 | 概要 | 修正バージョン |
-| --- | --- | --- | --- |
-| CVE-2026-25253 | 8.8（High） | 不正な `gatewayUrl` への接続で認証トークンが漏洩し、Gateway の乗っ取りやコード実行につながる | 2026.1.29 |
-| CVE-2026-24763 | 8.8（High） | 環境変数を指定できる認証済みユーザーが、`PATH` を通じて Docker サンドボックス内にコマンドを注入できる | 2026.1.29 |
+| 脆弱性         | CVSS v3.1   | 概要                                                                                                  | 修正バージョン |
+| -------------- | ----------- | ----------------------------------------------------------------------------------------------------- | -------------- |
+| CVE-2026-25253 | 8.8（High） | 不正な `gatewayUrl` への接続で認証トークンが漏洩し、Gateway の乗っ取りやコード実行につながる          | 2026.1.29      |
+| CVE-2026-24763 | 8.8（High） | 環境変数を指定できる認証済みユーザーが、`PATH` を通じて Docker サンドボックス内にコマンドを注入できる | 2026.1.29      |
 
 前者はブラウザーを経由するため、ローカル接続だけでも影響を受け得る問題でした。表の修正バージョンにとどまらず、継続的に脆弱性情報を確認して更新します。
 
@@ -149,15 +151,15 @@ ClawHub では、偽の事前準備を通じてマルウェアを導入させ、
 
 まずは **隔離環境・最小権限・専用認証情報**で試し、必要な機能だけを追加します。
 
-| 対策 | 実施すること |
-| --- | --- |
-| 更新 | 本体・プラグイン・依存関係の修正版を適用する |
-| Skill 管理 | 導入時と更新時に、内容と依存関係を確認する |
-| 隔離 | 専用端末や仮想環境を使い、機密データ・ネットワーク・ブラウザーを分離する |
-| 最小権限 | ファイル・ツール・通信先・依頼者を限定し、不要な権限を外す |
-| 認証情報 | 専用のアカウントやトークンを使い、失効・更新できるようにする |
-| 承認 | 送信・予約確定・削除・本番変更の前に人が確認する |
-| 監査 | ツール・OS・接続先のログを確認する。秘密情報の記録は避ける |
+| 対策       | 実施すること                                                             |
+| ---------- | ------------------------------------------------------------------------ |
+| 更新       | 本体・プラグイン・依存関係の修正版を適用する                             |
+| Skill 管理 | 導入時と更新時に、内容と依存関係を確認する                               |
+| 隔離       | 専用端末や仮想環境を使い、機密データ・ネットワーク・ブラウザーを分離する |
+| 最小権限   | ファイル・ツール・通信先・依頼者を限定し、不要な権限を外す               |
+| 認証情報   | 専用のアカウントやトークンを使い、失効・更新できるようにする             |
+| 承認       | 送信・予約確定・削除・本番変更の前に人が確認する                         |
+| 監査       | ツール・OS・接続先のログを確認する。秘密情報の記録は避ける               |
 
 サンドボックスも、重要なフォルダーの共有や強い権限の付与で隔離が弱まります。実際のアクセス範囲を確認しましょう。
 
@@ -189,18 +191,18 @@ flowchart TB
     SS <--> A
 ```
 
-| 構成要素 | 役割 |
-| --- | --- |
-| Channel | チャットサービスとの入出力 |
-| Gateway | 接続・認証・配送先・Session・実行要求を管理 |
-| Agent | Model の応答に応じて Tools を呼び、作業を進める |
-| Model | 入力を解釈し、回答や次の操作を提案 |
-| Tools | ファイル・シェル・ブラウザーなどを操作 |
-| Workspace | 作業ファイルと Agent 向けの指示を配置 |
-| Session | 会話履歴や Tool の実行結果を保持 |
-| Memory | 後の会話でも使う情報を保存・検索 |
-| Skills | 既存の Tools を使う手順を教える |
-| Plugins | Channel・Model Provider・Tool などの機能を追加 |
+| 構成要素  | 役割                                            |
+| --------- | ----------------------------------------------- |
+| Channel   | チャットサービスとの入出力                      |
+| Gateway   | 接続・認証・配送先・Session・実行要求を管理     |
+| Agent     | Model の応答に応じて Tools を呼び、作業を進める |
+| Model     | 入力を解釈し、回答や次の操作を提案              |
+| Tools     | ファイル・シェル・ブラウザーなどを操作          |
+| Workspace | 作業ファイルと Agent 向けの指示を配置           |
+| Session   | 会話履歴や Tool の実行結果を保持                |
+| Memory    | 後の会話でも使う情報を保存・検索                |
+| Skills    | 既存の Tools を使う手順を教える                 |
+| Plugins   | Channel・Model Provider・Tool などの機能を追加  |
 
 ## Channel と Gateway
 
@@ -235,16 +237,16 @@ Model が Tool 呼び出しを提案しても、実際に実行するのは Agen
 
 Model の接続先には OpenAI、Anthropic、Ollama などがあり、対応する Provider や接続方式を設定します。DB や業務 API の操作には、別途 Tool や Plugin などの連携が必要です。
 
-| Tool の例 | 用途 |
-| --- | --- |
-| `exec` / `process` | コマンド実行・バックグラウンド処理の管理 |
-| `read` / `write` / `edit` / `apply_patch` | ファイルの読み書き・編集 |
-| `web_search` / `web_fetch` | Web 検索・ページ取得 |
-| `browser` | ブラウザー操作 |
-| `message` | メッセージ送信 |
-| `memory_search` / `memory_get` | 保存した記憶の検索・取得 |
-| `view_image` / `image_generate` | 画像の確認・生成 |
-| `music_generate` / `video_generate` | 音楽・動画の生成 |
+| Tool の例                                 | 用途                                     |
+| ----------------------------------------- | ---------------------------------------- |
+| `exec` / `process`                        | コマンド実行・バックグラウンド処理の管理 |
+| `read` / `write` / `edit` / `apply_patch` | ファイルの読み書き・編集                 |
+| `web_search` / `web_fetch`                | Web 検索・ページ取得                     |
+| `browser`                                 | ブラウザー操作                           |
+| `message`                                 | メッセージ送信                           |
+| `memory_search` / `memory_get`            | 保存した記憶の検索・取得                 |
+| `view_image` / `image_generate`           | 画像の確認・生成                         |
+| `music_generate` / `video_generate`       | 音楽・動画の生成                         |
 
 Tool が用意されていても、Provider の認証、追加設定、実行環境、権限が必要な場合があります。すべてが無設定で利用できるわけではありません。
 
@@ -285,14 +287,14 @@ Workspace は作業場所であり、サンドボックスではありません�
 
 Agent の役割・口調・作業ルールを Markdown で定義します。実行時に必要な内容が Context に取り込まれます。
 
-| ファイル | 記載する内容 |
-| --- | --- |
-| `AGENTS.md` | 作業ルール、安全方針、Session 開始時の手順、Memory の扱い |
-| `IDENTITY.md` | 名前、雰囲気、絵文字、アバターなど |
-| `SOUL.md` | 人格、口調、価値観、振る舞いの境界 |
-| `USER.md` | ユーザー情報、呼び方、好み、コミュニケーション方針 |
-| `BOOTSTRAP.md` | 新規 Workspace の初回セットアップ手順 |
-| `MEMORY.md` | 継続して使う事実や判断の要約 |
+| ファイル       | 記載する内容                                              |
+| -------------- | --------------------------------------------------------- |
+| `AGENTS.md`    | 作業ルール、安全方針、Session 開始時の手順、Memory の扱い |
+| `IDENTITY.md`  | 名前、雰囲気、絵文字、アバターなど                        |
+| `SOUL.md`      | 人格、口調、価値観、振る舞いの境界                        |
+| `USER.md`      | ユーザー情報、呼び方、好み、コミュニケーション方針        |
+| `BOOTSTRAP.md` | 新規 Workspace の初回セットアップ手順                     |
+| `MEMORY.md`    | 継続して使う事実や判断の要約                              |
 
 `TOOLS.md` を使う旧構成もあります。現在の公式ドキュメントでは、環境固有の Tool 利用メモは `AGENTS.md` の `## Tools` に記載します。SSH 接続先の別名やデバイス名などを整理する場所です。
 
@@ -302,21 +304,21 @@ Agent の役割・口調・作業ルールを Markdown で定義します。実�
 
 Session は、会話履歴・Tool 呼び出し・実行結果などをまとめる単位です。Gateway が入力元に応じて Session を選び、同じ会話を継続できるようにします。
 
-| 入力元 | 基本的な分離方法 |
-| --- | --- |
-| DM | `session.dmScope` に従う |
-| グループ・ルーム・チャンネル | グループやルームごと。設定で変更可能 |
-| 定期実行・Webhook | ジョブや Hook の実行方式・Session 指定に従う |
+| 入力元                       | 基本的な分離方法                             |
+| ---------------------------- | -------------------------------------------- |
+| DM                           | `session.dmScope` に従う                     |
+| グループ・ルーム・チャンネル | グループやルームごと。設定で変更可能         |
+| 定期実行・Webhook            | ジョブや Hook の実行方式・Session 指定に従う |
 
 ### DM の分離
 
 DM の既定値は `main` で、同じ Agent に届く DM が会話を共有します。複数人から依頼を受ける場合は、送信者ごとに分離します。
 
-| `session.dmScope` | 分離単位 |
-| --- | --- |
-| `main` | 全 DM で共有 |
-| `per-peer` | 送信者 |
-| `per-channel-peer` | Channel と送信者 |
+| `session.dmScope`          | 分離単位                        |
+| -------------------------- | ------------------------------- |
+| `main`                     | 全 DM で共有                    |
+| `per-peer`                 | 送信者                          |
+| `per-channel-peer`         | Channel と送信者                |
 | `per-account-channel-peer` | 接続アカウント・Channel・送信者 |
 
 ```json
@@ -362,11 +364,11 @@ Memory  = 次の会話でも再利用する情報
 
 Memory の基本は Workspace 内の Markdown です。検索用の索引とは分けて考えます。
 
-| 保存先 | 用途 |
-| --- | --- |
-| `memory\YYYY-MM-DD.md` | 日々の作業記録・観察・メモ |
-| `MEMORY.md` | 長く使う事実・判断・要約 |
-| Agent ごとの SQLite | 組み込み Memory エンジンの検索用索引 |
+| 保存先                 | 用途                                 |
+| ---------------------- | ------------------------------------ |
+| `memory\YYYY-MM-DD.md` | 日々の作業記録・観察・メモ           |
+| `MEMORY.md`            | 長く使う事実・判断・要約             |
+| Agent ごとの SQLite    | 組み込み Memory エンジンの検索用索引 |
 
 `memory_search` で関連する記憶を探し、`memory_get` で内容を取得します。埋め込みモデルを設定すると、キーワード検索とベクトル検索を組み合わせられます。埋め込みの接続先には、OpenAI・Gemini・Mistral・Ollama などがあります。
 
@@ -397,12 +399,12 @@ skills\
 
 主な配置先は次のとおりです。同名の Skill がある場合、Workspace 側の定義が優先されます。
 
-| 配置先 | 主な用途 |
-| --- | --- |
-| `<workspace>\skills` | Workspace 専用 |
-| `<workspace>\.agents\skills` | プロジェクト用 |
-| `~\.agents\skills` | 個人用。既定の状態ディレクトリーで利用 |
-| `~\.openclaw\skills` | 同じ状態ディレクトリーを使う Agent 間で共有 |
+| 配置先                       | 主な用途                                    |
+| ---------------------------- | ------------------------------------------- |
+| `<workspace>\skills`         | Workspace 専用                              |
+| `<workspace>\.agents\skills` | プロジェクト用                              |
+| `~\.agents\skills`           | 個人用。既定の状態ディレクトリーで利用      |
+| `~\.openclaw\skills`         | 同じ状態ディレクトリーを使う Agent 間で共有 |
 
 Agent に公開する Skill を限定する例です。空配列 `[]` なら、その Agent に Skills を公開しません。
 
@@ -441,12 +443,12 @@ Skill によっては `gh` CLI などが必要です。**Skill を配置した�
 
 `tools.profile` で基本の Tool 範囲を選び、`tools.allow` / `tools.deny` などで調整します。
 
-| Profile | 主な範囲 |
-| --- | --- |
-| `minimal` | Session 状態などの最小構成。更新用の制限付き Gateway 操作も含む |
-| `coding` | ファイル・実行・Web・Session・Memory など |
-| `messaging` | メッセージ・Session 関連など |
-| `full` | Profile による制限なし。他の権限制御は有効 |
+| Profile     | 主な範囲                                                        |
+| ----------- | --------------------------------------------------------------- |
+| `minimal`   | Session 状態などの最小構成。更新用の制限付き Gateway 操作も含む |
+| `coding`    | ファイル・実行・Web・Session・Memory など                       |
+| `messaging` | メッセージ・Session 関連など                                    |
+| `full`      | Profile による制限なし。他の権限制御は有効                      |
 
 たとえば、調査・文書編集向けの Tool に絞る設定は次のようになります。
 
@@ -464,13 +466,13 @@ Skill によっては `gh` CLI などが必要です。**Skill を配置した�
 
 Tool は `group:*` でまとめて指定できます。
 
-| Group | 含まれる Tool の例 |
-| --- | --- |
-| `group:runtime` | `exec`、`process`、`code_execution` |
-| `group:fs` | `read`、`write`、`edit`、`apply_patch` |
+| Group            | 含まれる Tool の例                                        |
+| ---------------- | --------------------------------------------------------- |
+| `group:runtime`  | `exec`、`process`、`code_execution`                       |
+| `group:fs`       | `read`、`write`、`edit`、`apply_patch`                    |
 | `group:sessions` | `sessions_list`、`sessions_history`、`sessions_send` など |
-| `group:memory` | `memory_search`、`memory_get` |
-| `group:web` | `web_search`、`x_search`、`web_fetch` |
+| `group:memory`   | `memory_search`、`memory_get`                             |
+| `group:web`      | `web_search`、`x_search`、`web_fetch`                     |
 
 ### Plugins：OpenClaw の機能を増やす
 
@@ -619,9 +621,402 @@ Channel / Client
 
 # OpenClaw 環境構築
 
+ここでは、Mac の「ターミナル」を使って OpenClaw をセットアップします。以下のコマンドを上から順番に実行します。
+最終的にはslackと接続して、OpenClawを利用できるようにします。
+
+## インストールと初回設定
+
+まず、OpenClaw をインストールします。`--no-onboard` を指定し、インストール後の初回設定は別のコマンドで実施します。
+
+```shell
+curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
+```
+
+![](https://static.zenn.studio/user-upload/c3babc0cb482-20260913.png)
+
+インストールできたことを確認します。
+
+```shell
+openclaw --version
+```
+
+![](https://static.zenn.studio/user-upload/74c378626066-20260913.png)
+
+続いて、モデル・認証情報・作業環境を対話形式で設定します。
+
+```shell
+openclaw onboard
+```
+
+![](https://static.zenn.studio/user-upload/b86ed7ae8c26-20260913.png)
+
+![](https://static.zenn.studio/user-upload/540acb0db483-20260913.png)
+YesでOKです。
+
+![](https://static.zenn.studio/user-upload/2e8d8c0ca504-20260913.png)
+ここはプライバシー優先でいきましょう。
+No, thanksを選択
+
+![](https://static.zenn.studio/user-upload/8bc65ae83892-20260913.png)
+こんな感じの設定です。
+
+![](https://static.zenn.studio/user-upload/d53460610a8a-20260913.png)
+Model Auth ProviderはMoreを選択
+
+![](https://static.zenn.studio/user-upload/13fd6f61c311-20260913.png)
+Microsoft Foundryを選択して、Azure OpenAIを使いたいと思います。
+
+![](https://static.zenn.studio/user-upload/ee2950e4275b-20260913.png)
+API Keyを選択
+
+![](https://static.zenn.studio/user-upload/224b3345df92-20260913.png)
+このような入力待ちの画面になるので、AzureへログインしてFoundryを作成しましょう。
+
+![](https://static.zenn.studio/user-upload/fdf0d4b0c66e-20260913.png)
+Azureログインしてリソースグループを選択
+
+![](https://static.zenn.studio/user-upload/1026033864e9-20260913.png)
+リソースグループを作成
+
+![](https://static.zenn.studio/user-upload/3fa2e7fc4b54-20260913.png)
+次はFoundryを作成
+
+![](https://static.zenn.studio/user-upload/8586529909fe-20260913.png)
+Foundryにいい感じの名前をつけて作成
+
+完了したらFoundryポータルへ移動して、
+
+![](https://static.zenn.studio/user-upload/8a7ce0aa693f-20260913.png)
+検出→モデルで利用するモデルを選択します。
+
+![](https://static.zenn.studio/user-upload/c135d25fa5ff-20260913.png)
+Deployします。
+
+![](https://static.zenn.studio/user-upload/849a123c4d17-20260913.png)
+Deployしたモデルを選択して、キーとエンドポイントを取得します。
+
+先ほどのターミナルに戻り、取得したキーとエンドポイントを入力します。
+
+![](https://static.zenn.studio/user-upload/a381b1de0885-20260913.png)
+こんな感じで自動でチェックしてくれます
+
+![](https://static.zenn.studio/user-upload/a02a9ff18fe4-20260913.png)
+こんな感じの画面が開いたら勝ちです。
+
+![](https://static.zenn.studio/user-upload/ad83f27bbd3e-20260913.png)
+まずは、あいさつから。まだ自分の名前がわかっていないようですね。
+
+## slackとの接続
+
+次はslackと接続して、slack上で会話できるようにします。
+
+```shell
+openclaw plugins install @openclaw/slack
+```
+
+このコマンドを打ちましょう。
+![](https://static.zenn.studio/user-upload/f4fc8838ec86-20260913.png)
+こんな感じで表示されればOKです。
+
+次にGateway をバックグラウンドサービスとして再起動して接続します。
+
+```shell
+openclaw gateway restart
+```
+
+![](https://static.zenn.studio/user-upload/a4e85b7278f1-20260913.png)
+これも終わるとこんな感じです。
+
+起動状態を確認します。
+
+```shell
+openclaw plugins inspect slack --runtime --json
+```
+
+![](https://static.zenn.studio/user-upload/18b55f0f8472-20260913.png)
+こんな感じでなんだかいっぱい表示されればOKです。
+
+次は以下へログインします。
+https://slack.com/signin#/signin
+
+![](https://static.zenn.studio/user-upload/96cb8a8dc99c-20260913.png)
+ログインして再度URLを開くとこのような画面になるので、Create a new appをクリックします。
+
+![](https://static.zenn.studio/user-upload/0be1719fae8f-20260913.png)
+From Manifest を選択
+
+以下を貼り付けます。
+
+```json
+{
+  "display_information": {
+    "name": "Clawpilot",
+    "description": "OpenClaw Slack connector"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "Clawpilot",
+      "always_online": true
+    },
+    "app_home": {
+      "home_tab_enabled": true,
+      "messages_tab_enabled": true,
+      "messages_tab_read_only_enabled": false
+    },
+    "slash_commands": [
+      {
+        "command": "/openclaw",
+        "description": "Send a message to OpenClaw",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "app_mentions:read",
+        "assistant:write",
+        "channels:history",
+        "channels:read",
+        "chat:write",
+        "commands",
+        "groups:history",
+        "groups:read",
+        "im:history",
+        "im:read",
+        "im:write",
+        "users:read"
+      ]
+    }
+  },
+  "settings": {
+    "socket_mode_enabled": true,
+    "event_subscriptions": {
+      "bot_events": [
+        "app_home_opened",
+        "app_mention",
+        "message.channels",
+        "message.groups",
+        "message.im"
+      ]
+    }
+  }
+}
+```
+
+workspaceはお好きなworkspaceを選択してください。
+
+Createを押すと、以下のような画面が出ればOKです。
+![](https://static.zenn.studio/user-upload/6ff016bed4d8-20260913.png)
+
+**App-Level Tokens** という箇所まで移動して、Generate Token and Scopes をクリックします。
+表示された画面で、
+
+- Token Name: openclaw
+- Add Scope
+- connections:write を選択
+
+にします。
+以下のような文字列が表示されます。
+
+```text
+xapp-x-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Slack App設定画面の左側メニューを見てください。
+
+Features
+App Home
+...
+
+Settings
+Basic Information
+Install App ← これ
+
+Install App をクリックします。
+
+![](https://static.zenn.studio/user-upload/a336772efe12-20260913.png)
+
+次に、
+
+Install to Workspace
+
+をクリックします。
+
+![](https://static.zenn.studio/user-upload/b0c1076426eb-20260913.png)
+
+こんな感じの画面になればOKです。
+
+以下のような文字列が表示されます。
+
+```text
+xoxb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+2つ取れたらMacのTerminalへ以下を入力です。
+
+```shell
+export SLACK_APP_TOKEN='ここにxappのToken'
+export SLACK_BOT_TOKEN='ここにxoxbのToken'
+```
+
+以下コマンドで設定ファイルを開きます。
+
+```shell
+nano ~/slack.socket.patch.json5
+```
+
+以下を貼り付けます。
+
+```text
+{
+  channels: {
+    slack: {
+      enabled: true,
+      mode: "socket",
+      appToken: {
+        source: "env",
+        provider: "default",
+        id: "SLACK_APP_TOKEN"
+      },
+      botToken: {
+        source: "env",
+        provider: "default",
+        id: "SLACK_BOT_TOKEN"
+      }
+    }
+  }
+}
+```
+
+そして以下コマンドで保存されているか確認して、
+
+```shell
+cat ~/slack.socket.patch.json5
+```
+
+```shell
+openclaw config patch --file ~/slack.socket.patch.json5 --dry-run
+```
+
+を実行してください。
+
+![](https://static.zenn.studio/user-upload/9ddcb3a7fcf5-20260913.png)
+
+こんな感じになればOKです。
+
+そして次はこれです。
+
+```shell
+openclaw config patch --file ~/slack.socket.patch.json5
+```
+
+```text
+🦞 OpenClaw 2026.9.4 (3a9d69d) — I autocomplete your thoughts—just slower and with more API calls.
+Applied 4 config update(s). Restart the gateway to apply.
+```
+
+上記のように成功したら、Gatewayを再起動します。
+
+```shell
+openclaw gateway restart
+```
+
+そのあと、接続確認です。
+
+```shell
+openclaw channels status --probe --json
+```
+
+そして、以下を記入します。
+
+```shell
+nano ~/.openclaw/.env
+```
+
+先ほど取得したものですね。
+
+```text
+SLACK_APP_TOKEN=xapp-あなたのApp Token
+SLACK_BOT_TOKEN=xoxb-あなたのBot Token
+```
+
+忘れずに権限付与して読めるようにしておきましょう。
+
+```shell
+chmod 600 ~/.openclaw/.env
+```
+
+ここまでくればまたまた再起動です。
+
+```shell
+openclaw gateway restart
+```
+
+数秒待ってから以下を実行です。
+
+```shell
+openclaw channels status --probe --json
+```
+
+出力されるjsonの中に以下のような情報が含まれていれば、接続は正常です。
+
+```text
+"running": true
+"connected": true
+"lifecycle": "ready"
+"lastError": null
+"probe": {
+  "ok": true,
+  "status": 200
+}
+```
+
+次にやることはSlackを開いて、Apps → clawpilot2 を選び、DMで例えばこれを送ってください。
+
+```text
+こんにちは。今使っているモデル名を教えて。
+```
+
+![](https://static.zenn.studio/user-upload/a4b34b16cb00-20260913.png)
+
+おぉ〜！
+きましたね。
+
+これでslackの接続確認が完了です。
+slack上で色々聞けるようになります。
+![](https://static.zenn.studio/user-upload/e44e5fcd03b0-20260913.png)
+
+資料どこだっけ...??
+みたいなざっくりした質問も回答してくれます。
+
+## 補足：設定の変更と状態確認
+
+初回設定後は、次のコマンドで設定の変更や接続状態の確認ができます。
+
+| 用途                   | コマンド                                |
+| ---------------------- | --------------------------------------- |
+| モデル・認証情報の設定 | `openclaw configure --section model`    |
+| Slack などの接続設定   | `openclaw configure --section channels` |
+| モデルの状態確認       | `openclaw models status`                |
+| チャット連携の接続確認 | `openclaw channels status --probe`      |
+| Gateway の再起動       | `openclaw gateway restart`              |
+| 設定の診断             | `openclaw doctor`                       |
+| セキュリティ設定の確認 | `openclaw security audit`               |
+
+:::message alert
+API キーや Bot トークンは設定画面で入力し、記事や GitHub に記載しないでください。また、Mac がスリープまたはログアウトすると常駐処理が止まるため、継続利用する場合は電源とスリープの設定も確認します。
+:::
 
 # 最後に
 
+OpenClaw は、チャットから質問に答えるだけでなく、Gateway・モデル・ツールを組み合わせて実際の作業を進められる AI エージェントです。本記事では、その仕組みを整理し、Mac への導入から Azure AI Foundry のモデル設定、Slack との接続までを試しました。
+
+便利な一方で、OpenClaw に与えた権限は、そのまま操作できる範囲になります。最初は専用の作業環境と最小限の権限から始め、認証情報を安全に管理しながら、用途に応じて少しずつ機能を追加することが大切です。
+
+まずは Slack から簡単な調べものや資料の検索を依頼し、どのような作業を任せられるか試してみてください。安全性と実行結果を確認しながら育てていくことで、自分の作業に合った頼れる AI エージェントになっていくはずです。
+
+それでは🖐️
 
 # 参考文献
 
